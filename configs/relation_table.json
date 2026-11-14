@@ -1,0 +1,217 @@
+{
+  "version": "1.0",
+  "frozen": true,
+  "description": "Hand-built, versioned clinical concept relation table and lexicon (Sections 7.2, 8.10). Frozen before test evaluation.",
+  "concepts": {
+    "type 2 diabetes mellitus": {
+      "concept_class": "Endocrine / Metabolic Disorder",
+      "synonyms": ["diabetes", "type 2 diabetes", "t2dm", "diabetes mellitus"],
+      "related_concepts": ["metformin", "glipizide", "insulin glargine", "hba1c", "fasting glucose"]
+    },
+    "metformin": {
+      "concept_class": "Biguanide Antidiabetic",
+      "synonyms": ["metformin", "glucophage"],
+      "related_concepts": ["type 2 diabetes mellitus", "glipizide", "insulin glargine", "hba1c", "fasting glucose"]
+    },
+    "glipizide": {
+      "concept_class": "Sulfonylurea Antidiabetic",
+      "synonyms": ["glipizide", "glucotrol"],
+      "related_concepts": ["type 2 diabetes mellitus", "metformin", "insulin glargine", "hba1c", "fasting glucose"]
+    },
+    "insulin glargine": {
+      "concept_class": "Long-Acting Basal Insulin",
+      "synonyms": ["insulin glargine", "insulin", "lantus"],
+      "related_concepts": ["type 2 diabetes mellitus", "metformin", "glipizide", "hba1c", "fasting glucose"]
+    },
+    "hba1c": {
+      "concept_class": "Glycemic Control Laboratory Test",
+      "synonyms": ["hba1c", "hemoglobin a1c", "a1c", "glycated hemoglobin"],
+      "related_concepts": ["type 2 diabetes mellitus", "metformin", "glipizide", "insulin glargine", "fasting glucose"]
+    },
+    "fasting glucose": {
+      "concept_class": "Glycemic Control Laboratory Test",
+      "synonyms": ["fasting glucose", "blood glucose", "serum glucose"],
+      "related_concepts": ["type 2 diabetes mellitus", "metformin", "glipizide", "insulin glargine", "hba1c"]
+    },
+    "essential (primary) hypertension": {
+      "concept_class": "Cardiovascular Disorder",
+      "synonyms": ["hypertension", "high blood pressure", "essential hypertension", "essential (primary) hypertension"],
+      "related_concepts": ["lisinopril", "enalapril maleate", "amlodipine", "metoprolol", "furosemide", "hydrochlorothiazide", "systolic blood pressure"]
+    },
+    "lisinopril": {
+      "concept_class": "ACE Inhibitors",
+      "synonyms": ["lisinopril", "prinivil", "zestril"],
+      "related_concepts": ["essential (primary) hypertension", "enalapril maleate", "amlodipine", "systolic blood pressure", "serum creatinine", "potassium"]
+    },
+    "enalapril maleate": {
+      "concept_class": "ACE Inhibitors",
+      "synonyms": ["enalapril", "enalapril maleate", "vasotec"],
+      "related_concepts": ["essential (primary) hypertension", "lisinopril", "amlodipine", "systolic blood pressure", "serum creatinine"]
+    },
+    "amlodipine": {
+      "concept_class": "Calcium Channel Blockers",
+      "synonyms": ["amlodipine", "norvasc"],
+      "related_concepts": ["essential (primary) hypertension", "lisinopril", "enalapril maleate", "systolic blood pressure"]
+    },
+    "metoprolol": {
+      "concept_class": "Beta-Adrenergic Blocking Agents",
+      "synonyms": ["metoprolol", "lopressor", "toprol"],
+      "related_concepts": ["essential (primary) hypertension", "atrial fibrillation", "congestive heart failure", "heart rate"]
+    },
+    "furosemide": {
+      "concept_class": "Loop Diuretics",
+      "synonyms": ["furosemide", "lasix"],
+      "related_concepts": ["congestive heart failure", "essential (primary) hypertension", "chronic kidney disease", "potassium", "serum creatinine"]
+    },
+    "hydrochlorothiazide": {
+      "concept_class": "Thiazide Diuretics",
+      "synonyms": ["hydrochlorothiazide", "hctz"],
+      "related_concepts": ["essential (primary) hypertension", "lisinopril", "potassium"]
+    },
+    "hyperlipidemia": {
+      "concept_class": "Lipid Metabolism Disorder",
+      "synonyms": ["hyperlipidemia", "high cholesterol", "dyslipidemia", "hypercholesterolemia"],
+      "related_concepts": ["atorvastatin", "rosuvastatin", "simvastatin", "ldl cholesterol"]
+    },
+    "atorvastatin": {
+      "concept_class": "Antihyperlipidemic - HMG-CoA Reductase Inhibitors (Statins)",
+      "synonyms": ["atorvastatin", "lipitor"],
+      "related_concepts": ["hyperlipidemia", "rosuvastatin", "simvastatin", "ldl cholesterol"]
+    },
+    "rosuvastatin": {
+      "concept_class": "Antihyperlipidemic - HMG-CoA Reductase Inhibitors (Statins)",
+      "synonyms": ["rosuvastatin", "crestor"],
+      "related_concepts": ["hyperlipidemia", "atorvastatin", "simvastatin", "ldl cholesterol"]
+    },
+    "simvastatin": {
+      "concept_class": "Antihyperlipidemic - HMG-CoA Reductase Inhibitors (Statins)",
+      "synonyms": ["simvastatin", "zocor"],
+      "related_concepts": ["hyperlipidemia", "atorvastatin", "rosuvastatin", "ldl cholesterol"]
+    },
+    "ldl cholesterol": {
+      "concept_class": "Lipid Panel Laboratory Test",
+      "synonyms": ["ldl cholesterol", "ldl", "low-density lipoprotein"],
+      "related_concepts": ["hyperlipidemia", "atorvastatin", "rosuvastatin", "simvastatin"]
+    },
+    "chronic kidney disease": {
+      "concept_class": "Renal Disorder",
+      "synonyms": ["chronic kidney disease", "ckd", "renal insufficiency", "kidney disease"],
+      "related_concepts": ["serum creatinine", "egfr", "potassium", "furosemide", "lisinopril"]
+    },
+    "serum creatinine": {
+      "concept_class": "Renal Function Laboratory Test",
+      "synonyms": ["serum creatinine", "creatinine"],
+      "related_concepts": ["chronic kidney disease", "egfr", "furosemide", "lisinopril"]
+    },
+    "egfr": {
+      "concept_class": "Renal Function Laboratory Test",
+      "synonyms": ["egfr", "estimated gfr", "glomerular filtration rate"],
+      "related_concepts": ["chronic kidney disease", "serum creatinine"]
+    },
+    "potassium": {
+      "concept_class": "Electrolyte Laboratory Test",
+      "synonyms": ["potassium", "serum potassium"],
+      "related_concepts": ["furosemide", "potassium chloride", "lisinopril", "chronic kidney disease"]
+    },
+    "potassium chloride": {
+      "concept_class": "Minerals and Electrolytes - Potassium, Oral",
+      "synonyms": ["potassium chloride", "klor-con"],
+      "related_concepts": ["potassium", "furosemide", "hydrochlorothiazide"]
+    },
+    "hypothyroidism": {
+      "concept_class": "Thyroid Disorder",
+      "synonyms": ["hypothyroidism", "underactive thyroid"],
+      "related_concepts": ["levothyroxine", "tsh"]
+    },
+    "levothyroxine": {
+      "concept_class": "Thyroid Hormones",
+      "synonyms": ["levothyroxine", "synthroid"],
+      "related_concepts": ["hypothyroidism", "tsh"]
+    },
+    "tsh": {
+      "concept_class": "Thyroid Function Laboratory Test",
+      "synonyms": ["tsh", "thyroid stimulating hormone"],
+      "related_concepts": ["hypothyroidism", "levothyroxine"]
+    },
+    "atrial fibrillation": {
+      "concept_class": "Cardiac Arrhythmia",
+      "synonyms": ["atrial fibrillation", "afib"],
+      "related_concepts": ["apixaban", "warfarin", "digoxin", "metoprolol"]
+    },
+    "apixaban": {
+      "concept_class": "Direct Factor Xa Inhibitors",
+      "synonyms": ["apixaban", "eliquis"],
+      "related_concepts": ["atrial fibrillation", "warfarin", "aspirin"]
+    },
+    "warfarin": {
+      "concept_class": "Coumarin Anticoagulants",
+      "synonyms": ["warfarin", "coumadin"],
+      "related_concepts": ["atrial fibrillation", "apixaban", "inr"]
+    },
+    "aspirin": {
+      "concept_class": "Salicylate Analgesic / Antiplatelet",
+      "synonyms": ["aspirin", "ecotrin"],
+      "related_concepts": ["coronary artery disease", "clopidogrel", "nitroglycerin"]
+    },
+    "clopidogrel": {
+      "concept_class": "Platelet Aggregation Inhibitors",
+      "synonyms": ["clopidogrel", "plavix"],
+      "related_concepts": ["coronary artery disease", "aspirin", "nitroglycerin"]
+    },
+    "nitroglycerin": {
+      "concept_class": "Antianginal - Coronary Vasodilators (Nitrates)",
+      "synonyms": ["nitroglycerin", "nitrostat"],
+      "related_concepts": ["coronary artery disease", "aspirin", "chest pain"]
+    },
+    "digoxin": {
+      "concept_class": "Digitalis Glycosides",
+      "synonyms": ["digoxin", "digitek", "lanoxin"],
+      "related_concepts": ["atrial fibrillation", "congestive heart failure", "metoprolol"]
+    },
+    "congestive heart failure": {
+      "concept_class": "Cardiovascular Disorder",
+      "synonyms": ["congestive heart failure", "heart failure", "chf"],
+      "related_concepts": ["furosemide", "metoprolol", "lisinopril", "digoxin"]
+    },
+    "asthma": {
+      "concept_class": "Respiratory Disorder",
+      "synonyms": ["asthma", "bronchial asthma"],
+      "related_concepts": ["albuterol", "fluticasone"]
+    },
+    "albuterol": {
+      "concept_class": "Beta-Adrenergic Agents, Inhaled, Short Acting",
+      "synonyms": ["albuterol", "proair", "ventolin"],
+      "related_concepts": ["asthma", "fluticasone"]
+    },
+    "gastroesophageal reflux disease": {
+      "concept_class": "Gastrointestinal Disorder",
+      "synonyms": ["gastroesophageal reflux disease", "gerd", "acid reflux"],
+      "related_concepts": ["omeprazole", "pantoprazole"]
+    },
+    "omeprazole": {
+      "concept_class": "Proton-Pump Inhibitors",
+      "synonyms": ["omeprazole", "prilosec"],
+      "related_concepts": ["gastroesophageal reflux disease", "pantoprazole"]
+    },
+    "pantoprazole": {
+      "concept_class": "Proton-Pump Inhibitors",
+      "synonyms": ["pantoprazole", "protonix"],
+      "related_concepts": ["gastroesophageal reflux disease", "omeprazole"]
+    },
+    "penicillin allergy": {
+      "concept_class": "Drug Allergy",
+      "synonyms": ["penicillin allergy", "allergy to penicillin", "penicillin"],
+      "related_concepts": ["amoxicillin", "cephalexin"]
+    },
+    "sulfa allergy": {
+      "concept_class": "Drug Allergy",
+      "synonyms": ["sulfa allergy", "sulfonamide allergy", "sulfa"],
+      "related_concepts": ["sulfamethoxazole-trimethoprim", "furosemide"]
+    },
+    "latex allergy": {
+      "concept_class": "Material Allergy",
+      "synonyms": ["latex allergy", "allergy to latex", "latex"],
+      "related_concepts": []
+    }
+  }
+}

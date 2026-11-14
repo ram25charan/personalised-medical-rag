@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "synthetic_patients_count": 100,
+  "synthetic_events_count": 12184,
+  "avg_events_per_synthetic_patient": 121.84,
+  "disjoint_patient_splits": true,
+  "questions_total": 180,
+  "questions_by_track_and_split": {
+    "S_dev": 50,
+    "S_test": 100,
+    "R_test": 30
+  },
+  "categories_S_dev": {
+    "temporal_ordering": 8,
+    "current_vs_historical": 7,
+    "longitudinal_change": 7,
+    "irrelevant_history": 7,
+    "missing_or_ambiguous_dates": 7,
+    "conflicting_information": 7,
+    "insufficient_evidence": 7
+  },
+  "categories_S_test": {
+    "temporal_ordering": 15,
+    "current_vs_historical": 15,
+    "longitudinal_change": 14,
+    "irrelevant_history": 14,
+    "missing_or_ambiguous_dates": 14,
+    "conflicting_information": 14,
+    "insufficient_evidence": 14
+  },
+  "categories_R_test": {
+    "current_vs_historical": 6,
+    "longitudinal_change": 6,
+    "temporal_ordering": 6,
+    "irrelevant_history": 5,
+    "missing_or_ambiguous_dates": 3,
+    "insufficient_evidence": 4
+  },
+  "intents_total": {
+    "first_occurrence": 39,
+    "current_state": 84,
+    "change_over_time": 27,
+    "persistent_fact": 16,
+    "historical": 14
+  }
+}

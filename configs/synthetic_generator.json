@@ -1,0 +1,40 @@
+{
+  "generator_version": "1.0",
+  "seed": 42,
+  "num_patients": 100,
+  "dev_patients": 34,
+  "test_patients": 66,
+  "min_events_per_patient": 60,
+  "max_events_per_patient": 180,
+  "base_start_year": 2021,
+  "base_end_year": 2025,
+  "target_questions": {
+    "track_s_dev": 50,
+    "track_s_test": 100,
+    "track_r_test": 30
+  },
+  "distractor_medications": [
+    {"concept": "acetaminophen", "concept_class": "Analgesics - Non-Narcotic", "dose": "500 mg"},
+    {"concept": "ibuprofen", "concept_class": "NSAID Analgesics", "dose": "400 mg"},
+    {"concept": "cetirizine", "concept_class": "Antihistamines - 2nd Generation", "dose": "10 mg"},
+    {"concept": "loratadine", "concept_class": "Antihistamines - 2nd Generation", "dose": "10 mg"},
+    {"concept": "docusate sodium", "concept_class": "Laxatives - Stool Softeners", "dose": "100 mg"},
+    {"concept": "polyethylene glycol", "concept_class": "Laxatives - Osmotic", "dose": "17 g"},
+    {"concept": "melatonin", "concept_class": "Sleep Aid Supplement", "dose": "3 mg"},
+    {"concept": "cholecalciferol", "concept_class": "Vitamins - D Derivatives", "dose": "1000 IU"},
+    {"concept": "calcium carbonate", "concept_class": "Minerals and Electrolytes - Calcium Replacement", "dose": "500 mg"},
+    {"concept": "ferrous sulfate", "concept_class": "Minerals and Electrolytes - Iron", "dose": "325 mg"},
+    {"concept": "cyanocobalamin", "concept_class": "Vitamins - B12", "dose": "1000 mcg"},
+    {"concept": "folic acid", "concept_class": "Vitamins - Folic Acid", "dose": "1 mg"},
+    {"concept": "ondansetron", "concept_class": "Antiemetic - 5-HT3 Receptor Antagonist", "dose": "4 mg"},
+    {"concept": "cyclobenzaprine", "concept_class": "Skeletal Muscle Relaxants", "dose": "5 mg"},
+    {"concept": "gabapentin", "concept_class": "Anticonvulsants", "dose": "300 mg"}
+  ],
+  "unrecorded_query_concepts": [
+    {"concept": "methotrexate", "concept_class": "Antimetabolite Immunosuppressant"},
+    {"concept": "lithium carbonate", "concept_class": "Bipolar Mood Stabilizer"},
+    {"concept": "tacrolimus", "concept_class": "Calcineurin Inhibitor Immunosuppressant"},
+    {"concept": "rifampin", "concept_class": "Antimycobacterial Antibiotics"},
+    {"concept": "phenytoin", "concept_class": "Hydantoin Anticonvulsants"}
+  ]
+}

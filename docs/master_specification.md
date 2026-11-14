@@ -1119,7 +1119,7 @@ New optional fields may be added without breaking consumers. Renaming or removin
 | DF3 | Whether to attempt STRETCH items (Track P, second generator, B0 on short histories, learned ranker, clinician summary) | After Phase 3 |
 | DF4 | Final paper venue and template details | Phase 6 (IEEE format assumed) |
 | DF5 | Whether Track R may be sent to Groq (license / terms check) | Before Phase 4 |
-| DF6 | Final sizes (patients, questions) | After a feasibility check in Phase 2 |
+| DF6 | Final sizes (patients, questions) | Decided in Phase 2: 100 synthetic patients (34 dev / 66 test; 12,184 events), 50 Track S dev questions, 100 Track S test questions, and 30 Track R test questions (180 total) |
 | DF7 | Novelty wording: read EHR-RAG (Cao et al., 2026) fully and verify the abstract of reference 4 | Before writing the paper |
 
 ### 14.6 Decision Change History
@@ -1128,6 +1128,7 @@ New optional fields may be added without breaking consumers. Renaming or removin
 |---|---|---|
 | 2026-11-14 | 1.0 | Initial master specification. Consolidated changes against the original specification and slide deck: Gemini replaced by Groq; candidates are patient events, not evidence chunks; `as_of_date` and status computed at query time added; three data tracks added (R, S, P-stretch); baselines revised to B1-B4 plus retrieval-level baselines and oracles, B5 dropped; 2x2 selection x annotation added; two Streamlit interfaces replaced by one page with a view-mode switch; SQLite and LLM-as-judge removed; personalization coverage and safety-issue rate dropped; guideline corpus reduced to a demo-only corpus; hypothesis H4 demoted to exploratory analysis |
 | 2026-11-14 | 1.0.1 | Updated TD4 to include Python 3.13 (local development environment runs Python 3.13.5). |
+| 2026-11-14 | 1.0.2 | Resolved DF6 in Phase 2: fixed synthetic dataset at 100 patients (34 dev, 66 test; 60-180 events per patient, 12,184 events total) and benchmark at 50 Track S dev, 100 Track S test, and 30 Track R test questions; froze `configs/relation_table.json` v1.0. |
 
 ---
 
@@ -1147,14 +1148,19 @@ New optional fields may be added without breaking consumers. Renaming or removin
   - Versioned (`v1.0`) medication and diagnosis normalisation (`src/data/normalisation.py`).
   - Construction of 5,471 normalised Track R events (`data/processed/events.jsonl`), per-patient relative timelines (`data/processed/timelines.json`), and real-data scenario coverage report (`data/processed/coverage_report.json`, `docs/data_audit_phase1.md`).
   - Phase 1 `pytest` unit test suite (`tests/test_phase1.py`, 8/8 passing).
+- **Phase 2 (Synthetic Data and Benchmark):**
+  - Frozen clinical concept relation table and lexicon v1.0 (`configs/relation_table.json`).
+  - Deterministic, seeded synthetic longitudinal patient generator (`src/synthetic/generator.py`, `configs/synthetic_generator.json`) producing 100 patients (`S_001`–`S_100`) and 12,184 events (`data/synthetic/events.jsonl`).
+  - Template-based benchmark question and programmatic gold generator (`src/synthetic/question_generator.py`) producing 180 questions (`data/benchmark/questions.jsonl`, `data/benchmark/gold.jsonl`: 50 Track S dev, 100 Track S test, 30 Track R test).
+  - Generator documentation (`docs/synthetic_and_benchmark_phase2.md`, `data/benchmark/benchmark_summary.json`) and Phase 2 unit tests (`tests/test_phase2.py`, 13/13 total tests passing).
 
 ### 15.2 Current Implementation State
 
-Phase 1 is **complete** and verified (`v0.1-phase1`). Ready to start Phase 2 (Synthetic data and benchmark).
+Phases 1 and 2 are **complete** and verified (`v0.2-phase2`). Ready to start Phase 3 (Retrieval, scoring, fusion and retrieval-level evaluation).
 
 ### 15.3 Outstanding Work
 
-Phases 2-6 (Section 11), then STRETCH items if time permits.
+Phases 3-6 (Section 11), then STRETCH items if time permits.
 
 ### 15.4 Known Issues and Blockers
 
@@ -1169,7 +1175,7 @@ Phases 2-6 (Section 11), then STRETCH items if time permits.
 
 ### 15.5 Next Recommended Action
 
-Start **Phase 2**: implement the deterministic, seeded synthetic patient generator and template-based question generator with programmatic gold labels; create the versioned concept lexicon and relation table v1; generate Track S and Track R benchmark questions and disjoint patient splits.
+Start **Phase 3**: implement the temporal state module, BM25 + dense + RRF retrieval, history relevance ($R_h$), intent-dependent temporal relevance ($R_t$), chronology-aware context fusion, dev-set per-intent weight tuning, retrieval-level evaluation metrics with paired bootstrap confidence intervals, and run all retrieval-level baselines and proposed systems (RS1–RS5, B3, B2, ORACLE).
 
 ---
 
