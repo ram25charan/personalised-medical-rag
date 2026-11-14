@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0",
+  "total_events": 5471,
+  "total_patients": 64,
+  "event_type_counts": {
+    "visit": 222,
+    "triage_observation": 222,
+    "diagnosis_at_visit": 545,
+    "reported_home_medication": 2362,
+    "vital_sign": 1038,
+    "ed_administered_medication": 1082
+  },
+  "longitudinal_evidence_counts": {
+    "consecutive_medrecon_visit_pairs": 132,
+    "visit_pairs_with_med_add_or_drop": 117,
+    "patients_with_med_list_changes": 29,
+    "patients_with_recurring_diagnoses": 18,
+    "patients_with_3plus_vitals_in_a_visit": 51,
+    "stays_with_both_medrecon_and_pyxis": 144
+  },
+  "category_support": {
+    "1_temporal_ordering": {
+      "supported": true,
+      "basis": "Sequence of ED visits, diagnoses across visits, and within-visit vital/Pyxis timestamps."
+    },
+    "2_current_vs_historical": {
+      "supported": true,
+      "basis": "Snapshot-basis: medications LISTED on visit N vs NOT_LISTED_LATEST on visit N after appearing on an earlier visit.",
+      "limitation": "Snapshot list only; absence from a later list is not proof of clinical discontinuation."
+    },
+    "3_longitudinal_change": {
+      "supported": true,
+      "basis": "117 consecutive visit pairs have medications added or dropped; within-visit vital sign series."
+    },
+    "4_irrelevant_history": {
+      "supported": true,
+      "basis": "Multi-visit patients with up to 23 visits and dense vital/medication records around a specific query concept."
+    },
+    "5_missing_or_ambiguous_dates": {
+      "supported": "limited",
+      "basis": "25 stays of multi-visit patients lack medrecon lists; home medications have no prescription start/end dates (U1/U4 uncertainty)."
+    },
+    "6_conflicting_information": {
+      "supported": false,
+      "basis": "No explicit active-vs-stopped or dose-conflict records exist in MIMIC-IV-ED demo (medrecon vs pyxis is an informational provenance note per Section 7.5). Fully tested in Track S."
+    },
+    "7_insufficient_evidence": {
+      "supported": true,
+      "basis": "Constructed by querying unrecorded medications, labs, or conditions not present in the patient's ED history."
+    }
+  }
+}
