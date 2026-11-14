@@ -1,9 +1,14 @@
 """Deterministic, seeded synthetic longitudinal patient generator (Sections 6.3, 6.8, 12.2).
 
-No LLM writes patient histories. Generates ~100 synthetic patients (Track S) with 60-180 events
-each, embedding core clinical scenarios (medication lifecycles, lab trends, conflicting records,
-persistent conditions/allergies, missing/ambiguous dates) among realistic distractor visits,
-vitals, and medications so selection under context budget k matters.
+No LLM writes patient histories. Generates ~100 synthetic patients (Track S) with 70-180 events
+each, embedding realistic longitudinal clinical scenarios:
+  - Chronic medication lifecycles with 6-8 routine refill/dispense records before discontinuation
+    and switch to a new active medication (so budget k=5/10/20 faces real competition from stale refills).
+  - Condition-linked regimens (e.g. Type 2 diabetes mellitus -> metformin + HbA1c series;
+    Essential hypertension -> lisinopril/amlodipine) where individual medication/lab notes record
+    the drug or test without repeating the disease name verbatim, testing History Relevance (Rh).
+  - Serial lab trends with 8 longitudinal measurements over 3 years.
+  - Persistent conditions and allergies, missing/ambiguous dates (U2/U3), and C1/C2 conflicts.
 """
 
 from __future__ import annotations
@@ -78,8 +83,6 @@ class _PatientEventCollector:
             "vital_sign": 6,
             "symptom": 7,
         }
-        # Stable sort: observed_time (None sorts first so unknown-date historical events get early sequence numbers),
-        # then type_priority, then concept, then insertion order
         indexed = list(enumerate(self.raw_events))
         indexed.sort(
             key=lambda item: (
@@ -121,7 +124,6 @@ class _PatientEventCollector:
         return events, tag_to_id
 
 
-# Clinical regimen profiles for generating diverse, realistic synthetic patients
 _DIABETES_DRUGS = [
     ("metformin", "Biguanide Antidiabetic", "500 mg", "1000 mg"),
     ("glipizide", "Sulfonylurea Antidiabetic", "5 mg", "10 mg"),
@@ -166,10 +168,10 @@ _ALLERGY_PATTERNS = [
     ("latex allergy", "Material Allergy", "contact urticaria"),
 ]
 _LAB_TREND_PATTERNS = [
-    ("hba1c", "Glycemic Control Laboratory Test", "%", [8.6, 7.9, 7.2, 6.7]),
-    ("ldl cholesterol", "Lipid Panel Laboratory Test", "mg/dL", [168, 142, 118, 94]),
-    ("serum creatinine", "Renal Function Laboratory Test", "mg/dL", [1.1, 1.3, 1.6, 1.8]),
-    ("tsh", "Thyroid Function Laboratory Test", "mIU/L", [7.8, 5.4, 3.6, 2.3]),
+    ("hba1c", "Glycemic Control Laboratory Test", "%", [9.1, 8.7, 8.4, 8.0, 7.7, 7.4, 7.1, 6.8]),
+    ("ldl cholesterol", "Lipid Panel Laboratory Test", "mg/dL", [174, 162, 150, 138, 126, 114, 104, 92]),
+    ("serum creatinine", "Renal Function Laboratory Test", "mg/dL", [1.0, 1.1, 1.2, 1.3, 1.5, 1.6, 1.7, 1.9]),
+    ("tsh", "Thyroid Function Laboratory Test", "mIU/L", [8.4, 7.2, 6.1, 5.0, 4.2, 3.5, 2.9, 2.2]),
 ]
 _CONFLICT_PATTERNS = [
     ("apixaban", "Direct Factor Xa Inhibitors", "5 mg", "2.5 mg"),
@@ -183,23 +185,17 @@ def generate_synthetic_patients(
     config: dict[str, Any],
     seed: Optional[int] = None,
 ) -> tuple[list[Event], list[dict[str, Any]]]:
-    """Deterministically generate synthetic patients, their events, and embedded scenario metadata.
-
-    Returns:
-      - `events`: flat list of all Track S `Event` objects across all patients.
-      - `patient_Blueprints`: list of per-patient metadata dicts with resolved `event_id`s for
-        the benchmark question generator (`src/synthetic/question_generator.py`).
-    """
+    """Deterministically generate synthetic patients, their events, and embedded scenario metadata."""
     actual_seed = int(seed if seed is not None else config.get("seed", 42))
     rng = random.Random(actual_seed)
 
     gen_version = str(config.get("generator_version", "1.0"))
     num_patients = int(config.get("num_patients", 100))
     dev_patients = int(config.get("dev_patients", 34))
-    min_events = int(config.get("min_events_per_patient", 60))
+    min_events = int(config.get("min_events_per_patient", 80))
     max_events = int(config.get("max_events_per_patient", 180))
     distractor_meds = config.get("distractor_medications", [])
-    unrecorded_Pool = config.get("unrecorded_query_concepts", [])
+    unrecorded_pool = config.get("unrecorded_query_concepts", [])
 
     all_events: list[Event] = []
     patient_blueprints: list[dict[str, Any]] = []
@@ -207,21 +203,22 @@ def generate_synthetic_patients(
     for p_idx in range(1, num_patients + 1):
         pid = f"S_{p_idx:03d}"
         split = "dev" if p_idx <= dev_patients else "test"
-        target_event_count = rng.randint(min_events, max_events)
+        target_event_count = rng.randint(max(85, min_events), max_events)
         collector = _PatientEventCollector(pid, gen_version, actual_seed)
 
-        # Base anchor timeline for this patient
-        base_date = date(2021, 1, 15) + timedelta(days=rng.randint(0, 120))
-        as_of_dt = base_date + timedelta(days=rng.randint(1150, 1350))  # ~3.3 - 3.7 years later
+        base_date = date(2021, 1, 15) + timedelta(days=rng.randint(0, 90))
+        as_of_dt = base_date + timedelta(days=rng.randint(1200, 1360))
         as_of_str = _fmt_date(as_of_dt)
 
         # ------------------------------------------------------------------
-        # Scenario 1: Persistent Condition + Allergy (persistent_fact & first_occurrence)
+        # Scenario 1: Persistent Allergy + Chronic Condition with 8 follow-up notes
+        # (So querying "When was hypertension first diagnosed?" must rank the earliest
+        #  diagnosis above 8 later follow-up condition notes!)
         # ------------------------------------------------------------------
         allergy_concept, allergy_class, allergy_reaction = _ALLERGY_PATTERNS[
             p_idx % len(_ALLERGY_PATTERNS)
         ]
-        allergy_dt = base_date + timedelta(days=rng.randint(5, 30))
+        allergy_dt = base_date + timedelta(days=rng.randint(5, 25))
         collector.add(
             tag="allergy_1",
             event_type="allergy",
@@ -235,76 +232,125 @@ def generate_synthetic_patients(
             attributes={"reaction": allergy_reaction, "persistent": True},
         )
 
-        # Chronic condition with first diagnosis and follow-up documentation
         htn_pat = _HTN_PATTERNS[p_idx % len(_HTN_PATTERNS)]
         old_med, old_med_class, old_dose_1, old_dose_2, new_med, new_med_class, new_dose = htn_pat
 
-        cond_dt_1 = base_date + timedelta(days=rng.randint(35, 70))
-        cond_dt_2 = cond_dt_1 + timedelta(days=rng.randint(300, 450))
+        cond_dt_1 = base_date + timedelta(days=rng.randint(30, 50))
         collector.add(
             tag="cond_htn_first",
             event_type="condition",
             concept="essential (primary) hypertension",
             concept_class="Cardiovascular Disorder",
-            text="Initial diagnosis of essential (primary) hypertension.",
+            text="Diagnosis recorded: essential (primary) hypertension.",
             observed_time=_fmt_date(cond_dt_1),
             valid_start=_fmt_date(cond_dt_1),
             valid_end=None,
             encounter_id=f"{pid}_ENC_02",
             attributes={"onset": _fmt_date(cond_dt_1), "status": "chronic"},
         )
+
+        htn_followup_tags: list[str] = []
+        for f_i in range(1, 9):
+            f_dt = cond_dt_1 + timedelta(days=f_i * 120 + rng.randint(0, 15))
+            if f_dt < as_of_dt - timedelta(days=20):
+                f_tag = f"cond_htn_followup_{f_i}"
+                htn_followup_tags.append(f_tag)
+                collector.add(
+                    tag=f_tag,
+                    event_type="condition",
+                    concept="essential (primary) hypertension",
+                    concept_class="Cardiovascular Disorder",
+                    text="Outpatient diagnosis check: essential (primary) hypertension.",
+                    observed_time=_fmt_date(f_dt),
+                    valid_start=_fmt_date(cond_dt_1),
+                    valid_end=None,
+                    encounter_id=f"{pid}_ENC_HTN_{f_i}",
+                    attributes={"onset": _fmt_date(cond_dt_1), "status": "chronic"},
+                )
+
+        # Also record Type 2 diabetes mellitus diagnosis (for cross-concept Rh testing)
+        dm_diag_dt = base_date + timedelta(days=rng.randint(60, 85))
         collector.add(
-            tag="cond_htn_followup",
+            tag="cond_dm_first",
             event_type="condition",
-            concept="essential (primary) hypertension",
-            concept_class="Cardiovascular Disorder",
-            text="Follow-up visit noting ongoing essential (primary) hypertension.",
-            observed_time=_fmt_date(cond_dt_2),
-            valid_start=_fmt_date(cond_dt_1),
+            concept="type 2 diabetes mellitus",
+            concept_class="Endocrine / Metabolic Disorder",
+            text="Condition recorded: type 2 diabetes mellitus.",
+            observed_time=_fmt_date(dm_diag_dt),
+            valid_start=_fmt_date(dm_diag_dt),
             valid_end=None,
-            encounter_id=f"{pid}_ENC_05",
-            attributes={"onset": _fmt_date(cond_dt_1), "status": "chronic"},
+            encounter_id=f"{pid}_ENC_03",
+            attributes={"onset": _fmt_date(dm_diag_dt), "status": "chronic"},
         )
 
         # ------------------------------------------------------------------
-        # Scenario 2: Medication Lifecycle (start -> dose change -> stop -> switch to new med)
-        # Supports current_vs_historical, temporal_ordering, longitudinal_change
+        # Scenario 2: Medication Lifecycle with 7 historical refills before discontinuation
+        # Note: The medication text states the drug name and dose without repeating the word
+        # "hypertension", so condition-level queries rely on Rh (relation table) to retrieve
+        # the drug and Rt to prefer the current active replacement over the 7 ended refills!
         # ------------------------------------------------------------------
         med_t1 = cond_dt_1 + timedelta(days=5)
-        med_t2 = med_t1 + timedelta(days=rng.randint(150, 220))
-        med_t3_stop = med_t2 + timedelta(days=rng.randint(180, 240))
-        med_t4_new = med_t3_stop + timedelta(days=rng.randint(7, 25))
-
+        refill_tags: list[str] = []
+        prev_dt = med_t1
+        # Initial start order
+        next_dt = prev_dt + timedelta(days=60)
         collector.add(
             tag="med_lifecycle_start",
             event_type="medication_order",
             concept=old_med,
             concept_class=old_med_class,
-            text=f"{old_med} prescribed at initial dose {old_dose_1} daily for hypertension.",
-            observed_time=_fmt_date(med_t1),
-            valid_start=_fmt_date(med_t1),
-            valid_end=_fmt_date(med_t2),
+            text=f"Prescription order: {old_med} {old_dose_1} oral daily.",
+            observed_time=_fmt_date(prev_dt),
+            valid_start=_fmt_date(prev_dt),
+            valid_end=_fmt_date(next_dt),
             encounter_id=f"{pid}_ENC_02",
             attributes={"dose": old_dose_1, "action": "start"},
         )
+        prev_dt = next_dt
+
+        # 6 intermediate refills at initial dose (all ended/superseded)
+        for r_i in range(1, 7):
+            r_end = prev_dt + timedelta(days=60)
+            r_tag = f"med_lifecycle_refill_{r_i}"
+            refill_tags.append(r_tag)
+            collector.add(
+                tag=r_tag,
+                event_type="medication_order",
+                concept=old_med,
+                concept_class=old_med_class,
+                text=f"Medication refill order: {old_med} {old_dose_1} oral daily (refill #{r_i}).",
+                observed_time=_fmt_date(prev_dt),
+                valid_start=_fmt_date(prev_dt),
+                valid_end=_fmt_date(r_end),
+                encounter_id=f"{pid}_ENC_REF_{r_i}",
+                attributes={"dose": old_dose_1, "action": "refill"},
+            )
+            prev_dt = r_end
+
+        # Dose escalation order (later discontinued)
+        med_t2 = prev_dt
+        med_t3_stop = med_t2 + timedelta(days=90)
         collector.add(
             tag="med_lifecycle_dose_change",
             event_type="medication_order",
             concept=old_med,
             concept_class=old_med_class,
-            text=f"{old_med} dose increased to {old_dose_2} daily; discontinued prior {old_dose_1} order.",
+            text=f"Prescription dose change: {old_med} increased to {old_dose_2} oral daily; discontinued {old_dose_1} and stopped on {_fmt_date(med_t3_stop)}.",
             observed_time=_fmt_date(med_t2),
             valid_start=_fmt_date(med_t2),
             valid_end=_fmt_date(med_t3_stop),
             encounter_id=f"{pid}_ENC_04",
-            attributes={"dose": old_dose_2, "action": "dose_change", "Stopped": True},
+            attributes={"dose": old_dose_2, "action": "dose_change", "stopped": True},
         )
+
+        # Replacement active medication (note: text names new_med and dose without saying "antihypertensive")
+        med_t4_new = med_t3_stop + timedelta(days=10)
         collector.add(
             tag="med_lifecycle_new_active",
             event_type="medication_order",
             concept=new_med,
             concept_class=new_med_class,
-            text=f"Switched antihypertensive therapy: started {new_med} {new_dose} daily after stopping {old_med}.",
+            text=f"Active prescription order: {new_med} {new_dose} oral once daily.",
             observed_time=_fmt_date(med_t4_new),
             valid_start=_fmt_date(med_t4_new),
             valid_end=None,
@@ -312,38 +358,53 @@ def generate_synthetic_patients(
             attributes={"dose": new_dose, "action": "start"},
         )
 
-        # Second active chronic medication (diabetes or statin) with U1 (open end date)
+        # Active diabetes medication (with 6 prior ended refills so active order competes with old refills)
         dm_med, dm_class, dm_dose1, dm_dose2 = _DIABETES_DRUGS[p_idx % len(_DIABETES_DRUGS)]
-        dm_start = base_date + timedelta(days=rng.randint(90, 160))
+        dm_curr_dt = dm_diag_dt + timedelta(days=5)
+        dm_old_refill_tags: list[str] = []
+        for dr_i in range(1, 7):
+            dr_end = dm_curr_dt + timedelta(days=75)
+            dr_tag = f"med_dm_refill_{dr_i}"
+            dm_old_refill_tags.append(dr_tag)
+            collector.add(
+                tag=dr_tag,
+                event_type="medication_order",
+                concept=dm_med,
+                concept_class=dm_class,
+                text=f"Medication order disp: {dm_med} {dm_dose1} twice daily (course #{dr_i}).",
+                observed_time=_fmt_date(dm_curr_dt),
+                valid_start=_fmt_date(dm_curr_dt),
+                valid_end=_fmt_date(dr_end),
+                encounter_id=f"{pid}_ENC_DM_{dr_i}",
+                attributes={"dose": dm_dose1, "action": "refill"},
+            )
+            dm_curr_dt = dr_end
+
         collector.add(
             tag="med_chronic_active",
             event_type="medication_order",
             concept=dm_med,
             concept_class=dm_class,
-            text=f"{dm_med} {dm_dose1} prescribed twice daily for glycemic management.",
-            observed_time=_fmt_date(dm_start),
-            valid_start=_fmt_date(dm_start),
+            text=f"Current ongoing prescription: {dm_med} {dm_dose2} oral twice daily.",
+            observed_time=_fmt_date(dm_curr_dt),
+            valid_start=_fmt_date(dm_curr_dt),
             valid_end=None,
             encounter_id=f"{pid}_ENC_03",
-            attributes={"dose": dm_dose1, "action": "start"},
+            attributes={"dose": dm_dose2, "action": "start"},
         )
 
         # ------------------------------------------------------------------
-        # Scenario 3: Lab Trend (4 longitudinal measurements over time)
+        # Scenario 3: Lab Trend (8 longitudinal measurements over ~3 years)
+        # So finding both the earliest (#1) and latest (#8) in top-5 requires Rt boundary scoring!
         # ------------------------------------------------------------------
         lab_concept, lab_class, lab_unit, base_vals = _LAB_TREND_PATTERNS[
             p_idx % len(_LAB_TREND_PATTERNS)
         ]
         jitter = round((rng.random() - 0.5) * 0.2, 1)
         lab_vals = [round(v + jitter, 1) for v in base_vals]
-        lab_dates = [
-            base_date + timedelta(days=100),
-            base_date + timedelta(days=340),
-            base_date + timedelta(days=620),
-            base_date + timedelta(days=920),
-        ]
         lab_tags: list[str] = []
-        for l_i, (l_dt, l_val) in enumerate(zip(lab_dates, lab_vals), start=1):
+        for l_i, l_val in enumerate(lab_vals, start=1):
+            l_dt = base_date + timedelta(days=80 + l_i * 125)
             t_tag = f"lab_trend_{l_i}"
             lab_tags.append(t_tag)
             collector.add(
@@ -351,7 +412,7 @@ def generate_synthetic_patients(
                 event_type="lab_result",
                 concept=lab_concept,
                 concept_class=lab_class,
-                text=f"Laboratory result for {lab_concept}: {l_val} {lab_unit}.",
+                text=f"Laboratory test result: {lab_concept} measured at {l_val} {lab_unit}.",
                 observed_time=_fmt_date(l_dt),
                 valid_start=_fmt_date(l_dt),
                 valid_end=_fmt_date(l_dt),
@@ -365,7 +426,6 @@ def generate_synthetic_patients(
         statin_concept, statin_class, statin_dose, _ = _STATIN_PATTERNS[
             p_idx % len(_STATIN_PATTERNS)
         ]
-        # U2: month precision
         ambig_month_str = f"{base_date.year + 1}-06"
         collector.add(
             tag="med_ambig_month",
@@ -380,7 +440,6 @@ def generate_synthetic_patients(
             encounter_id=f"{pid}_ENC_AMBIG",
             attributes={"dose": statin_dose, "action": "start"},
         )
-        # U3: unknown date
         collector.add(
             tag="cond_missing_date",
             event_type="condition",
@@ -406,7 +465,6 @@ def generate_synthetic_patients(
         conflict_type = "C1" if (p_idx % 2 == 0) else "C2"
 
         if conflict_type == "C1":
-            # C1 Status conflict: Outpatient clinic says ACTIVE, Hospital discharge note says ENDED/discontinued on overlapping interval
             collector.add(
                 tag="conflict_a",
                 event_type="medication_order",
@@ -432,7 +490,6 @@ def generate_synthetic_patients(
                 attributes={"dose": conf_dose_a, "reported_status": "ended", "clinical_source": "external_pharmacy"},
             )
         else:
-            # C2 Dose conflict: Same medication, overlapping validity, two different doses recorded
             collector.add(
                 tag="conflict_a",
                 event_type="medication_order",
@@ -458,9 +515,7 @@ def generate_synthetic_patients(
                 attributes={"dose": conf_dose_b, "reported_status": "active", "clinical_source": "specialist_clinic"},
             )
 
-        # ------------------------------------------------------------------
         # Future Event (observed AFTER as_of_date) to test AD5 availability filter
-        # ------------------------------------------------------------------
         future_dt = as_of_dt + timedelta(days=rng.randint(15, 60))
         collector.add(
             tag="future_event_1",
@@ -476,11 +531,11 @@ def generate_synthetic_patients(
         )
 
         # ------------------------------------------------------------------
-        # Scenario 6: Irrelevant History / Distractor Events (pad up to target_event_count)
+        # Scenario 6: Irrelevant History / Distractor Events
         # ------------------------------------------------------------------
         distractor_tags: list[str] = []
         current_count = len(collector.raw_events)
-        needed = max(20, target_event_count - current_count)
+        needed = max(25, target_event_count - current_count)
 
         for d_i in range(1, needed + 1):
             d_offset = rng.randint(10, (as_of_dt - base_date).days - 10)
@@ -500,7 +555,7 @@ def generate_synthetic_patients(
                     event_type="medication_order",
                     concept=d_med["concept"],
                     concept_class=d_med["concept_class"],
-                    text=f"Short-course order for {d_med['concept']} {d_med['dose']} from {d_str} to {end_str}.",
+                    text=f"Short-course prescription order for {d_med['concept']} {d_med['dose']} oral from {d_str} to {end_str}.",
                     observed_time=d_str,
                     valid_start=d_str,
                     valid_end=end_str,
@@ -542,11 +597,10 @@ def generate_synthetic_patients(
                     attributes={"disposition": "HOME"},
                 )
 
-        # Finalize patient events and resolve tags to actual event_ids
         p_events, tag_map = collector.finalize()
         all_events.extend(p_events)
 
-        unrecorded_item = unrecorded_Pool[p_idx % len(unrecorded_Pool)]
+        unrecorded_item = unrecorded_pool[p_idx % len(unrecorded_pool)]
         patient_blueprints.append(
             {
                 "patient_id": pid,
@@ -565,7 +619,11 @@ def generate_synthetic_patients(
                         "concept": "essential (primary) hypertension",
                         "onset_date": _fmt_date(cond_dt_1),
                         "first_id": tag_map["cond_htn_first"],
-                        "followup_id": tag_map["cond_htn_followup"],
+                        "followup_ids": [tag_map[t] for t in htn_followup_tags],
+                    },
+                    "condition_dm": {
+                        "concept": "type 2 diabetes mellitus",
+                        "diag_id": tag_map["cond_dm_first"],
                     },
                     "med_lifecycle": {
                         "old_med": old_med,
@@ -574,11 +632,13 @@ def generate_synthetic_patients(
                         "new_med": new_med,
                         "new_dose": new_dose,
                         "dm_med": dm_med,
-                        "dm_dose": dm_dose1,
+                        "dm_dose": dm_dose2,
                         "start_id": tag_map["med_lifecycle_start"],
+                        "refill_ids": [tag_map[t] for t in refill_tags],
                         "dose_change_id": tag_map["med_lifecycle_dose_change"],
                         "new_active_id": tag_map["med_lifecycle_new_active"],
                         "dm_active_id": tag_map["med_chronic_active"],
+                        "dm_refill_ids": [tag_map[t] for t in dm_old_refill_tags],
                     },
                     "lab_trend": {
                         "concept": lab_concept,

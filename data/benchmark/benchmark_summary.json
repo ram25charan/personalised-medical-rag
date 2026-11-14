@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
   "synthetic_patients_count": 100,
-  "synthetic_events_count": 12184,
-  "avg_events_per_synthetic_patient": 121.84,
+  "synthetic_events_count": 13116,
+  "avg_events_per_synthetic_patient": 131.16,
   "disjoint_patient_splits": true,
   "questions_total": 180,
   "questions_by_track_and_split": {

@@ -1,0 +1,3846 @@
+{
+  "B2_by_intent": {
+    "current_state": {
+      "num_dev_questions": 17,
+      "best": {
+        "weights": {
+          "alpha": 0.8,
+          "beta": 0.1,
+          "gamma": 0.1
+        },
+        "mean_ndcg_at_10": 0.857537,
+        "mean_recall_at_10": 0.941176
+      },
+      "top_5": [
+        {
+          "weights": {
+            "alpha": 0.8,
+            "beta": 0.1,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 0.857537,
+          "mean_recall_at_10": 0.941176
+        },
+        {
+          "weights": {
+            "alpha": 0.7,
+            "beta": 0.2,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 0.857537,
+          "mean_recall_at_10": 0.941176
+        },
+        {
+          "weights": {
+            "alpha": 0.6,
+            "beta": 0.3,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 0.857537,
+          "mean_recall_at_10": 0.941176
+        },
+        {
+          "weights": {
+            "alpha": 0.5,
+            "beta": 0.4,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 0.857537,
+          "mean_recall_at_10": 0.941176
+        },
+        {
+          "weights": {
+            "alpha": 0.9,
+            "beta": 0.0,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 0.840533,
+          "mean_recall_at_10": 0.882353
+        }
+      ],
+      "all_grid": [
+        {
+          "weights": {
+            "alpha": 0.8,
+            "beta": 0.1,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 0.857537,
+          "mean_recall_at_10": 0.941176
+        },
+        {
+          "weights": {
+            "alpha": 0.7,
+            "beta": 0.2,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 0.857537,
+          "mean_recall_at_10": 0.941176
+        },
+        {
+          "weights": {
+            "alpha": 0.6,
+            "beta": 0.3,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 0.857537,
+          "mean_recall_at_10": 0.941176
+        },
+        {
+          "weights": {
+            "alpha": 0.5,
+            "beta": 0.4,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 0.857537,
+          "mean_recall_at_10": 0.941176
+        },
+        {
+          "weights": {
+            "alpha": 0.9,
+            "beta": 0.0,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 0.840533,
+          "mean_recall_at_10": 0.882353
+        },
+        {
+          "weights": {
+            "alpha": 0.7,
+            "beta": 0.1,
+            "gamma": 0.2
+          },
+          "mean_ndcg_at_10": 0.814117,
+          "mean_recall_at_10": 0.941176
+        },
+        {
+          "weights": {
+            "alpha": 0.4,
+            "beta": 0.5,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 0.814117,
+          "mean_recall_at_10": 0.941176
+        },
+        {
+          "weights": {
+            "alpha": 1.0,
+            "beta": 0.0,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.797113,
+          "mean_recall_at_10": 0.882353
+        },
+        {
+          "weights": {
+            "alpha": 0.9,
+            "beta": 0.1,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.797113,
+          "mean_recall_at_10": 0.882353
+        },
+        {
+          "weights": {
+            "alpha": 0.8,
+            "beta": 0.2,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.797113,
+          "mean_recall_at_10": 0.882353
+        },
+        {
+          "weights": {
+            "alpha": 0.7,
+            "beta": 0.3,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.797113,
+          "mean_recall_at_10": 0.882353
+        },
+        {
+          "weights": {
+            "alpha": 0.6,
+            "beta": 0.4,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.797113,
+          "mean_recall_at_10": 0.882353
+        },
+        {
+          "weights": {
+            "alpha": 0.5,
+            "beta": 0.5,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.797113,
+          "mean_recall_at_10": 0.882353
+        },
+        {
+          "weights": {
+            "alpha": 0.4,
+            "beta": 0.6,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.797113,
+          "mean_recall_at_10": 0.882353
+        },
+        {
+          "weights": {
+            "alpha": 0.3,
+            "beta": 0.7,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.797113,
+          "mean_recall_at_10": 0.882353
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.8,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.797113,
+          "mean_recall_at_10": 0.882353
+        },
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.9,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.797113,
+          "mean_recall_at_10": 0.882353
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 1.0,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.797113,
+          "mean_recall_at_10": 0.882353
+        },
+        {
+          "weights": {
+            "alpha": 0.6,
+            "beta": 0.2,
+            "gamma": 0.2
+          },
+          "mean_ndcg_at_10": 0.792407,
+          "mean_recall_at_10": 0.941176
+        },
+        {
+          "weights": {
+            "alpha": 0.3,
+            "beta": 0.6,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 0.792407,
+          "mean_recall_at_10": 0.941176
+        },
+        {
+          "weights": {
+            "alpha": 0.5,
+            "beta": 0.3,
+            "gamma": 0.2
+          },
+          "mean_ndcg_at_10": 0.787685,
+          "mean_recall_at_10": 0.941176
+        },
+        {
+          "weights": {
+            "alpha": 0.8,
+            "beta": 0.0,
+            "gamma": 0.2
+          },
+          "mean_ndcg_at_10": 0.775403,
+          "mean_recall_at_10": 0.882353
+        },
+        {
+          "weights": {
+            "alpha": 0.5,
+            "beta": 0.2,
+            "gamma": 0.3
+          },
+          "mean_ndcg_at_10": 0.765975,
+          "mean_recall_at_10": 0.941176
+        },
+        {
+          "weights": {
+            "alpha": 0.4,
+            "beta": 0.4,
+            "gamma": 0.2
+          },
+          "mean_ndcg_at_10": 0.765975,
+          "mean_recall_at_10": 0.941176
+        },
+        {
+          "weights": {
+            "alpha": 0.3,
+            "beta": 0.5,
+            "gamma": 0.2
+          },
+          "mean_ndcg_at_10": 0.765975,
+          "mean_recall_at_10": 0.941176
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.7,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 0.765975,
+          "mean_recall_at_10": 0.941176
+        },
+        {
+          "weights": {
+            "alpha": 0.4,
+            "beta": 0.3,
+            "gamma": 0.3
+          },
+          "mean_ndcg_at_10": 0.758273,
+          "mean_recall_at_10": 0.941176
+        },
+        {
+          "weights": {
+            "alpha": 0.6,
+            "beta": 0.1,
+            "gamma": 0.3
+          },
+          "mean_ndcg_at_10": 0.750571,
+          "mean_recall_at_10": 0.941176
+        },
+        {
+          "weights": {
+            "alpha": 0.3,
+            "beta": 0.4,
+            "gamma": 0.3
+          },
+          "mean_ndcg_at_10": 0.713877,
+          "mean_recall_at_10": 0.941176
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.6,
+            "gamma": 0.2
+          },
+          "mean_ndcg_at_10": 0.713877,
+          "mean_recall_at_10": 0.941176
+        },
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.8,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 0.713877,
+          "mean_recall_at_10": 0.941176
+        },
+        {
+          "weights": {
+            "alpha": 0.7,
+            "beta": 0.0,
+            "gamma": 0.3
+          },
+          "mean_ndcg_at_10": 0.711699,
+          "mean_recall_at_10": 0.882353
+        },
+        {
+          "weights": {
+            "alpha": 0.5,
+            "beta": 0.1,
+            "gamma": 0.4
+          },
+          "mean_ndcg_at_10": 0.677895,
+          "mean_recall_at_10": 0.941176
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.5,
+            "gamma": 0.3
+          },
+          "mean_ndcg_at_10": 0.67392,
+          "mean_recall_at_10": 0.941176
+        },
+        {
+          "weights": {
+            "alpha": 0.4,
+            "beta": 0.2,
+            "gamma": 0.4
+          },
+          "mean_ndcg_at_10": 0.667718,
+          "mean_recall_at_10": 0.941176
+        },
+        {
+          "weights": {
+            "alpha": 0.6,
+            "beta": 0.0,
+            "gamma": 0.4
+          },
+          "mean_ndcg_at_10": 0.657915,
+          "mean_recall_at_10": 0.882353
+        },
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.7,
+            "gamma": 0.2
+          },
+          "mean_ndcg_at_10": 0.656291,
+          "mean_recall_at_10": 0.941176
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 0.8,
+            "gamma": 0.2
+          },
+          "mean_ndcg_at_10": 0.628326,
+          "mean_recall_at_10": 0.882353
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 0.9,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 0.628326,
+          "mean_recall_at_10": 0.882353
+        },
+        {
+          "weights": {
+            "alpha": 0.3,
+            "beta": 0.3,
+            "gamma": 0.4
+          },
+          "mean_ndcg_at_10": 0.588109,
+          "mean_recall_at_10": 0.676471
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.4,
+            "gamma": 0.4
+          },
+          "mean_ndcg_at_10": 0.555264,
+          "mean_recall_at_10": 0.647059
+        },
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.5,
+            "gamma": 0.4
+          },
+          "mean_ndcg_at_10": 0.554099,
+          "mean_recall_at_10": 0.647059
+        },
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.6,
+            "gamma": 0.3
+          },
+          "mean_ndcg_at_10": 0.554099,
+          "mean_recall_at_10": 0.647059
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 0.5,
+            "gamma": 0.5
+          },
+          "mean_ndcg_at_10": 0.554099,
+          "mean_recall_at_10": 0.647059
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 0.6,
+            "gamma": 0.4
+          },
+          "mean_ndcg_at_10": 0.554099,
+          "mean_recall_at_10": 0.647059
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 0.7,
+            "gamma": 0.3
+          },
+          "mean_ndcg_at_10": 0.554099,
+          "mean_recall_at_10": 0.647059
+        },
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.4,
+            "gamma": 0.5
+          },
+          "mean_ndcg_at_10": 0.542597,
+          "mean_recall_at_10": 0.617647
+        },
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.1,
+            "gamma": 0.8
+          },
+          "mean_ndcg_at_10": 0.531219,
+          "mean_recall_at_10": 0.588235
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.1,
+            "gamma": 0.7
+          },
+          "mean_ndcg_at_10": 0.531219,
+          "mean_recall_at_10": 0.588235
+        },
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.2,
+            "gamma": 0.7
+          },
+          "mean_ndcg_at_10": 0.531219,
+          "mean_recall_at_10": 0.588235
+        },
+        {
+          "weights": {
+            "alpha": 0.3,
+            "beta": 0.1,
+            "gamma": 0.6
+          },
+          "mean_ndcg_at_10": 0.531219,
+          "mean_recall_at_10": 0.588235
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.2,
+            "gamma": 0.6
+          },
+          "mean_ndcg_at_10": 0.531219,
+          "mean_recall_at_10": 0.588235
+        },
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.3,
+            "gamma": 0.6
+          },
+          "mean_ndcg_at_10": 0.531219,
+          "mean_recall_at_10": 0.588235
+        },
+        {
+          "weights": {
+            "alpha": 0.4,
+            "beta": 0.1,
+            "gamma": 0.5
+          },
+          "mean_ndcg_at_10": 0.531219,
+          "mean_recall_at_10": 0.588235
+        },
+        {
+          "weights": {
+            "alpha": 0.3,
+            "beta": 0.2,
+            "gamma": 0.5
+          },
+          "mean_ndcg_at_10": 0.531219,
+          "mean_recall_at_10": 0.588235
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.3,
+            "gamma": 0.5
+          },
+          "mean_ndcg_at_10": 0.531219,
+          "mean_recall_at_10": 0.588235
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 0.1,
+            "gamma": 0.9
+          },
+          "mean_ndcg_at_10": 0.531219,
+          "mean_recall_at_10": 0.588235
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 0.2,
+            "gamma": 0.8
+          },
+          "mean_ndcg_at_10": 0.531219,
+          "mean_recall_at_10": 0.588235
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 0.3,
+            "gamma": 0.7
+          },
+          "mean_ndcg_at_10": 0.531219,
+          "mean_recall_at_10": 0.588235
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 0.4,
+            "gamma": 0.6
+          },
+          "mean_ndcg_at_10": 0.531219,
+          "mean_recall_at_10": 0.588235
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 0.0,
+            "gamma": 1.0
+          },
+          "mean_ndcg_at_10": 0.514215,
+          "mean_recall_at_10": 0.529412
+        },
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.0,
+            "gamma": 0.9
+          },
+          "mean_ndcg_at_10": 0.514215,
+          "mean_recall_at_10": 0.529412
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.0,
+            "gamma": 0.8
+          },
+          "mean_ndcg_at_10": 0.514215,
+          "mean_recall_at_10": 0.529412
+        },
+        {
+          "weights": {
+            "alpha": 0.3,
+            "beta": 0.0,
+            "gamma": 0.7
+          },
+          "mean_ndcg_at_10": 0.514215,
+          "mean_recall_at_10": 0.529412
+        },
+        {
+          "weights": {
+            "alpha": 0.4,
+            "beta": 0.0,
+            "gamma": 0.6
+          },
+          "mean_ndcg_at_10": 0.514215,
+          "mean_recall_at_10": 0.529412
+        },
+        {
+          "weights": {
+            "alpha": 0.5,
+            "beta": 0.0,
+            "gamma": 0.5
+          },
+          "mean_ndcg_at_10": 0.514215,
+          "mean_recall_at_10": 0.529412
+        }
+      ]
+    },
+    "historical": {
+      "num_dev_questions": 4,
+      "best": {
+        "weights": {
+          "alpha": 0.1,
+          "beta": 0.1,
+          "gamma": 0.8
+        },
+        "mean_ndcg_at_10": 0.177239,
+        "mean_recall_at_10": 0.5
+      },
+      "top_5": [
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.1,
+            "gamma": 0.8
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.1,
+            "gamma": 0.7
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.2,
+            "gamma": 0.7
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.3,
+            "beta": 0.1,
+            "gamma": 0.6
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.2,
+            "gamma": 0.6
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        }
+      ],
+      "all_grid": [
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.1,
+            "gamma": 0.8
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.1,
+            "gamma": 0.7
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.2,
+            "gamma": 0.7
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.3,
+            "beta": 0.1,
+            "gamma": 0.6
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.2,
+            "gamma": 0.6
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.3,
+            "gamma": 0.6
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.3,
+            "beta": 0.2,
+            "gamma": 0.5
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.3,
+            "gamma": 0.5
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.4,
+            "gamma": 0.5
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.4,
+            "beta": 0.2,
+            "gamma": 0.4
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.3,
+            "beta": 0.3,
+            "gamma": 0.4
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.4,
+            "gamma": 0.4
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.5,
+            "gamma": 0.4
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.5,
+            "beta": 0.2,
+            "gamma": 0.3
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.4,
+            "beta": 0.3,
+            "gamma": 0.3
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.3,
+            "beta": 0.4,
+            "gamma": 0.3
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.5,
+            "gamma": 0.3
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.6,
+            "gamma": 0.3
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.6,
+            "beta": 0.2,
+            "gamma": 0.2
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.5,
+            "beta": 0.3,
+            "gamma": 0.2
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.4,
+            "beta": 0.4,
+            "gamma": 0.2
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.3,
+            "beta": 0.5,
+            "gamma": 0.2
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.6,
+            "gamma": 0.2
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.7,
+            "gamma": 0.2
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.7,
+            "beta": 0.2,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.6,
+            "beta": 0.3,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.5,
+            "beta": 0.4,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.4,
+            "beta": 0.5,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.3,
+            "beta": 0.6,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.7,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.8,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 0.1,
+            "gamma": 0.9
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 0.2,
+            "gamma": 0.8
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 0.3,
+            "gamma": 0.7
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 0.4,
+            "gamma": 0.6
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 0.5,
+            "gamma": 0.5
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 0.6,
+            "gamma": 0.4
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 0.7,
+            "gamma": 0.3
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 0.8,
+            "gamma": 0.2
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 0.9,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.7,
+            "beta": 0.3,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.6,
+            "beta": 0.4,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.5,
+            "beta": 0.5,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.4,
+            "beta": 0.6,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.3,
+            "beta": 0.7,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.8,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.9,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 1.0,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.4,
+            "beta": 0.1,
+            "gamma": 0.5
+          },
+          "mean_ndcg_at_10": 0.132929,
+          "mean_recall_at_10": 0.375
+        },
+        {
+          "weights": {
+            "alpha": 0.8,
+            "beta": 0.2,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.132929,
+          "mean_recall_at_10": 0.375
+        },
+        {
+          "weights": {
+            "alpha": 0.5,
+            "beta": 0.1,
+            "gamma": 0.4
+          },
+          "mean_ndcg_at_10": 0.0,
+          "mean_recall_at_10": 0.0
+        },
+        {
+          "weights": {
+            "alpha": 0.6,
+            "beta": 0.1,
+            "gamma": 0.3
+          },
+          "mean_ndcg_at_10": 0.0,
+          "mean_recall_at_10": 0.0
+        },
+        {
+          "weights": {
+            "alpha": 0.7,
+            "beta": 0.1,
+            "gamma": 0.2
+          },
+          "mean_ndcg_at_10": 0.0,
+          "mean_recall_at_10": 0.0
+        },
+        {
+          "weights": {
+            "alpha": 0.8,
+            "beta": 0.1,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 0.0,
+          "mean_recall_at_10": 0.0
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 0.0,
+            "gamma": 1.0
+          },
+          "mean_ndcg_at_10": 0.0,
+          "mean_recall_at_10": 0.0
+        },
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.0,
+            "gamma": 0.9
+          },
+          "mean_ndcg_at_10": 0.0,
+          "mean_recall_at_10": 0.0
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.0,
+            "gamma": 0.8
+          },
+          "mean_ndcg_at_10": 0.0,
+          "mean_recall_at_10": 0.0
+        },
+        {
+          "weights": {
+            "alpha": 0.3,
+            "beta": 0.0,
+            "gamma": 0.7
+          },
+          "mean_ndcg_at_10": 0.0,
+          "mean_recall_at_10": 0.0
+        },
+        {
+          "weights": {
+            "alpha": 0.4,
+            "beta": 0.0,
+            "gamma": 0.6
+          },
+          "mean_ndcg_at_10": 0.0,
+          "mean_recall_at_10": 0.0
+        },
+        {
+          "weights": {
+            "alpha": 0.5,
+            "beta": 0.0,
+            "gamma": 0.5
+          },
+          "mean_ndcg_at_10": 0.0,
+          "mean_recall_at_10": 0.0
+        },
+        {
+          "weights": {
+            "alpha": 0.6,
+            "beta": 0.0,
+            "gamma": 0.4
+          },
+          "mean_ndcg_at_10": 0.0,
+          "mean_recall_at_10": 0.0
+        },
+        {
+          "weights": {
+            "alpha": 0.7,
+            "beta": 0.0,
+            "gamma": 0.3
+          },
+          "mean_ndcg_at_10": 0.0,
+          "mean_recall_at_10": 0.0
+        },
+        {
+          "weights": {
+            "alpha": 0.8,
+            "beta": 0.0,
+            "gamma": 0.2
+          },
+          "mean_ndcg_at_10": 0.0,
+          "mean_recall_at_10": 0.0
+        },
+        {
+          "weights": {
+            "alpha": 0.9,
+            "beta": 0.0,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 0.0,
+          "mean_recall_at_10": 0.0
+        },
+        {
+          "weights": {
+            "alpha": 1.0,
+            "beta": 0.0,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.0,
+          "mean_recall_at_10": 0.0
+        },
+        {
+          "weights": {
+            "alpha": 0.9,
+            "beta": 0.1,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.0,
+          "mean_recall_at_10": 0.0
+        }
+      ]
+    },
+    "change_over_time": {
+      "num_dev_questions": 7,
+      "best": {
+        "weights": {
+          "alpha": 0.1,
+          "beta": 0.1,
+          "gamma": 0.8
+        },
+        "mean_ndcg_at_10": 1.0,
+        "mean_recall_at_10": 1.0
+      },
+      "top_5": [
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.1,
+            "gamma": 0.8
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.1,
+            "gamma": 0.7
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.2,
+            "gamma": 0.7
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.3,
+            "beta": 0.1,
+            "gamma": 0.6
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.2,
+            "gamma": 0.6
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        }
+      ],
+      "all_grid": [
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.1,
+            "gamma": 0.8
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.1,
+            "gamma": 0.7
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.2,
+            "gamma": 0.7
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.3,
+            "beta": 0.1,
+            "gamma": 0.6
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.2,
+            "gamma": 0.6
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.3,
+            "gamma": 0.6
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.4,
+            "beta": 0.1,
+            "gamma": 0.5
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.3,
+            "beta": 0.2,
+            "gamma": 0.5
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.3,
+            "gamma": 0.5
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.4,
+            "gamma": 0.5
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.5,
+            "beta": 0.1,
+            "gamma": 0.4
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.4,
+            "beta": 0.2,
+            "gamma": 0.4
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.3,
+            "beta": 0.3,
+            "gamma": 0.4
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.4,
+            "gamma": 0.4
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.5,
+            "gamma": 0.4
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.6,
+            "beta": 0.1,
+            "gamma": 0.3
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.5,
+            "beta": 0.2,
+            "gamma": 0.3
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.4,
+            "beta": 0.3,
+            "gamma": 0.3
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.3,
+            "beta": 0.4,
+            "gamma": 0.3
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.5,
+            "gamma": 0.3
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.6,
+            "gamma": 0.3
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.5,
+            "beta": 0.3,
+            "gamma": 0.2
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.4,
+            "beta": 0.4,
+            "gamma": 0.2
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.3,
+            "beta": 0.5,
+            "gamma": 0.2
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.6,
+            "gamma": 0.2
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.7,
+            "gamma": 0.2
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.7,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.8,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 0.0,
+            "gamma": 1.0
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.0,
+            "gamma": 0.9
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 0.1,
+            "gamma": 0.9
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.0,
+            "gamma": 0.8
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 0.2,
+            "gamma": 0.8
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.3,
+            "beta": 0.0,
+            "gamma": 0.7
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 0.3,
+            "gamma": 0.7
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.4,
+            "beta": 0.0,
+            "gamma": 0.6
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 0.4,
+            "gamma": 0.6
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.5,
+            "beta": 0.0,
+            "gamma": 0.5
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 0.5,
+            "gamma": 0.5
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.6,
+            "beta": 0.0,
+            "gamma": 0.4
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 0.6,
+            "gamma": 0.4
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.7,
+            "beta": 0.0,
+            "gamma": 0.3
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 0.7,
+            "gamma": 0.3
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 0.8,
+            "gamma": 0.2
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 0.9,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.6,
+            "beta": 0.2,
+            "gamma": 0.2
+          },
+          "mean_ndcg_at_10": 0.982459,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.3,
+            "beta": 0.6,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 0.982459,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.7,
+            "beta": 0.1,
+            "gamma": 0.2
+          },
+          "mean_ndcg_at_10": 0.959522,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.4,
+            "beta": 0.5,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 0.955684,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.8,
+            "beta": 0.0,
+            "gamma": 0.2
+          },
+          "mean_ndcg_at_10": 0.955684,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.5,
+            "beta": 0.4,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 0.949612,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.7,
+            "beta": 0.2,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 0.938143,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.6,
+            "beta": 0.3,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 0.938143,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.8,
+            "beta": 0.1,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 0.925999,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.9,
+            "beta": 0.0,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 0.882202,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 1.0,
+            "beta": 0.0,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.783005,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.9,
+            "beta": 0.1,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.783005,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.8,
+            "beta": 0.2,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.783005,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.7,
+            "beta": 0.3,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.783005,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.6,
+            "beta": 0.4,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.783005,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.5,
+            "beta": 0.5,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.783005,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.4,
+            "beta": 0.6,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.783005,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.3,
+            "beta": 0.7,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.783005,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.8,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.783005,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.9,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.783005,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 1.0,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.783005,
+          "mean_recall_at_10": 1.0
+        }
+      ]
+    },
+    "first_occurrence": {
+      "num_dev_questions": 11,
+      "best": {
+        "weights": {
+          "alpha": 0.1,
+          "beta": 0.1,
+          "gamma": 0.8
+        },
+        "mean_ndcg_at_10": 1.0,
+        "mean_recall_at_10": 1.0
+      },
+      "top_5": [
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.1,
+            "gamma": 0.8
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.1,
+            "gamma": 0.7
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.2,
+            "gamma": 0.7
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.3,
+            "beta": 0.1,
+            "gamma": 0.6
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.2,
+            "gamma": 0.6
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        }
+      ],
+      "all_grid": [
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.1,
+            "gamma": 0.8
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.1,
+            "gamma": 0.7
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.2,
+            "gamma": 0.7
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.3,
+            "beta": 0.1,
+            "gamma": 0.6
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.2,
+            "gamma": 0.6
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.3,
+            "gamma": 0.6
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.4,
+            "beta": 0.1,
+            "gamma": 0.5
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.3,
+            "beta": 0.2,
+            "gamma": 0.5
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.3,
+            "gamma": 0.5
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.4,
+            "gamma": 0.5
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.5,
+            "beta": 0.1,
+            "gamma": 0.4
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.4,
+            "beta": 0.2,
+            "gamma": 0.4
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.3,
+            "beta": 0.3,
+            "gamma": 0.4
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.4,
+            "gamma": 0.4
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.5,
+            "gamma": 0.4
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.6,
+            "beta": 0.1,
+            "gamma": 0.3
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.5,
+            "beta": 0.2,
+            "gamma": 0.3
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.4,
+            "beta": 0.3,
+            "gamma": 0.3
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.3,
+            "beta": 0.4,
+            "gamma": 0.3
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.5,
+            "gamma": 0.3
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.6,
+            "gamma": 0.3
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.7,
+            "beta": 0.1,
+            "gamma": 0.2
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.6,
+            "beta": 0.2,
+            "gamma": 0.2
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.5,
+            "beta": 0.3,
+            "gamma": 0.2
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.4,
+            "beta": 0.4,
+            "gamma": 0.2
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.3,
+            "beta": 0.5,
+            "gamma": 0.2
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.6,
+            "gamma": 0.2
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.7,
+            "gamma": 0.2
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.8,
+            "beta": 0.1,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.7,
+            "beta": 0.2,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.6,
+            "beta": 0.3,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.5,
+            "beta": 0.4,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.4,
+            "beta": 0.5,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.3,
+            "beta": 0.6,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.7,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.8,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 0.0,
+            "gamma": 1.0
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.0,
+            "gamma": 0.9
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 0.1,
+            "gamma": 0.9
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.0,
+            "gamma": 0.8
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 0.2,
+            "gamma": 0.8
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.3,
+            "beta": 0.0,
+            "gamma": 0.7
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 0.3,
+            "gamma": 0.7
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.4,
+            "beta": 0.0,
+            "gamma": 0.6
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 0.4,
+            "gamma": 0.6
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.5,
+            "beta": 0.0,
+            "gamma": 0.5
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 0.5,
+            "gamma": 0.5
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.6,
+            "beta": 0.0,
+            "gamma": 0.4
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 0.6,
+            "gamma": 0.4
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.7,
+            "beta": 0.0,
+            "gamma": 0.3
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 0.7,
+            "gamma": 0.3
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.8,
+            "beta": 0.0,
+            "gamma": 0.2
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 0.8,
+            "gamma": 0.2
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.9,
+            "beta": 0.0,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 0.9,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 1.0,
+            "beta": 0.0,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.9,
+            "beta": 0.1,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.8,
+            "beta": 0.2,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.7,
+            "beta": 0.3,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.6,
+            "beta": 0.4,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.5,
+            "beta": 0.5,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.4,
+            "beta": 0.6,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.3,
+            "beta": 0.7,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.8,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.9,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 1.0,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        }
+      ]
+    },
+    "persistent_fact": {
+      "num_dev_questions": 4,
+      "best": {
+        "weights": {
+          "alpha": 0.1,
+          "beta": 0.1,
+          "gamma": 0.8
+        },
+        "mean_ndcg_at_10": 1.0,
+        "mean_recall_at_10": 1.0
+      },
+      "top_5": [
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.1,
+            "gamma": 0.8
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.1,
+            "gamma": 0.7
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.2,
+            "gamma": 0.7
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.3,
+            "beta": 0.1,
+            "gamma": 0.6
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.2,
+            "gamma": 0.6
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        }
+      ],
+      "all_grid": [
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.1,
+            "gamma": 0.8
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.1,
+            "gamma": 0.7
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.2,
+            "gamma": 0.7
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.3,
+            "beta": 0.1,
+            "gamma": 0.6
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.2,
+            "gamma": 0.6
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.3,
+            "gamma": 0.6
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.4,
+            "beta": 0.1,
+            "gamma": 0.5
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.3,
+            "beta": 0.2,
+            "gamma": 0.5
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.3,
+            "gamma": 0.5
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.4,
+            "gamma": 0.5
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.5,
+            "beta": 0.1,
+            "gamma": 0.4
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.4,
+            "beta": 0.2,
+            "gamma": 0.4
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.3,
+            "beta": 0.3,
+            "gamma": 0.4
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.4,
+            "gamma": 0.4
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.5,
+            "gamma": 0.4
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.6,
+            "beta": 0.1,
+            "gamma": 0.3
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.5,
+            "beta": 0.2,
+            "gamma": 0.3
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.4,
+            "beta": 0.3,
+            "gamma": 0.3
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.3,
+            "beta": 0.4,
+            "gamma": 0.3
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.5,
+            "gamma": 0.3
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.6,
+            "gamma": 0.3
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.7,
+            "beta": 0.1,
+            "gamma": 0.2
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.6,
+            "beta": 0.2,
+            "gamma": 0.2
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.5,
+            "beta": 0.3,
+            "gamma": 0.2
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.4,
+            "beta": 0.4,
+            "gamma": 0.2
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.3,
+            "beta": 0.5,
+            "gamma": 0.2
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.6,
+            "gamma": 0.2
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.7,
+            "gamma": 0.2
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.8,
+            "beta": 0.1,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.7,
+            "beta": 0.2,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.6,
+            "beta": 0.3,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.5,
+            "beta": 0.4,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.4,
+            "beta": 0.5,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.3,
+            "beta": 0.6,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.7,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.8,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 0.0,
+            "gamma": 1.0
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.0,
+            "gamma": 0.9
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 0.1,
+            "gamma": 0.9
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.0,
+            "gamma": 0.8
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 0.2,
+            "gamma": 0.8
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.3,
+            "beta": 0.0,
+            "gamma": 0.7
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 0.3,
+            "gamma": 0.7
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.4,
+            "beta": 0.0,
+            "gamma": 0.6
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 0.4,
+            "gamma": 0.6
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.5,
+            "beta": 0.0,
+            "gamma": 0.5
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 0.5,
+            "gamma": 0.5
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.6,
+            "beta": 0.0,
+            "gamma": 0.4
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 0.6,
+            "gamma": 0.4
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.7,
+            "beta": 0.0,
+            "gamma": 0.3
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 0.7,
+            "gamma": 0.3
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.8,
+            "beta": 0.0,
+            "gamma": 0.2
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 0.8,
+            "gamma": 0.2
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.9,
+            "beta": 0.0,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 0.9,
+            "gamma": 0.1
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 1.0,
+            "beta": 0.0,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.9,
+            "beta": 0.1,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.8,
+            "beta": 0.2,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.7,
+            "beta": 0.3,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.6,
+            "beta": 0.4,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.5,
+            "beta": 0.5,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.4,
+            "beta": 0.6,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.3,
+            "beta": 0.7,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.8,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.9,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 1.0,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        }
+      ]
+    }
+  },
+  "B3_by_intent": {
+    "current_state": {
+      "num_dev_questions": 17,
+      "best": {
+        "weights": {
+          "alpha": 0.1,
+          "beta": 0.9,
+          "gamma": 0.0
+        },
+        "mean_ndcg_at_10": 0.797113,
+        "mean_recall_at_10": 0.882353
+      },
+      "all_grid": [
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.9,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.797113,
+          "mean_recall_at_10": 0.882353
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.8,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.797113,
+          "mean_recall_at_10": 0.882353
+        },
+        {
+          "weights": {
+            "alpha": 0.3,
+            "beta": 0.7,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.797113,
+          "mean_recall_at_10": 0.882353
+        },
+        {
+          "weights": {
+            "alpha": 0.4,
+            "beta": 0.6,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.797113,
+          "mean_recall_at_10": 0.882353
+        },
+        {
+          "weights": {
+            "alpha": 0.5,
+            "beta": 0.5,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.797113,
+          "mean_recall_at_10": 0.882353
+        },
+        {
+          "weights": {
+            "alpha": 0.6,
+            "beta": 0.4,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.797113,
+          "mean_recall_at_10": 0.882353
+        },
+        {
+          "weights": {
+            "alpha": 0.7,
+            "beta": 0.3,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.797113,
+          "mean_recall_at_10": 0.882353
+        },
+        {
+          "weights": {
+            "alpha": 0.8,
+            "beta": 0.2,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.797113,
+          "mean_recall_at_10": 0.882353
+        },
+        {
+          "weights": {
+            "alpha": 0.9,
+            "beta": 0.1,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.797113,
+          "mean_recall_at_10": 0.882353
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 1.0,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.797113,
+          "mean_recall_at_10": 0.882353
+        },
+        {
+          "weights": {
+            "alpha": 1.0,
+            "beta": 0.0,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.797113,
+          "mean_recall_at_10": 0.882353
+        }
+      ]
+    },
+    "historical": {
+      "num_dev_questions": 4,
+      "best": {
+        "weights": {
+          "alpha": 0.1,
+          "beta": 0.9,
+          "gamma": 0.0
+        },
+        "mean_ndcg_at_10": 0.177239,
+        "mean_recall_at_10": 0.5
+      },
+      "all_grid": [
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.9,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.8,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.3,
+            "beta": 0.7,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.4,
+            "beta": 0.6,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.5,
+            "beta": 0.5,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.6,
+            "beta": 0.4,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.7,
+            "beta": 0.3,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 1.0,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.177239,
+          "mean_recall_at_10": 0.5
+        },
+        {
+          "weights": {
+            "alpha": 0.8,
+            "beta": 0.2,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.132929,
+          "mean_recall_at_10": 0.375
+        },
+        {
+          "weights": {
+            "alpha": 0.9,
+            "beta": 0.1,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.0,
+          "mean_recall_at_10": 0.0
+        },
+        {
+          "weights": {
+            "alpha": 1.0,
+            "beta": 0.0,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.0,
+          "mean_recall_at_10": 0.0
+        }
+      ]
+    },
+    "change_over_time": {
+      "num_dev_questions": 7,
+      "best": {
+        "weights": {
+          "alpha": 0.1,
+          "beta": 0.9,
+          "gamma": 0.0
+        },
+        "mean_ndcg_at_10": 0.783005,
+        "mean_recall_at_10": 1.0
+      },
+      "all_grid": [
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.9,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.783005,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.8,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.783005,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.3,
+            "beta": 0.7,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.783005,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.4,
+            "beta": 0.6,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.783005,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.5,
+            "beta": 0.5,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.783005,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.6,
+            "beta": 0.4,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.783005,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.7,
+            "beta": 0.3,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.783005,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.8,
+            "beta": 0.2,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.783005,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.9,
+            "beta": 0.1,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.783005,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 1.0,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.783005,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 1.0,
+            "beta": 0.0,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 0.783005,
+          "mean_recall_at_10": 1.0
+        }
+      ]
+    },
+    "first_occurrence": {
+      "num_dev_questions": 11,
+      "best": {
+        "weights": {
+          "alpha": 0.1,
+          "beta": 0.9,
+          "gamma": 0.0
+        },
+        "mean_ndcg_at_10": 1.0,
+        "mean_recall_at_10": 1.0
+      },
+      "all_grid": [
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.9,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.8,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.3,
+            "beta": 0.7,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.4,
+            "beta": 0.6,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.5,
+            "beta": 0.5,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.6,
+            "beta": 0.4,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.7,
+            "beta": 0.3,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.8,
+            "beta": 0.2,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.9,
+            "beta": 0.1,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 1.0,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 1.0,
+            "beta": 0.0,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        }
+      ]
+    },
+    "persistent_fact": {
+      "num_dev_questions": 4,
+      "best": {
+        "weights": {
+          "alpha": 0.1,
+          "beta": 0.9,
+          "gamma": 0.0
+        },
+        "mean_ndcg_at_10": 1.0,
+        "mean_recall_at_10": 1.0
+      },
+      "all_grid": [
+        {
+          "weights": {
+            "alpha": 0.1,
+            "beta": 0.9,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.2,
+            "beta": 0.8,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.3,
+            "beta": 0.7,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.4,
+            "beta": 0.6,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.5,
+            "beta": 0.5,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.6,
+            "beta": 0.4,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.7,
+            "beta": 0.3,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.8,
+            "beta": 0.2,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.9,
+            "beta": 0.1,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 0.0,
+            "beta": 1.0,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        },
+        {
+          "weights": {
+            "alpha": 1.0,
+            "beta": 0.0,
+            "gamma": 0.0
+          },
+          "mean_ndcg_at_10": 1.0,
+          "mean_recall_at_10": 1.0
+        }
+      ]
+    }
+  }
+}

@@ -3,6 +3,9 @@
 Generates questions and exact programmatic gold labels across:
 - Track S: 50 dev questions (from the 34 dev patients) and 100 test questions (from the 66 test patients),
   balanced across all 7 benchmark categories and covering all 5 question intents.
+  Includes condition-level queries (e.g. querying hypertension or diabetes management where the drug/lab
+  events do not repeat the disease name verbatim) and multi-refill/multi-lab series so both History Relevance
+  (Rh, H1) and Temporal Relevance (Rt, H2) are non-trivially evaluated under budget k in {5, 10, 20}.
 - Track R: 30 test questions on real MIMIC-IV-ED demo patients anchored to visit `outtime`,
   following snapshot semantics ("recorded on the list at visit N", Section 6.8 & DD5).
 """
@@ -41,28 +44,28 @@ def _make_track_s_question_and_gold(
 
     if category == "temporal_ordering":
         if variant % 2 == 0:
-            # First occurrence of chronic condition
+            # First occurrence of chronic condition among 8 later follow-up notes of the same condition
             c_info = sc["condition_htn"]
             q_text = f"When was {c_info['concept']} first diagnosed for this patient?"
             intent = "first_occurrence"
             anchors = [c_info["concept"]]
             gold_ids = [c_info["first_id"]]
-            distractors = [c_info["followup_id"]] + dist_ids[:4]
+            distractors = c_info["followup_ids"] + dist_ids[:3]
             exp_ans = ExpectedAnswer(type="value", value=c_info["onset_date"])
             exp_beh = "answer"
             exp_conf = False
             exp_flags: list[str] = []
         else:
-            # Sequence of hypertension medications (historical ordering)
+            # Condition-level historical sequence of hypertension medications (tests Rh + Rt)
             m_info = sc["med_lifecycle"]
             q_text = (
-                f"In what chronological order were the antihypertensive medications "
-                f"{m_info['old_med']} and {m_info['new_med']} prescribed up to {as_of}?"
+                f"In what chronological order were medications prescribed to treat the patient's "
+                f"essential (primary) hypertension up to {as_of}?"
             )
             intent = "historical"
-            anchors = [m_info["old_med"], m_info["new_med"], "essential (primary) hypertension"]
+            anchors = ["essential (primary) hypertension", m_info["old_med"], m_info["new_med"]]
             gold_ids = [m_info["start_id"], m_info["new_active_id"]]
-            distractors = dist_ids[:5]
+            distractors = m_info["refill_ids"][:4] + dist_ids[:3]
             exp_ans = ExpectedAnswer(
                 type="ordered_values", value=[m_info["old_med"], m_info["new_med"]]
             )
@@ -73,28 +76,33 @@ def _make_track_s_question_and_gold(
     elif category == "current_vs_historical":
         m_info = sc["med_lifecycle"]
         if variant % 2 == 0:
-            # Ask about the discontinued medication vs current active replacement
+            # Ask about the medication with 6 prior refills + 1 dose change stop vs current replacement
             q_text = (
                 f"Is the patient currently taking {m_info['old_med']} as of {as_of}, "
-                f"or has it been stopped and replaced?"
+                f"or has it been discontinued?"
             )
             intent = "current_state"
             anchors = [m_info["old_med"], m_info["new_med"]]
-            gold_ids = [m_info["dose_change_id"], m_info["new_active_id"]]
-            distractors = [m_info["start_id"]] + dist_ids[:4]
+            gold_ids = [m_info["dose_change_id"]]
+            # All 7 earlier start/refill records of old_med are stale distractors!
+            distractors = [m_info["start_id"]] + m_info["refill_ids"]
             exp_ans = ExpectedAnswer(type="status", value="ENDED")
             exp_beh = "answer"
             exp_conf = False
-            exp_flags = ["U1"]
+            exp_flags = []
         else:
-            # Ask which antihypertensive is currently active
+            # Condition-level current medication query: asks about essential (primary) hypertension
+            # without naming the active drug in the question text! B1 (Rq only) matches the 9 condition
+            # notes ("essential (primary) hypertension"), whereas B3/B2 use Rh to link hypertension -> new_med
+            # and B2 uses Rt to rank the active new_med above the 8 ended old_med orders!
             q_text = (
-                f"What antihypertensive medication is the patient currently taking as of {as_of}?"
+                f"Which medication is currently active for treating the patient's "
+                f"essential (primary) hypertension as of {as_of}?"
             )
             intent = "current_state"
             anchors = ["essential (primary) hypertension", m_info["new_med"], m_info["old_med"]]
             gold_ids = [m_info["new_active_id"]]
-            distractors = [m_info["start_id"], m_info["dose_change_id"]] + dist_ids[:3]
+            distractors = [m_info["start_id"]] + m_info["refill_ids"] + [m_info["dose_change_id"]]
             exp_ans = ExpectedAnswer(type="set", value=[m_info["new_med"]])
             exp_beh = "answer"
             exp_conf = False
@@ -102,6 +110,7 @@ def _make_track_s_question_and_gold(
 
     elif category == "longitudinal_change":
         if variant % 2 == 0:
+            # 8-point lab series: must select both the earliest (#1) and latest (#8) over 6 intermediate labs
             l_info = sc["lab_trend"]
             q_text = (
                 f"How has the patient's {l_info['concept']} changed from the earliest "
@@ -109,9 +118,8 @@ def _make_track_s_question_and_gold(
             )
             intent = "change_over_time"
             anchors = [l_info["concept"]]
-            # Minimal gold for earliest-to-latest change is the full series (or first & last)
             gold_ids = [l_info["gold_ids"][0], l_info["gold_ids"][-1]]
-            distractors = dist_ids[:5]
+            distractors = l_info["gold_ids"][1:-1] + dist_ids[:3]
             exp_ans = ExpectedAnswer(
                 type="ordered_values",
                 value=[l_info["values"][0], l_info["values"][-1]],
@@ -120,12 +128,13 @@ def _make_track_s_question_and_gold(
             exp_conf = False
             exp_flags = []
         else:
+            # Dose change over time across 8 orders of old_med (earliest start vs latest dose escalation)
             m_info = sc["med_lifecycle"]
-            q_text = f"How did the patient's {m_info['old_med']} dose change over time before it was stopped?"
+            q_text = f"How did the patient's {m_info['old_med']} dose change from initial start to final order?"
             intent = "change_over_time"
             anchors = [m_info["old_med"]]
             gold_ids = [m_info["start_id"], m_info["dose_change_id"]]
-            distractors = dist_ids[:5]
+            distractors = m_info["refill_ids"] + dist_ids[:2]
             exp_ans = ExpectedAnswer(
                 type="ordered_values",
                 value=[m_info["old_dose_1"], m_info["old_dose_2"]],
@@ -147,12 +156,16 @@ def _make_track_s_question_and_gold(
             exp_conf = False
             exp_flags = []
         else:
+            # Condition-level query for Type 2 diabetes mellitus active regimen (tests Rh + Rt over 6 old refills)
             m_info = sc["med_lifecycle"]
-            q_text = f"What is the current status and dose of {m_info['dm_med']} as of {as_of}?"
+            q_text = (
+                f"What is the current active medication and dose prescribed for the patient's "
+                f"type 2 diabetes mellitus as of {as_of}?"
+            )
             intent = "current_state"
-            anchors = [m_info["dm_med"]]
+            anchors = ["type 2 diabetes mellitus", m_info["dm_med"]]
             gold_ids = [m_info["dm_active_id"]]
-            distractors = dist_ids[:6]
+            distractors = m_info["dm_refill_ids"] + dist_ids[:3]
             exp_ans = ExpectedAnswer(type="value", value=m_info["dm_dose"])
             exp_beh = "answer"
             exp_conf = False
@@ -250,12 +263,7 @@ def generate_track_r_questions(
     track_r_events: list[Event],
     target_count: int = 30,
 ) -> tuple[list[Question], list[Gold]]:
-    """Deterministically generate ~30 test questions on Track R (real MIMIC-IV-ED demo) anchored to visit `outtime`.
-
-    Follows Section 6.8 & DD5:
-    - Real-track gold means "recorded on the list at visit N", not clinical truth.
-    - Covers Categories 1-5 and 7 (Category 6 has no real conflicts per coverage report).
-    """
+    """Deterministically generate ~30 test questions on Track R (real MIMIC-IV-ED demo) anchored to visit `outtime`."""
     by_patient: dict[str, list[Event]] = defaultdict(list)
     for ev in track_r_events:
         by_patient[ev.patient_id].append(ev)
@@ -308,11 +316,9 @@ def generate_track_r_questions(
             )
         )
 
-    # Sort patients deterministically
     sorted_pids = sorted(by_patient.keys())
 
-    # 1. Category 2 (current_vs_historical): 6 questions on multi-visit patients where a drug was on an earlier visit list
-    #    or listed on the latest visit
+    # 1. Category 2 (current_vs_historical): 6 questions
     cat2_count = 0
     for pid in sorted_pids:
         if cat2_count >= 6:
@@ -378,7 +384,7 @@ def generate_track_r_questions(
                 )
             cat2_count += 1
 
-    # 2. Category 3 (longitudinal_change): 6 questions on medications added between consecutive visits
+    # 2. Category 3 (longitudinal_change): 6 questions
     cat3_count = 0
     for pid in sorted_pids:
         if cat3_count >= 6:
@@ -417,7 +423,7 @@ def generate_track_r_questions(
             )
             cat3_count += 1
 
-    # 3. Category 1 (temporal_ordering): 6 questions on earliest recorded diagnosis across visits
+    # 3. Category 1 (temporal_ordering): 6 questions
     cat1_count = 0
     for pid in sorted_pids:
         if cat1_count >= 6:
@@ -447,7 +453,7 @@ def generate_track_r_questions(
             )
             cat1_count += 1
 
-    # 4. Category 4 (irrelevant_history): 5 questions on recurring diagnosis in multi-visit patients
+    # 4. Category 4 (irrelevant_history): 5 questions
     cat4_count = 0
     for pid in sorted_pids:
         if cat4_count >= 5:
@@ -483,7 +489,7 @@ def generate_track_r_questions(
             )
             cat4_count += 1
 
-    # 5. Category 5 (missing_or_ambiguous_dates): 3 questions on stays where home medication start/stop dates are absent (snapshot U1/U4)
+    # 5. Category 5 (missing_or_ambiguous_dates): 3 questions
     cat5_count = 0
     for pid in sorted_pids:
         if cat5_count >= 3:
@@ -498,7 +504,7 @@ def generate_track_r_questions(
             vitals = [e.event_id for e in p_evs if e.event_type == "vital_sign"][:4]
             add_pair(
                 pid=pid,
-                text=f"Does the ED record specify when the patient originally started or stopped taking the home medication {m_ev.concept}?",
+                text=f"Does the historical ED record specify when the patient started or stopped the home medication {m_ev.concept}?",
                 as_of=as_of,
                 win_start=None,
                 intent="historical",
@@ -513,16 +519,16 @@ def generate_track_r_questions(
             )
             cat5_count += 1
 
-    # 6. Category 7 (insufficient_evidence): 4 questions asking about unrecorded medications/labs on Track R
+    # 6. Category 7 (insufficient_evidence): 4 questions
     cat7_count = 0
-    unrecorded_Pool = ["methotrexate", "tacrolimus", "lithium carbonate", "hba1c"]
+    unrecorded_pool = ["methotrexate", "tacrolimus", "lithium carbonate", "hba1c"]
     for pid in sorted_pids:
         if cat7_count >= 4 or len(questions) >= target_count:
             break
         p_evs = by_patient[pid]
         visits = [e for e in p_evs if e.event_type == "visit"]
         concepts_present = {e.concept for e in p_evs}
-        q_concept = unrecorded_Pool[cat7_count % len(unrecorded_Pool)]
+        q_concept = unrecorded_pool[cat7_count % len(unrecorded_pool)]
         if q_concept not in concepts_present and visits:
             last_visit = visits[-1]
             as_of = last_visit.valid_end or last_visit.observed_time or ""
@@ -566,7 +572,6 @@ def generate_benchmark_questions(
     golds: list[Gold] = []
     s_counter = 1
 
-    # Generate Track S dev questions (50 questions balanced across the 7 categories)
     for i in range(n_s_dev):
         bp = dev_bps[i % len(dev_bps)]
         category = ALL_CATEGORIES[i % len(ALL_CATEGORIES)]
@@ -576,7 +581,6 @@ def generate_benchmark_questions(
         questions.append(q)
         golds.append(g)
 
-    # Generate Track S test questions (100 questions balanced across the 7 categories)
     for i in range(n_s_test):
         bp = test_bps[i % len(test_bps)]
         category = ALL_CATEGORIES[i % len(ALL_CATEGORIES)]
@@ -586,7 +590,6 @@ def generate_benchmark_questions(
         questions.append(q)
         golds.append(g)
 
-    # Generate Track R test questions if Track R events are provided
     if track_r_events:
         r_questions, r_golds = generate_track_r_questions(track_r_events, target_count=n_r_test)
         questions.extend(r_questions)

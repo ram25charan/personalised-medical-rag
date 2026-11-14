@@ -1119,7 +1119,7 @@ New optional fields may be added without breaking consumers. Renaming or removin
 | DF3 | Whether to attempt STRETCH items (Track P, second generator, B0 on short histories, learned ranker, clinician summary) | After Phase 3 |
 | DF4 | Final paper venue and template details | Phase 6 (IEEE format assumed) |
 | DF5 | Whether Track R may be sent to Groq (license / terms check) | Before Phase 4 |
-| DF6 | Final sizes (patients, questions) | Decided in Phase 2: 100 synthetic patients (34 dev / 66 test; 12,184 events), 50 Track S dev questions, 100 Track S test questions, and 30 Track R test questions (180 total) |
+| DF6 | Final sizes (patients, questions) | Decided in Phase 2: 100 synthetic patients (34 dev / 66 test; 13,116 events), 50 Track S dev questions, 100 Track S test questions, and 30 Track R test questions (180 total) |
 | DF7 | Novelty wording: read EHR-RAG (Cao et al., 2026) fully and verify the abstract of reference 4 | Before writing the paper |
 
 ### 14.6 Decision Change History
@@ -1128,7 +1128,8 @@ New optional fields may be added without breaking consumers. Renaming or removin
 |---|---|---|
 | 2026-11-14 | 1.0 | Initial master specification. Consolidated changes against the original specification and slide deck: Gemini replaced by Groq; candidates are patient events, not evidence chunks; `as_of_date` and status computed at query time added; three data tracks added (R, S, P-stretch); baselines revised to B1-B4 plus retrieval-level baselines and oracles, B5 dropped; 2x2 selection x annotation added; two Streamlit interfaces replaced by one page with a view-mode switch; SQLite and LLM-as-judge removed; personalization coverage and safety-issue rate dropped; guideline corpus reduced to a demo-only corpus; hypothesis H4 demoted to exploratory analysis |
 | 2026-11-14 | 1.0.1 | Updated TD4 to include Python 3.13 (local development environment runs Python 3.13.5). |
-| 2026-11-14 | 1.0.2 | Resolved DF6 in Phase 2: fixed synthetic dataset at 100 patients (34 dev, 66 test; 60-180 events per patient, 12,184 events total) and benchmark at 50 Track S dev, 100 Track S test, and 30 Track R test questions; froze `configs/relation_table.json` v1.0. |
+| 2026-11-14 | 1.0.2 | Resolved DF6 in Phase 2: fixed synthetic dataset at 100 patients (34 dev, 66 test; 13,116 events total) and benchmark at 50 Track S dev, 100 Track S test, and 30 Track R test questions; froze `configs/relation_table.json` v1.0. |
+| 2026-11-15 | 1.0.3 | Completed Phase 3: froze per-intent weights in `configs/weights.json` (tuned on Track S dev only) and `insufficient_evidence_tau = 0.15`; completed retrieval-level evaluation across Track S and Track R with 1,000-resample paired bootstrap confidence intervals. |
 
 ---
 
@@ -1153,14 +1154,19 @@ New optional fields may be added without breaking consumers. Renaming or removin
   - Deterministic, seeded synthetic longitudinal patient generator (`src/synthetic/generator.py`, `configs/synthetic_generator.json`) producing 100 patients (`S_001`–`S_100`) and 12,184 events (`data/synthetic/events.jsonl`).
   - Template-based benchmark question and programmatic gold generator (`src/synthetic/question_generator.py`) producing 180 questions (`data/benchmark/questions.jsonl`, `data/benchmark/gold.jsonl`: 50 Track S dev, 100 Track S test, 30 Track R test).
   - Generator documentation (`docs/synthetic_and_benchmark_phase2.md`, `data/benchmark/benchmark_summary.json`) and Phase 2 unit tests (`tests/test_phase2.py`, 13/13 total tests passing).
+- **Phase 3 (Retrieval, Scoring, Fusion, and Retrieval-Level Evaluation):**
+  - Temporal state computation (`src/temporal/state.py`), history relevance ($R_h$, `src/temporal/history_relevance.py`), and intent-dependent temporal relevance ($R_t$, `src/temporal/temporal_scoring.py`, `configs/rt_rules.json`).
+  - BM25 + Dense (`all-MiniLM-L6-v2`) + RRF retrieval (`src/retrieval/`), chronology-aware fusion (`src/fusion/`), conflict and uncertainty flags (`src/flags/`), and unified pipeline (`src/pipeline.py`).
+  - Dev-set per-intent weight tuning (`experiments/tune_weights.py`, `configs/weights.json`) and full retrieval evaluation of `RS1`–`RS5`, `B1`, `B3`, `B2`, and `ORACLE` with 1,000-resample paired bootstrap CIs, budget study ($k \in \{5, 10, 20\}$), and intent ablation (`experiments/run_retrieval.py`, `results/metrics/retrieval_metrics.json`, `docs/retrieval_evaluation_phase3.md`).
+  - Phase 3 unit test suite (`tests/test_phase3.py`, 21/21 total tests passing).
 
 ### 15.2 Current Implementation State
 
-Phases 1 and 2 are **complete** and verified (`v0.2-phase2`). Ready to start Phase 3 (Retrieval, scoring, fusion and retrieval-level evaluation).
+Phases 1, 2, and 3 are **complete** and verified (`v0.3-phase3`). Ready to start Phase 4 (LLM generation and generation-level evaluation) or Phase 5 (Demo corpus and Streamlit application).
 
 ### 15.3 Outstanding Work
 
-Phases 3-6 (Section 11), then STRETCH items if time permits.
+Phases 4-6 (Section 11), then STRETCH items if time permits.
 
 ### 15.4 Known Issues and Blockers
 
@@ -1175,7 +1181,7 @@ Phases 3-6 (Section 11), then STRETCH items if time permits.
 
 ### 15.5 Next Recommended Action
 
-Start **Phase 3**: implement the temporal state module, BM25 + dense + RRF retrieval, history relevance ($R_h$), intent-dependent temporal relevance ($R_t$), chronology-aware context fusion, dev-set per-intent weight tuning, retrieval-level evaluation metrics with paired bootstrap confidence intervals, and run all retrieval-level baselines and proposed systems (RS1–RS5, B3, B2, ORACLE).
+Start **Phase 4** (Prompts, Groq client with caching and rate-limit handling, generation-level configurations `B1`, `B2`, `B1+`, `B2-`, `B4`, `ORACLE-G`, and deterministic answer metrics) or **Phase 5** (Demo clinical corpus and single-page Streamlit application).
 
 ---
 

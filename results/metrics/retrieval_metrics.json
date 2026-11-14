@@ -1,0 +1,3905 @@
+{
+  "schema_version": "1.0",
+  "git_commit": "00ff9fb",
+  "config_hash": "ffd3c40ded43",
+  "run_date": "2026-11-15",
+  "default_k": 10,
+  "splits": {
+    "S_dev": {
+      "systems": {
+        "RS1": {
+          "num_questions_total": 50,
+          "num_questions_answerable": 43,
+          "metrics": {
+            "recall_at_5": {
+              "mean": 0.7442,
+              "ci_lower": 0.6163,
+              "ci_upper": 0.8605
+            },
+            "recall_at_10": {
+              "mean": 0.8372,
+              "ci_lower": 0.7209,
+              "ci_upper": 0.9302
+            },
+            "ndcg_at_10": {
+              "mean": 0.7279,
+              "ci_lower": 0.6164,
+              "ci_upper": 0.8308
+            },
+            "mrr": {
+              "mean": 0.7206,
+              "ci_lower": 0.591,
+              "ci_upper": 0.8336
+            },
+            "hit_rate_at_5": {
+              "mean": 0.7907,
+              "ci_lower": 0.6744,
+              "ci_upper": 0.907
+            },
+            "stale_evidence_rate": {
+              "mean": 0.23,
+              "ci_lower": 0.15,
+              "ci_upper": 0.318
+            }
+          },
+          "by_intent": {
+            "change_over_time": {
+              "count": 7,
+              "ndcg_at_10": 0.8895,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            },
+            "current_state": {
+              "count": 17,
+              "ndcg_at_10": 0.5926,
+              "recall_at_10": 0.8235,
+              "mrr": 0.5286
+            },
+            "first_occurrence": {
+              "count": 11,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            },
+            "historical": {
+              "count": 4,
+              "ndcg_at_10": 0.0,
+              "recall_at_10": 0.0,
+              "mrr": 0.0
+            },
+            "persistent_fact": {
+              "count": 4,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            }
+          },
+          "by_category": {
+            "conflicting_information": {
+              "count": 7,
+              "ndcg_at_10": 0.8227,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0571
+            },
+            "current_vs_historical": {
+              "count": 7,
+              "ndcg_at_10": 0.466,
+              "recall_at_10": 0.5714,
+              "stale_evidence_rate": 0.3857
+            },
+            "insufficient_evidence": {
+              "count": 7,
+              "ndcg_at_10": 0.0,
+              "recall_at_10": 0.0,
+              "stale_evidence_rate": 0.0429
+            },
+            "irrelevant_history": {
+              "count": 7,
+              "ndcg_at_10": 0.7219,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0714
+            },
+            "longitudinal_change": {
+              "count": 7,
+              "ndcg_at_10": 0.8895,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.6
+            },
+            "missing_or_ambiguous_dates": {
+              "count": 7,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0286
+            },
+            "temporal_ordering": {
+              "count": 8,
+              "ndcg_at_10": 0.5,
+              "recall_at_10": 0.5,
+              "stale_evidence_rate": 0.4
+            }
+          }
+        },
+        "RS2": {
+          "num_questions_total": 50,
+          "num_questions_answerable": 43,
+          "metrics": {
+            "recall_at_5": {
+              "mean": 0.8023,
+              "ci_lower": 0.686,
+              "ci_upper": 0.907
+            },
+            "recall_at_10": {
+              "mean": 0.8721,
+              "ci_lower": 0.7674,
+              "ci_upper": 0.9535
+            },
+            "ndcg_at_10": {
+              "mean": 0.7936,
+              "ci_lower": 0.6903,
+              "ci_upper": 0.8965
+            },
+            "mrr": {
+              "mean": 0.7818,
+              "ci_lower": 0.6666,
+              "ci_upper": 0.8938
+            },
+            "hit_rate_at_5": {
+              "mean": 0.8372,
+              "ci_lower": 0.7209,
+              "ci_upper": 0.9302
+            },
+            "stale_evidence_rate": {
+              "mean": 0.266,
+              "ci_lower": 0.178,
+              "ci_upper": 0.356
+            }
+          },
+          "by_intent": {
+            "change_over_time": {
+              "count": 7,
+              "ndcg_at_10": 0.6656,
+              "recall_at_10": 1.0,
+              "mrr": 0.631
+            },
+            "current_state": {
+              "count": 17,
+              "ndcg_at_10": 0.8405,
+              "recall_at_10": 0.8824,
+              "mrr": 0.8294
+            },
+            "first_occurrence": {
+              "count": 11,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            },
+            "historical": {
+              "count": 4,
+              "ndcg_at_10": 0.0443,
+              "recall_at_10": 0.125,
+              "mrr": 0.025
+            },
+            "persistent_fact": {
+              "count": 4,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            }
+          },
+          "by_category": {
+            "conflicting_information": {
+              "count": 7,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0286
+            },
+            "current_vs_historical": {
+              "count": 7,
+              "ndcg_at_10": 0.6127,
+              "recall_at_10": 0.7143,
+              "stale_evidence_rate": 0.4
+            },
+            "insufficient_evidence": {
+              "count": 7,
+              "ndcg_at_10": 0.0,
+              "recall_at_10": 0.0,
+              "stale_evidence_rate": 0.0857
+            },
+            "irrelevant_history": {
+              "count": 7,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.3143
+            },
+            "longitudinal_change": {
+              "count": 7,
+              "ndcg_at_10": 0.6656,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.6
+            },
+            "missing_or_ambiguous_dates": {
+              "count": 7,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0143
+            },
+            "temporal_ordering": {
+              "count": 8,
+              "ndcg_at_10": 0.5222,
+              "recall_at_10": 0.5625,
+              "stale_evidence_rate": 0.4
+            }
+          }
+        },
+        "B1": {
+          "num_questions_total": 50,
+          "num_questions_answerable": 43,
+          "metrics": {
+            "recall_at_5": {
+              "mean": 0.8256,
+              "ci_lower": 0.7093,
+              "ci_upper": 0.9302
+            },
+            "recall_at_10": {
+              "mean": 0.8605,
+              "ci_lower": 0.7442,
+              "ci_upper": 0.9535
+            },
+            "ndcg_at_10": {
+              "mean": 0.7914,
+              "ci_lower": 0.6859,
+              "ci_upper": 0.8929
+            },
+            "mrr": {
+              "mean": 0.793,
+              "ci_lower": 0.6814,
+              "ci_upper": 0.9002
+            },
+            "hit_rate_at_5": {
+              "mean": 0.8372,
+              "ci_lower": 0.7209,
+              "ci_upper": 0.9302
+            },
+            "stale_evidence_rate": {
+              "mean": 0.26,
+              "ci_lower": 0.178,
+              "ci_upper": 0.3441
+            }
+          },
+          "by_intent": {
+            "change_over_time": {
+              "count": 7,
+              "ndcg_at_10": 0.783,
+              "recall_at_10": 1.0,
+              "mrr": 0.8571
+            },
+            "current_state": {
+              "count": 17,
+              "ndcg_at_10": 0.7971,
+              "recall_at_10": 0.8824,
+              "mrr": 0.7706
+            },
+            "first_occurrence": {
+              "count": 11,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            },
+            "historical": {
+              "count": 4,
+              "ndcg_at_10": 0.0,
+              "recall_at_10": 0.0,
+              "mrr": 0.0
+            },
+            "persistent_fact": {
+              "count": 4,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            }
+          },
+          "by_category": {
+            "conflicting_information": {
+              "count": 7,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0714
+            },
+            "current_vs_historical": {
+              "count": 7,
+              "ndcg_at_10": 0.6127,
+              "recall_at_10": 0.7143,
+              "stale_evidence_rate": 0.4
+            },
+            "insufficient_evidence": {
+              "count": 7,
+              "ndcg_at_10": 0.0,
+              "recall_at_10": 0.0,
+              "stale_evidence_rate": 0.0857
+            },
+            "irrelevant_history": {
+              "count": 7,
+              "ndcg_at_10": 0.8946,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.2143
+            },
+            "longitudinal_change": {
+              "count": 7,
+              "ndcg_at_10": 0.783,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.6
+            },
+            "missing_or_ambiguous_dates": {
+              "count": 7,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0286
+            },
+            "temporal_ordering": {
+              "count": 8,
+              "ndcg_at_10": 0.5,
+              "recall_at_10": 0.5,
+              "stale_evidence_rate": 0.4
+            }
+          }
+        },
+        "RS4": {
+          "num_questions_total": 50,
+          "num_questions_answerable": 43,
+          "metrics": {
+            "recall_at_5": {
+              "mean": 0.0233,
+              "ci_lower": 0.0,
+              "ci_upper": 0.0581
+            },
+            "recall_at_10": {
+              "mean": 0.1395,
+              "ci_lower": 0.0581,
+              "ci_upper": 0.2442
+            },
+            "ndcg_at_10": {
+              "mean": 0.0668,
+              "ci_lower": 0.0256,
+              "ci_upper": 0.1152
+            },
+            "mrr": {
+              "mean": 0.054,
+              "ci_lower": 0.0122,
+              "ci_upper": 0.1135
+            },
+            "hit_rate_at_5": {
+              "mean": 0.0465,
+              "ci_lower": 0.0,
+              "ci_upper": 0.1163
+            },
+            "stale_evidence_rate": {
+              "mean": 0.04,
+              "ci_lower": 0.022,
+              "ci_upper": 0.062
+            }
+          },
+          "by_intent": {
+            "change_over_time": {
+              "count": 7,
+              "ndcg_at_10": 0.1974,
+              "recall_at_10": 0.2857,
+              "mrr": 0.249
+            },
+            "current_state": {
+              "count": 17,
+              "ndcg_at_10": 0.0878,
+              "recall_at_10": 0.2353,
+              "mrr": 0.0341
+            },
+            "first_occurrence": {
+              "count": 11,
+              "ndcg_at_10": 0.0,
+              "recall_at_10": 0.0,
+              "mrr": 0.0
+            },
+            "historical": {
+              "count": 4,
+              "ndcg_at_10": 0.0,
+              "recall_at_10": 0.0,
+              "mrr": 0.0
+            },
+            "persistent_fact": {
+              "count": 4,
+              "ndcg_at_10": 0.0,
+              "recall_at_10": 0.0,
+              "mrr": 0.0
+            }
+          },
+          "by_category": {
+            "conflicting_information": {
+              "count": 7,
+              "ndcg_at_10": 0.2132,
+              "recall_at_10": 0.5714,
+              "stale_evidence_rate": 0.0143
+            },
+            "current_vs_historical": {
+              "count": 7,
+              "ndcg_at_10": 0.0,
+              "recall_at_10": 0.0,
+              "stale_evidence_rate": 0.0
+            },
+            "insufficient_evidence": {
+              "count": 7,
+              "ndcg_at_10": 0.0,
+              "recall_at_10": 0.0,
+              "stale_evidence_rate": 0.0143
+            },
+            "irrelevant_history": {
+              "count": 7,
+              "ndcg_at_10": 0.0,
+              "recall_at_10": 0.0,
+              "stale_evidence_rate": 0.0571
+            },
+            "longitudinal_change": {
+              "count": 7,
+              "ndcg_at_10": 0.1974,
+              "recall_at_10": 0.2857,
+              "stale_evidence_rate": 0.0714
+            },
+            "missing_or_ambiguous_dates": {
+              "count": 7,
+              "ndcg_at_10": 0.0,
+              "recall_at_10": 0.0,
+              "stale_evidence_rate": 0.0
+            },
+            "temporal_ordering": {
+              "count": 8,
+              "ndcg_at_10": 0.0,
+              "recall_at_10": 0.0,
+              "stale_evidence_rate": 0.1125
+            }
+          }
+        },
+        "RS5": {
+          "num_questions_total": 50,
+          "num_questions_answerable": 43,
+          "metrics": {
+            "recall_at_5": {
+              "mean": 0.686,
+              "ci_lower": 0.5581,
+              "ci_upper": 0.8023
+            },
+            "recall_at_10": {
+              "mean": 0.7209,
+              "ci_lower": 0.593,
+              "ci_upper": 0.8372
+            },
+            "ndcg_at_10": {
+              "mean": 0.6796,
+              "ci_lower": 0.5599,
+              "ci_upper": 0.7919
+            },
+            "mrr": {
+              "mean": 0.7233,
+              "ci_lower": 0.593,
+              "ci_upper": 0.8488
+            },
+            "hit_rate_at_5": {
+              "mean": 0.7442,
+              "ci_lower": 0.6047,
+              "ci_upper": 0.8605
+            },
+            "stale_evidence_rate": {
+              "mean": 0.1761,
+              "ci_lower": 0.0833,
+              "ci_upper": 0.2678
+            }
+          },
+          "by_intent": {
+            "change_over_time": {
+              "count": 7,
+              "ndcg_at_10": 0.783,
+              "recall_at_10": 1.0,
+              "mrr": 0.8571
+            },
+            "current_state": {
+              "count": 17,
+              "ndcg_at_10": 0.5142,
+              "recall_at_10": 0.5294,
+              "mrr": 0.5941
+            },
+            "first_occurrence": {
+              "count": 11,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            },
+            "historical": {
+              "count": 4,
+              "ndcg_at_10": 0.0,
+              "recall_at_10": 0.0,
+              "mrr": 0.0
+            },
+            "persistent_fact": {
+              "count": 4,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            }
+          },
+          "by_category": {
+            "conflicting_information": {
+              "count": 7,
+              "ndcg_at_10": 0.7789,
+              "recall_at_10": 0.7143,
+              "stale_evidence_rate": 0.0
+            },
+            "current_vs_historical": {
+              "count": 7,
+              "ndcg_at_10": 0.0413,
+              "recall_at_10": 0.1429,
+              "stale_evidence_rate": 0.0
+            },
+            "insufficient_evidence": {
+              "count": 7,
+              "ndcg_at_10": 0.0,
+              "recall_at_10": 0.0,
+              "stale_evidence_rate": 0.0
+            },
+            "irrelevant_history": {
+              "count": 7,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0
+            },
+            "longitudinal_change": {
+              "count": 7,
+              "ndcg_at_10": 0.783,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.75
+            },
+            "missing_or_ambiguous_dates": {
+              "count": 7,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0
+            },
+            "temporal_ordering": {
+              "count": 8,
+              "ndcg_at_10": 0.5,
+              "recall_at_10": 0.5,
+              "stale_evidence_rate": 0.4444
+            }
+          }
+        },
+        "B3": {
+          "num_questions_total": 50,
+          "num_questions_answerable": 43,
+          "metrics": {
+            "recall_at_5": {
+              "mean": 0.8256,
+              "ci_lower": 0.7093,
+              "ci_upper": 0.9302
+            },
+            "recall_at_10": {
+              "mean": 0.907,
+              "ci_lower": 0.8256,
+              "ci_upper": 0.9767
+            },
+            "ndcg_at_10": {
+              "mean": 0.8079,
+              "ci_lower": 0.7131,
+              "ci_upper": 0.8997
+            },
+            "mrr": {
+              "mean": 0.8023,
+              "ci_lower": 0.6953,
+              "ci_upper": 0.9047
+            },
+            "hit_rate_at_5": {
+              "mean": 0.8372,
+              "ci_lower": 0.7209,
+              "ci_upper": 0.9302
+            },
+            "stale_evidence_rate": {
+              "mean": 0.258,
+              "ci_lower": 0.174,
+              "ci_upper": 0.344
+            }
+          },
+          "by_intent": {
+            "change_over_time": {
+              "count": 7,
+              "ndcg_at_10": 0.783,
+              "recall_at_10": 1.0,
+              "mrr": 0.8571
+            },
+            "current_state": {
+              "count": 17,
+              "ndcg_at_10": 0.7971,
+              "recall_at_10": 0.8824,
+              "mrr": 0.7706
+            },
+            "first_occurrence": {
+              "count": 11,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            },
+            "historical": {
+              "count": 4,
+              "ndcg_at_10": 0.1772,
+              "recall_at_10": 0.5,
+              "mrr": 0.1
+            },
+            "persistent_fact": {
+              "count": 4,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            }
+          },
+          "by_category": {
+            "conflicting_information": {
+              "count": 7,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0714
+            },
+            "current_vs_historical": {
+              "count": 7,
+              "ndcg_at_10": 0.6127,
+              "recall_at_10": 0.7143,
+              "stale_evidence_rate": 0.4143
+            },
+            "insufficient_evidence": {
+              "count": 7,
+              "ndcg_at_10": 0.0,
+              "recall_at_10": 0.0,
+              "stale_evidence_rate": 0.0571
+            },
+            "irrelevant_history": {
+              "count": 7,
+              "ndcg_at_10": 0.8946,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.2143
+            },
+            "longitudinal_change": {
+              "count": 7,
+              "ndcg_at_10": 0.783,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.6
+            },
+            "missing_or_ambiguous_dates": {
+              "count": 7,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0286
+            },
+            "temporal_ordering": {
+              "count": 8,
+              "ndcg_at_10": 0.5886,
+              "recall_at_10": 0.75,
+              "stale_evidence_rate": 0.4
+            }
+          }
+        },
+        "B2": {
+          "num_questions_total": 50,
+          "num_questions_answerable": 43,
+          "metrics": {
+            "recall_at_5": {
+              "mean": 0.8372,
+              "ci_lower": 0.7209,
+              "ci_upper": 0.9302
+            },
+            "recall_at_10": {
+              "mean": 0.9302,
+              "ci_lower": 0.8721,
+              "ci_upper": 0.9767
+            },
+            "ndcg_at_10": {
+              "mean": 0.8671,
+              "ci_lower": 0.7715,
+              "ci_upper": 0.9478
+            },
+            "mrr": {
+              "mean": 0.8512,
+              "ci_lower": 0.7442,
+              "ci_upper": 0.9372
+            },
+            "hit_rate_at_5": {
+              "mean": 0.8372,
+              "ci_lower": 0.7209,
+              "ci_upper": 0.9302
+            },
+            "stale_evidence_rate": {
+              "mean": 0.256,
+              "ci_lower": 0.174,
+              "ci_upper": 0.342
+            }
+          },
+          "by_intent": {
+            "change_over_time": {
+              "count": 7,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            },
+            "current_state": {
+              "count": 17,
+              "ndcg_at_10": 0.8575,
+              "recall_at_10": 0.9412,
+              "mrr": 0.8353
+            },
+            "first_occurrence": {
+              "count": 11,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            },
+            "historical": {
+              "count": 4,
+              "ndcg_at_10": 0.1772,
+              "recall_at_10": 0.5,
+              "mrr": 0.1
+            },
+            "persistent_fact": {
+              "count": 4,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            }
+          },
+          "by_category": {
+            "conflicting_information": {
+              "count": 7,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0714
+            },
+            "current_vs_historical": {
+              "count": 7,
+              "ndcg_at_10": 0.654,
+              "recall_at_10": 0.8571,
+              "stale_evidence_rate": 0.4
+            },
+            "insufficient_evidence": {
+              "count": 7,
+              "ndcg_at_10": 0.0,
+              "recall_at_10": 0.0,
+              "stale_evidence_rate": 0.0857
+            },
+            "irrelevant_history": {
+              "count": 7,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.1857
+            },
+            "longitudinal_change": {
+              "count": 7,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.6
+            },
+            "missing_or_ambiguous_dates": {
+              "count": 7,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0286
+            },
+            "temporal_ordering": {
+              "count": 8,
+              "ndcg_at_10": 0.5886,
+              "recall_at_10": 0.75,
+              "stale_evidence_rate": 0.4
+            }
+          }
+        },
+        "ORACLE": {
+          "num_questions_total": 50,
+          "num_questions_answerable": 43,
+          "metrics": {
+            "recall_at_5": {
+              "mean": 1.0,
+              "ci_lower": 1.0,
+              "ci_upper": 1.0
+            },
+            "recall_at_10": {
+              "mean": 1.0,
+              "ci_lower": 1.0,
+              "ci_upper": 1.0
+            },
+            "ndcg_at_10": {
+              "mean": 1.0,
+              "ci_lower": 1.0,
+              "ci_upper": 1.0
+            },
+            "mrr": {
+              "mean": 1.0,
+              "ci_lower": 1.0,
+              "ci_upper": 1.0
+            },
+            "hit_rate_at_5": {
+              "mean": 1.0,
+              "ci_lower": 1.0,
+              "ci_upper": 1.0
+            },
+            "stale_evidence_rate": {
+              "mean": 0.0,
+              "ci_lower": 0.0,
+              "ci_upper": 0.0
+            }
+          },
+          "by_intent": {
+            "change_over_time": {
+              "count": 7,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            },
+            "current_state": {
+              "count": 17,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            },
+            "first_occurrence": {
+              "count": 11,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            },
+            "historical": {
+              "count": 4,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            },
+            "persistent_fact": {
+              "count": 4,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            }
+          },
+          "by_category": {
+            "conflicting_information": {
+              "count": 7,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0
+            },
+            "current_vs_historical": {
+              "count": 7,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0
+            },
+            "insufficient_evidence": {
+              "count": 7,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0
+            },
+            "irrelevant_history": {
+              "count": 7,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0
+            },
+            "longitudinal_change": {
+              "count": 7,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0
+            },
+            "missing_or_ambiguous_dates": {
+              "count": 7,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0
+            },
+            "temporal_ordering": {
+              "count": 8,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0
+            }
+          }
+        }
+      },
+      "paired_bootstrap_tests": {
+        "H1_history_alone_B3_vs_B1": {
+          "recall_at_5": {
+            "mean_a": 0.8256,
+            "mean_b": 0.8256,
+            "diff_mean": 0.0,
+            "ci_lower": 0.0,
+            "ci_upper": 0.0,
+            "p_value_two_sided": 1.0
+          },
+          "recall_at_10": {
+            "mean_a": 0.907,
+            "mean_b": 0.8605,
+            "diff_mean": 0.0465,
+            "ci_lower": 0.0116,
+            "ci_upper": 0.093,
+            "p_value_two_sided": 0.032
+          },
+          "ndcg_at_10": {
+            "mean_a": 0.8079,
+            "mean_b": 0.7914,
+            "diff_mean": 0.0165,
+            "ci_lower": 0.0041,
+            "ci_upper": 0.033,
+            "p_value_two_sided": 0.032
+          },
+          "mrr": {
+            "mean_a": 0.8023,
+            "mean_b": 0.793,
+            "diff_mean": 0.0093,
+            "ci_lower": 0.0023,
+            "ci_upper": 0.0186,
+            "p_value_two_sided": 0.032
+          },
+          "hit_rate_at_5": {
+            "mean_a": 0.8372,
+            "mean_b": 0.8372,
+            "diff_mean": 0.0,
+            "ci_lower": 0.0,
+            "ci_upper": 0.0,
+            "p_value_two_sided": 1.0
+          },
+          "stale_evidence_rate": {
+            "mean_a": 0.258,
+            "mean_b": 0.26,
+            "diff_mean": -0.002,
+            "ci_lower": -0.012,
+            "ci_upper": 0.01,
+            "p_value_two_sided": 0.612
+          }
+        },
+        "H1_combined_B2_vs_B1": {
+          "recall_at_5": {
+            "mean_a": 0.8372,
+            "mean_b": 0.8256,
+            "diff_mean": 0.0116,
+            "ci_lower": 0.0,
+            "ci_upper": 0.0349,
+            "p_value_two_sided": 0.722
+          },
+          "recall_at_10": {
+            "mean_a": 0.9302,
+            "mean_b": 0.8605,
+            "diff_mean": 0.0698,
+            "ci_lower": 0.0233,
+            "ci_upper": 0.1395,
+            "p_value_two_sided": 0.006
+          },
+          "ndcg_at_10": {
+            "mean_a": 0.8671,
+            "mean_b": 0.7914,
+            "diff_mean": 0.0757,
+            "ci_lower": 0.0406,
+            "ci_upper": 0.1134,
+            "p_value_two_sided": 0.0
+          },
+          "mrr": {
+            "mean_a": 0.8512,
+            "mean_b": 0.793,
+            "diff_mean": 0.0581,
+            "ci_lower": 0.0186,
+            "ci_upper": 0.107,
+            "p_value_two_sided": 0.0
+          },
+          "hit_rate_at_5": {
+            "mean_a": 0.8372,
+            "mean_b": 0.8372,
+            "diff_mean": 0.0,
+            "ci_lower": 0.0,
+            "ci_upper": 0.0,
+            "p_value_two_sided": 1.0
+          },
+          "stale_evidence_rate": {
+            "mean_a": 0.256,
+            "mean_b": 0.26,
+            "diff_mean": -0.004,
+            "ci_lower": -0.012,
+            "ci_upper": 0.002,
+            "p_value_two_sided": 0.42
+          }
+        },
+        "H2_temporal_gain_B2_vs_B3": {
+          "recall_at_5": {
+            "mean_a": 0.8372,
+            "mean_b": 0.8256,
+            "diff_mean": 0.0116,
+            "ci_lower": 0.0,
+            "ci_upper": 0.0349,
+            "p_value_two_sided": 0.722
+          },
+          "recall_at_10": {
+            "mean_a": 0.9302,
+            "mean_b": 0.907,
+            "diff_mean": 0.0233,
+            "ci_lower": 0.0,
+            "ci_upper": 0.0698,
+            "p_value_two_sided": 0.732
+          },
+          "ndcg_at_10": {
+            "mean_a": 0.8671,
+            "mean_b": 0.8079,
+            "diff_mean": 0.0592,
+            "ci_lower": 0.0262,
+            "ci_upper": 0.0972,
+            "p_value_two_sided": 0.0
+          },
+          "mrr": {
+            "mean_a": 0.8512,
+            "mean_b": 0.8023,
+            "diff_mean": 0.0488,
+            "ci_lower": 0.0116,
+            "ci_upper": 0.0954,
+            "p_value_two_sided": 0.012
+          },
+          "hit_rate_at_5": {
+            "mean_a": 0.8372,
+            "mean_b": 0.8372,
+            "diff_mean": 0.0,
+            "ci_lower": 0.0,
+            "ci_upper": 0.0,
+            "p_value_two_sided": 1.0
+          },
+          "stale_evidence_rate": {
+            "mean_a": 0.256,
+            "mean_b": 0.258,
+            "diff_mean": -0.002,
+            "ci_lower": -0.01,
+            "ci_upper": 0.006,
+            "p_value_two_sided": 0.858
+          }
+        },
+        "Baseline_B2_vs_RS4_recency": {
+          "recall_at_5": {
+            "mean_a": 0.8372,
+            "mean_b": 0.0233,
+            "diff_mean": 0.814,
+            "ci_lower": 0.6977,
+            "ci_upper": 0.9186,
+            "p_value_two_sided": 0.0
+          },
+          "recall_at_10": {
+            "mean_a": 0.9302,
+            "mean_b": 0.1395,
+            "diff_mean": 0.7907,
+            "ci_lower": 0.686,
+            "ci_upper": 0.8837,
+            "p_value_two_sided": 0.0
+          },
+          "ndcg_at_10": {
+            "mean_a": 0.8671,
+            "mean_b": 0.0668,
+            "diff_mean": 0.8003,
+            "ci_lower": 0.7088,
+            "ci_upper": 0.8846,
+            "p_value_two_sided": 0.0
+          },
+          "mrr": {
+            "mean_a": 0.8512,
+            "mean_b": 0.054,
+            "diff_mean": 0.7972,
+            "ci_lower": 0.6858,
+            "ci_upper": 0.8977,
+            "p_value_two_sided": 0.0
+          },
+          "hit_rate_at_5": {
+            "mean_a": 0.8372,
+            "mean_b": 0.0465,
+            "diff_mean": 0.7907,
+            "ci_lower": 0.6744,
+            "ci_upper": 0.907,
+            "p_value_two_sided": 0.0
+          },
+          "stale_evidence_rate": {
+            "mean_a": 0.256,
+            "mean_b": 0.04,
+            "diff_mean": 0.216,
+            "ci_lower": 0.14,
+            "ci_upper": 0.2941,
+            "p_value_two_sided": 0.0
+          }
+        },
+        "Baseline_B2_vs_RS5_status_filter": {
+          "recall_at_5": {
+            "mean_a": 0.8372,
+            "mean_b": 0.686,
+            "diff_mean": 0.1512,
+            "ci_lower": 0.0581,
+            "ci_upper": 0.2442,
+            "p_value_two_sided": 0.0
+          },
+          "recall_at_10": {
+            "mean_a": 0.9302,
+            "mean_b": 0.7209,
+            "diff_mean": 0.2093,
+            "ci_lower": 0.1163,
+            "ci_upper": 0.314,
+            "p_value_two_sided": 0.0
+          },
+          "ndcg_at_10": {
+            "mean_a": 0.8671,
+            "mean_b": 0.6796,
+            "diff_mean": 0.1875,
+            "ci_lower": 0.1019,
+            "ci_upper": 0.2779,
+            "p_value_two_sided": 0.0
+          },
+          "mrr": {
+            "mean_a": 0.8512,
+            "mean_b": 0.7233,
+            "diff_mean": 0.1279,
+            "ci_lower": 0.0465,
+            "ci_upper": 0.2186,
+            "p_value_two_sided": 0.0
+          },
+          "hit_rate_at_5": {
+            "mean_a": 0.8372,
+            "mean_b": 0.7442,
+            "diff_mean": 0.093,
+            "ci_lower": 0.0233,
+            "ci_upper": 0.186,
+            "p_value_two_sided": 0.03
+          },
+          "stale_evidence_rate": {
+            "mean_a": 0.256,
+            "mean_b": 0.1761,
+            "diff_mean": 0.0799,
+            "ci_lower": 0.0236,
+            "ci_upper": 0.1465,
+            "p_value_two_sided": 0.006
+          }
+        },
+        "Lexical_vs_Dense_B1_vs_RS1": {
+          "recall_at_5": {
+            "mean_a": 0.8256,
+            "mean_b": 0.7442,
+            "diff_mean": 0.0814,
+            "ci_lower": 0.0233,
+            "ci_upper": 0.1628,
+            "p_value_two_sided": 0.012
+          },
+          "recall_at_10": {
+            "mean_a": 0.8605,
+            "mean_b": 0.8372,
+            "diff_mean": 0.0233,
+            "ci_lower": 0.0,
+            "ci_upper": 0.0698,
+            "p_value_two_sided": 0.772
+          },
+          "ndcg_at_10": {
+            "mean_a": 0.7914,
+            "mean_b": 0.7279,
+            "diff_mean": 0.0635,
+            "ci_lower": 0.0214,
+            "ci_upper": 0.113,
+            "p_value_two_sided": 0.006
+          },
+          "mrr": {
+            "mean_a": 0.793,
+            "mean_b": 0.7206,
+            "diff_mean": 0.0724,
+            "ci_lower": 0.0083,
+            "ci_upper": 0.1482,
+            "p_value_two_sided": 0.028
+          },
+          "hit_rate_at_5": {
+            "mean_a": 0.8372,
+            "mean_b": 0.7907,
+            "diff_mean": 0.0465,
+            "ci_lower": 0.0,
+            "ci_upper": 0.1163,
+            "p_value_two_sided": 0.212
+          },
+          "stale_evidence_rate": {
+            "mean_a": 0.26,
+            "mean_b": 0.23,
+            "diff_mean": 0.03,
+            "ci_lower": 0.008,
+            "ci_upper": 0.054,
+            "p_value_two_sided": 0.01
+          }
+        },
+        "Lexical_vs_Dense_B1_vs_RS2": {
+          "recall_at_5": {
+            "mean_a": 0.8256,
+            "mean_b": 0.8023,
+            "diff_mean": 0.0233,
+            "ci_lower": -0.0233,
+            "ci_upper": 0.0698,
+            "p_value_two_sided": 0.458
+          },
+          "recall_at_10": {
+            "mean_a": 0.8605,
+            "mean_b": 0.8721,
+            "diff_mean": -0.0116,
+            "ci_lower": -0.0349,
+            "ci_upper": 0.0,
+            "p_value_two_sided": 0.736
+          },
+          "ndcg_at_10": {
+            "mean_a": 0.7914,
+            "mean_b": 0.7936,
+            "diff_mean": -0.0022,
+            "ci_lower": -0.0358,
+            "ci_upper": 0.0293,
+            "p_value_two_sided": 0.9
+          },
+          "mrr": {
+            "mean_a": 0.793,
+            "mean_b": 0.7818,
+            "diff_mean": 0.0112,
+            "ci_lower": -0.0426,
+            "ci_upper": 0.0678,
+            "p_value_two_sided": 0.722
+          },
+          "hit_rate_at_5": {
+            "mean_a": 0.8372,
+            "mean_b": 0.8372,
+            "diff_mean": 0.0,
+            "ci_lower": 0.0,
+            "ci_upper": 0.0,
+            "p_value_two_sided": 1.0
+          },
+          "stale_evidence_rate": {
+            "mean_a": 0.26,
+            "mean_b": 0.266,
+            "diff_mean": -0.006,
+            "ci_lower": -0.024,
+            "ci_upper": 0.01,
+            "p_value_two_sided": 0.638
+          }
+        }
+      }
+    },
+    "S_test": {
+      "systems": {
+        "RS1": {
+          "num_questions_total": 100,
+          "num_questions_answerable": 86,
+          "metrics": {
+            "recall_at_5": {
+              "mean": 0.7267,
+              "ci_lower": 0.6394,
+              "ci_upper": 0.8081
+            },
+            "recall_at_10": {
+              "mean": 0.8372,
+              "ci_lower": 0.7558,
+              "ci_upper": 0.907
+            },
+            "ndcg_at_10": {
+              "mean": 0.7109,
+              "ci_lower": 0.6324,
+              "ci_upper": 0.7829
+            },
+            "mrr": {
+              "mean": 0.6928,
+              "ci_lower": 0.6053,
+              "ci_upper": 0.7802
+            },
+            "hit_rate_at_5": {
+              "mean": 0.7674,
+              "ci_lower": 0.6744,
+              "ci_upper": 0.8488
+            },
+            "stale_evidence_rate": {
+              "mean": 0.221,
+              "ci_lower": 0.16,
+              "ci_upper": 0.28
+            }
+          },
+          "by_intent": {
+            "change_over_time": {
+              "count": 14,
+              "ndcg_at_10": 0.9033,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            },
+            "current_state": {
+              "count": 36,
+              "ndcg_at_10": 0.5413,
+              "recall_at_10": 0.8056,
+              "mrr": 0.4606
+            },
+            "first_occurrence": {
+              "count": 22,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            },
+            "historical": {
+              "count": 7,
+              "ndcg_at_10": 0.0,
+              "recall_at_10": 0.0,
+              "mrr": 0.0
+            },
+            "persistent_fact": {
+              "count": 7,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            }
+          },
+          "by_category": {
+            "conflicting_information": {
+              "count": 14,
+              "ndcg_at_10": 0.8066,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0357
+            },
+            "current_vs_historical": {
+              "count": 15,
+              "ndcg_at_10": 0.3857,
+              "recall_at_10": 0.5333,
+              "stale_evidence_rate": 0.36
+            },
+            "insufficient_evidence": {
+              "count": 14,
+              "ndcg_at_10": 0.0,
+              "recall_at_10": 0.0,
+              "stale_evidence_rate": 0.0143
+            },
+            "irrelevant_history": {
+              "count": 14,
+              "ndcg_at_10": 0.6721,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0714
+            },
+            "longitudinal_change": {
+              "count": 14,
+              "ndcg_at_10": 0.9033,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.6
+            },
+            "missing_or_ambiguous_dates": {
+              "count": 14,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0143
+            },
+            "temporal_ordering": {
+              "count": 15,
+              "ndcg_at_10": 0.5333,
+              "recall_at_10": 0.5333,
+              "stale_evidence_rate": 0.4267
+            }
+          }
+        },
+        "RS2": {
+          "num_questions_total": 100,
+          "num_questions_answerable": 86,
+          "metrics": {
+            "recall_at_5": {
+              "mean": 0.8081,
+              "ci_lower": 0.7209,
+              "ci_upper": 0.8837
+            },
+            "recall_at_10": {
+              "mean": 0.8895,
+              "ci_lower": 0.8198,
+              "ci_upper": 0.9477
+            },
+            "ndcg_at_10": {
+              "mean": 0.805,
+              "ci_lower": 0.728,
+              "ci_upper": 0.8716
+            },
+            "mrr": {
+              "mean": 0.7948,
+              "ci_lower": 0.7114,
+              "ci_upper": 0.8651
+            },
+            "hit_rate_at_5": {
+              "mean": 0.8372,
+              "ci_lower": 0.7558,
+              "ci_upper": 0.907
+            },
+            "stale_evidence_rate": {
+              "mean": 0.26,
+              "ci_lower": 0.198,
+              "ci_upper": 0.322
+            }
+          },
+          "by_intent": {
+            "change_over_time": {
+              "count": 14,
+              "ndcg_at_10": 0.7025,
+              "recall_at_10": 1.0,
+              "mrr": 0.6964
+            },
+            "current_state": {
+              "count": 36,
+              "ndcg_at_10": 0.8296,
+              "recall_at_10": 0.8889,
+              "mrr": 0.8139
+            },
+            "first_occurrence": {
+              "count": 22,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            },
+            "historical": {
+              "count": 7,
+              "ndcg_at_10": 0.076,
+              "recall_at_10": 0.2143,
+              "mrr": 0.0429
+            },
+            "persistent_fact": {
+              "count": 7,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            }
+          },
+          "by_category": {
+            "conflicting_information": {
+              "count": 14,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0071
+            },
+            "current_vs_historical": {
+              "count": 15,
+              "ndcg_at_10": 0.5911,
+              "recall_at_10": 0.7333,
+              "stale_evidence_rate": 0.3733
+            },
+            "insufficient_evidence": {
+              "count": 14,
+              "ndcg_at_10": 0.0,
+              "recall_at_10": 0.0,
+              "stale_evidence_rate": 0.05
+            },
+            "irrelevant_history": {
+              "count": 14,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.3143
+            },
+            "longitudinal_change": {
+              "count": 14,
+              "ndcg_at_10": 0.7025,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.6
+            },
+            "missing_or_ambiguous_dates": {
+              "count": 14,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0286
+            },
+            "temporal_ordering": {
+              "count": 15,
+              "ndcg_at_10": 0.5688,
+              "recall_at_10": 0.6333,
+              "stale_evidence_rate": 0.4267
+            }
+          }
+        },
+        "B1": {
+          "num_questions_total": 100,
+          "num_questions_answerable": 86,
+          "metrics": {
+            "recall_at_5": {
+              "mean": 0.8256,
+              "ci_lower": 0.7442,
+              "ci_upper": 0.8953
+            },
+            "recall_at_10": {
+              "mean": 0.8605,
+              "ci_lower": 0.7907,
+              "ci_upper": 0.9302
+            },
+            "ndcg_at_10": {
+              "mean": 0.787,
+              "ci_lower": 0.7088,
+              "ci_upper": 0.8528
+            },
+            "mrr": {
+              "mean": 0.7814,
+              "ci_lower": 0.7,
+              "ci_upper": 0.85
+            },
+            "hit_rate_at_5": {
+              "mean": 0.8372,
+              "ci_lower": 0.7558,
+              "ci_upper": 0.907
+            },
+            "stale_evidence_rate": {
+              "mean": 0.254,
+              "ci_lower": 0.194,
+              "ci_upper": 0.314
+            }
+          },
+          "by_intent": {
+            "change_over_time": {
+              "count": 14,
+              "ndcg_at_10": 0.7818,
+              "recall_at_10": 1.0,
+              "mrr": 0.8214
+            },
+            "current_state": {
+              "count": 36,
+              "ndcg_at_10": 0.7704,
+              "recall_at_10": 0.8611,
+              "mrr": 0.7417
+            },
+            "first_occurrence": {
+              "count": 22,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            },
+            "historical": {
+              "count": 7,
+              "ndcg_at_10": 0.0,
+              "recall_at_10": 0.0,
+              "mrr": 0.0
+            },
+            "persistent_fact": {
+              "count": 7,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            }
+          },
+          "by_category": {
+            "conflicting_information": {
+              "count": 14,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0214
+            },
+            "current_vs_historical": {
+              "count": 15,
+              "ndcg_at_10": 0.5719,
+              "recall_at_10": 0.6667,
+              "stale_evidence_rate": 0.3733
+            },
+            "insufficient_evidence": {
+              "count": 14,
+              "ndcg_at_10": 0.0,
+              "recall_at_10": 0.0,
+              "stale_evidence_rate": 0.0571
+            },
+            "irrelevant_history": {
+              "count": 14,
+              "ndcg_at_10": 0.8682,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.2357
+            },
+            "longitudinal_change": {
+              "count": 14,
+              "ndcg_at_10": 0.7818,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.6
+            },
+            "missing_or_ambiguous_dates": {
+              "count": 14,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0429
+            },
+            "temporal_ordering": {
+              "count": 15,
+              "ndcg_at_10": 0.5333,
+              "recall_at_10": 0.5333,
+              "stale_evidence_rate": 0.4267
+            }
+          }
+        },
+        "RS4": {
+          "num_questions_total": 100,
+          "num_questions_answerable": 86,
+          "metrics": {
+            "recall_at_5": {
+              "mean": 0.0291,
+              "ci_lower": 0.0058,
+              "ci_upper": 0.0525
+            },
+            "recall_at_10": {
+              "mean": 0.1105,
+              "ci_lower": 0.0581,
+              "ci_upper": 0.1744
+            },
+            "ndcg_at_10": {
+              "mean": 0.0445,
+              "ci_lower": 0.0222,
+              "ci_upper": 0.0691
+            },
+            "mrr": {
+              "mean": 0.0267,
+              "ci_lower": 0.0131,
+              "ci_upper": 0.0402
+            },
+            "hit_rate_at_5": {
+              "mean": 0.0581,
+              "ci_lower": 0.0116,
+              "ci_upper": 0.1049
+            },
+            "stale_evidence_rate": {
+              "mean": 0.046,
+              "ci_lower": 0.032,
+              "ci_upper": 0.062
+            }
+          },
+          "by_intent": {
+            "change_over_time": {
+              "count": 14,
+              "ndcg_at_10": 0.1236,
+              "recall_at_10": 0.25,
+              "mrr": 0.1095
+            },
+            "current_state": {
+              "count": 36,
+              "ndcg_at_10": 0.0495,
+              "recall_at_10": 0.1389,
+              "mrr": 0.0178
+            },
+            "first_occurrence": {
+              "count": 22,
+              "ndcg_at_10": 0.0143,
+              "recall_at_10": 0.0455,
+              "mrr": 0.0057
+            },
+            "historical": {
+              "count": 7,
+              "ndcg_at_10": 0.0,
+              "recall_at_10": 0.0,
+              "mrr": 0.0
+            },
+            "persistent_fact": {
+              "count": 7,
+              "ndcg_at_10": 0.0,
+              "recall_at_10": 0.0,
+              "mrr": 0.0
+            }
+          },
+          "by_category": {
+            "conflicting_information": {
+              "count": 14,
+              "ndcg_at_10": 0.0842,
+              "recall_at_10": 0.2143,
+              "stale_evidence_rate": 0.0357
+            },
+            "current_vs_historical": {
+              "count": 15,
+              "ndcg_at_10": 0.0403,
+              "recall_at_10": 0.1333,
+              "stale_evidence_rate": 0.0
+            },
+            "insufficient_evidence": {
+              "count": 14,
+              "ndcg_at_10": 0.0,
+              "recall_at_10": 0.0,
+              "stale_evidence_rate": 0.0286
+            },
+            "irrelevant_history": {
+              "count": 14,
+              "ndcg_at_10": 0.0,
+              "recall_at_10": 0.0,
+              "stale_evidence_rate": 0.05
+            },
+            "longitudinal_change": {
+              "count": 14,
+              "ndcg_at_10": 0.1236,
+              "recall_at_10": 0.25,
+              "stale_evidence_rate": 0.0714
+            },
+            "missing_or_ambiguous_dates": {
+              "count": 14,
+              "ndcg_at_10": 0.0225,
+              "recall_at_10": 0.0714,
+              "stale_evidence_rate": 0.0143
+            },
+            "temporal_ordering": {
+              "count": 15,
+              "ndcg_at_10": 0.0,
+              "recall_at_10": 0.0,
+              "stale_evidence_rate": 0.12
+            }
+          }
+        },
+        "RS5": {
+          "num_questions_total": 100,
+          "num_questions_answerable": 86,
+          "metrics": {
+            "recall_at_5": {
+              "mean": 0.6919,
+              "ci_lower": 0.593,
+              "ci_upper": 0.7734
+            },
+            "recall_at_10": {
+              "mean": 0.7267,
+              "ci_lower": 0.6337,
+              "ci_upper": 0.8081
+            },
+            "ndcg_at_10": {
+              "mean": 0.6839,
+              "ci_lower": 0.5971,
+              "ci_upper": 0.7648
+            },
+            "mrr": {
+              "mean": 0.7174,
+              "ci_lower": 0.6244,
+              "ci_upper": 0.8023
+            },
+            "hit_rate_at_5": {
+              "mean": 0.7442,
+              "ci_lower": 0.6512,
+              "ci_upper": 0.8256
+            },
+            "stale_evidence_rate": {
+              "mean": 0.1761,
+              "ci_lower": 0.1133,
+              "ci_upper": 0.2436
+            }
+          },
+          "by_intent": {
+            "change_over_time": {
+              "count": 14,
+              "ndcg_at_10": 0.7818,
+              "recall_at_10": 1.0,
+              "mrr": 0.8214
+            },
+            "current_state": {
+              "count": 36,
+              "ndcg_at_10": 0.5242,
+              "recall_at_10": 0.5417,
+              "mrr": 0.5889
+            },
+            "first_occurrence": {
+              "count": 22,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            },
+            "historical": {
+              "count": 7,
+              "ndcg_at_10": 0.0,
+              "recall_at_10": 0.0,
+              "mrr": 0.0
+            },
+            "persistent_fact": {
+              "count": 7,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            }
+          },
+          "by_category": {
+            "conflicting_information": {
+              "count": 14,
+              "ndcg_at_10": 0.8066,
+              "recall_at_10": 0.75,
+              "stale_evidence_rate": 0.0
+            },
+            "current_vs_historical": {
+              "count": 15,
+              "ndcg_at_10": 0.0385,
+              "recall_at_10": 0.1333,
+              "stale_evidence_rate": 0.0
+            },
+            "insufficient_evidence": {
+              "count": 14,
+              "ndcg_at_10": 0.0,
+              "recall_at_10": 0.0,
+              "stale_evidence_rate": 0.0
+            },
+            "irrelevant_history": {
+              "count": 14,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0
+            },
+            "longitudinal_change": {
+              "count": 14,
+              "ndcg_at_10": 0.7818,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.75
+            },
+            "missing_or_ambiguous_dates": {
+              "count": 14,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0
+            },
+            "temporal_ordering": {
+              "count": 15,
+              "ndcg_at_10": 0.5333,
+              "recall_at_10": 0.5333,
+              "stale_evidence_rate": 0.4741
+            }
+          }
+        },
+        "B3": {
+          "num_questions_total": 100,
+          "num_questions_answerable": 86,
+          "metrics": {
+            "recall_at_5": {
+              "mean": 0.8256,
+              "ci_lower": 0.7442,
+              "ci_upper": 0.8953
+            },
+            "recall_at_10": {
+              "mean": 0.8953,
+              "ci_lower": 0.8314,
+              "ci_upper": 0.9477
+            },
+            "ndcg_at_10": {
+              "mean": 0.7986,
+              "ci_lower": 0.7254,
+              "ci_upper": 0.8593
+            },
+            "mrr": {
+              "mean": 0.7872,
+              "ci_lower": 0.7069,
+              "ci_upper": 0.8535
+            },
+            "hit_rate_at_5": {
+              "mean": 0.8372,
+              "ci_lower": 0.7558,
+              "ci_upper": 0.907
+            },
+            "stale_evidence_rate": {
+              "mean": 0.255,
+              "ci_lower": 0.193,
+              "ci_upper": 0.315
+            }
+          },
+          "by_intent": {
+            "change_over_time": {
+              "count": 14,
+              "ndcg_at_10": 0.7818,
+              "recall_at_10": 1.0,
+              "mrr": 0.8214
+            },
+            "current_state": {
+              "count": 36,
+              "ndcg_at_10": 0.7784,
+              "recall_at_10": 0.8889,
+              "mrr": 0.7444
+            },
+            "first_occurrence": {
+              "count": 22,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            },
+            "historical": {
+              "count": 7,
+              "ndcg_at_10": 0.1013,
+              "recall_at_10": 0.2857,
+              "mrr": 0.0571
+            },
+            "persistent_fact": {
+              "count": 7,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            }
+          },
+          "by_category": {
+            "conflicting_information": {
+              "count": 14,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0214
+            },
+            "current_vs_historical": {
+              "count": 15,
+              "ndcg_at_10": 0.5911,
+              "recall_at_10": 0.7333,
+              "stale_evidence_rate": 0.38
+            },
+            "insufficient_evidence": {
+              "count": 14,
+              "ndcg_at_10": 0.0,
+              "recall_at_10": 0.0,
+              "stale_evidence_rate": 0.0571
+            },
+            "irrelevant_history": {
+              "count": 14,
+              "ndcg_at_10": 0.8682,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.2286
+            },
+            "longitudinal_change": {
+              "count": 14,
+              "ndcg_at_10": 0.7818,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.6
+            },
+            "missing_or_ambiguous_dates": {
+              "count": 14,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0286
+            },
+            "temporal_ordering": {
+              "count": 15,
+              "ndcg_at_10": 0.5806,
+              "recall_at_10": 0.6667,
+              "stale_evidence_rate": 0.4467
+            }
+          }
+        },
+        "B2": {
+          "num_questions_total": 100,
+          "num_questions_answerable": 86,
+          "metrics": {
+            "recall_at_5": {
+              "mean": 0.8372,
+              "ci_lower": 0.7558,
+              "ci_upper": 0.907
+            },
+            "recall_at_10": {
+              "mean": 0.907,
+              "ci_lower": 0.843,
+              "ci_upper": 0.9593
+            },
+            "ndcg_at_10": {
+              "mean": 0.8589,
+              "ci_lower": 0.7889,
+              "ci_upper": 0.922
+            },
+            "mrr": {
+              "mean": 0.8465,
+              "ci_lower": 0.7709,
+              "ci_upper": 0.914
+            },
+            "hit_rate_at_5": {
+              "mean": 0.8372,
+              "ci_lower": 0.7558,
+              "ci_upper": 0.907
+            },
+            "stale_evidence_rate": {
+              "mean": 0.253,
+              "ci_lower": 0.192,
+              "ci_upper": 0.312
+            }
+          },
+          "by_intent": {
+            "change_over_time": {
+              "count": 14,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            },
+            "current_state": {
+              "count": 36,
+              "ndcg_at_10": 0.8377,
+              "recall_at_10": 0.9167,
+              "mrr": 0.8167
+            },
+            "first_occurrence": {
+              "count": 22,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            },
+            "historical": {
+              "count": 7,
+              "ndcg_at_10": 0.1013,
+              "recall_at_10": 0.2857,
+              "mrr": 0.0571
+            },
+            "persistent_fact": {
+              "count": 7,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            }
+          },
+          "by_category": {
+            "conflicting_information": {
+              "count": 14,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0214
+            },
+            "current_vs_historical": {
+              "count": 15,
+              "ndcg_at_10": 0.6104,
+              "recall_at_10": 0.8,
+              "stale_evidence_rate": 0.3733
+            },
+            "insufficient_evidence": {
+              "count": 14,
+              "ndcg_at_10": 0.0,
+              "recall_at_10": 0.0,
+              "stale_evidence_rate": 0.0571
+            },
+            "irrelevant_history": {
+              "count": 14,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.2214
+            },
+            "longitudinal_change": {
+              "count": 14,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.6
+            },
+            "missing_or_ambiguous_dates": {
+              "count": 14,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0286
+            },
+            "temporal_ordering": {
+              "count": 15,
+              "ndcg_at_10": 0.5806,
+              "recall_at_10": 0.6667,
+              "stale_evidence_rate": 0.4467
+            }
+          }
+        },
+        "ORACLE": {
+          "num_questions_total": 100,
+          "num_questions_answerable": 86,
+          "metrics": {
+            "recall_at_5": {
+              "mean": 1.0,
+              "ci_lower": 1.0,
+              "ci_upper": 1.0
+            },
+            "recall_at_10": {
+              "mean": 1.0,
+              "ci_lower": 1.0,
+              "ci_upper": 1.0
+            },
+            "ndcg_at_10": {
+              "mean": 1.0,
+              "ci_lower": 1.0,
+              "ci_upper": 1.0
+            },
+            "mrr": {
+              "mean": 1.0,
+              "ci_lower": 1.0,
+              "ci_upper": 1.0
+            },
+            "hit_rate_at_5": {
+              "mean": 1.0,
+              "ci_lower": 1.0,
+              "ci_upper": 1.0
+            },
+            "stale_evidence_rate": {
+              "mean": 0.0,
+              "ci_lower": 0.0,
+              "ci_upper": 0.0
+            }
+          },
+          "by_intent": {
+            "change_over_time": {
+              "count": 14,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            },
+            "current_state": {
+              "count": 36,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            },
+            "first_occurrence": {
+              "count": 22,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            },
+            "historical": {
+              "count": 7,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            },
+            "persistent_fact": {
+              "count": 7,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            }
+          },
+          "by_category": {
+            "conflicting_information": {
+              "count": 14,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0
+            },
+            "current_vs_historical": {
+              "count": 15,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0
+            },
+            "insufficient_evidence": {
+              "count": 14,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0
+            },
+            "irrelevant_history": {
+              "count": 14,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0
+            },
+            "longitudinal_change": {
+              "count": 14,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0
+            },
+            "missing_or_ambiguous_dates": {
+              "count": 14,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0
+            },
+            "temporal_ordering": {
+              "count": 15,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0
+            }
+          }
+        }
+      },
+      "paired_bootstrap_tests": {
+        "H1_history_alone_B3_vs_B1": {
+          "recall_at_5": {
+            "mean_a": 0.8256,
+            "mean_b": 0.8256,
+            "diff_mean": 0.0,
+            "ci_lower": 0.0,
+            "ci_upper": 0.0,
+            "p_value_two_sided": 1.0
+          },
+          "recall_at_10": {
+            "mean_a": 0.8953,
+            "mean_b": 0.8605,
+            "diff_mean": 0.0349,
+            "ci_lower": 0.0058,
+            "ci_upper": 0.0698,
+            "p_value_two_sided": 0.012
+          },
+          "ndcg_at_10": {
+            "mean_a": 0.7986,
+            "mean_b": 0.787,
+            "diff_mean": 0.0116,
+            "ci_lower": 0.0021,
+            "ci_upper": 0.0224,
+            "p_value_two_sided": 0.012
+          },
+          "mrr": {
+            "mean_a": 0.7872,
+            "mean_b": 0.7814,
+            "diff_mean": 0.0058,
+            "ci_lower": 0.0012,
+            "ci_upper": 0.0105,
+            "p_value_two_sided": 0.012
+          },
+          "hit_rate_at_5": {
+            "mean_a": 0.8372,
+            "mean_b": 0.8372,
+            "diff_mean": 0.0,
+            "ci_lower": 0.0,
+            "ci_upper": 0.0,
+            "p_value_two_sided": 1.0
+          },
+          "stale_evidence_rate": {
+            "mean_a": 0.255,
+            "mean_b": 0.254,
+            "diff_mean": 0.001,
+            "ci_lower": -0.006,
+            "ci_upper": 0.008,
+            "p_value_two_sided": 0.928
+          }
+        },
+        "H1_combined_B2_vs_B1": {
+          "recall_at_5": {
+            "mean_a": 0.8372,
+            "mean_b": 0.8256,
+            "diff_mean": 0.0116,
+            "ci_lower": 0.0,
+            "ci_upper": 0.0291,
+            "p_value_two_sided": 0.242
+          },
+          "recall_at_10": {
+            "mean_a": 0.907,
+            "mean_b": 0.8605,
+            "diff_mean": 0.0465,
+            "ci_lower": 0.0116,
+            "ci_upper": 0.0872,
+            "p_value_two_sided": 0.002
+          },
+          "ndcg_at_10": {
+            "mean_a": 0.8589,
+            "mean_b": 0.787,
+            "diff_mean": 0.0719,
+            "ci_lower": 0.0467,
+            "ci_upper": 0.1008,
+            "p_value_two_sided": 0.0
+          },
+          "mrr": {
+            "mean_a": 0.8465,
+            "mean_b": 0.7814,
+            "diff_mean": 0.0651,
+            "ci_lower": 0.036,
+            "ci_upper": 0.1,
+            "p_value_two_sided": 0.0
+          },
+          "hit_rate_at_5": {
+            "mean_a": 0.8372,
+            "mean_b": 0.8372,
+            "diff_mean": 0.0,
+            "ci_lower": 0.0,
+            "ci_upper": 0.0,
+            "p_value_two_sided": 1.0
+          },
+          "stale_evidence_rate": {
+            "mean_a": 0.253,
+            "mean_b": 0.254,
+            "diff_mean": -0.001,
+            "ci_lower": -0.008,
+            "ci_upper": 0.005,
+            "p_value_two_sided": 0.696
+          }
+        },
+        "H2_temporal_gain_B2_vs_B3": {
+          "recall_at_5": {
+            "mean_a": 0.8372,
+            "mean_b": 0.8256,
+            "diff_mean": 0.0116,
+            "ci_lower": 0.0,
+            "ci_upper": 0.0291,
+            "p_value_two_sided": 0.242
+          },
+          "recall_at_10": {
+            "mean_a": 0.907,
+            "mean_b": 0.8953,
+            "diff_mean": 0.0116,
+            "ci_lower": 0.0,
+            "ci_upper": 0.0465,
+            "p_value_two_sided": 0.756
+          },
+          "ndcg_at_10": {
+            "mean_a": 0.8589,
+            "mean_b": 0.7986,
+            "diff_mean": 0.0603,
+            "ci_lower": 0.0369,
+            "ci_upper": 0.0881,
+            "p_value_two_sided": 0.0
+          },
+          "mrr": {
+            "mean_a": 0.8465,
+            "mean_b": 0.7872,
+            "diff_mean": 0.0593,
+            "ci_lower": 0.0291,
+            "ci_upper": 0.0942,
+            "p_value_two_sided": 0.0
+          },
+          "hit_rate_at_5": {
+            "mean_a": 0.8372,
+            "mean_b": 0.8372,
+            "diff_mean": 0.0,
+            "ci_lower": 0.0,
+            "ci_upper": 0.0,
+            "p_value_two_sided": 1.0
+          },
+          "stale_evidence_rate": {
+            "mean_a": 0.253,
+            "mean_b": 0.255,
+            "diff_mean": -0.002,
+            "ci_lower": -0.006,
+            "ci_upper": 0.002,
+            "p_value_two_sided": 0.436
+          }
+        },
+        "Baseline_B2_vs_RS4_recency": {
+          "recall_at_5": {
+            "mean_a": 0.8372,
+            "mean_b": 0.0291,
+            "diff_mean": 0.8081,
+            "ci_lower": 0.7267,
+            "ci_upper": 0.8837,
+            "p_value_two_sided": 0.0
+          },
+          "recall_at_10": {
+            "mean_a": 0.907,
+            "mean_b": 0.1105,
+            "diff_mean": 0.7965,
+            "ci_lower": 0.7151,
+            "ci_upper": 0.8721,
+            "p_value_two_sided": 0.0
+          },
+          "ndcg_at_10": {
+            "mean_a": 0.8589,
+            "mean_b": 0.0445,
+            "diff_mean": 0.8144,
+            "ci_lower": 0.7422,
+            "ci_upper": 0.8787,
+            "p_value_two_sided": 0.0
+          },
+          "mrr": {
+            "mean_a": 0.8465,
+            "mean_b": 0.0267,
+            "diff_mean": 0.8198,
+            "ci_lower": 0.7439,
+            "ci_upper": 0.8849,
+            "p_value_two_sided": 0.0
+          },
+          "hit_rate_at_5": {
+            "mean_a": 0.8372,
+            "mean_b": 0.0581,
+            "diff_mean": 0.7791,
+            "ci_lower": 0.686,
+            "ci_upper": 0.8605,
+            "p_value_two_sided": 0.0
+          },
+          "stale_evidence_rate": {
+            "mean_a": 0.253,
+            "mean_b": 0.046,
+            "diff_mean": 0.207,
+            "ci_lower": 0.151,
+            "ci_upper": 0.26,
+            "p_value_two_sided": 0.0
+          }
+        },
+        "Baseline_B2_vs_RS5_status_filter": {
+          "recall_at_5": {
+            "mean_a": 0.8372,
+            "mean_b": 0.6919,
+            "diff_mean": 0.1453,
+            "ci_lower": 0.0814,
+            "ci_upper": 0.2151,
+            "p_value_two_sided": 0.0
+          },
+          "recall_at_10": {
+            "mean_a": 0.907,
+            "mean_b": 0.7267,
+            "diff_mean": 0.1802,
+            "ci_lower": 0.1105,
+            "ci_upper": 0.2558,
+            "p_value_two_sided": 0.0
+          },
+          "ndcg_at_10": {
+            "mean_a": 0.8589,
+            "mean_b": 0.6839,
+            "diff_mean": 0.175,
+            "ci_lower": 0.1157,
+            "ci_upper": 0.2411,
+            "p_value_two_sided": 0.0
+          },
+          "mrr": {
+            "mean_a": 0.8465,
+            "mean_b": 0.7174,
+            "diff_mean": 0.1291,
+            "ci_lower": 0.0709,
+            "ci_upper": 0.1942,
+            "p_value_two_sided": 0.0
+          },
+          "hit_rate_at_5": {
+            "mean_a": 0.8372,
+            "mean_b": 0.7442,
+            "diff_mean": 0.093,
+            "ci_lower": 0.0462,
+            "ci_upper": 0.1628,
+            "p_value_two_sided": 0.0
+          },
+          "stale_evidence_rate": {
+            "mean_a": 0.253,
+            "mean_b": 0.1761,
+            "diff_mean": 0.0769,
+            "ci_lower": 0.0315,
+            "ci_upper": 0.1206,
+            "p_value_two_sided": 0.0
+          }
+        },
+        "Lexical_vs_Dense_B1_vs_RS1": {
+          "recall_at_5": {
+            "mean_a": 0.8256,
+            "mean_b": 0.7267,
+            "diff_mean": 0.0988,
+            "ci_lower": 0.0465,
+            "ci_upper": 0.1628,
+            "p_value_two_sided": 0.0
+          },
+          "recall_at_10": {
+            "mean_a": 0.8605,
+            "mean_b": 0.8372,
+            "diff_mean": 0.0233,
+            "ci_lower": 0.0,
+            "ci_upper": 0.0581,
+            "p_value_two_sided": 0.252
+          },
+          "ndcg_at_10": {
+            "mean_a": 0.787,
+            "mean_b": 0.7109,
+            "diff_mean": 0.0761,
+            "ci_lower": 0.0396,
+            "ci_upper": 0.115,
+            "p_value_two_sided": 0.0
+          },
+          "mrr": {
+            "mean_a": 0.7814,
+            "mean_b": 0.6928,
+            "diff_mean": 0.0886,
+            "ci_lower": 0.0354,
+            "ci_upper": 0.1464,
+            "p_value_two_sided": 0.0
+          },
+          "hit_rate_at_5": {
+            "mean_a": 0.8372,
+            "mean_b": 0.7674,
+            "diff_mean": 0.0698,
+            "ci_lower": 0.0233,
+            "ci_upper": 0.1279,
+            "p_value_two_sided": 0.002
+          },
+          "stale_evidence_rate": {
+            "mean_a": 0.254,
+            "mean_b": 0.221,
+            "diff_mean": 0.033,
+            "ci_lower": 0.016,
+            "ci_upper": 0.054,
+            "p_value_two_sided": 0.0
+          }
+        },
+        "Lexical_vs_Dense_B1_vs_RS2": {
+          "recall_at_5": {
+            "mean_a": 0.8256,
+            "mean_b": 0.8081,
+            "diff_mean": 0.0174,
+            "ci_lower": -0.0058,
+            "ci_upper": 0.0465,
+            "p_value_two_sided": 0.234
+          },
+          "recall_at_10": {
+            "mean_a": 0.8605,
+            "mean_b": 0.8895,
+            "diff_mean": -0.0291,
+            "ci_lower": -0.064,
+            "ci_upper": -0.0058,
+            "p_value_two_sided": 0.03
+          },
+          "ndcg_at_10": {
+            "mean_a": 0.787,
+            "mean_b": 0.805,
+            "diff_mean": -0.0181,
+            "ci_lower": -0.0411,
+            "ci_upper": 0.0036,
+            "p_value_two_sided": 0.106
+          },
+          "mrr": {
+            "mean_a": 0.7814,
+            "mean_b": 0.7948,
+            "diff_mean": -0.0134,
+            "ci_lower": -0.0463,
+            "ci_upper": 0.0182,
+            "p_value_two_sided": 0.424
+          },
+          "hit_rate_at_5": {
+            "mean_a": 0.8372,
+            "mean_b": 0.8372,
+            "diff_mean": 0.0,
+            "ci_lower": 0.0,
+            "ci_upper": 0.0,
+            "p_value_two_sided": 1.0
+          },
+          "stale_evidence_rate": {
+            "mean_a": 0.254,
+            "mean_b": 0.26,
+            "diff_mean": -0.006,
+            "ci_lower": -0.018,
+            "ci_upper": 0.004,
+            "p_value_two_sided": 0.3
+          }
+        }
+      }
+    },
+    "R_test": {
+      "systems": {
+        "RS1": {
+          "num_questions_total": 30,
+          "num_questions_answerable": 26,
+          "metrics": {
+            "recall_at_5": {
+              "mean": 0.6987,
+              "ci_lower": 0.5128,
+              "ci_upper": 0.8526
+            },
+            "recall_at_10": {
+              "mean": 0.8077,
+              "ci_lower": 0.6538,
+              "ci_upper": 0.9295
+            },
+            "ndcg_at_10": {
+              "mean": 0.6489,
+              "ci_lower": 0.5059,
+              "ci_upper": 0.7894
+            },
+            "mrr": {
+              "mean": 0.588,
+              "ci_lower": 0.429,
+              "ci_upper": 0.7389
+            },
+            "hit_rate_at_5": {
+              "mean": 0.7308,
+              "ci_lower": 0.5385,
+              "ci_upper": 0.8846
+            },
+            "stale_evidence_rate": {
+              "mean": 0.1233,
+              "ci_lower": 0.0733,
+              "ci_upper": 0.1833
+            }
+          },
+          "by_intent": {
+            "change_over_time": {
+              "count": 6,
+              "ndcg_at_10": 0.1057,
+              "recall_at_10": 0.1667,
+              "mrr": 0.0833
+            },
+            "current_state": {
+              "count": 6,
+              "ndcg_at_10": 0.4638,
+              "recall_at_10": 1.0,
+              "mrr": 0.2979
+            },
+            "first_occurrence": {
+              "count": 6,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            },
+            "historical": {
+              "count": 3,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            },
+            "persistent_fact": {
+              "count": 5,
+              "ndcg_at_10": 0.8908,
+              "recall_at_10": 1.0,
+              "mrr": 0.8
+            }
+          },
+          "by_category": {
+            "current_vs_historical": {
+              "count": 6,
+              "ndcg_at_10": 0.4638,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0833
+            },
+            "insufficient_evidence": {
+              "count": 4,
+              "ndcg_at_10": 0.0,
+              "recall_at_10": 0.0,
+              "stale_evidence_rate": 0.275
+            },
+            "irrelevant_history": {
+              "count": 5,
+              "ndcg_at_10": 0.8908,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0
+            },
+            "longitudinal_change": {
+              "count": 6,
+              "ndcg_at_10": 0.1057,
+              "recall_at_10": 0.1667,
+              "stale_evidence_rate": 0.0667
+            },
+            "missing_or_ambiguous_dates": {
+              "count": 3,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0
+            },
+            "temporal_ordering": {
+              "count": 6,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.2833
+            }
+          }
+        },
+        "RS2": {
+          "num_questions_total": 30,
+          "num_questions_answerable": 26,
+          "metrics": {
+            "recall_at_5": {
+              "mean": 0.7788,
+              "ci_lower": 0.6281,
+              "ci_upper": 0.9103
+            },
+            "recall_at_10": {
+              "mean": 0.8894,
+              "ci_lower": 0.7788,
+              "ci_upper": 0.9808
+            },
+            "ndcg_at_10": {
+              "mean": 0.7508,
+              "ci_lower": 0.6205,
+              "ci_upper": 0.8669
+            },
+            "mrr": {
+              "mean": 0.7177,
+              "ci_lower": 0.5705,
+              "ci_upper": 0.8494
+            },
+            "hit_rate_at_5": {
+              "mean": 0.8462,
+              "ci_lower": 0.6923,
+              "ci_upper": 0.9615
+            },
+            "stale_evidence_rate": {
+              "mean": 0.13,
+              "ci_lower": 0.0867,
+              "ci_upper": 0.1767
+            }
+          },
+          "by_intent": {
+            "change_over_time": {
+              "count": 6,
+              "ndcg_at_10": 0.3474,
+              "recall_at_10": 0.5208,
+              "mrr": 0.3407
+            },
+            "current_state": {
+              "count": 6,
+              "ndcg_at_10": 0.6341,
+              "recall_at_10": 1.0,
+              "mrr": 0.5194
+            },
+            "first_occurrence": {
+              "count": 6,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            },
+            "historical": {
+              "count": 3,
+              "ndcg_at_10": 0.877,
+              "recall_at_10": 1.0,
+              "mrr": 0.8333
+            },
+            "persistent_fact": {
+              "count": 5,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            }
+          },
+          "by_category": {
+            "current_vs_historical": {
+              "count": 6,
+              "ndcg_at_10": 0.6341,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.05
+            },
+            "insufficient_evidence": {
+              "count": 4,
+              "ndcg_at_10": 0.0,
+              "recall_at_10": 0.0,
+              "stale_evidence_rate": 0.275
+            },
+            "irrelevant_history": {
+              "count": 5,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0
+            },
+            "longitudinal_change": {
+              "count": 6,
+              "ndcg_at_10": 0.3474,
+              "recall_at_10": 0.5208,
+              "stale_evidence_rate": 0.2
+            },
+            "missing_or_ambiguous_dates": {
+              "count": 3,
+              "ndcg_at_10": 0.877,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0
+            },
+            "temporal_ordering": {
+              "count": 6,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.2167
+            }
+          }
+        },
+        "B1": {
+          "num_questions_total": 30,
+          "num_questions_answerable": 26,
+          "metrics": {
+            "recall_at_5": {
+              "mean": 0.766,
+              "ci_lower": 0.6121,
+              "ci_upper": 0.9038
+            },
+            "recall_at_10": {
+              "mean": 0.8462,
+              "ci_lower": 0.7115,
+              "ci_upper": 0.9615
+            },
+            "ndcg_at_10": {
+              "mean": 0.7453,
+              "ci_lower": 0.6073,
+              "ci_upper": 0.871
+            },
+            "mrr": {
+              "mean": 0.7288,
+              "ci_lower": 0.5833,
+              "ci_upper": 0.8635
+            },
+            "hit_rate_at_5": {
+              "mean": 0.8462,
+              "ci_lower": 0.6923,
+              "ci_upper": 0.9615
+            },
+            "stale_evidence_rate": {
+              "mean": 0.15,
+              "ci_lower": 0.1,
+              "ci_upper": 0.2034
+            }
+          },
+          "by_intent": {
+            "change_over_time": {
+              "count": 6,
+              "ndcg_at_10": 0.2623,
+              "recall_at_10": 0.3333,
+              "mrr": 0.3056
+            },
+            "current_state": {
+              "count": 6,
+              "ndcg_at_10": 0.6341,
+              "recall_at_10": 1.0,
+              "mrr": 0.5194
+            },
+            "first_occurrence": {
+              "count": 6,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            },
+            "historical": {
+              "count": 3,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            },
+            "persistent_fact": {
+              "count": 5,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            }
+          },
+          "by_category": {
+            "current_vs_historical": {
+              "count": 6,
+              "ndcg_at_10": 0.6341,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0833
+            },
+            "insufficient_evidence": {
+              "count": 4,
+              "ndcg_at_10": 0.0,
+              "recall_at_10": 0.0,
+              "stale_evidence_rate": 0.35
+            },
+            "irrelevant_history": {
+              "count": 5,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0
+            },
+            "longitudinal_change": {
+              "count": 6,
+              "ndcg_at_10": 0.2623,
+              "recall_at_10": 0.3333,
+              "stale_evidence_rate": 0.1667
+            },
+            "missing_or_ambiguous_dates": {
+              "count": 3,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0
+            },
+            "temporal_ordering": {
+              "count": 6,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.2667
+            }
+          }
+        },
+        "RS4": {
+          "num_questions_total": 30,
+          "num_questions_answerable": 26,
+          "metrics": {
+            "recall_at_5": {
+              "mean": 0.2404,
+              "ci_lower": 0.0962,
+              "ci_upper": 0.3942
+            },
+            "recall_at_10": {
+              "mean": 0.4038,
+              "ci_lower": 0.2404,
+              "ci_upper": 0.5673
+            },
+            "ndcg_at_10": {
+              "mean": 0.2394,
+              "ci_lower": 0.1288,
+              "ci_upper": 0.3616
+            },
+            "mrr": {
+              "mean": 0.1724,
+              "ci_lower": 0.0811,
+              "ci_upper": 0.2865
+            },
+            "hit_rate_at_5": {
+              "mean": 0.3077,
+              "ci_lower": 0.1538,
+              "ci_upper": 0.5
+            },
+            "stale_evidence_rate": {
+              "mean": 0.02,
+              "ci_lower": 0.0067,
+              "ci_upper": 0.04
+            }
+          },
+          "by_intent": {
+            "change_over_time": {
+              "count": 6,
+              "ndcg_at_10": 0.4072,
+              "recall_at_10": 0.625,
+              "mrr": 0.2516
+            },
+            "current_state": {
+              "count": 6,
+              "ndcg_at_10": 0.5059,
+              "recall_at_10": 0.8333,
+              "mrr": 0.4113
+            },
+            "first_occurrence": {
+              "count": 6,
+              "ndcg_at_10": 0.0,
+              "recall_at_10": 0.0,
+              "mrr": 0.0
+            },
+            "historical": {
+              "count": 3,
+              "ndcg_at_10": 0.1436,
+              "recall_at_10": 0.3333,
+              "mrr": 0.0833
+            },
+            "persistent_fact": {
+              "count": 5,
+              "ndcg_at_10": 0.0629,
+              "recall_at_10": 0.15,
+              "mrr": 0.0508
+            }
+          },
+          "by_category": {
+            "current_vs_historical": {
+              "count": 6,
+              "ndcg_at_10": 0.5059,
+              "recall_at_10": 0.8333,
+              "stale_evidence_rate": 0.05
+            },
+            "insufficient_evidence": {
+              "count": 4,
+              "ndcg_at_10": 0.0,
+              "recall_at_10": 0.0,
+              "stale_evidence_rate": 0.0
+            },
+            "irrelevant_history": {
+              "count": 5,
+              "ndcg_at_10": 0.0629,
+              "recall_at_10": 0.15,
+              "stale_evidence_rate": 0.0
+            },
+            "longitudinal_change": {
+              "count": 6,
+              "ndcg_at_10": 0.4072,
+              "recall_at_10": 0.625,
+              "stale_evidence_rate": 0.0
+            },
+            "missing_or_ambiguous_dates": {
+              "count": 3,
+              "ndcg_at_10": 0.1436,
+              "recall_at_10": 0.3333,
+              "stale_evidence_rate": 0.0667
+            },
+            "temporal_ordering": {
+              "count": 6,
+              "ndcg_at_10": 0.0,
+              "recall_at_10": 0.0,
+              "stale_evidence_rate": 0.0167
+            }
+          }
+        },
+        "RS5": {
+          "num_questions_total": 30,
+          "num_questions_answerable": 26,
+          "metrics": {
+            "recall_at_5": {
+              "mean": 0.6891,
+              "ci_lower": 0.5192,
+              "ci_upper": 0.8526
+            },
+            "recall_at_10": {
+              "mean": 0.6891,
+              "ci_lower": 0.5192,
+              "ci_upper": 0.8526
+            },
+            "ndcg_at_10": {
+              "mean": 0.6939,
+              "ci_lower": 0.5242,
+              "ci_upper": 0.8557
+            },
+            "mrr": {
+              "mean": 0.7244,
+              "ci_lower": 0.5577,
+              "ci_upper": 0.8846
+            },
+            "hit_rate_at_5": {
+              "mean": 0.7692,
+              "ci_lower": 0.6154,
+              "ci_upper": 0.9231
+            },
+            "stale_evidence_rate": {
+              "mean": 0.1015,
+              "ci_lower": 0.0422,
+              "ci_upper": 0.167
+            }
+          },
+          "by_intent": {
+            "change_over_time": {
+              "count": 6,
+              "ndcg_at_10": 0.1737,
+              "recall_at_10": 0.1528,
+              "mrr": 0.3056
+            },
+            "current_state": {
+              "count": 6,
+              "ndcg_at_10": 0.5,
+              "recall_at_10": 0.5,
+              "mrr": 0.5
+            },
+            "first_occurrence": {
+              "count": 6,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            },
+            "historical": {
+              "count": 3,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            },
+            "persistent_fact": {
+              "count": 5,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            }
+          },
+          "by_category": {
+            "current_vs_historical": {
+              "count": 6,
+              "ndcg_at_10": 0.5,
+              "recall_at_10": 0.5,
+              "stale_evidence_rate": 0.1741
+            },
+            "insufficient_evidence": {
+              "count": 4,
+              "ndcg_at_10": 0.0,
+              "recall_at_10": 0.0,
+              "stale_evidence_rate": 0.05
+            },
+            "irrelevant_history": {
+              "count": 5,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0
+            },
+            "longitudinal_change": {
+              "count": 6,
+              "ndcg_at_10": 0.1737,
+              "recall_at_10": 0.1528,
+              "stale_evidence_rate": 0.3
+            },
+            "missing_or_ambiguous_dates": {
+              "count": 3,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0
+            },
+            "temporal_ordering": {
+              "count": 6,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0
+            }
+          }
+        },
+        "B3": {
+          "num_questions_total": 30,
+          "num_questions_answerable": 26,
+          "metrics": {
+            "recall_at_5": {
+              "mean": 0.766,
+              "ci_lower": 0.6121,
+              "ci_upper": 0.9038
+            },
+            "recall_at_10": {
+              "mean": 0.8846,
+              "ci_lower": 0.75,
+              "ci_upper": 0.9808
+            },
+            "ndcg_at_10": {
+              "mean": 0.7596,
+              "ci_lower": 0.6244,
+              "ci_upper": 0.8786
+            },
+            "mrr": {
+              "mean": 0.7327,
+              "ci_lower": 0.5878,
+              "ci_upper": 0.8654
+            },
+            "hit_rate_at_5": {
+              "mean": 0.8462,
+              "ci_lower": 0.6923,
+              "ci_upper": 0.9615
+            },
+            "stale_evidence_rate": {
+              "mean": 0.1433,
+              "ci_lower": 0.09,
+              "ci_upper": 0.2
+            }
+          },
+          "by_intent": {
+            "change_over_time": {
+              "count": 6,
+              "ndcg_at_10": 0.3242,
+              "recall_at_10": 0.5,
+              "mrr": 0.3222
+            },
+            "current_state": {
+              "count": 6,
+              "ndcg_at_10": 0.6341,
+              "recall_at_10": 1.0,
+              "mrr": 0.5194
+            },
+            "first_occurrence": {
+              "count": 6,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            },
+            "historical": {
+              "count": 3,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            },
+            "persistent_fact": {
+              "count": 5,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            }
+          },
+          "by_category": {
+            "current_vs_historical": {
+              "count": 6,
+              "ndcg_at_10": 0.6341,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0667
+            },
+            "insufficient_evidence": {
+              "count": 4,
+              "ndcg_at_10": 0.0,
+              "recall_at_10": 0.0,
+              "stale_evidence_rate": 0.375
+            },
+            "irrelevant_history": {
+              "count": 5,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0
+            },
+            "longitudinal_change": {
+              "count": 6,
+              "ndcg_at_10": 0.3242,
+              "recall_at_10": 0.5,
+              "stale_evidence_rate": 0.1667
+            },
+            "missing_or_ambiguous_dates": {
+              "count": 3,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0667
+            },
+            "temporal_ordering": {
+              "count": 6,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.2
+            }
+          }
+        },
+        "B2": {
+          "num_questions_total": 30,
+          "num_questions_answerable": 26,
+          "metrics": {
+            "recall_at_5": {
+              "mean": 0.8045,
+              "ci_lower": 0.6506,
+              "ci_upper": 0.9327
+            },
+            "recall_at_10": {
+              "mean": 0.875,
+              "ci_lower": 0.7404,
+              "ci_upper": 0.9808
+            },
+            "ndcg_at_10": {
+              "mean": 0.794,
+              "ci_lower": 0.6591,
+              "ci_upper": 0.9161
+            },
+            "mrr": {
+              "mean": 0.784,
+              "ci_lower": 0.6416,
+              "ci_upper": 0.9109
+            },
+            "hit_rate_at_5": {
+              "mean": 0.8846,
+              "ci_lower": 0.7308,
+              "ci_upper": 1.0
+            },
+            "stale_evidence_rate": {
+              "mean": 0.14,
+              "ci_lower": 0.0933,
+              "ci_upper": 0.19
+            }
+          },
+          "by_intent": {
+            "change_over_time": {
+              "count": 6,
+              "ndcg_at_10": 0.3046,
+              "recall_at_10": 0.4583,
+              "mrr": 0.3222
+            },
+            "current_state": {
+              "count": 6,
+              "ndcg_at_10": 0.8029,
+              "recall_at_10": 1.0,
+              "mrr": 0.7417
+            },
+            "first_occurrence": {
+              "count": 6,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            },
+            "historical": {
+              "count": 3,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            },
+            "persistent_fact": {
+              "count": 5,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            }
+          },
+          "by_category": {
+            "current_vs_historical": {
+              "count": 6,
+              "ndcg_at_10": 0.8029,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.1
+            },
+            "insufficient_evidence": {
+              "count": 4,
+              "ndcg_at_10": 0.0,
+              "recall_at_10": 0.0,
+              "stale_evidence_rate": 0.325
+            },
+            "irrelevant_history": {
+              "count": 5,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0
+            },
+            "longitudinal_change": {
+              "count": 6,
+              "ndcg_at_10": 0.3046,
+              "recall_at_10": 0.4583,
+              "stale_evidence_rate": 0.1667
+            },
+            "missing_or_ambiguous_dates": {
+              "count": 3,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0333
+            },
+            "temporal_ordering": {
+              "count": 6,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.2
+            }
+          }
+        },
+        "ORACLE": {
+          "num_questions_total": 30,
+          "num_questions_answerable": 26,
+          "metrics": {
+            "recall_at_5": {
+              "mean": 0.9728,
+              "ci_lower": 0.9311,
+              "ci_upper": 1.0
+            },
+            "recall_at_10": {
+              "mean": 1.0,
+              "ci_lower": 1.0,
+              "ci_upper": 1.0
+            },
+            "ndcg_at_10": {
+              "mean": 1.0,
+              "ci_lower": 1.0,
+              "ci_upper": 1.0
+            },
+            "mrr": {
+              "mean": 1.0,
+              "ci_lower": 1.0,
+              "ci_upper": 1.0
+            },
+            "hit_rate_at_5": {
+              "mean": 1.0,
+              "ci_lower": 1.0,
+              "ci_upper": 1.0
+            },
+            "stale_evidence_rate": {
+              "mean": 0.0,
+              "ci_lower": 0.0,
+              "ci_upper": 0.0
+            }
+          },
+          "by_intent": {
+            "change_over_time": {
+              "count": 6,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            },
+            "current_state": {
+              "count": 6,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            },
+            "first_occurrence": {
+              "count": 6,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            },
+            "historical": {
+              "count": 3,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            },
+            "persistent_fact": {
+              "count": 5,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0
+            }
+          },
+          "by_category": {
+            "current_vs_historical": {
+              "count": 6,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0
+            },
+            "insufficient_evidence": {
+              "count": 4,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0
+            },
+            "irrelevant_history": {
+              "count": 5,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0
+            },
+            "longitudinal_change": {
+              "count": 6,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0
+            },
+            "missing_or_ambiguous_dates": {
+              "count": 3,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0
+            },
+            "temporal_ordering": {
+              "count": 6,
+              "ndcg_at_10": 1.0,
+              "recall_at_10": 1.0,
+              "stale_evidence_rate": 0.0
+            }
+          }
+        }
+      },
+      "paired_bootstrap_tests": {
+        "H1_history_alone_B3_vs_B1": {
+          "recall_at_5": {
+            "mean_a": 0.766,
+            "mean_b": 0.766,
+            "diff_mean": 0.0,
+            "ci_lower": 0.0,
+            "ci_upper": 0.0,
+            "p_value_two_sided": 1.0
+          },
+          "recall_at_10": {
+            "mean_a": 0.8846,
+            "mean_b": 0.8462,
+            "diff_mean": 0.0385,
+            "ci_lower": 0.0,
+            "ci_upper": 0.1154,
+            "p_value_two_sided": 0.764
+          },
+          "ndcg_at_10": {
+            "mean_a": 0.7596,
+            "mean_b": 0.7453,
+            "diff_mean": 0.0143,
+            "ci_lower": 0.0,
+            "ci_upper": 0.0393,
+            "p_value_two_sided": 0.1
+          },
+          "mrr": {
+            "mean_a": 0.7327,
+            "mean_b": 0.7288,
+            "diff_mean": 0.0038,
+            "ci_lower": 0.0,
+            "ci_upper": 0.0115,
+            "p_value_two_sided": 0.764
+          },
+          "hit_rate_at_5": {
+            "mean_a": 0.8462,
+            "mean_b": 0.8462,
+            "diff_mean": 0.0,
+            "ci_lower": 0.0,
+            "ci_upper": 0.0,
+            "p_value_two_sided": 1.0
+          },
+          "stale_evidence_rate": {
+            "mean_a": 0.1433,
+            "mean_b": 0.15,
+            "diff_mean": -0.0067,
+            "ci_lower": -0.03,
+            "ci_upper": 0.0167,
+            "p_value_two_sided": 0.49
+          }
+        },
+        "H1_combined_B2_vs_B1": {
+          "recall_at_5": {
+            "mean_a": 0.8045,
+            "mean_b": 0.766,
+            "diff_mean": 0.0385,
+            "ci_lower": 0.0,
+            "ci_upper": 0.1154,
+            "p_value_two_sided": 0.722
+          },
+          "recall_at_10": {
+            "mean_a": 0.875,
+            "mean_b": 0.8462,
+            "diff_mean": 0.0288,
+            "ci_lower": -0.0288,
+            "ci_upper": 0.1154,
+            "p_value_two_sided": 0.78
+          },
+          "ndcg_at_10": {
+            "mean_a": 0.794,
+            "mean_b": 0.7453,
+            "diff_mean": 0.0487,
+            "ci_lower": 0.0,
+            "ci_upper": 0.1124,
+            "p_value_two_sided": 0.054
+          },
+          "mrr": {
+            "mean_a": 0.784,
+            "mean_b": 0.7288,
+            "diff_mean": 0.0551,
+            "ci_lower": 0.0,
+            "ci_upper": 0.1346,
+            "p_value_two_sided": 0.072
+          },
+          "hit_rate_at_5": {
+            "mean_a": 0.8846,
+            "mean_b": 0.8462,
+            "diff_mean": 0.0385,
+            "ci_lower": 0.0,
+            "ci_upper": 0.1154,
+            "p_value_two_sided": 0.722
+          },
+          "stale_evidence_rate": {
+            "mean_a": 0.14,
+            "mean_b": 0.15,
+            "diff_mean": -0.01,
+            "ci_lower": -0.03,
+            "ci_upper": 0.01,
+            "p_value_two_sided": 0.29
+          }
+        },
+        "H2_temporal_gain_B2_vs_B3": {
+          "recall_at_5": {
+            "mean_a": 0.8045,
+            "mean_b": 0.766,
+            "diff_mean": 0.0385,
+            "ci_lower": 0.0,
+            "ci_upper": 0.1154,
+            "p_value_two_sided": 0.722
+          },
+          "recall_at_10": {
+            "mean_a": 0.875,
+            "mean_b": 0.8846,
+            "diff_mean": -0.0096,
+            "ci_lower": -0.0288,
+            "ci_upper": 0.0,
+            "p_value_two_sided": 0.716
+          },
+          "ndcg_at_10": {
+            "mean_a": 0.794,
+            "mean_b": 0.7596,
+            "diff_mean": 0.0344,
+            "ci_lower": -0.009,
+            "ci_upper": 0.0946,
+            "p_value_two_sided": 0.246
+          },
+          "mrr": {
+            "mean_a": 0.784,
+            "mean_b": 0.7327,
+            "diff_mean": 0.0513,
+            "ci_lower": 0.0,
+            "ci_upper": 0.1346,
+            "p_value_two_sided": 0.238
+          },
+          "hit_rate_at_5": {
+            "mean_a": 0.8846,
+            "mean_b": 0.8462,
+            "diff_mean": 0.0385,
+            "ci_lower": 0.0,
+            "ci_upper": 0.1154,
+            "p_value_two_sided": 0.722
+          },
+          "stale_evidence_rate": {
+            "mean_a": 0.14,
+            "mean_b": 0.1433,
+            "diff_mean": -0.0033,
+            "ci_lower": -0.0167,
+            "ci_upper": 0.01,
+            "p_value_two_sided": 0.896
+          }
+        },
+        "Baseline_B2_vs_RS4_recency": {
+          "recall_at_5": {
+            "mean_a": 0.8045,
+            "mean_b": 0.2404,
+            "diff_mean": 0.5641,
+            "ci_lower": 0.3333,
+            "ci_upper": 0.7692,
+            "p_value_two_sided": 0.0
+          },
+          "recall_at_10": {
+            "mean_a": 0.875,
+            "mean_b": 0.4038,
+            "diff_mean": 0.4712,
+            "ci_lower": 0.2692,
+            "ci_upper": 0.6635,
+            "p_value_two_sided": 0.0
+          },
+          "ndcg_at_10": {
+            "mean_a": 0.794,
+            "mean_b": 0.2394,
+            "diff_mean": 0.5546,
+            "ci_lower": 0.3611,
+            "ci_upper": 0.7384,
+            "p_value_two_sided": 0.0
+          },
+          "mrr": {
+            "mean_a": 0.784,
+            "mean_b": 0.1724,
+            "diff_mean": 0.6116,
+            "ci_lower": 0.4328,
+            "ci_upper": 0.7816,
+            "p_value_two_sided": 0.0
+          },
+          "hit_rate_at_5": {
+            "mean_a": 0.8846,
+            "mean_b": 0.3077,
+            "diff_mean": 0.5769,
+            "ci_lower": 0.3462,
+            "ci_upper": 0.7692,
+            "p_value_two_sided": 0.0
+          },
+          "stale_evidence_rate": {
+            "mean_a": 0.14,
+            "mean_b": 0.02,
+            "diff_mean": 0.12,
+            "ci_lower": 0.0633,
+            "ci_upper": 0.1767,
+            "p_value_two_sided": 0.0
+          }
+        },
+        "Baseline_B2_vs_RS5_status_filter": {
+          "recall_at_5": {
+            "mean_a": 0.8045,
+            "mean_b": 0.6891,
+            "diff_mean": 0.1154,
+            "ci_lower": 0.0,
+            "ci_upper": 0.2308,
+            "p_value_two_sided": 0.092
+          },
+          "recall_at_10": {
+            "mean_a": 0.875,
+            "mean_b": 0.6891,
+            "diff_mean": 0.1859,
+            "ci_lower": 0.0513,
+            "ci_upper": 0.3271,
+            "p_value_two_sided": 0.008
+          },
+          "ndcg_at_10": {
+            "mean_a": 0.794,
+            "mean_b": 0.6939,
+            "diff_mean": 0.1001,
+            "ci_lower": 0.0264,
+            "ci_upper": 0.1984,
+            "p_value_two_sided": 0.008
+          },
+          "mrr": {
+            "mean_a": 0.784,
+            "mean_b": 0.7244,
+            "diff_mean": 0.0596,
+            "ci_lower": 0.0038,
+            "ci_upper": 0.1538,
+            "p_value_two_sided": 0.038
+          },
+          "hit_rate_at_5": {
+            "mean_a": 0.8846,
+            "mean_b": 0.7692,
+            "diff_mean": 0.1154,
+            "ci_lower": 0.0,
+            "ci_upper": 0.2308,
+            "p_value_two_sided": 0.092
+          },
+          "stale_evidence_rate": {
+            "mean_a": 0.14,
+            "mean_b": 0.1015,
+            "diff_mean": 0.0385,
+            "ci_lower": -0.0259,
+            "ci_upper": 0.1093,
+            "p_value_two_sided": 0.264
+          }
+        },
+        "Lexical_vs_Dense_B1_vs_RS1": {
+          "recall_at_5": {
+            "mean_a": 0.766,
+            "mean_b": 0.6987,
+            "diff_mean": 0.0673,
+            "ci_lower": 0.0,
+            "ci_upper": 0.1635,
+            "p_value_two_sided": 0.06
+          },
+          "recall_at_10": {
+            "mean_a": 0.8462,
+            "mean_b": 0.8077,
+            "diff_mean": 0.0385,
+            "ci_lower": 0.0,
+            "ci_upper": 0.0897,
+            "p_value_two_sided": 0.068
+          },
+          "ndcg_at_10": {
+            "mean_a": 0.7453,
+            "mean_b": 0.6489,
+            "diff_mean": 0.0964,
+            "ci_lower": 0.0476,
+            "ci_upper": 0.1555,
+            "p_value_two_sided": 0.0
+          },
+          "mrr": {
+            "mean_a": 0.7288,
+            "mean_b": 0.588,
+            "diff_mean": 0.1409,
+            "ci_lower": 0.063,
+            "ci_upper": 0.2416,
+            "p_value_two_sided": 0.0
+          },
+          "hit_rate_at_5": {
+            "mean_a": 0.8462,
+            "mean_b": 0.7308,
+            "diff_mean": 0.1154,
+            "ci_lower": 0.0,
+            "ci_upper": 0.2692,
+            "p_value_two_sided": 0.06
+          },
+          "stale_evidence_rate": {
+            "mean_a": 0.15,
+            "mean_b": 0.1233,
+            "diff_mean": 0.0267,
+            "ci_lower": -0.0033,
+            "ci_upper": 0.06,
+            "p_value_two_sided": 0.104
+          }
+        },
+        "Lexical_vs_Dense_B1_vs_RS2": {
+          "recall_at_5": {
+            "mean_a": 0.766,
+            "mean_b": 0.7788,
+            "diff_mean": -0.0128,
+            "ci_lower": -0.0321,
+            "ci_upper": 0.0,
+            "p_value_two_sided": 0.248
+          },
+          "recall_at_10": {
+            "mean_a": 0.8462,
+            "mean_b": 0.8894,
+            "diff_mean": -0.0433,
+            "ci_lower": -0.125,
+            "ci_upper": 0.0,
+            "p_value_two_sided": 0.226
+          },
+          "ndcg_at_10": {
+            "mean_a": 0.7453,
+            "mean_b": 0.7508,
+            "diff_mean": -0.0054,
+            "ci_lower": -0.0423,
+            "ci_upper": 0.0306,
+            "p_value_two_sided": 0.618
+          },
+          "mrr": {
+            "mean_a": 0.7288,
+            "mean_b": 0.7177,
+            "diff_mean": 0.0111,
+            "ci_lower": -0.0171,
+            "ci_upper": 0.0538,
+            "p_value_two_sided": 0.804
+          },
+          "hit_rate_at_5": {
+            "mean_a": 0.8462,
+            "mean_b": 0.8462,
+            "diff_mean": 0.0,
+            "ci_lower": 0.0,
+            "ci_upper": 0.0,
+            "p_value_two_sided": 1.0
+          },
+          "stale_evidence_rate": {
+            "mean_a": 0.15,
+            "mean_b": 0.13,
+            "diff_mean": 0.02,
+            "ci_lower": -0.0034,
+            "ci_upper": 0.05,
+            "p_value_two_sided": 0.118
+          }
+        }
+      }
+    }
+  },
+  "budget_study_E1": {
+    "S_test": {
+      "B1": {
+        "k=5": {
+          "recall_at_k": 0.8256,
+          "ndcg_at_k": 0.7754,
+          "stale_evidence_rate": 0.25
+        },
+        "k=10": {
+          "recall_at_k": 0.8605,
+          "ndcg_at_k": 0.787,
+          "stale_evidence_rate": 0.254
+        },
+        "k=20": {
+          "recall_at_k": 0.9244,
+          "ndcg_at_k": 0.8044,
+          "stale_evidence_rate": 0.1615
+        }
+      },
+      "RS4": {
+        "k=5": {
+          "recall_at_k": 0.0291,
+          "ndcg_at_k": 0.015,
+          "stale_evidence_rate": 0.034
+        },
+        "k=10": {
+          "recall_at_k": 0.1105,
+          "ndcg_at_k": 0.0445,
+          "stale_evidence_rate": 0.046
+        },
+        "k=20": {
+          "recall_at_k": 0.5233,
+          "ndcg_at_k": 0.1571,
+          "stale_evidence_rate": 0.06
+        }
+      },
+      "RS5": {
+        "k=5": {
+          "recall_at_k": 0.6919,
+          "ndcg_at_k": 0.6724,
+          "stale_evidence_rate": 0.152
+        },
+        "k=10": {
+          "recall_at_k": 0.7267,
+          "ndcg_at_k": 0.6839,
+          "stale_evidence_rate": 0.1761
+        },
+        "k=20": {
+          "recall_at_k": 0.7907,
+          "ndcg_at_k": 0.7016,
+          "stale_evidence_rate": 0.1776
+        }
+      },
+      "B3": {
+        "k=5": {
+          "recall_at_k": 0.8256,
+          "ndcg_at_k": 0.7754,
+          "stale_evidence_rate": 0.25
+        },
+        "k=10": {
+          "recall_at_k": 0.8953,
+          "ndcg_at_k": 0.7986,
+          "stale_evidence_rate": 0.255
+        },
+        "k=20": {
+          "recall_at_k": 1.0,
+          "ndcg_at_k": 0.8292,
+          "stale_evidence_rate": 0.177
+        }
+      },
+      "B2": {
+        "k=5": {
+          "recall_at_k": 0.8372,
+          "ndcg_at_k": 0.8372,
+          "stale_evidence_rate": 0.246
+        },
+        "k=10": {
+          "recall_at_k": 0.907,
+          "ndcg_at_k": 0.8589,
+          "stale_evidence_rate": 0.253
+        },
+        "k=20": {
+          "recall_at_k": 1.0,
+          "ndcg_at_k": 0.8866,
+          "stale_evidence_rate": 0.169
+        }
+      }
+    },
+    "R_test": {
+      "B1": {
+        "k=5": {
+          "recall_at_k": 0.766,
+          "ndcg_at_k": 0.7123,
+          "stale_evidence_rate": 0.1733
+        },
+        "k=10": {
+          "recall_at_k": 0.8462,
+          "ndcg_at_k": 0.7453,
+          "stale_evidence_rate": 0.15
+        },
+        "k=20": {
+          "recall_at_k": 0.9119,
+          "ndcg_at_k": 0.7677,
+          "stale_evidence_rate": 0.1061
+        }
+      },
+      "RS4": {
+        "k=5": {
+          "recall_at_k": 0.2404,
+          "ndcg_at_k": 0.1728,
+          "stale_evidence_rate": 0.0267
+        },
+        "k=10": {
+          "recall_at_k": 0.4038,
+          "ndcg_at_k": 0.2394,
+          "stale_evidence_rate": 0.02
+        },
+        "k=20": {
+          "recall_at_k": 0.6058,
+          "ndcg_at_k": 0.3033,
+          "stale_evidence_rate": 0.0395
+        }
+      },
+      "RS5": {
+        "k=5": {
+          "recall_at_k": 0.6891,
+          "ndcg_at_k": 0.6976,
+          "stale_evidence_rate": 0.1033
+        },
+        "k=10": {
+          "recall_at_k": 0.6891,
+          "ndcg_at_k": 0.6939,
+          "stale_evidence_rate": 0.1015
+        },
+        "k=20": {
+          "recall_at_k": 0.6891,
+          "ndcg_at_k": 0.6939,
+          "stale_evidence_rate": 0.1041
+        }
+      },
+      "B3": {
+        "k=5": {
+          "recall_at_k": 0.766,
+          "ndcg_at_k": 0.7149,
+          "stale_evidence_rate": 0.18
+        },
+        "k=10": {
+          "recall_at_k": 0.8846,
+          "ndcg_at_k": 0.7596,
+          "stale_evidence_rate": 0.1433
+        },
+        "k=20": {
+          "recall_at_k": 0.9215,
+          "ndcg_at_k": 0.7764,
+          "stale_evidence_rate": 0.1028
+        }
+      },
+      "B2": {
+        "k=5": {
+          "recall_at_k": 0.8045,
+          "ndcg_at_k": 0.7675,
+          "stale_evidence_rate": 0.1733
+        },
+        "k=10": {
+          "recall_at_k": 0.875,
+          "ndcg_at_k": 0.794,
+          "stale_evidence_rate": 0.14
+        },
+        "k=20": {
+          "recall_at_k": 0.9215,
+          "ndcg_at_k": 0.815,
+          "stale_evidence_rate": 0.1078
+        }
+      }
+    }
+  },
+  "intent_ablation_oracle_vs_rules": {
+    "S_test": {
+      "intent_classification_accuracy": 1.0,
+      "rule_intent_mean_ndcg_at_10": 0.8589,
+      "oracle_intent_mean_ndcg_at_10": 0.8589
+    },
+    "R_test": {
+      "intent_classification_accuracy": 1.0,
+      "rule_intent_mean_ndcg_at_10": 0.794,
+      "oracle_intent_mean_ndcg_at_10": 0.794
+    }
+  }
+}
