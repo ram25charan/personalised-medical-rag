@@ -1,0 +1,122 @@
+{
+  "schema_version": "1.0",
+  "validation": {
+    "valid": true,
+    "row_counts": {
+      "edstays": 222,
+      "diagnosis": 545,
+      "medrecon": 2764,
+      "pyxis": 1082,
+      "triage": 222,
+      "vitalsign": 1038
+    },
+    "unique_patients": 64,
+    "mismatches": {}
+  },
+  "file_sha256": {
+    "edstays": "fc185cb111a70e9dfd8457c6e1da4f9366dee729e072282995dcd7045a5a3c52",
+    "diagnosis": "3a2d6bfb402d5783f1950f4729dd378e825475719f0535fb6b0209c2bc0744e9",
+    "medrecon": "efdab040cede0ef19997d6c5f55f3e8cbaccdfdf7b502fc779420ddcbf47804c",
+    "pyxis": "9019853bc68c0467ee26d3dcedf4d3dcbaa7a01ffb2f819adb99b2072fa84ec0",
+    "triage": "086dadcb49adc5f24bdda0e342ec9cf0fbcb2e9595516c5c101d408434e1e09b",
+    "vitalsign": "89967d8b9dd139d540e9d08270bb6282dd2df0eb7111d38bfe2a79c0b291ab78"
+  },
+  "missing_values": {
+    "edstays": {
+      "hadm_id": 50
+    },
+    "diagnosis": {},
+    "medrecon": {
+      "etccode": 4,
+      "etcdescription": 4
+    },
+    "pyxis": {
+      "gsn": 32
+    },
+    "triage": {
+      "temperature": 26,
+      "heartrate": 24,
+      "resprate": 23,
+      "o2sat": 24,
+      "sbp": 23,
+      "dbp": 23,
+      "pain": 21,
+      "acuity": 15
+    },
+    "vitalsign": {
+      "temperature": 459,
+      "heartrate": 30,
+      "resprate": 48,
+      "o2sat": 67,
+      "sbp": 40,
+      "dbp": 40,
+      "rhythm": 1005,
+      "pain": 302
+    }
+  },
+  "exact_duplicate_rows": {
+    "edstays": 0,
+    "diagnosis": 0,
+    "medrecon": 0,
+    "pyxis": 0,
+    "triage": 0,
+    "vitalsign": 0
+  },
+  "relational_integrity": {
+    "orphan_stays": {
+      "edstays": 0,
+      "diagnosis": 0,
+      "medrecon": 0,
+      "pyxis": 0,
+      "triage": 0,
+      "vitalsign": 0
+    },
+    "orphan_subjects": {
+      "edstays": 0,
+      "diagnosis": 0,
+      "medrecon": 0,
+      "pyxis": 0,
+      "triage": 0,
+      "vitalsign": 0
+    }
+  },
+  "timestamp_checks": {
+    "invalid_intime": 0,
+    "invalid_outtime": 0,
+    "inverted_stay_times": 0,
+    "min_year": 2112,
+    "max_year": 2201
+  },
+  "longitudinal_summary": {
+    "total_patients": 64,
+    "total_stays": 222,
+    "patients_with_2plus_stays": 35,
+    "patients_with_3plus_stays": 24,
+    "max_stays_per_patient": 23,
+    "median_multi_visit_span_days": 828.16,
+    "stays_with_medrecon": 181,
+    "patients_with_2plus_medrecon_visits": 30,
+    "multi_visit_stays_without_medrecon": 27,
+    "patients_with_both_icd9_and_icd10": 14
+  },
+  "outlier_flags": {
+    "triage": {
+      "temperature_outside_85_115F": 1,
+      "heartrate_outside_20_250": 0,
+      "resprate_outside_4_60": 0,
+      "o2sat_outside_50_100": 0,
+      "sbp_outside_40_300": 0,
+      "dbp_outside_20_200": 1
+    },
+    "vitalsign": {
+      "temperature_outside_85_115F": 36,
+      "heartrate_outside_20_250": 0,
+      "resprate_outside_4_60": 0,
+      "o2sat_outside_50_100": 1,
+      "sbp_outside_40_300": 1,
+      "dbp_outside_20_200": 0
+    },
+    "medrecon_gsn_zero": 4,
+    "pyxis_missing_gsn": 32
+  }
+}

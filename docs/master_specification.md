@@ -1141,14 +1141,20 @@ New optional fields may be added without breaking consumers. Renaming or removin
 - License check for demo-corpus sources (MedlinePlus public-domain vs ASHP-copyrighted content).
 - Check of Groq free-tier sample limits.
 - Review of the `temporal-rag` repository as design inspiration (MIT license).
+- **Phase 1 (Foundation and Real-Data Ingestion):**
+  - Repository structure, Git initialization (`main` and `phase-1`), and shared Pydantic schemas (`src/schemas.py`).
+  - Read-only ingestion and quality audit of the 6 MIMIC-IV-ED demo v2.2 tables (`src/data/ingestion.py`, `data/processed/quality_report.json`).
+  - Versioned (`v1.0`) medication and diagnosis normalisation (`src/data/normalisation.py`).
+  - Construction of 5,471 normalised Track R events (`data/processed/events.jsonl`), per-patient relative timelines (`data/processed/timelines.json`), and real-data scenario coverage report (`data/processed/coverage_report.json`, `docs/data_audit_phase1.md`).
+  - Phase 1 `pytest` unit test suite (`tests/test_phase1.py`, 8/8 passing).
 
 ### 15.2 Current Implementation State
 
-Phase 1 in progress.
+Phase 1 is **complete** and verified (`v0.1-phase1`). Ready to start Phase 2 (Synthetic data and benchmark).
 
 ### 15.3 Outstanding Work
 
-Phases 1-6 (Section 11), then STRETCH items if time permits.
+Phases 2-6 (Section 11), then STRETCH items if time permits.
 
 ### 15.4 Known Issues and Blockers
 
@@ -1163,7 +1169,7 @@ Phases 1-6 (Section 11), then STRETCH items if time permits.
 
 ### 15.5 Next Recommended Action
 
-Start **Phase 1**: create the repository and environment; place the ED demo files under `data/raw/` as read-only; implement the Event schema and the ingestion module; produce the data-quality report and the Track R event table.
+Start **Phase 2**: implement the deterministic, seeded synthetic patient generator and template-based question generator with programmatic gold labels; create the versioned concept lexicon and relation table v1; generate Track S and Track R benchmark questions and disjoint patient splits.
 
 ---
 
