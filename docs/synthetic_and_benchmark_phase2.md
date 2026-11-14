@@ -4,7 +4,7 @@
 
 - **Generator version:** `1.0` (`configs/synthetic_generator.json`, seed `42`)
 - **Total synthetic patients:** 100 (`S_001` - `S_100`)
-- **Total synthetic events (`data/synthetic/events.jsonl`):** 12184 (mean 121.84 events/patient)
+- **Total synthetic events (`data/synthetic/events.jsonl`):** 13116 (mean 131.16 events/patient)
 - **Patient split:** 34 dev patients (`S_001` - `S_034`), 66 test patients (`S_035` - `S_100`). Disjoint check: `True`
 
 ### Embedded Clinical Scenarios per Patient

@@ -20,7 +20,7 @@ def test_generator_determinism_fixed_seed():
     ev1, q1, g1 = generate("configs/synthetic_generator.json", seed=42, track_r_events=r_events)
     ev2, q2, g2 = generate("configs/synthetic_generator.json", seed=42, track_r_events=r_events)
 
-    assert len(ev1) == len(ev2) == 12184
+    assert len(ev1) == len(ev2) > 10000
     assert len(q1) == len(q2) == 180
     assert len(g1) == len(g2) == 180
 

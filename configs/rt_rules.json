@@ -1,0 +1,87 @@
+{
+  "version": "1.0",
+  "frozen": true,
+  "description": "Intent-dependent temporal relevance (Rt) scoring rules and keyword-based intent classifier rules (Section 7.3).",
+  "intent_keywords": {
+    "first_occurrence": [
+      "when was",
+      "when did",
+      "first diagnosed",
+      "first recorded",
+      "exact start day",
+      "first occurrence",
+      "earliest recorded"
+    ],
+    "change_over_time": [
+      "how has",
+      "how did",
+      "changed",
+      "change from",
+      "change over time",
+      "newly listed",
+      "added or dropped",
+      "compared with the earlier",
+      "from the earliest to the latest",
+      "initial start to final",
+      "trend"
+    ],
+    "persistent_fact": [
+      "documented",
+      "allergy",
+      "allergic",
+      "recurring",
+      "across multiple visits",
+      "ever had",
+      "chronic history"
+    ],
+    "historical": [
+      "in what chronological order",
+      "chronological order",
+      "before it was stopped",
+      "specify when",
+      "started or stopped"
+    ],
+    "current_state": [
+      "currently",
+      "current status",
+      "current active",
+      "latest",
+      "at the visit ending",
+      "is there any record",
+      "now",
+      "active"
+    ]
+  },
+  "rt_table": {
+    "current_state": {
+      "ACTIVE": 1.0,
+      "LISTED": 1.0,
+      "PERSISTENT": 1.0,
+      "UNKNOWN": 0.5,
+      "SUPERSEDED": 0.2,
+      "ENDED": 0.1,
+      "NOT_LISTED_LATEST": 0.1
+    },
+    "historical": {
+      "OVERLAPS_WINDOW": 1.0,
+      "UNKNOWN": 0.5,
+      "OTHER": 0.1
+    },
+    "change_over_time": {
+      "SERIES_BOUNDARY": 1.0,
+      "SERIES_INTERMEDIATE": 0.7,
+      "OTHER": 0.1
+    },
+    "first_occurrence": {
+      "EARLIEST_ANCHOR": 1.0,
+      "LATER_ANCHOR": 0.3,
+      "OTHER": 0.1
+    },
+    "persistent_fact": {
+      "PERSISTENT": 1.0,
+      "ACTIVE": 0.5,
+      "LISTED": 0.5,
+      "OTHER": 0.2
+    }
+  }
+}

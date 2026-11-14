@@ -1,0 +1,72 @@
+{
+  "version": "1.0",
+  "default_k": 10,
+  "budget_study_k": [5, 10, 20],
+  "dense_model_name": "sentence-transformers/all-MiniLM-L6-v2",
+  "rrf_k": 60,
+  "recency_pool_size": 50,
+  "status_filter_min_rt": 0.2,
+  "insufficient_evidence_tau": 0.35,
+  "systems": {
+    "RS1": {
+      "description": "BM25 lexical retrieval only",
+      "mode": "bm25_only",
+      "annotation": "A0"
+    },
+    "RS2": {
+      "description": "Dense semantic retrieval only (all-MiniLM-L6-v2)",
+      "mode": "dense_only",
+      "annotation": "A0"
+    },
+    "B1": {
+      "description": "Conventional hybrid question-only RAG baseline (RS3 = B1, alpha=1, beta=0, gamma=0)",
+      "mode": "hybrid_rq_only",
+      "annotation": "A0"
+    },
+    "RS3": {
+      "description": "Alias for B1: Hybrid question-only (RRF)",
+      "mode": "hybrid_rq_only",
+      "annotation": "A0"
+    },
+    "RS4": {
+      "description": "Recency-only: take top 50 by Rq, then sort by recency and select top-k",
+      "mode": "recency_only",
+      "annotation": "A0"
+    },
+    "RS5": {
+      "description": "Status-filter-only: drop events whose Rt for the intent is <= 0.2, then rank by Rq",
+      "mode": "status_filter_only",
+      "annotation": "A0"
+    },
+    "B3": {
+      "description": "Question + History relevance (Rq + Rh, gamma=0, per-intent tuned weights)",
+      "mode": "fusion_b3",
+      "annotation": "A0"
+    },
+    "B2": {
+      "description": "Proposed Chronology-Aware Context Fusion (Rq + Rh + Rt, per-intent tuned weights, A2 flags)",
+      "mode": "fusion_b2",
+      "annotation": "A2"
+    },
+    "B1+": {
+      "description": "B1 selection with A2 status, conflict, and uncertainty annotations",
+      "mode": "hybrid_rq_only",
+      "annotation": "A2"
+    },
+    "B2-": {
+      "description": "B2 selection with A0 (events only, no status or flag annotations)",
+      "mode": "fusion_b2",
+      "annotation": "A0"
+    },
+    "B4": {
+      "description": "B2 selection with A1 (status annotations only, no conflict/uncertainty flags)",
+      "mode": "fusion_b2",
+      "annotation": "A1"
+    },
+    "ORACLE": {
+      "description": "Gold events upper bound",
+      "mode": "oracle",
+      "annotation": "A2"
+    }
+  }
+}
