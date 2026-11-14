@@ -28,6 +28,63 @@ def _fmt_ci(m_dict: dict[str, Any]) -> str:
     return f"{mean:.4f} [{lo:.4f}, {hi:.4f}]"
 
 
+def _classify_error_cause(rec: dict[str, Any]) -> str:
+    m = rec.get("metrics", {})
+    if float(m.get("answer_correctness", 0.0)) >= 0.99:
+        return "correct"
+    if float(m.get("recall_at_10", 1.0)) < 0.99:
+        return "retrieval_miss_at_k10"
+    if float(m.get("contradiction_rate", 0.0)) > 0.0:
+        return "stale_or_superseded_state_confusion"
+    if float(m.get("abstention_accuracy", 1.0)) < 0.99:
+        return "abstention_or_hallucination_error"
+    return "partial_set_or_value_extraction_error"
+
+
+def _append_failure_analysis(
+    lines: list[str],
+    runs_jsonl_path: str | Path,
+    model_label: str,
+) -> None:
+    r_path = Path(runs_jsonl_path)
+    if not r_path.exists():
+        return
+    records = [
+        json.loads(line)
+        for line in r_path.read_text(encoding="utf-8").splitlines()
+        if line.strip()
+    ]
+    if not records:
+        return
+
+    lines.append(f"## Failure Taxonomy & Root-Cause Error Analysis (`{model_label}`, Section 8.9)")
+    lines.append("")
+    for track_code, track_name in [("S", "Track S Test"), ("R", "Track R Real-Data Test")]:
+        t_recs = [r for r in records if r.get("track") == track_code]
+        if not t_recs:
+            continue
+        lines.append(f"### {track_name} (`{model_label}`) Error Breakdown (`answer_correctness < 1.0`)")
+        lines.append("")
+        lines.append(
+            "| System | Total Questions | Total Errors | Retrieval Miss at k=10 | Stale/Superseded State Confusion | Abstention / Hallucination Error | Partial Set / Value Extraction |"
+        )
+        lines.append("|---|---:|---:|---:|---:|---:|---:|")
+        for sys_id in ["B1", "B1+", "B2-", "B4", "B2", "ORACLE"]:
+            s_recs = [r for r in t_recs if r.get("system_id") == sys_id]
+            if not s_recs:
+                continue
+            causes = [_classify_error_cause(r) for r in s_recs]
+            n_err = sum(1 for c in causes if c != "correct")
+            n_ret = sum(1 for c in causes if c == "retrieval_miss_at_k10")
+            n_stale = sum(1 for c in causes if c == "stale_or_superseded_state_confusion")
+            n_abs = sum(1 for c in causes if c == "abstention_or_hallucination_error")
+            n_ext = sum(1 for c in causes if c == "partial_set_or_value_extraction_error")
+            lines.append(
+                f"| **{sys_id}** | {len(s_recs)} | {n_err} | {n_ret} | {n_stale} | {n_abs} | {n_ext} |"
+            )
+        lines.append("")
+
+
 def _fmt_diff(d_dict: dict[str, Any]) -> str:
     if not d_dict:
         return "+0.0000"
@@ -40,7 +97,7 @@ def _fmt_diff(d_dict: dict[str, Any]) -> str:
 
 def generate_markdown_report(
     primary_metrics_path: str | Path = "results/metrics/generation_metrics.json",
-    secondary_metrics_path: str | Path = "results/metrics/generation_metrics_secondary.json",
+    secondary_metrics_path: str | Path = "results/metrics/generation_metrics_gemini.json",
     manual_review_path: str | Path = "results/metrics/manual_review_20.json",
     output_md_path: str | Path = "docs/generation_evaluation_phase4.md",
 ) -> None:
@@ -246,6 +303,18 @@ def generate_markdown_report(
             )
         lines.append("")
 
+    # Root-cause failure taxonomy (Section 8.9)
+    _append_failure_analysis(
+        lines,
+        "results/outputs/generation_runs.jsonl",
+        str(report.get("model_id", "openai/gpt-oss-120b")),
+    )
+    _append_failure_analysis(
+        lines,
+        "results/outputs/generation_runs_gemini.jsonl",
+        "gemini-flash-lite-latest",
+    )
+
     out_path = Path(output_md_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text("\n".join(lines), encoding="utf-8")
@@ -256,7 +325,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Compare generation runs and build Phase 4 report.")
     parser.add_argument("--primary", type=str, default="results/metrics/generation_metrics.json")
     parser.add_argument(
-        "--secondary", type=str, default="results/metrics/generation_metrics_secondary.json"
+        "--secondary", type=str, default="results/metrics/generation_metrics_gemini.json"
     )
     parser.add_argument("--manual-review", type=str, default="results/metrics/manual_review_20.json")
     parser.add_argument("--output", type=str, default="docs/generation_evaluation_phase4.md")

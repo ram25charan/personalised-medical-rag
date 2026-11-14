@@ -146,3 +146,39 @@
 | `Q_S_0068` | `irrelevant_history` | `PERSISTENT` | 1.00 | 1.00 | 1.00 | 1.00 |
 | `Q_S_0067` | `longitudinal_change` | `[8.4, 2.2]` | 1.00 | 1.00 | 1.00 | 1.00 |
 | `Q_S_0069` | `missing_or_ambiguous_dates` | `2022-06` | 1.00 | 1.00 | 1.00 | 1.00 |
+
+## Failure Taxonomy & Root-Cause Error Analysis (`openai/gpt-oss-120b`, Section 8.9)
+
+### Track S Test (`openai/gpt-oss-120b`) Error Breakdown (`answer_correctness < 1.0`)
+
+| System | Total Questions | Total Errors | Retrieval Miss at k=10 | Stale/Superseded State Confusion | Abstention / Hallucination Error | Partial Set / Value Extraction |
+|---|---:|---:|---:|---:|---:|---:|
+| **B1** | 100 | 20 | 12 | 4 | 0 | 4 |
+| **B1+** | 100 | 12 | 12 | 0 | 0 | 0 |
+| **B2-** | 100 | 17 | 10 | 4 | 0 | 3 |
+| **B4** | 100 | 10 | 10 | 0 | 0 | 0 |
+| **B2** | 100 | 10 | 10 | 0 | 0 | 0 |
+
+## Failure Taxonomy & Root-Cause Error Analysis (`gemini-flash-lite-latest`, Section 8.9)
+
+### Track S Test (`gemini-flash-lite-latest`) Error Breakdown (`answer_correctness < 1.0`)
+
+| System | Total Questions | Total Errors | Retrieval Miss at k=10 | Stale/Superseded State Confusion | Abstention / Hallucination Error | Partial Set / Value Extraction |
+|---|---:|---:|---:|---:|---:|---:|
+| **B1** | 100 | 15 | 15 | 0 | 0 | 0 |
+| **B1+** | 100 | 12 | 12 | 0 | 0 | 0 |
+| **B2-** | 100 | 14 | 13 | 0 | 0 | 1 |
+| **B4** | 100 | 11 | 11 | 0 | 0 | 0 |
+| **B2** | 100 | 10 | 10 | 0 | 0 | 0 |
+| **ORACLE** | 100 | 0 | 0 | 0 | 0 | 0 |
+
+### Track R Real-Data Test (`gemini-flash-lite-latest`) Error Breakdown (`answer_correctness < 1.0`)
+
+| System | Total Questions | Total Errors | Retrieval Miss at k=10 | Stale/Superseded State Confusion | Abstention / Hallucination Error | Partial Set / Value Extraction |
+|---|---:|---:|---:|---:|---:|---:|
+| **B1** | 30 | 10 | 9 | 0 | 1 | 0 |
+| **B1+** | 30 | 8 | 8 | 0 | 0 | 0 |
+| **B2-** | 30 | 9 | 8 | 0 | 1 | 0 |
+| **B4** | 30 | 8 | 8 | 0 | 0 | 0 |
+| **B2** | 30 | 7 | 7 | 0 | 0 | 0 |
+| **ORACLE** | 30 | 1 | 0 | 1 | 0 | 0 |

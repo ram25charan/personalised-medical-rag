@@ -1114,11 +1114,11 @@ New optional fields may be added without breaking consumers. Renaming or removin
 
 | ID | Open item | Decide |
 |---|---|---|
-| DF1 | Exact Groq model ID and its limits | Phase 4, after checking the console limits page |
+| DF1 | Exact Groq model ID and its limits | Decided in Phase 4: `openai/gpt-oss-120b` (`reasoning_effort = "low"`, `temperature = 0.0`) as primary Groq model; `gemini-flash-lite-latest` (`temperature = 0.0`) as secondary generator model |
 | DF2 | Project deadline and calendar schedule (none fixed) | When known; update Section 11 |
-| DF3 | Whether to attempt STRETCH items (Track P, second generator, B0 on short histories, learned ranker, clinician summary) | After Phase 3 |
+| DF3 | Whether to attempt STRETCH items (Track P, second generator, B0 on short histories, learned ranker, clinician summary) | Second generator (`gemini-flash-lite-latest`) completed in Phase 4 |
 | DF4 | Final paper venue and template details | Phase 6 (IEEE format assumed) |
-| DF5 | Whether Track R may be sent to Groq (license / terms check) | Before Phase 4 |
+| DF5 | Whether Track R may be sent to Groq (license / terms check) | Confirmed in Phase 4 (MIMIC-IV-ED demo v2.2 is open-access under ODC-By v1.0; only relative day offsets and de-identified events used) |
 | DF6 | Final sizes (patients, questions) | Decided in Phase 2: 100 synthetic patients (34 dev / 66 test; 13,116 events), 50 Track S dev questions, 100 Track S test questions, and 30 Track R test questions (180 total) |
 | DF7 | Novelty wording: read EHR-RAG (Cao et al., 2026) fully and verify the abstract of reference 4 | Before writing the paper |
 
@@ -1131,6 +1131,7 @@ New optional fields may be added without breaking consumers. Renaming or removin
 | 2026-11-14 | 1.0.2 | Resolved DF6 in Phase 2: fixed synthetic dataset at 100 patients (34 dev, 66 test; 13,116 events total) and benchmark at 50 Track S dev, 100 Track S test, and 30 Track R test questions; froze `configs/relation_table.json` v1.0. |
 | 2026-11-15 | 1.0.3 | Completed Phase 3: froze per-intent weights in `configs/weights.json` (tuned on Track S dev only) and `insufficient_evidence_tau = 0.15`; completed retrieval-level evaluation across Track S and Track R with 1,000-resample paired bootstrap confidence intervals. |
 | 2026-11-15 | 1.0.4 | Updated TD1 before Phase 4: added support for 4 API keys (`GROQ_API_KEY_1`, `GROQ_API_KEY_2`, `GEMINI_API_KEY_1`, `GEMINI_API_KEY_2`) with intra-provider key rotation on rate limits/errors for experiments, Gemini Flash as the second generator model (STRETCH) and live demo provider option, while strictly keeping each experimental table pinned to a single model ID. |
+| 2026-11-15 | 1.0.5 | Completed Phase 4: resolved DF1 and DF5 (`openai/gpt-oss-120b` with `reasoning_effort = "low"` for Groq; `gemini-flash-lite-latest` for Gemini Flash); froze prompt template `v1.0`; evaluated all 6 generation systems (`B1`, `B2`, `B1+`, `B2-`, `B4`, `ORACLE`) on `S_test` (100 questions) and `R_test` (30 questions) across both generators with 1,000-resample paired bootstrap CIs, $2 \times 2$ factorial decomposition (`E3`), per-category breakdowns (`E4`), 20-response stratified manual review, and Section 8.9 failure taxonomy. |
 
 ---
 
@@ -1152,7 +1153,7 @@ New optional fields may be added without breaking consumers. Renaming or removin
   - Phase 1 `pytest` unit test suite (`tests/test_phase1.py`, 8/8 passing).
 - **Phase 2 (Synthetic Data and Benchmark):**
   - Frozen clinical concept relation table and lexicon v1.0 (`configs/relation_table.json`).
-  - Deterministic, seeded synthetic longitudinal patient generator (`src/synthetic/generator.py`, `configs/synthetic_generator.json`) producing 100 patients (`S_001`–`S_100`) and 12,184 events (`data/synthetic/events.jsonl`).
+  - Deterministic, seeded synthetic longitudinal patient generator (`src/synthetic/generator.py`, `configs/synthetic_generator.json`) producing 100 patients (`S_001`–`S_100`) and 13,116 events (`data/synthetic/events.jsonl`).
   - Template-based benchmark question and programmatic gold generator (`src/synthetic/question_generator.py`) producing 180 questions (`data/benchmark/questions.jsonl`, `data/benchmark/gold.jsonl`: 50 Track S dev, 100 Track S test, 30 Track R test).
   - Generator documentation (`docs/synthetic_and_benchmark_phase2.md`, `data/benchmark/benchmark_summary.json`) and Phase 2 unit tests (`tests/test_phase2.py`, 13/13 total tests passing).
 - **Phase 3 (Retrieval, Scoring, Fusion, and Retrieval-Level Evaluation):**
@@ -1160,29 +1161,31 @@ New optional fields may be added without breaking consumers. Renaming or removin
   - BM25 + Dense (`all-MiniLM-L6-v2`) + RRF retrieval (`src/retrieval/`), chronology-aware fusion (`src/fusion/`), conflict and uncertainty flags (`src/flags/`), and unified pipeline (`src/pipeline.py`).
   - Dev-set per-intent weight tuning (`experiments/tune_weights.py`, `configs/weights.json`) and full retrieval evaluation of `RS1`–`RS5`, `B1`, `B3`, `B2`, and `ORACLE` with 1,000-resample paired bootstrap CIs, budget study ($k \in \{5, 10, 20\}$), and intent ablation (`experiments/run_retrieval.py`, `results/metrics/retrieval_metrics.json`, `docs/retrieval_evaluation_phase3.md`).
   - Phase 3 unit test suite (`tests/test_phase3.py`, 21/21 total tests passing).
+- **Phase 4 (Conflict/Uncertainty Handling, LLM Generation, and Generation-Level Evaluation):**
+  - Frozen structured JSON prompt template `v1.0` (`src/generation/prompts.py`), disk-backed SHA-256 prompt cache (`src/generation/cache.py`), and 4-key LLM client (`src/generation/groq_client.py`) with automatic intra-provider key rotation (`groq-1 <-> groq-2`, `gemini-1 <-> gemini-2`) and `[E#]` -> `event_id` citation mapping.
+  - Deterministic answer-level evaluation metrics (`src/evaluation/answer_metrics.py`), resumable priority-ordered benchmark runner (`src/evaluation/runner.py`, `experiments/run_generation.py`), and comprehensive comparison report generator (`experiments/compare.py`, `docs/generation_evaluation_phase4.md`).
+  - Full 6-system evaluation (`B1`, `B2`, `B1+`, `B2-`, `B4`, `ORACLE`) on `S_test` (100 questions) and `R_test` (30 questions) across both **Groq (`openai/gpt-oss-120b`)** (`results/metrics/generation_metrics.json`) and **Gemini Flash (`gemini-flash-lite-latest`)** (`results/metrics/generation_metrics_gemini.json`), including paired bootstrap hypothesis tests (`H1/H2`, `H3`), $2 \times 2$ Selection $\times$ Annotation factorial (`E3`), per-category breakdowns (`E4`), 20-response stratified manual review (`results/metrics/manual_review_20.json`), and Section 8.9 failure taxonomy.
+  - Phase 4 unit test suite (`tests/test_phase4.py`, 27/27 total tests passing).
 
 ### 15.2 Current Implementation State
 
-Phases 1, 2, and 3 are **complete** and verified (`v0.3-phase3`). Ready to start Phase 4 (LLM generation and generation-level evaluation) or Phase 5 (Demo corpus and Streamlit application).
+Phases 1, 2, 3, and 4 are **complete** and verified (`v0.4-phase4`). Ready to start Phase 5 (Demo clinical corpus and single-page Streamlit application).
 
 ### 15.3 Outstanding Work
 
-Phases 4-6 (Section 11), then STRETCH items if time permits.
+Phases 5 and 6 (Section 11).
 
 ### 15.4 Known Issues and Blockers
 
-- The MIMIC-IV clinical demo (labs, prescriptions) could not be downloaded (PhysioNet login failed); the project proceeds with the ED demo plus synthetic data. A `wget` download may still work, but is optional.
+- The MIMIC-IV clinical demo (labs, prescriptions) could not be downloaded (PhysioNet login failed); the project proceeds with the ED demo plus synthetic data.
 - No deadline fixed (DF2).
-- Groq model ID not chosen (DF1); free-tier limits may force multi-day generation runs.
-- License / terms confirmation for sending Track R rows to Groq and for releasing derived data (DF5, 6.9).
 - Reference 4 (Najafabadipour 2020): abstract not yet reviewed.
 - EHR-RAG (Cao et al., 2026) is close related work and must be read fully before novelty is discussed.
-- The `ClinQuery` and `EHR-QA-Skill` repositories were not reviewed.
-- Track R is small and its labels are weak by construction.
+- Track R is small (30 test questions) and its labels are weak by construction.
 
 ### 15.5 Next Recommended Action
 
-Start **Phase 4** (Prompts, Groq client with caching and rate-limit handling, generation-level configurations `B1`, `B2`, `B1+`, `B2-`, `B4`, `ORACLE-G`, and deterministic answer metrics) or **Phase 5** (Demo clinical corpus and single-page Streamlit application).
+Start **Phase 5** (Demo clinical corpus `data/corpus/demo_corpus.jsonl`, corpus retrieval `src/retrieval/corpus_retrieval.py`, and single-page Streamlit application `app/main.py`).
 
 ---
 
