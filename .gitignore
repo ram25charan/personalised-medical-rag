@@ -1,0 +1,24 @@
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Python virtual environment and caches
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Raw data (never committed per Section 10.8)
+data/raw/
+
+# IDE and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

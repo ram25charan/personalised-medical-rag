@@ -1,0 +1,22 @@
+# Core data & scientific stack
+numpy>=2.1.0
+pandas>=2.2.3
+pyarrow>=18.0.0
+pydantic>=2.10.0
+python-dotenv>=1.0.1
+
+# Retrieval & embeddings (Phase 3+)
+rank-bm25>=0.2.2
+scikit-learn>=1.5.2
+sentence-transformers>=3.3.0
+
+# LLM generation (Phase 4+)
+groq>=0.13.0
+requests>=2.32.0
+
+# Demo UI & visualization (Phase 5+)
+streamlit>=1.40.0
+plotly>=5.24.0
+
+# Testing
+pytest>=8.3.0
