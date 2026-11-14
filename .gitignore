@@ -14,8 +14,9 @@ __pycache__/
 .coverage
 htmlcov/
 
-# Raw data (never committed per Section 10.8)
+# Raw data and local LLM disk cache (never committed per Section 10.8)
 data/raw/
+results/cache/
 
 # IDE and OS files
 .vscode/

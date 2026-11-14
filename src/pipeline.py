@@ -230,7 +230,30 @@ def run_retrieval_stage(
         raise ValueError(f"Unknown retrieval mode: {mode}")
 
     # 8. Conflict & Uncertainty Flag Detection
-    conflicts, prov_notes = detect_conflicts(selected_ranked_ids, pool, as_of_date)
+    # Restrict C1-C3 and U1-U4 flag attachment to concepts directly queried by the question
+    # (expanding condition anchors to related medications when the question asks about medications/treatment)
+    # so unrelated spillover events in top-k do not trigger false conflict/uncertainty warnings.
+    q_anchor_set = {a.lower().strip() for a in question_only_anchors if a.strip()}
+    if q_anchor_set:
+        relevant_concepts = set(q_anchor_set)
+        concepts_map = rel_tbl.get("concepts", {})
+        q_low = question_text.lower()
+        asks_meds_or_tx = any(w in q_low for w in ["medication", "medications", "prescribed", "taking", "treat", "treating", "dose", "dosage"])
+        for anc in q_anchor_set:
+            spec = concepts_map.get(anc, {})
+            is_cond = any(
+                e.concept.lower().strip() == anc and e.event_type in {"condition", "diagnosis_at_visit"}
+                for e in pool
+            )
+            if is_cond and asks_meds_or_tx:
+                for rel_c in spec.get("related_concepts", []):
+                    relevant_concepts.add(rel_c.lower().strip())
+    else:
+        relevant_concepts = set()
+
+    conflicts, prov_notes = detect_conflicts(
+        selected_ranked_ids, pool, as_of_date, relevant_concepts=q_anchor_set
+    )
     u_flags, insuff_ev = uncertainty_flags(
         selected_ranked_ids,
         pool,
@@ -238,7 +261,11 @@ def run_retrieval_stage(
         question_only_anchors,
         tau=tau,
         question_text=question_text,
+        relevant_concepts=relevant_concepts,
     )
+    if insuff_ev:
+        conflicts = []
+        u_flags = []
     flags_container = FlagsContainer(
         conflicts=conflicts,
         uncertainty=u_flags,
@@ -340,4 +367,19 @@ def run_pipeline(
     )
 
     ans_json: Optional[AnswerJSON] = None
+    if generate_answer:
+        from src.generation.groq_client import generate
+
+        gen_cfg = {
+            "provider": cfg_dict.get("provider", "groq"),
+            "model_id": cfg_dict.get("model_id"),
+            "patient_id": patient_id,
+            "question_text": question,
+            "as_of_date": as_of_date,
+            "window_start": window_start,
+            "preferred_key_label": cfg_dict.get("preferred_key_label"),
+            "allow_cross_provider_fallback": cfg_dict.get("allow_cross_provider_fallback", False),
+        }
+        ans_json = generate(pipe_out.context_text, gen_cfg)
+
     return pipe_out, ans_json

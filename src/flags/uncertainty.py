@@ -23,10 +23,19 @@ def uncertainty_flags(
     question_anchors: list[str],
     tau: float = 0.35,
     question_text: Optional[str] = None,
+    relevant_concepts: Optional[set[str]] = None,
 ) -> tuple[list[UncertaintyFlag], bool]:
     """Compute U1-U4 flags on selected events and U5 (`insufficient_evidence`) (Sections 7.6, 12.2)."""
     ev_by_id = {e.event_id: e for e in candidate_events}
-    selected_evs = [ev_by_id[eid] for eid in selected_event_ids if eid in ev_by_id]
+    selected_evs = [
+        ev_by_id[eid]
+        for eid in selected_event_ids
+        if eid in ev_by_id
+        and (
+            relevant_concepts is None
+            or ev_by_id[eid].concept.lower().strip() in relevant_concepts
+        )
+    ]
 
     u1_ids: list[str] = []
     u2_ids: list[str] = []

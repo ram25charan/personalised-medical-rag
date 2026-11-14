@@ -67,6 +67,11 @@
       "description": "Gold events upper bound",
       "mode": "oracle",
       "annotation": "A2"
+    },
+    "ORACLE-G": {
+      "description": "Gold events upper bound for generation (alias for ORACLE)",
+      "mode": "oracle",
+      "annotation": "A2"
     }
   }
 }

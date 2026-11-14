@@ -1,0 +1,2224 @@
+{
+  "sample_size": 20,
+  "description": "Stratified 20-question manual review sample across all 7 categories (Section 8.6).",
+  "items": [
+    {
+      "question_id": "Q_S_0056",
+      "patient_id": "S_040",
+      "category": "conflicting_information",
+      "intent": "current_state",
+      "question_text": "What is the patient's current status and dosage for apixaban as of 2024-06-08?",
+      "as_of_date": "2024-06-08",
+      "gold_events": [
+        "S_040_0117",
+        "S_040_0119"
+      ],
+      "expected_answer": {
+        "type": "set",
+        "value": [
+          "ACTIVE",
+          "ENDED"
+        ]
+      },
+      "expected_behavior": "flag_conflict",
+      "B1": {
+        "selected_event_ids": [
+          "S_040_0117",
+          "S_040_0119",
+          "S_040_0077",
+          "S_040_0024",
+          "S_040_0136",
+          "S_040_0082",
+          "S_040_0039",
+          "S_040_0048",
+          "S_040_0100",
+          "S_040_0130"
+        ],
+        "parsed_answer": {
+          "answer_text": "The patient has conflicting records for apixaban: one order indicates it is ACTIVE and ongoing (E7), while an external reconciliation notes it was discontinued on 2023-03-14 (E8).",
+          "status_claims": [
+            {
+              "concept": "apixaban",
+              "status": "ACTIVE"
+            },
+            {
+              "concept": "apixaban",
+              "status": "ENDED"
+            }
+          ],
+          "cited_event_ids": [
+            "S_040_0117",
+            "S_040_0119"
+          ],
+          "abstain": false,
+          "conflict_flagged": true,
+          "uncertainty_noted": true
+        },
+        "metrics": {
+          "recall_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "recall_at_k": 1.0,
+          "ndcg_at_10": 1.0,
+          "ndcg_at_k": 1.0,
+          "mrr": 1.0,
+          "hit_rate_at_5": 1.0,
+          "stale_evidence_rate": 0.0,
+          "answer_correctness": 1.0,
+          "temporal_consistency": 1.0,
+          "contradiction_rate": 0.0,
+          "citation_precision": 1.0,
+          "citation_recall": 1.0,
+          "citation_f1": 1.0,
+          "abstention_accuracy": 1.0,
+          "conflict_flag_accuracy": 1.0,
+          "uncertainty_noted_accuracy": 1.0,
+          "grounded_faithfulness": 1.0
+        }
+      },
+      "B2": {
+        "selected_event_ids": [
+          "S_040_0117",
+          "S_040_0119",
+          "S_040_0077",
+          "S_040_0024",
+          "S_040_0136",
+          "S_040_0082",
+          "S_040_0100",
+          "S_040_0130",
+          "S_040_0156",
+          "S_040_0161"
+        ],
+        "parsed_answer": {
+          "answer_text": "The patient has conflicting records for apixaban: one shows it ACTIVE (dose 5 mg daily) and another shows it ENDED on 2023-03-14.",
+          "status_claims": [
+            {
+              "concept": "apixaban",
+              "status": "ACTIVE"
+            },
+            {
+              "concept": "apixaban",
+              "status": "ENDED"
+            }
+          ],
+          "cited_event_ids": [
+            "S_040_0117",
+            "S_040_0119"
+          ],
+          "abstain": false,
+          "conflict_flagged": true,
+          "uncertainty_noted": true
+        },
+        "metrics": {
+          "recall_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "recall_at_k": 1.0,
+          "ndcg_at_10": 1.0,
+          "ndcg_at_k": 1.0,
+          "mrr": 1.0,
+          "hit_rate_at_5": 1.0,
+          "stale_evidence_rate": 0.0,
+          "answer_correctness": 1.0,
+          "temporal_consistency": 1.0,
+          "contradiction_rate": 0.0,
+          "citation_precision": 1.0,
+          "citation_recall": 1.0,
+          "citation_f1": 1.0,
+          "abstention_accuracy": 1.0,
+          "conflict_flag_accuracy": 1.0,
+          "uncertainty_noted_accuracy": 1.0,
+          "grounded_faithfulness": 1.0
+        }
+      }
+    },
+    {
+      "question_id": "Q_S_0052",
+      "patient_id": "S_036",
+      "category": "current_vs_historical",
+      "intent": "current_state",
+      "question_text": "Is the patient currently taking lisinopril as of 2024-06-22, or has it been discontinued?",
+      "as_of_date": "2024-06-22",
+      "gold_events": [
+        "S_036_0045"
+      ],
+      "expected_answer": {
+        "type": "status",
+        "value": "ENDED"
+      },
+      "expected_behavior": "answer",
+      "B1": {
+        "selected_event_ids": [
+          "S_036_0045",
+          "S_036_0008",
+          "S_036_0017",
+          "S_036_0028",
+          "S_036_0012",
+          "S_036_0023",
+          "S_036_0039",
+          "S_036_0072",
+          "S_036_0032",
+          "S_036_0073"
+        ],
+        "parsed_answer": {
+          "answer_text": "The patient is currently taking lisinopril (20 mg daily) as of 2024-06-22, based on the dose change record that increased the dose and did not indicate a discontinuation of the new dose.",
+          "status_claims": [
+            {
+              "concept": "lisinopril",
+              "status": "ACTIVE"
+            }
+          ],
+          "cited_event_ids": [
+            "S_036_0045"
+          ],
+          "abstain": false,
+          "conflict_flagged": false,
+          "uncertainty_noted": false
+        },
+        "metrics": {
+          "recall_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "recall_at_k": 1.0,
+          "ndcg_at_10": 1.0,
+          "ndcg_at_k": 1.0,
+          "mrr": 1.0,
+          "hit_rate_at_5": 1.0,
+          "stale_evidence_rate": 0.7,
+          "answer_correctness": 0.0,
+          "temporal_consistency": 0.0,
+          "contradiction_rate": 1.0,
+          "citation_precision": 1.0,
+          "citation_recall": 1.0,
+          "citation_f1": 1.0,
+          "abstention_accuracy": 1.0,
+          "conflict_flag_accuracy": 1.0,
+          "uncertainty_noted_accuracy": 1.0,
+          "grounded_faithfulness": 1.0
+        }
+      },
+      "B2": {
+        "selected_event_ids": [
+          "S_036_0045",
+          "S_036_0008",
+          "S_036_0017",
+          "S_036_0028",
+          "S_036_0012",
+          "S_036_0023",
+          "S_036_0039",
+          "S_036_0032",
+          "S_036_0072",
+          "S_036_0001"
+        ],
+        "parsed_answer": {
+          "answer_text": "Lisinopril was discontinued on 2022-08-24; the patient is not currently taking it as of 2024-06-22 (latest record E9 shows ENDED).",
+          "status_claims": [
+            {
+              "concept": "lisinopril",
+              "status": "ENDED"
+            }
+          ],
+          "cited_event_ids": [
+            "S_036_0045"
+          ],
+          "abstain": false,
+          "conflict_flagged": false,
+          "uncertainty_noted": false
+        },
+        "metrics": {
+          "recall_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "recall_at_k": 1.0,
+          "ndcg_at_10": 1.0,
+          "ndcg_at_k": 1.0,
+          "mrr": 1.0,
+          "hit_rate_at_5": 1.0,
+          "stale_evidence_rate": 0.7,
+          "answer_correctness": 1.0,
+          "temporal_consistency": 1.0,
+          "contradiction_rate": 0.0,
+          "citation_precision": 1.0,
+          "citation_recall": 1.0,
+          "citation_f1": 1.0,
+          "abstention_accuracy": 1.0,
+          "conflict_flag_accuracy": 1.0,
+          "uncertainty_noted_accuracy": 1.0,
+          "grounded_faithfulness": 1.0
+        }
+      }
+    },
+    {
+      "question_id": "Q_S_0057",
+      "patient_id": "S_041",
+      "category": "insufficient_evidence",
+      "intent": "current_state",
+      "question_text": "Is the patient currently taking lithium carbonate as of 2024-08-28?",
+      "as_of_date": "2024-08-28",
+      "gold_events": [],
+      "expected_answer": {
+        "type": "none",
+        "value": null
+      },
+      "expected_behavior": "abstain",
+      "B1": {
+        "selected_event_ids": [
+          "S_041_0010",
+          "S_041_0073",
+          "S_041_0056",
+          "S_041_0115",
+          "S_041_0114",
+          "S_041_0146",
+          "S_041_0131",
+          "S_041_0149",
+          "S_041_0071",
+          "S_041_0009"
+        ],
+        "parsed_answer": {
+          "answer_text": "No record of lithium carbonate prescription or use is found up to 2024-08-28.",
+          "status_claims": [],
+          "cited_event_ids": [],
+          "abstain": true,
+          "conflict_flagged": false,
+          "uncertainty_noted": false
+        },
+        "metrics": {
+          "recall_at_5": 0.0,
+          "recall_at_10": 0.0,
+          "recall_at_k": 0.0,
+          "ndcg_at_10": 0.0,
+          "ndcg_at_k": 0.0,
+          "mrr": 0.0,
+          "hit_rate_at_5": 0.0,
+          "stale_evidence_rate": 0.0,
+          "answer_correctness": 1.0,
+          "temporal_consistency": 1.0,
+          "contradiction_rate": 0.0,
+          "citation_precision": 1.0,
+          "citation_recall": 1.0,
+          "citation_f1": 1.0,
+          "abstention_accuracy": 1.0,
+          "conflict_flag_accuracy": 1.0,
+          "uncertainty_noted_accuracy": 0.0,
+          "grounded_faithfulness": 1.0
+        }
+      },
+      "B2": {
+        "selected_event_ids": [
+          "S_041_0010",
+          "S_041_0073",
+          "S_041_0056",
+          "S_041_0115",
+          "S_041_0114",
+          "S_041_0131",
+          "S_041_0146",
+          "S_041_0149",
+          "S_041_0071",
+          "S_041_0009"
+        ],
+        "parsed_answer": {
+          "answer_text": "No evidence found regarding lithium carbonate usage for the patient as of 2024-08-28.",
+          "status_claims": [],
+          "cited_event_ids": [],
+          "abstain": true,
+          "conflict_flagged": false,
+          "uncertainty_noted": false
+        },
+        "metrics": {
+          "recall_at_5": 0.0,
+          "recall_at_10": 0.0,
+          "recall_at_k": 0.0,
+          "ndcg_at_10": 0.0,
+          "ndcg_at_k": 0.0,
+          "mrr": 0.0,
+          "hit_rate_at_5": 0.0,
+          "stale_evidence_rate": 0.0,
+          "answer_correctness": 1.0,
+          "temporal_consistency": 1.0,
+          "contradiction_rate": 0.0,
+          "citation_precision": 1.0,
+          "citation_recall": 1.0,
+          "citation_f1": 1.0,
+          "abstention_accuracy": 1.0,
+          "conflict_flag_accuracy": 1.0,
+          "uncertainty_noted_accuracy": 0.0,
+          "grounded_faithfulness": 1.0
+        }
+      }
+    },
+    {
+      "question_id": "Q_S_0054",
+      "patient_id": "S_038",
+      "category": "irrelevant_history",
+      "intent": "persistent_fact",
+      "question_text": "Does the patient have a documented latex allergy in their record?",
+      "as_of_date": "2024-09-19",
+      "gold_events": [
+        "S_038_0002"
+      ],
+      "expected_answer": {
+        "type": "status",
+        "value": "PERSISTENT"
+      },
+      "expected_behavior": "answer",
+      "B1": {
+        "selected_event_ids": [
+          "S_038_0002",
+          "S_038_0001",
+          "S_038_0007",
+          "S_038_0020",
+          "S_038_0031",
+          "S_038_0009",
+          "S_038_0019",
+          "S_038_0028",
+          "S_038_0017",
+          "S_038_0004"
+        ],
+        "parsed_answer": {
+          "answer_text": "The record shows a documented latex allergy (reaction: contact urticaria) recorded on 2021-04-12.",
+          "status_claims": [
+            {
+              "concept": "latex allergy",
+              "status": "ACTIVE"
+            }
+          ],
+          "cited_event_ids": [
+            "S_038_0002"
+          ],
+          "abstain": false,
+          "conflict_flagged": false,
+          "uncertainty_noted": false
+        },
+        "metrics": {
+          "recall_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "recall_at_k": 1.0,
+          "ndcg_at_10": 1.0,
+          "ndcg_at_k": 1.0,
+          "mrr": 1.0,
+          "hit_rate_at_5": 1.0,
+          "stale_evidence_rate": 0.0,
+          "answer_correctness": 1.0,
+          "temporal_consistency": 1.0,
+          "contradiction_rate": 0.0,
+          "citation_precision": 1.0,
+          "citation_recall": 1.0,
+          "citation_f1": 1.0,
+          "abstention_accuracy": 1.0,
+          "conflict_flag_accuracy": 1.0,
+          "uncertainty_noted_accuracy": 1.0,
+          "grounded_faithfulness": 1.0
+        }
+      },
+      "B2": {
+        "selected_event_ids": [
+          "S_038_0002",
+          "S_038_0007",
+          "S_038_0019",
+          "S_038_0028",
+          "S_038_0004",
+          "S_038_0047",
+          "S_038_0063",
+          "S_038_0078",
+          "S_038_0089",
+          "S_038_0109"
+        ],
+        "parsed_answer": {
+          "answer_text": "The patient has a documented latex allergy (contact urticaria) recorded as persistent.",
+          "status_claims": [
+            {
+              "concept": "latex allergy",
+              "status": "ACTIVE"
+            }
+          ],
+          "cited_event_ids": [
+            "S_038_0002"
+          ],
+          "abstain": false,
+          "conflict_flagged": false,
+          "uncertainty_noted": false
+        },
+        "metrics": {
+          "recall_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "recall_at_k": 1.0,
+          "ndcg_at_10": 1.0,
+          "ndcg_at_k": 1.0,
+          "mrr": 1.0,
+          "hit_rate_at_5": 1.0,
+          "stale_evidence_rate": 0.0,
+          "answer_correctness": 1.0,
+          "temporal_consistency": 1.0,
+          "contradiction_rate": 0.0,
+          "citation_precision": 1.0,
+          "citation_recall": 1.0,
+          "citation_f1": 1.0,
+          "abstention_accuracy": 1.0,
+          "conflict_flag_accuracy": 1.0,
+          "uncertainty_noted_accuracy": 1.0,
+          "grounded_faithfulness": 1.0
+        }
+      }
+    },
+    {
+      "question_id": "Q_S_0053",
+      "patient_id": "S_037",
+      "category": "longitudinal_change",
+      "intent": "change_over_time",
+      "question_text": "How has the patient's ldl cholesterol changed from the earliest to the latest recorded test up to 2024-09-23?",
+      "as_of_date": "2024-09-23",
+      "gold_events": [
+        "S_037_0023",
+        "S_037_0099"
+      ],
+      "expected_answer": {
+        "type": "ordered_values",
+        "value": [
+          174.0,
+          92.0
+        ]
+      },
+      "expected_behavior": "answer",
+      "B1": {
+        "selected_event_ids": [
+          "S_037_0041",
+          "S_037_0023",
+          "S_037_0058",
+          "S_037_0099",
+          "S_037_0084",
+          "S_037_0068",
+          "S_037_0073",
+          "S_037_0093",
+          "S_037_0001",
+          "S_037_0061"
+        ],
+        "parsed_answer": {
+          "answer_text": "The patient’s LDL cholesterol decreased from 174.0 mg/dL on 2021-08-23 (earliest test) to 92.0 mg/dL on 2024-01-15 (latest test).",
+          "status_claims": [],
+          "cited_event_ids": [
+            "S_037_0023",
+            "S_037_0099"
+          ],
+          "abstain": false,
+          "conflict_flagged": false,
+          "uncertainty_noted": false
+        },
+        "metrics": {
+          "recall_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "recall_at_k": 1.0,
+          "ndcg_at_10": 0.650921,
+          "ndcg_at_k": 0.650921,
+          "mrr": 0.5,
+          "hit_rate_at_5": 1.0,
+          "stale_evidence_rate": 0.6,
+          "answer_correctness": 1.0,
+          "temporal_consistency": 1.0,
+          "contradiction_rate": 0.0,
+          "citation_precision": 1.0,
+          "citation_recall": 1.0,
+          "citation_f1": 1.0,
+          "abstention_accuracy": 1.0,
+          "conflict_flag_accuracy": 1.0,
+          "uncertainty_noted_accuracy": 1.0,
+          "grounded_faithfulness": 1.0
+        }
+      },
+      "B2": {
+        "selected_event_ids": [
+          "S_037_0023",
+          "S_037_0099",
+          "S_037_0041",
+          "S_037_0058",
+          "S_037_0084",
+          "S_037_0068",
+          "S_037_0073",
+          "S_037_0093",
+          "S_037_0061",
+          "S_037_0001"
+        ],
+        "parsed_answer": {
+          "answer_text": "The patient’s LDL cholesterol decreased from 174.0 mg/dL on 2021-08-23 (earliest recorded) to 92.0 mg/dL on 2024-01-15 (latest recorded).",
+          "status_claims": [],
+          "cited_event_ids": [
+            "S_037_0023",
+            "S_037_0099"
+          ],
+          "abstain": false,
+          "conflict_flagged": false,
+          "uncertainty_noted": false
+        },
+        "metrics": {
+          "recall_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "recall_at_k": 1.0,
+          "ndcg_at_10": 1.0,
+          "ndcg_at_k": 1.0,
+          "mrr": 1.0,
+          "hit_rate_at_5": 1.0,
+          "stale_evidence_rate": 0.6,
+          "answer_correctness": 1.0,
+          "temporal_consistency": 1.0,
+          "contradiction_rate": 0.0,
+          "citation_precision": 1.0,
+          "citation_recall": 1.0,
+          "citation_f1": 1.0,
+          "abstention_accuracy": 1.0,
+          "conflict_flag_accuracy": 1.0,
+          "uncertainty_noted_accuracy": 1.0,
+          "grounded_faithfulness": 1.0
+        }
+      }
+    },
+    {
+      "question_id": "Q_S_0055",
+      "patient_id": "S_039",
+      "category": "missing_or_ambiguous_dates",
+      "intent": "first_occurrence",
+      "question_text": "When did the patient start taking atorvastatin, and is the exact start day known?",
+      "as_of_date": "2024-08-16",
+      "gold_events": [
+        "S_039_0072"
+      ],
+      "expected_answer": {
+        "type": "value",
+        "value": "2022-06"
+      },
+      "expected_behavior": "flag_uncertainty",
+      "B1": {
+        "selected_event_ids": [
+          "S_039_0072",
+          "S_039_0041",
+          "S_039_0016",
+          "S_039_0011",
+          "S_039_0014",
+          "S_039_0001",
+          "S_039_0026",
+          "S_039_0042",
+          "S_039_0048",
+          "S_039_0111"
+        ],
+        "parsed_answer": {
+          "answer_text": "The patient began atorvastatin in June 2022, but the exact day of initiation is not known (reported as 2022‑06 with day unknown).",
+          "status_claims": [],
+          "cited_event_ids": [
+            "S_039_0072"
+          ],
+          "abstain": false,
+          "conflict_flagged": false,
+          "uncertainty_noted": true
+        },
+        "metrics": {
+          "recall_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "recall_at_k": 1.0,
+          "ndcg_at_10": 1.0,
+          "ndcg_at_k": 1.0,
+          "mrr": 1.0,
+          "hit_rate_at_5": 1.0,
+          "stale_evidence_rate": 0.1,
+          "answer_correctness": 1.0,
+          "temporal_consistency": 1.0,
+          "contradiction_rate": 0.0,
+          "citation_precision": 1.0,
+          "citation_recall": 1.0,
+          "citation_f1": 1.0,
+          "abstention_accuracy": 1.0,
+          "conflict_flag_accuracy": 1.0,
+          "uncertainty_noted_accuracy": 1.0,
+          "grounded_faithfulness": 1.0
+        }
+      },
+      "B2": {
+        "selected_event_ids": [
+          "S_039_0072",
+          "S_039_0041",
+          "S_039_0016",
+          "S_039_0011",
+          "S_039_0014",
+          "S_039_0026",
+          "S_039_0042",
+          "S_039_0048",
+          "S_039_0111",
+          "S_039_0153"
+        ],
+        "parsed_answer": {
+          "answer_text": "The patient began atorvastatin in June 2022; the exact start day is not recorded.",
+          "status_claims": [],
+          "cited_event_ids": [
+            "S_039_0072"
+          ],
+          "abstain": false,
+          "conflict_flagged": false,
+          "uncertainty_noted": true
+        },
+        "metrics": {
+          "recall_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "recall_at_k": 1.0,
+          "ndcg_at_10": 1.0,
+          "ndcg_at_k": 1.0,
+          "mrr": 1.0,
+          "hit_rate_at_5": 1.0,
+          "stale_evidence_rate": 0.1,
+          "answer_correctness": 1.0,
+          "temporal_consistency": 1.0,
+          "contradiction_rate": 0.0,
+          "citation_precision": 1.0,
+          "citation_recall": 1.0,
+          "citation_f1": 1.0,
+          "abstention_accuracy": 1.0,
+          "conflict_flag_accuracy": 1.0,
+          "uncertainty_noted_accuracy": 1.0,
+          "grounded_faithfulness": 1.0
+        }
+      }
+    },
+    {
+      "question_id": "Q_S_0051",
+      "patient_id": "S_035",
+      "category": "temporal_ordering",
+      "intent": "first_occurrence",
+      "question_text": "When was essential (primary) hypertension first diagnosed for this patient?",
+      "as_of_date": "2024-09-28",
+      "gold_events": [
+        "S_035_0006"
+      ],
+      "expected_answer": {
+        "type": "value",
+        "value": "2021-03-24"
+      },
+      "expected_behavior": "answer",
+      "B1": {
+        "selected_event_ids": [
+          "S_035_0006",
+          "S_035_0022",
+          "S_035_0040",
+          "S_035_0062",
+          "S_035_0076",
+          "S_035_0083",
+          "S_035_0094",
+          "S_035_0114",
+          "S_035_0129",
+          "S_035_0001"
+        ],
+        "parsed_answer": {
+          "answer_text": "Essential (primary) hypertension was first diagnosed on 2021-03-24 (event S_035_0006).",
+          "status_claims": [
+            {
+              "concept": "essential (primary) hypertension diagnosis",
+              "status": "ACTIVE"
+            }
+          ],
+          "cited_event_ids": [
+            "S_035_0006"
+          ],
+          "abstain": false,
+          "conflict_flagged": false,
+          "uncertainty_noted": false
+        },
+        "metrics": {
+          "recall_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "recall_at_k": 1.0,
+          "ndcg_at_10": 1.0,
+          "ndcg_at_k": 1.0,
+          "mrr": 1.0,
+          "hit_rate_at_5": 1.0,
+          "stale_evidence_rate": 0.8,
+          "answer_correctness": 1.0,
+          "temporal_consistency": 1.0,
+          "contradiction_rate": 0.0,
+          "citation_precision": 1.0,
+          "citation_recall": 1.0,
+          "citation_f1": 1.0,
+          "abstention_accuracy": 1.0,
+          "conflict_flag_accuracy": 1.0,
+          "uncertainty_noted_accuracy": 1.0,
+          "grounded_faithfulness": 1.0
+        }
+      },
+      "B2": {
+        "selected_event_ids": [
+          "S_035_0006",
+          "S_035_0022",
+          "S_035_0040",
+          "S_035_0062",
+          "S_035_0076",
+          "S_035_0083",
+          "S_035_0094",
+          "S_035_0114",
+          "S_035_0129",
+          "S_035_0007"
+        ],
+        "parsed_answer": {
+          "answer_text": "Essential (primary) hypertension was first diagnosed on 2021-03-24 (event S_035_0006).",
+          "status_claims": [
+            {
+              "concept": "essential (primary) hypertension",
+              "status": "PERSISTENT"
+            }
+          ],
+          "cited_event_ids": [
+            "S_035_0006"
+          ],
+          "abstain": false,
+          "conflict_flagged": false,
+          "uncertainty_noted": false
+        },
+        "metrics": {
+          "recall_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "recall_at_k": 1.0,
+          "ndcg_at_10": 1.0,
+          "ndcg_at_k": 1.0,
+          "mrr": 1.0,
+          "hit_rate_at_5": 1.0,
+          "stale_evidence_rate": 0.8,
+          "answer_correctness": 1.0,
+          "temporal_consistency": 1.0,
+          "contradiction_rate": 0.0,
+          "citation_precision": 1.0,
+          "citation_recall": 1.0,
+          "citation_f1": 1.0,
+          "abstention_accuracy": 1.0,
+          "conflict_flag_accuracy": 1.0,
+          "uncertainty_noted_accuracy": 1.0,
+          "grounded_faithfulness": 1.0
+        }
+      }
+    },
+    {
+      "question_id": "Q_S_0063",
+      "patient_id": "S_047",
+      "category": "conflicting_information",
+      "intent": "current_state",
+      "question_text": "What is the patient's current status and dosage for omeprazole as of 2024-08-24?",
+      "as_of_date": "2024-08-24",
+      "gold_events": [
+        "S_047_0099",
+        "S_047_0100"
+      ],
+      "expected_answer": {
+        "type": "set",
+        "value": [
+          "20 mg",
+          "40 mg"
+        ]
+      },
+      "expected_behavior": "flag_conflict",
+      "B1": {
+        "selected_event_ids": [
+          "S_047_0099",
+          "S_047_0100",
+          "S_047_0060",
+          "S_047_0107",
+          "S_047_0045",
+          "S_047_0139",
+          "S_047_0110",
+          "S_047_0081",
+          "S_047_0015",
+          "S_047_0040"
+        ],
+        "parsed_answer": {
+          "answer_text": "Omeprazole is recorded as ACTIVE as of 2024-08-24, but there are conflicting dose entries (20 mg daily on 2023-04-10 and 40 mg daily on 2023-04-15).",
+          "status_claims": [
+            {
+              "concept": "omeprazole",
+              "status": "ACTIVE"
+            }
+          ],
+          "cited_event_ids": [
+            "S_047_0099",
+            "S_047_0100"
+          ],
+          "abstain": false,
+          "conflict_flagged": true,
+          "uncertainty_noted": true
+        },
+        "metrics": {
+          "recall_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "recall_at_k": 1.0,
+          "ndcg_at_10": 1.0,
+          "ndcg_at_k": 1.0,
+          "mrr": 1.0,
+          "hit_rate_at_5": 1.0,
+          "stale_evidence_rate": 0.0,
+          "answer_correctness": 1.0,
+          "temporal_consistency": 1.0,
+          "contradiction_rate": 0.0,
+          "citation_precision": 1.0,
+          "citation_recall": 1.0,
+          "citation_f1": 1.0,
+          "abstention_accuracy": 1.0,
+          "conflict_flag_accuracy": 1.0,
+          "uncertainty_noted_accuracy": 1.0,
+          "grounded_faithfulness": 1.0
+        }
+      },
+      "B2": {
+        "selected_event_ids": [
+          "S_047_0099",
+          "S_047_0100",
+          "S_047_0107",
+          "S_047_0060",
+          "S_047_0045",
+          "S_047_0139",
+          "S_047_0110",
+          "S_047_0081",
+          "S_047_0080",
+          "S_047_0117"
+        ],
+        "parsed_answer": {
+          "answer_text": "The patient has conflicting active omeprazole prescriptions: 20 mg once daily (record S_047_0099) and 40 mg once daily (record S_047_0100) as of 2024‑08‑24.",
+          "status_claims": [
+            {
+              "concept": "omeprazole",
+              "status": "ACTIVE"
+            },
+            {
+              "concept": "omeprazole",
+              "status": "ACTIVE"
+            }
+          ],
+          "cited_event_ids": [
+            "S_047_0099",
+            "S_047_0100"
+          ],
+          "abstain": false,
+          "conflict_flagged": true,
+          "uncertainty_noted": true
+        },
+        "metrics": {
+          "recall_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "recall_at_k": 1.0,
+          "ndcg_at_10": 1.0,
+          "ndcg_at_k": 1.0,
+          "mrr": 1.0,
+          "hit_rate_at_5": 1.0,
+          "stale_evidence_rate": 0.0,
+          "answer_correctness": 1.0,
+          "temporal_consistency": 1.0,
+          "contradiction_rate": 0.0,
+          "citation_precision": 1.0,
+          "citation_recall": 1.0,
+          "citation_f1": 1.0,
+          "abstention_accuracy": 1.0,
+          "conflict_flag_accuracy": 1.0,
+          "uncertainty_noted_accuracy": 1.0,
+          "grounded_faithfulness": 1.0
+        }
+      }
+    },
+    {
+      "question_id": "Q_S_0059",
+      "patient_id": "S_043",
+      "category": "current_vs_historical",
+      "intent": "current_state",
+      "question_text": "Which medication is currently active for treating the patient's essential (primary) hypertension as of 2024-10-21?",
+      "as_of_date": "2024-10-21",
+      "gold_events": [
+        "S_043_0066"
+      ],
+      "expected_answer": {
+        "type": "set",
+        "value": [
+          "hydrochlorothiazide"
+        ]
+      },
+      "expected_behavior": "answer",
+      "B1": {
+        "selected_event_ids": [
+          "S_043_0021",
+          "S_043_0036",
+          "S_043_0052",
+          "S_043_0064",
+          "S_043_0007",
+          "S_043_0072",
+          "S_043_0080",
+          "S_043_0090",
+          "S_043_0095",
+          "S_043_0081"
+        ],
+        "parsed_answer": {
+          "answer_text": "No medication for essential hypertension is documented as active as of 2024-10-21.",
+          "status_claims": [],
+          "cited_event_ids": [],
+          "abstain": true,
+          "conflict_flagged": false,
+          "uncertainty_noted": false
+        },
+        "metrics": {
+          "recall_at_5": 0.0,
+          "recall_at_10": 0.0,
+          "recall_at_k": 0.0,
+          "ndcg_at_10": 0.0,
+          "ndcg_at_k": 0.0,
+          "mrr": 0.0,
+          "hit_rate_at_5": 0.0,
+          "stale_evidence_rate": 0.0,
+          "answer_correctness": 0.0,
+          "temporal_consistency": 0.0,
+          "contradiction_rate": 1.0,
+          "citation_precision": 0.0,
+          "citation_recall": 0.0,
+          "citation_f1": 0.0,
+          "abstention_accuracy": 0.0,
+          "conflict_flag_accuracy": 1.0,
+          "uncertainty_noted_accuracy": 0.0,
+          "grounded_faithfulness": 1.0
+        }
+      },
+      "B2": {
+        "selected_event_ids": [
+          "S_043_0021",
+          "S_043_0036",
+          "S_043_0052",
+          "S_043_0064",
+          "S_043_0007",
+          "S_043_0072",
+          "S_043_0080",
+          "S_043_0090",
+          "S_043_0095",
+          "S_043_0066"
+        ],
+        "parsed_answer": {
+          "answer_text": "Hydrochlorothiazide 25 mg oral once daily is currently active for treating the patient’s essential (primary) hypertension as of 2024-10-21 (based on event S_043_0066).",
+          "status_claims": [
+            {
+              "concept": "hydrochlorothiazide",
+              "status": "ACTIVE"
+            }
+          ],
+          "cited_event_ids": [
+            "S_043_0066"
+          ],
+          "abstain": false,
+          "conflict_flagged": false,
+          "uncertainty_noted": true
+        },
+        "metrics": {
+          "recall_at_5": 0.0,
+          "recall_at_10": 1.0,
+          "recall_at_k": 1.0,
+          "ndcg_at_10": 0.289065,
+          "ndcg_at_k": 0.289065,
+          "mrr": 0.1,
+          "hit_rate_at_5": 0.0,
+          "stale_evidence_rate": 0.0,
+          "answer_correctness": 1.0,
+          "temporal_consistency": 1.0,
+          "contradiction_rate": 0.0,
+          "citation_precision": 1.0,
+          "citation_recall": 1.0,
+          "citation_f1": 1.0,
+          "abstention_accuracy": 1.0,
+          "conflict_flag_accuracy": 1.0,
+          "uncertainty_noted_accuracy": 1.0,
+          "grounded_faithfulness": 1.0
+        }
+      }
+    },
+    {
+      "question_id": "Q_S_0064",
+      "patient_id": "S_048",
+      "category": "insufficient_evidence",
+      "intent": "current_state",
+      "question_text": "Is the patient currently taking rifampin as of 2024-11-09?",
+      "as_of_date": "2024-11-09",
+      "gold_events": [],
+      "expected_answer": {
+        "type": "none",
+        "value": null
+      },
+      "expected_behavior": "abstain",
+      "B1": {
+        "selected_event_ids": [
+          "S_048_0046",
+          "S_048_0021",
+          "S_048_0066",
+          "S_048_0013",
+          "S_048_0019",
+          "S_048_0015",
+          "S_048_0010",
+          "S_048_0001",
+          "S_048_0025",
+          "S_048_0009"
+        ],
+        "parsed_answer": {
+          "answer_text": "No record of rifampin use is found for the patient up to the reference date.",
+          "status_claims": [],
+          "cited_event_ids": [],
+          "abstain": true,
+          "conflict_flagged": false,
+          "uncertainty_noted": false
+        },
+        "metrics": {
+          "recall_at_5": 0.0,
+          "recall_at_10": 0.0,
+          "recall_at_k": 0.0,
+          "ndcg_at_10": 0.0,
+          "ndcg_at_k": 0.0,
+          "mrr": 0.0,
+          "hit_rate_at_5": 0.0,
+          "stale_evidence_rate": 0.0,
+          "answer_correctness": 1.0,
+          "temporal_consistency": 1.0,
+          "contradiction_rate": 0.0,
+          "citation_precision": 1.0,
+          "citation_recall": 1.0,
+          "citation_f1": 1.0,
+          "abstention_accuracy": 1.0,
+          "conflict_flag_accuracy": 1.0,
+          "uncertainty_noted_accuracy": 0.0,
+          "grounded_faithfulness": 1.0
+        }
+      },
+      "B2": {
+        "selected_event_ids": [
+          "S_048_0046",
+          "S_048_0066",
+          "S_048_0021",
+          "S_048_0013",
+          "S_048_0019",
+          "S_048_0025",
+          "S_048_0001",
+          "S_048_0003",
+          "S_048_0015",
+          "S_048_0061"
+        ],
+        "parsed_answer": {
+          "answer_text": "Insufficient evidence to determine current rifampin use.",
+          "status_claims": [],
+          "cited_event_ids": [],
+          "abstain": true,
+          "conflict_flagged": false,
+          "uncertainty_noted": true
+        },
+        "metrics": {
+          "recall_at_5": 0.0,
+          "recall_at_10": 0.0,
+          "recall_at_k": 0.0,
+          "ndcg_at_10": 0.0,
+          "ndcg_at_k": 0.0,
+          "mrr": 0.0,
+          "hit_rate_at_5": 0.0,
+          "stale_evidence_rate": 0.0,
+          "answer_correctness": 1.0,
+          "temporal_consistency": 1.0,
+          "contradiction_rate": 0.0,
+          "citation_precision": 1.0,
+          "citation_recall": 1.0,
+          "citation_f1": 1.0,
+          "abstention_accuracy": 1.0,
+          "conflict_flag_accuracy": 1.0,
+          "uncertainty_noted_accuracy": 1.0,
+          "grounded_faithfulness": 1.0
+        }
+      }
+    },
+    {
+      "question_id": "Q_S_0061",
+      "patient_id": "S_045",
+      "category": "irrelevant_history",
+      "intent": "current_state",
+      "question_text": "What is the current active medication and dose prescribed for the patient's type 2 diabetes mellitus as of 2024-08-15?",
+      "as_of_date": "2024-08-15",
+      "gold_events": [
+        "S_045_0073"
+      ],
+      "expected_answer": {
+        "type": "value",
+        "value": "10 mg"
+      },
+      "expected_behavior": "answer",
+      "B1": {
+        "selected_event_ids": [
+          "S_045_0017",
+          "S_045_0073",
+          "S_045_0104",
+          "S_045_0065",
+          "S_045_0102",
+          "S_045_0010",
+          "S_045_0013",
+          "S_045_0028",
+          "S_045_0040",
+          "S_045_0020"
+        ],
+        "parsed_answer": {
+          "answer_text": "The patient’s current active medication for type 2 diabetes mellitus is glipizide 10 mg oral twice daily (as of the latest record on 2022-07-11).",
+          "status_claims": [
+            {
+              "concept": "glipizide",
+              "status": "ACTIVE"
+            }
+          ],
+          "cited_event_ids": [
+            "S_045_0073"
+          ],
+          "abstain": false,
+          "conflict_flagged": false,
+          "uncertainty_noted": false
+        },
+        "metrics": {
+          "recall_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "recall_at_k": 1.0,
+          "ndcg_at_10": 0.63093,
+          "ndcg_at_k": 0.63093,
+          "mrr": 0.5,
+          "hit_rate_at_5": 1.0,
+          "stale_evidence_rate": 0.4,
+          "answer_correctness": 1.0,
+          "temporal_consistency": 1.0,
+          "contradiction_rate": 0.0,
+          "citation_precision": 1.0,
+          "citation_recall": 1.0,
+          "citation_f1": 1.0,
+          "abstention_accuracy": 1.0,
+          "conflict_flag_accuracy": 1.0,
+          "uncertainty_noted_accuracy": 0.0,
+          "grounded_faithfulness": 1.0
+        }
+      },
+      "B2": {
+        "selected_event_ids": [
+          "S_045_0073",
+          "S_045_0104",
+          "S_045_0017",
+          "S_045_0102",
+          "S_045_0010",
+          "S_045_0065",
+          "S_045_0013",
+          "S_045_0028",
+          "S_045_0040",
+          "S_045_0020"
+        ],
+        "parsed_answer": {
+          "answer_text": "The patient’s current active medication for type 2 diabetes mellitus is glipizide 10 mg oral twice daily (recorded on 2022-07-11).",
+          "status_claims": [
+            {
+              "concept": "glipizide",
+              "status": "ACTIVE"
+            }
+          ],
+          "cited_event_ids": [
+            "S_045_0073"
+          ],
+          "abstain": false,
+          "conflict_flagged": false,
+          "uncertainty_noted": true
+        },
+        "metrics": {
+          "recall_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "recall_at_k": 1.0,
+          "ndcg_at_10": 1.0,
+          "ndcg_at_k": 1.0,
+          "mrr": 1.0,
+          "hit_rate_at_5": 1.0,
+          "stale_evidence_rate": 0.4,
+          "answer_correctness": 1.0,
+          "temporal_consistency": 1.0,
+          "contradiction_rate": 0.0,
+          "citation_precision": 1.0,
+          "citation_recall": 1.0,
+          "citation_f1": 1.0,
+          "abstention_accuracy": 1.0,
+          "conflict_flag_accuracy": 1.0,
+          "uncertainty_noted_accuracy": 1.0,
+          "grounded_faithfulness": 1.0
+        }
+      }
+    },
+    {
+      "question_id": "Q_S_0060",
+      "patient_id": "S_044",
+      "category": "longitudinal_change",
+      "intent": "change_over_time",
+      "question_text": "How did the patient's amlodipine dose change from initial start to final order?",
+      "as_of_date": "2024-08-18",
+      "gold_events": [
+        "S_044_0005",
+        "S_044_0053"
+      ],
+      "expected_answer": {
+        "type": "ordered_values",
+        "value": [
+          "5 mg",
+          "10 mg"
+        ]
+      },
+      "expected_behavior": "answer",
+      "B1": {
+        "selected_event_ids": [
+          "S_044_0053",
+          "S_044_0012",
+          "S_044_0005",
+          "S_044_0047",
+          "S_044_0040",
+          "S_044_0026",
+          "S_044_0019",
+          "S_044_0032",
+          "S_044_0009",
+          "S_044_0068"
+        ],
+        "parsed_answer": {
+          "answer_text": "The patient started amlodipine at 5 mg daily (prescribed on 2021-02-23) and later was prescribed 10 mg daily (dose increase recorded on 2022-04-19).",
+          "status_claims": [],
+          "cited_event_ids": [
+            "S_044_0005",
+            "S_044_0053"
+          ],
+          "abstain": false,
+          "conflict_flagged": false,
+          "uncertainty_noted": false
+        },
+        "metrics": {
+          "recall_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "recall_at_k": 1.0,
+          "ndcg_at_10": 0.919721,
+          "ndcg_at_k": 0.919721,
+          "mrr": 1.0,
+          "hit_rate_at_5": 1.0,
+          "stale_evidence_rate": 0.6,
+          "answer_correctness": 1.0,
+          "temporal_consistency": 1.0,
+          "contradiction_rate": 0.0,
+          "citation_precision": 1.0,
+          "citation_recall": 1.0,
+          "citation_f1": 1.0,
+          "abstention_accuracy": 1.0,
+          "conflict_flag_accuracy": 1.0,
+          "uncertainty_noted_accuracy": 1.0,
+          "grounded_faithfulness": 1.0
+        }
+      },
+      "B2": {
+        "selected_event_ids": [
+          "S_044_0053",
+          "S_044_0005",
+          "S_044_0012",
+          "S_044_0047",
+          "S_044_0040",
+          "S_044_0026",
+          "S_044_0019",
+          "S_044_0032",
+          "S_044_0004",
+          "S_044_0018"
+        ],
+        "parsed_answer": {
+          "answer_text": "The patient started amlodipine at 5 mg daily (prescription on 2021-02-23) and later was prescribed 10 mg daily (dose increase recorded on 2022-04-19).",
+          "status_claims": [],
+          "cited_event_ids": [
+            "S_044_0005",
+            "S_044_0053"
+          ],
+          "abstain": false,
+          "conflict_flagged": false,
+          "uncertainty_noted": false
+        },
+        "metrics": {
+          "recall_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "recall_at_k": 1.0,
+          "ndcg_at_10": 1.0,
+          "ndcg_at_k": 1.0,
+          "mrr": 1.0,
+          "hit_rate_at_5": 1.0,
+          "stale_evidence_rate": 0.6,
+          "answer_correctness": 1.0,
+          "temporal_consistency": 1.0,
+          "contradiction_rate": 0.0,
+          "citation_precision": 1.0,
+          "citation_recall": 1.0,
+          "citation_f1": 1.0,
+          "abstention_accuracy": 1.0,
+          "conflict_flag_accuracy": 1.0,
+          "uncertainty_noted_accuracy": 1.0,
+          "grounded_faithfulness": 1.0
+        }
+      }
+    },
+    {
+      "question_id": "Q_S_0062",
+      "patient_id": "S_046",
+      "category": "missing_or_ambiguous_dates",
+      "intent": "first_occurrence",
+      "question_text": "When was gastroesophageal reflux disease first recorded in the patient's history?",
+      "as_of_date": "2024-09-05",
+      "gold_events": [
+        "S_046_0001"
+      ],
+      "expected_answer": {
+        "type": "value",
+        "value": "unknown"
+      },
+      "expected_behavior": "flag_uncertainty",
+      "B1": {
+        "selected_event_ids": [
+          "S_046_0001",
+          "S_046_0007",
+          "S_046_0004",
+          "S_046_0038",
+          "S_046_0018",
+          "S_046_0027",
+          "S_046_0026",
+          "S_046_0015",
+          "S_046_0003",
+          "S_046_0002"
+        ],
+        "parsed_answer": {
+          "answer_text": "Gastroesophageal reflux disease was first recorded in the patient’s history in an entry with an unknown date (UNKNOWN_DATE) (event S_046_0001).",
+          "status_claims": [
+            {
+              "concept": "gastroesophageal reflux disease",
+              "status": "UNKNOWN"
+            }
+          ],
+          "cited_event_ids": [
+            "S_046_0001"
+          ],
+          "abstain": false,
+          "conflict_flagged": false,
+          "uncertainty_noted": true
+        },
+        "metrics": {
+          "recall_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "recall_at_k": 1.0,
+          "ndcg_at_10": 1.0,
+          "ndcg_at_k": 1.0,
+          "mrr": 1.0,
+          "hit_rate_at_5": 1.0,
+          "stale_evidence_rate": 0.1,
+          "answer_correctness": 1.0,
+          "temporal_consistency": 1.0,
+          "contradiction_rate": 0.0,
+          "citation_precision": 1.0,
+          "citation_recall": 1.0,
+          "citation_f1": 1.0,
+          "abstention_accuracy": 1.0,
+          "conflict_flag_accuracy": 1.0,
+          "uncertainty_noted_accuracy": 1.0,
+          "grounded_faithfulness": 1.0
+        }
+      },
+      "B2": {
+        "selected_event_ids": [
+          "S_046_0001",
+          "S_046_0007",
+          "S_046_0004",
+          "S_046_0038",
+          "S_046_0018",
+          "S_046_0031",
+          "S_046_0037",
+          "S_046_0044",
+          "S_046_0052",
+          "S_046_0061"
+        ],
+        "parsed_answer": {
+          "answer_text": "The first record of gastroesophageal reflux disease is in event S_046_0001, which notes a history of the condition (date unknown).",
+          "status_claims": [
+            {
+              "concept": "gastroesophageal reflux disease",
+              "status": "UNKNOWN"
+            }
+          ],
+          "cited_event_ids": [
+            "S_046_0001"
+          ],
+          "abstain": false,
+          "conflict_flagged": false,
+          "uncertainty_noted": true
+        },
+        "metrics": {
+          "recall_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "recall_at_k": 1.0,
+          "ndcg_at_10": 1.0,
+          "ndcg_at_k": 1.0,
+          "mrr": 1.0,
+          "hit_rate_at_5": 1.0,
+          "stale_evidence_rate": 0.0,
+          "answer_correctness": 1.0,
+          "temporal_consistency": 1.0,
+          "contradiction_rate": 0.0,
+          "citation_precision": 1.0,
+          "citation_recall": 1.0,
+          "citation_f1": 1.0,
+          "abstention_accuracy": 1.0,
+          "conflict_flag_accuracy": 1.0,
+          "uncertainty_noted_accuracy": 1.0,
+          "grounded_faithfulness": 1.0
+        }
+      }
+    },
+    {
+      "question_id": "Q_S_0058",
+      "patient_id": "S_042",
+      "category": "temporal_ordering",
+      "intent": "historical",
+      "question_text": "In what chronological order were medications prescribed to treat the patient's essential (primary) hypertension up to 2024-10-25?",
+      "as_of_date": "2024-10-25",
+      "gold_events": [
+        "S_042_0006",
+        "S_042_0069"
+      ],
+      "expected_answer": {
+        "type": "ordered_values",
+        "value": [
+          "lisinopril",
+          "amlodipine"
+        ]
+      },
+      "expected_behavior": "answer",
+      "B1": {
+        "selected_event_ids": [
+          "S_042_0005",
+          "S_042_0020",
+          "S_042_0034",
+          "S_042_0045",
+          "S_042_0064",
+          "S_042_0083",
+          "S_042_0092",
+          "S_042_0103",
+          "S_042_0109",
+          "S_042_0037"
+        ],
+        "parsed_answer": {
+          "answer_text": "Insufficient evidence to determine the chronological order of hypertension medications.",
+          "status_claims": [],
+          "cited_event_ids": [],
+          "abstain": true,
+          "conflict_flagged": false,
+          "uncertainty_noted": true
+        },
+        "metrics": {
+          "recall_at_5": 0.0,
+          "recall_at_10": 0.0,
+          "recall_at_k": 0.0,
+          "ndcg_at_10": 0.0,
+          "ndcg_at_k": 0.0,
+          "mrr": 0.0,
+          "hit_rate_at_5": 0.0,
+          "stale_evidence_rate": 0.0,
+          "answer_correctness": 0.0,
+          "temporal_consistency": 0.0,
+          "contradiction_rate": 0.0,
+          "citation_precision": 0.0,
+          "citation_recall": 0.0,
+          "citation_f1": 0.0,
+          "abstention_accuracy": 0.0,
+          "conflict_flag_accuracy": 1.0,
+          "uncertainty_noted_accuracy": 1.0,
+          "grounded_faithfulness": 1.0
+        }
+      },
+      "B2": {
+        "selected_event_ids": [
+          "S_042_0005",
+          "S_042_0020",
+          "S_042_0034",
+          "S_042_0045",
+          "S_042_0064",
+          "S_042_0083",
+          "S_042_0092",
+          "S_042_0103",
+          "S_042_0109",
+          "S_042_0021"
+        ],
+        "parsed_answer": {
+          "answer_text": "Insufficient evidence to determine the chronological order of prescribed hypertension medications.",
+          "status_claims": [],
+          "cited_event_ids": [],
+          "abstain": true,
+          "conflict_flagged": false,
+          "uncertainty_noted": true
+        },
+        "metrics": {
+          "recall_at_5": 0.0,
+          "recall_at_10": 0.0,
+          "recall_at_k": 0.0,
+          "ndcg_at_10": 0.0,
+          "ndcg_at_k": 0.0,
+          "mrr": 0.0,
+          "hit_rate_at_5": 0.0,
+          "stale_evidence_rate": 0.1,
+          "answer_correctness": 0.0,
+          "temporal_consistency": 0.0,
+          "contradiction_rate": 0.0,
+          "citation_precision": 0.0,
+          "citation_recall": 0.0,
+          "citation_f1": 0.0,
+          "abstention_accuracy": 0.0,
+          "conflict_flag_accuracy": 1.0,
+          "uncertainty_noted_accuracy": 1.0,
+          "grounded_faithfulness": 1.0
+        }
+      }
+    },
+    {
+      "question_id": "Q_S_0070",
+      "patient_id": "S_054",
+      "category": "conflicting_information",
+      "intent": "current_state",
+      "question_text": "What is the patient's current status and dosage for levothyroxine as of 2024-10-02?",
+      "as_of_date": "2024-10-02",
+      "gold_events": [
+        "S_054_0104",
+        "S_054_0107"
+      ],
+      "expected_answer": {
+        "type": "set",
+        "value": [
+          "ACTIVE",
+          "ENDED"
+        ]
+      },
+      "expected_behavior": "flag_conflict",
+      "B1": {
+        "selected_event_ids": [
+          "S_054_0104",
+          "S_054_0107",
+          "S_054_0025",
+          "S_054_0009",
+          "S_054_0039",
+          "S_054_0068",
+          "S_054_0029",
+          "S_054_0045",
+          "S_054_0021",
+          "S_054_0040"
+        ],
+        "parsed_answer": {
+          "answer_text": "Levothyroxine is discontinued (ended) as of 2024-10-02; the last recorded dose was 50 mcg daily.",
+          "status_claims": [
+            {
+              "concept": "levothyroxine",
+              "status": "ENDED"
+            }
+          ],
+          "cited_event_ids": [
+            "S_054_0107"
+          ],
+          "abstain": false,
+          "conflict_flagged": false,
+          "uncertainty_noted": true
+        },
+        "metrics": {
+          "recall_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "recall_at_k": 1.0,
+          "ndcg_at_10": 1.0,
+          "ndcg_at_k": 1.0,
+          "mrr": 1.0,
+          "hit_rate_at_5": 1.0,
+          "stale_evidence_rate": 0.0,
+          "answer_correctness": 0.6667,
+          "temporal_consistency": 1.0,
+          "contradiction_rate": 0.0,
+          "citation_precision": 1.0,
+          "citation_recall": 0.5,
+          "citation_f1": 0.6667,
+          "abstention_accuracy": 1.0,
+          "conflict_flag_accuracy": 0.0,
+          "uncertainty_noted_accuracy": 1.0,
+          "grounded_faithfulness": 1.0
+        }
+      },
+      "B2": {
+        "selected_event_ids": [
+          "S_054_0104",
+          "S_054_0107",
+          "S_054_0025",
+          "S_054_0009",
+          "S_054_0039",
+          "S_054_0029",
+          "S_054_0045",
+          "S_054_0021",
+          "S_054_0040",
+          "S_054_0026"
+        ],
+        "parsed_answer": {
+          "answer_text": "The patient has conflicting records for levothyroxine: one indicates it is ACTIVE (dose 50 mcg daily) and another indicates it ENDED on 2023-03-12.",
+          "status_claims": [
+            {
+              "concept": "levothyroxine",
+              "status": "ACTIVE"
+            },
+            {
+              "concept": "levothyroxine",
+              "status": "ENDED"
+            }
+          ],
+          "cited_event_ids": [
+            "S_054_0104",
+            "S_054_0107"
+          ],
+          "abstain": false,
+          "conflict_flagged": true,
+          "uncertainty_noted": true
+        },
+        "metrics": {
+          "recall_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "recall_at_k": 1.0,
+          "ndcg_at_10": 1.0,
+          "ndcg_at_k": 1.0,
+          "mrr": 1.0,
+          "hit_rate_at_5": 1.0,
+          "stale_evidence_rate": 0.0,
+          "answer_correctness": 1.0,
+          "temporal_consistency": 1.0,
+          "contradiction_rate": 0.0,
+          "citation_precision": 1.0,
+          "citation_recall": 1.0,
+          "citation_f1": 1.0,
+          "abstention_accuracy": 1.0,
+          "conflict_flag_accuracy": 1.0,
+          "uncertainty_noted_accuracy": 1.0,
+          "grounded_faithfulness": 1.0
+        }
+      }
+    },
+    {
+      "question_id": "Q_S_0066",
+      "patient_id": "S_050",
+      "category": "current_vs_historical",
+      "intent": "current_state",
+      "question_text": "Is the patient currently taking amlodipine as of 2024-08-27, or has it been discontinued?",
+      "as_of_date": "2024-08-27",
+      "gold_events": [
+        "S_050_0051"
+      ],
+      "expected_answer": {
+        "type": "status",
+        "value": "ENDED"
+      },
+      "expected_behavior": "answer",
+      "B1": {
+        "selected_event_ids": [
+          "S_050_0051",
+          "S_050_0004",
+          "S_050_0016",
+          "S_050_0024",
+          "S_050_0011",
+          "S_050_0045",
+          "S_050_0031",
+          "S_050_0086",
+          "S_050_0039",
+          "S_050_0007"
+        ],
+        "parsed_answer": {
+          "answer_text": "The patient is currently taking amlodipine (10 mg daily) as of 2024‑08‑27; the prior 5 mg dose was discontinued on 2022‑07‑30.",
+          "status_claims": [
+            {
+              "concept": "amlodipine",
+              "status": "ACTIVE"
+            }
+          ],
+          "cited_event_ids": [
+            "S_050_0051"
+          ],
+          "abstain": false,
+          "conflict_flagged": false,
+          "uncertainty_noted": false
+        },
+        "metrics": {
+          "recall_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "recall_at_k": 1.0,
+          "ndcg_at_10": 1.0,
+          "ndcg_at_k": 1.0,
+          "mrr": 1.0,
+          "hit_rate_at_5": 1.0,
+          "stale_evidence_rate": 0.7,
+          "answer_correctness": 0.0,
+          "temporal_consistency": 0.0,
+          "contradiction_rate": 1.0,
+          "citation_precision": 1.0,
+          "citation_recall": 1.0,
+          "citation_f1": 1.0,
+          "abstention_accuracy": 1.0,
+          "conflict_flag_accuracy": 1.0,
+          "uncertainty_noted_accuracy": 1.0,
+          "grounded_faithfulness": 1.0
+        }
+      },
+      "B2": {
+        "selected_event_ids": [
+          "S_050_0051",
+          "S_050_0004",
+          "S_050_0016",
+          "S_050_0024",
+          "S_050_0011",
+          "S_050_0045",
+          "S_050_0031",
+          "S_050_0039",
+          "S_050_0086",
+          "S_050_0001"
+        ],
+        "parsed_answer": {
+          "answer_text": "The patient is not currently taking amlodipine; the medication was discontinued on 2022-07-30 (status ENDED).",
+          "status_claims": [
+            {
+              "concept": "amlodipine",
+              "status": "ENDED"
+            }
+          ],
+          "cited_event_ids": [
+            "S_050_0051"
+          ],
+          "abstain": false,
+          "conflict_flagged": false,
+          "uncertainty_noted": false
+        },
+        "metrics": {
+          "recall_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "recall_at_k": 1.0,
+          "ndcg_at_10": 1.0,
+          "ndcg_at_k": 1.0,
+          "mrr": 1.0,
+          "hit_rate_at_5": 1.0,
+          "stale_evidence_rate": 0.7,
+          "answer_correctness": 1.0,
+          "temporal_consistency": 1.0,
+          "contradiction_rate": 0.0,
+          "citation_precision": 1.0,
+          "citation_recall": 1.0,
+          "citation_f1": 1.0,
+          "abstention_accuracy": 1.0,
+          "conflict_flag_accuracy": 1.0,
+          "uncertainty_noted_accuracy": 1.0,
+          "grounded_faithfulness": 1.0
+        }
+      }
+    },
+    {
+      "question_id": "Q_S_0071",
+      "patient_id": "S_055",
+      "category": "insufficient_evidence",
+      "intent": "current_state",
+      "question_text": "Is the patient currently taking methotrexate as of 2024-10-18?",
+      "as_of_date": "2024-10-18",
+      "gold_events": [],
+      "expected_answer": {
+        "type": "none",
+        "value": null
+      },
+      "expected_behavior": "abstain",
+      "B1": {
+        "selected_event_ids": [
+          "S_055_0045",
+          "S_055_0011",
+          "S_055_0020",
+          "S_055_0002",
+          "S_055_0024",
+          "S_055_0005",
+          "S_055_0028",
+          "S_055_0019",
+          "S_055_0007",
+          "S_055_0031"
+        ],
+        "parsed_answer": {
+          "answer_text": "No evidence found that the patient is taking methotrexate as of 2024-10-18.",
+          "status_claims": [],
+          "cited_event_ids": [],
+          "abstain": true,
+          "conflict_flagged": false,
+          "uncertainty_noted": true
+        },
+        "metrics": {
+          "recall_at_5": 0.0,
+          "recall_at_10": 0.0,
+          "recall_at_k": 0.0,
+          "ndcg_at_10": 0.0,
+          "ndcg_at_k": 0.0,
+          "mrr": 0.0,
+          "hit_rate_at_5": 0.0,
+          "stale_evidence_rate": 0.0,
+          "answer_correctness": 1.0,
+          "temporal_consistency": 1.0,
+          "contradiction_rate": 0.0,
+          "citation_precision": 1.0,
+          "citation_recall": 1.0,
+          "citation_f1": 1.0,
+          "abstention_accuracy": 1.0,
+          "conflict_flag_accuracy": 1.0,
+          "uncertainty_noted_accuracy": 1.0,
+          "grounded_faithfulness": 1.0
+        }
+      },
+      "B2": {
+        "selected_event_ids": [
+          "S_055_0045",
+          "S_055_0002",
+          "S_055_0011",
+          "S_055_0020",
+          "S_055_0024",
+          "S_055_0028",
+          "S_055_0005",
+          "S_055_0038",
+          "S_055_0019",
+          "S_055_0007"
+        ],
+        "parsed_answer": {
+          "answer_text": "Insufficient evidence to determine current methotrexate use.",
+          "status_claims": [],
+          "cited_event_ids": [],
+          "abstain": true,
+          "conflict_flagged": false,
+          "uncertainty_noted": true
+        },
+        "metrics": {
+          "recall_at_5": 0.0,
+          "recall_at_10": 0.0,
+          "recall_at_k": 0.0,
+          "ndcg_at_10": 0.0,
+          "ndcg_at_k": 0.0,
+          "mrr": 0.0,
+          "hit_rate_at_5": 0.0,
+          "stale_evidence_rate": 0.0,
+          "answer_correctness": 1.0,
+          "temporal_consistency": 1.0,
+          "contradiction_rate": 0.0,
+          "citation_precision": 1.0,
+          "citation_recall": 1.0,
+          "citation_f1": 1.0,
+          "abstention_accuracy": 1.0,
+          "conflict_flag_accuracy": 1.0,
+          "uncertainty_noted_accuracy": 1.0,
+          "grounded_faithfulness": 1.0
+        }
+      }
+    },
+    {
+      "question_id": "Q_S_0068",
+      "patient_id": "S_052",
+      "category": "irrelevant_history",
+      "intent": "persistent_fact",
+      "question_text": "Does the patient have a documented sulfa allergy in their record?",
+      "as_of_date": "2024-05-08",
+      "gold_events": [
+        "S_052_0002"
+      ],
+      "expected_answer": {
+        "type": "status",
+        "value": "PERSISTENT"
+      },
+      "expected_behavior": "answer",
+      "B1": {
+        "selected_event_ids": [
+          "S_052_0002",
+          "S_052_0001",
+          "S_052_0007",
+          "S_052_0010",
+          "S_052_0059",
+          "S_052_0008",
+          "S_052_0018",
+          "S_052_0028",
+          "S_052_0012",
+          "S_052_0015"
+        ],
+        "parsed_answer": {
+          "answer_text": "The patient has a documented sulfa allergy (persistent) per record E2 dated 2021-02-09.",
+          "status_claims": [
+            {
+              "concept": "sulfa allergy",
+              "status": "ACTIVE"
+            }
+          ],
+          "cited_event_ids": [
+            "S_052_0002"
+          ],
+          "abstain": false,
+          "conflict_flagged": false,
+          "uncertainty_noted": false
+        },
+        "metrics": {
+          "recall_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "recall_at_k": 1.0,
+          "ndcg_at_10": 1.0,
+          "ndcg_at_k": 1.0,
+          "mrr": 1.0,
+          "hit_rate_at_5": 1.0,
+          "stale_evidence_rate": 0.0,
+          "answer_correctness": 1.0,
+          "temporal_consistency": 1.0,
+          "contradiction_rate": 0.0,
+          "citation_precision": 1.0,
+          "citation_recall": 1.0,
+          "citation_f1": 1.0,
+          "abstention_accuracy": 1.0,
+          "conflict_flag_accuracy": 1.0,
+          "uncertainty_noted_accuracy": 1.0,
+          "grounded_faithfulness": 1.0
+        }
+      },
+      "B2": {
+        "selected_event_ids": [
+          "S_052_0002",
+          "S_052_0010",
+          "S_052_0003",
+          "S_052_0016",
+          "S_052_0025",
+          "S_052_0032",
+          "S_052_0041",
+          "S_052_0051",
+          "S_052_0056",
+          "S_052_0065"
+        ],
+        "parsed_answer": {
+          "answer_text": "The patient has a documented sulfa allergy (persistent) as recorded on 2021-02-09 (event S_052_0002).",
+          "status_claims": [
+            {
+              "concept": "sulfa allergy",
+              "status": "ACTIVE"
+            }
+          ],
+          "cited_event_ids": [
+            "S_052_0002"
+          ],
+          "abstain": false,
+          "conflict_flagged": false,
+          "uncertainty_noted": false
+        },
+        "metrics": {
+          "recall_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "recall_at_k": 1.0,
+          "ndcg_at_10": 1.0,
+          "ndcg_at_k": 1.0,
+          "mrr": 1.0,
+          "hit_rate_at_5": 1.0,
+          "stale_evidence_rate": 0.0,
+          "answer_correctness": 1.0,
+          "temporal_consistency": 1.0,
+          "contradiction_rate": 0.0,
+          "citation_precision": 1.0,
+          "citation_recall": 1.0,
+          "citation_f1": 1.0,
+          "abstention_accuracy": 1.0,
+          "conflict_flag_accuracy": 1.0,
+          "uncertainty_noted_accuracy": 1.0,
+          "grounded_faithfulness": 1.0
+        }
+      }
+    },
+    {
+      "question_id": "Q_S_0067",
+      "patient_id": "S_051",
+      "category": "longitudinal_change",
+      "intent": "change_over_time",
+      "question_text": "How has the patient's tsh changed from the earliest to the latest recorded test up to 2024-07-02?",
+      "as_of_date": "2024-07-02",
+      "gold_events": [
+        "S_051_0020",
+        "S_051_0096"
+      ],
+      "expected_answer": {
+        "type": "ordered_values",
+        "value": [
+          8.4,
+          2.2
+        ]
+      },
+      "expected_behavior": "answer",
+      "B1": {
+        "selected_event_ids": [
+          "S_051_0034",
+          "S_051_0020",
+          "S_051_0070",
+          "S_051_0048",
+          "S_051_0096",
+          "S_051_0086",
+          "S_051_0060",
+          "S_051_0077",
+          "S_051_0007",
+          "S_051_0033"
+        ],
+        "parsed_answer": {
+          "answer_text": "TSH decreased from 8.4 mIU/L on 2021-08-20 (event S_051_0020) to 2.2 mIU/L on 2024-01-12 (event S_051_0096).",
+          "status_claims": [],
+          "cited_event_ids": [
+            "S_051_0020",
+            "S_051_0096"
+          ],
+          "abstain": false,
+          "conflict_flagged": false,
+          "uncertainty_noted": false
+        },
+        "metrics": {
+          "recall_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "recall_at_k": 1.0,
+          "ndcg_at_10": 0.624051,
+          "ndcg_at_k": 0.624051,
+          "mrr": 0.5,
+          "hit_rate_at_5": 1.0,
+          "stale_evidence_rate": 0.6,
+          "answer_correctness": 1.0,
+          "temporal_consistency": 1.0,
+          "contradiction_rate": 0.0,
+          "citation_precision": 1.0,
+          "citation_recall": 1.0,
+          "citation_f1": 1.0,
+          "abstention_accuracy": 1.0,
+          "conflict_flag_accuracy": 1.0,
+          "uncertainty_noted_accuracy": 1.0,
+          "grounded_faithfulness": 1.0
+        }
+      },
+      "B2": {
+        "selected_event_ids": [
+          "S_051_0020",
+          "S_051_0096",
+          "S_051_0034",
+          "S_051_0070",
+          "S_051_0048",
+          "S_051_0086",
+          "S_051_0060",
+          "S_051_0077",
+          "S_051_0007",
+          "S_051_0033"
+        ],
+        "parsed_answer": {
+          "answer_text": "The patient’s TSH decreased from 8.4 mIU/L on 2021-08-20 (earliest recorded) to 2.2 mIU/L on 2024-01-12 (latest recorded).",
+          "status_claims": [],
+          "cited_event_ids": [
+            "S_051_0020",
+            "S_051_0096"
+          ],
+          "abstain": false,
+          "conflict_flagged": false,
+          "uncertainty_noted": false
+        },
+        "metrics": {
+          "recall_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "recall_at_k": 1.0,
+          "ndcg_at_10": 1.0,
+          "ndcg_at_k": 1.0,
+          "mrr": 1.0,
+          "hit_rate_at_5": 1.0,
+          "stale_evidence_rate": 0.6,
+          "answer_correctness": 1.0,
+          "temporal_consistency": 1.0,
+          "contradiction_rate": 0.0,
+          "citation_precision": 1.0,
+          "citation_recall": 1.0,
+          "citation_f1": 1.0,
+          "abstention_accuracy": 1.0,
+          "conflict_flag_accuracy": 1.0,
+          "uncertainty_noted_accuracy": 1.0,
+          "grounded_faithfulness": 1.0
+        }
+      }
+    },
+    {
+      "question_id": "Q_S_0069",
+      "patient_id": "S_053",
+      "category": "missing_or_ambiguous_dates",
+      "intent": "first_occurrence",
+      "question_text": "When did the patient start taking simvastatin, and is the exact start day known?",
+      "as_of_date": "2024-08-19",
+      "gold_events": [
+        "S_053_0043"
+      ],
+      "expected_answer": {
+        "type": "value",
+        "value": "2022-06"
+      },
+      "expected_behavior": "flag_uncertainty",
+      "B1": {
+        "selected_event_ids": [
+          "S_053_0043",
+          "S_053_0001",
+          "S_053_0014",
+          "S_053_0075",
+          "S_053_0041",
+          "S_053_0037",
+          "S_053_0028",
+          "S_053_0095",
+          "S_053_0009",
+          "S_053_0005"
+        ],
+        "parsed_answer": {
+          "answer_text": "The patient began simvastatin in June 2022, but the exact start day is not known (reported only as 2022‑06).",
+          "status_claims": [],
+          "cited_event_ids": [
+            "S_053_0043"
+          ],
+          "abstain": false,
+          "conflict_flagged": false,
+          "uncertainty_noted": true
+        },
+        "metrics": {
+          "recall_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "recall_at_k": 1.0,
+          "ndcg_at_10": 1.0,
+          "ndcg_at_k": 1.0,
+          "mrr": 1.0,
+          "hit_rate_at_5": 1.0,
+          "stale_evidence_rate": 0.0,
+          "answer_correctness": 1.0,
+          "temporal_consistency": 1.0,
+          "contradiction_rate": 0.0,
+          "citation_precision": 1.0,
+          "citation_recall": 1.0,
+          "citation_f1": 1.0,
+          "abstention_accuracy": 1.0,
+          "conflict_flag_accuracy": 1.0,
+          "uncertainty_noted_accuracy": 1.0,
+          "grounded_faithfulness": 1.0
+        }
+      },
+      "B2": {
+        "selected_event_ids": [
+          "S_053_0043",
+          "S_053_0001",
+          "S_053_0014",
+          "S_053_0075",
+          "S_053_0041",
+          "S_053_0037",
+          "S_053_0028",
+          "S_053_0095",
+          "S_053_0009",
+          "S_053_0005"
+        ],
+        "parsed_answer": {
+          "answer_text": "The patient started simvastatin in June 2022; the exact start day is not known (only the month is recorded).",
+          "status_claims": [],
+          "cited_event_ids": [
+            "S_053_0043"
+          ],
+          "abstain": false,
+          "conflict_flagged": false,
+          "uncertainty_noted": true
+        },
+        "metrics": {
+          "recall_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "recall_at_k": 1.0,
+          "ndcg_at_10": 1.0,
+          "ndcg_at_k": 1.0,
+          "mrr": 1.0,
+          "hit_rate_at_5": 1.0,
+          "stale_evidence_rate": 0.0,
+          "answer_correctness": 1.0,
+          "temporal_consistency": 1.0,
+          "contradiction_rate": 0.0,
+          "citation_precision": 1.0,
+          "citation_recall": 1.0,
+          "citation_f1": 1.0,
+          "abstention_accuracy": 1.0,
+          "conflict_flag_accuracy": 1.0,
+          "uncertainty_noted_accuracy": 1.0,
+          "grounded_faithfulness": 1.0
+        }
+      }
+    }
+  ]
+}

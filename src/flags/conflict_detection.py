@@ -44,6 +44,7 @@ def detect_conflicts(
     selected_event_ids: list[str],
     patient_events: list[Event],
     as_of_date: str,
+    relevant_concepts: Optional[set[str]] = None,
 ) -> tuple[list[ConflictFlag], list[ProvenanceNote]]:
     """Detect C1, C2, and C3 conflicts and Track R provenance notes (Sections 7.5, 12.2)."""
     available = filter_candidate_pool(patient_events, as_of_date)
@@ -54,6 +55,7 @@ def detect_conflicts(
         e.concept.lower().strip()
         for e in selected_evs
         if e.concept.lower().strip() not in {"vital_signs", "ed_visit", "outpatient_visit", "triage_assessment"}
+        and (relevant_concepts is None or e.concept.lower().strip() in relevant_concepts)
     }
 
     # Group all available patient events sharing a selected concept
@@ -106,23 +108,17 @@ def detect_conflicts(
                 action1 = e1.attributes.get("action")
                 action2 = e2.attributes.get("action")
 
-                # Ignore normal sequential dose escalation where one order ends at the exact date the next starts
-                if (
+                # Sequential intervals where one order ends on or before the date the next order starts do not overlap
+                is_sequential = (
                     e1.valid_end is not None
                     and e2.valid_start is not None
                     and e1.valid_end <= e2.valid_start
-                    and (action2 == "dose_change" or action1 == "dose_change")
-                ):
-                    continue
-                if (
+                ) or (
                     e2.valid_end is not None
                     and e1.valid_start is not None
                     and e2.valid_end <= e1.valid_start
-                    and (action1 == "dose_change" or action2 == "dose_change")
-                ):
-                    continue
-
-                overlap = _intervals_overlap(e1, e2, as_of_date)
+                )
+                overlap = (not is_sequential) and _intervals_overlap(e1, e2, as_of_date)
 
                 # C1: Status conflict (overlapping validity, one active/open and another ended/discontinued across sources)
                 is_active_1 = (e1.valid_end is None or e1.valid_end > as_of_date) or rep1 == "active"

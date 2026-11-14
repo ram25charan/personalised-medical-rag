@@ -1104,7 +1104,7 @@ New optional fields may be added without breaking consumers. Renaming or removin
 
 | ID | Decision |
 |---|---|
-| TD1 | **Groq** replaces Gemini for generation |
+| TD1 | **Groq** is the primary LLM generator (`GROQ_API_KEY_1`, `GROQ_API_KEY_2` with automatic intra-provider key rotation on rate limits/errors); **Gemini Flash** (`GEMINI_API_KEY_1`, `GEMINI_API_KEY_2`) is supported as a secondary generator model (STRETCH comparison) and live demo fallback. Providers are never mixed within a single experimental comparison table (Section 3.4.4) |
 | TD2 | `all-MiniLM-L6-v2` + `rank-bm25` + reciprocal-rank fusion |
 | TD3 | Temperature 0, structured JSON output, response cache, resumable runner |
 | TD4 | Python 3.11/3.12/3.13, Streamlit, pandas, numpy, pytest, Git/GitHub |
@@ -1130,6 +1130,7 @@ New optional fields may be added without breaking consumers. Renaming or removin
 | 2026-11-14 | 1.0.1 | Updated TD4 to include Python 3.13 (local development environment runs Python 3.13.5). |
 | 2026-11-14 | 1.0.2 | Resolved DF6 in Phase 2: fixed synthetic dataset at 100 patients (34 dev, 66 test; 13,116 events total) and benchmark at 50 Track S dev, 100 Track S test, and 30 Track R test questions; froze `configs/relation_table.json` v1.0. |
 | 2026-11-15 | 1.0.3 | Completed Phase 3: froze per-intent weights in `configs/weights.json` (tuned on Track S dev only) and `insufficient_evidence_tau = 0.15`; completed retrieval-level evaluation across Track S and Track R with 1,000-resample paired bootstrap confidence intervals. |
+| 2026-11-15 | 1.0.4 | Updated TD1 before Phase 4: added support for 4 API keys (`GROQ_API_KEY_1`, `GROQ_API_KEY_2`, `GEMINI_API_KEY_1`, `GEMINI_API_KEY_2`) with intra-provider key rotation on rate limits/errors for experiments, Gemini Flash as the second generator model (STRETCH) and live demo provider option, while strictly keeping each experimental table pinned to a single model ID. |
 
 ---
 
