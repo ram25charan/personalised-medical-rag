@@ -170,9 +170,17 @@ def inject_design_system_css(view_mode: str) -> None:
         f"""
         <style>
         .block-container {{
-            padding-top: 1.5rem;
+            padding-top: 3.25rem;
             padding-bottom: 2.5rem;
             max-width: 1280px;
+        }}
+        .app-title {{
+            font-size: 1.45rem;
+            font-weight: 700;
+            color: #161616;
+            margin: 0;
+            padding-top: 4px;
+            line-height: 1.3;
         }}
         .prototype-banner {{
             background-color: #F4F6F8;
@@ -512,71 +520,77 @@ def build_timeline_figure(
         if e.event_type not in present_types:
             present_types.append(e.event_type)
 
-    # Draw interval bars for medication orders / conditions with valid_start and valid_end
+    # 1. Combine unselected interval bars into a single trace and selected interval bars into a single trace
+    unsel_bar_x: list[Any] = []
+    unsel_bar_y: list[Any] = []
+    sel_bar_x: list[Any] = []
+    sel_bar_y: list[Any] = []
+
     for ev in patient_events:
         d_start = _parse_iso_day(ev.valid_start or ev.observed_time)
-        if d_start is None:
+        if d_start is None or d_start > tq_date:
             continue
-        is_after_tq = d_start > tq_date
-        state_str = "AFTER_AS_OF_DATE" if is_after_tq else states_at_tq.get(ev.event_id, "UNKNOWN")
-        st_info = get_status_style(state_str) if not is_after_tq else {
-            "plot_color": "#C6C6C6",
-            "symbol": "◌",
-            "opacity": "0.30",
-        }
-        is_selected = ev.event_id in selected_rank_map
-        e_rank = selected_rank_map.get(ev.event_id)
-
         d_end = _parse_iso_day(ev.valid_end)
-        if ev.status_basis == "interval" and not is_after_tq:
+        if ev.status_basis == "interval":
             eff_end = min(d_end, tq_date) if d_end else tq_date
             if eff_end > d_start:
-                line_color = ACCENT_BLUE if is_selected else st_info["plot_color"]
-                line_width = 7 if is_selected else 4
-                fig.add_trace(
-                    go.Scatter(
-                        x=[to_x(d_start), to_x(eff_end)],
-                        y=[ev.event_type, ev.event_type],
-                        mode="lines",
-                        line=dict(
-                            color=line_color,
-                            width=line_width,
-                            dash="solid" if state_str in ("ACTIVE", "PERSISTENT") else "dot",
-                        ),
-                        opacity=0.95 if is_selected else float(st_info["opacity"]),
-                        hoverinfo="skip",
-                        showlegend=False,
-                    )
-                )
+                if ev.event_id in selected_rank_map:
+                    sel_bar_x.extend([to_x(d_start), to_x(eff_end), None])
+                    sel_bar_y.extend([ev.event_type, ev.event_type, None])
+                else:
+                    unsel_bar_x.extend([to_x(d_start), to_x(eff_end), None])
+                    unsel_bar_y.extend([ev.event_type, ev.event_type, None])
 
-    # Group point markers by status so legend shows verbatim status names + symbols
-    grouped: dict[str, list[tuple[Event, date, bool]]] = {}
+    if unsel_bar_x:
+        fig.add_trace(
+            go.Scatter(
+                x=unsel_bar_x,
+                y=unsel_bar_y,
+                mode="lines",
+                line=dict(color="#A8B2BD", width=4),
+                opacity=0.55,
+                hoverinfo="skip",
+                showlegend=False,
+            )
+        )
+    if sel_bar_x:
+        fig.add_trace(
+            go.Scatter(
+                x=sel_bar_x,
+                y=sel_bar_y,
+                mode="lines",
+                line=dict(color=ACCENT_BLUE, width=7),
+                opacity=0.90,
+                hoverinfo="skip",
+                showlegend=False,
+            )
+        )
+
+    # 2. Group point markers by verbatim status (unselected first, then selected on top)
+    grouped: dict[str, list[tuple[Event, date]]] = {}
+    selected_points: list[tuple[Event, date, str, int]] = []
     for ev in patient_events:
         d_pt = _parse_iso_day(ev.observed_time or ev.valid_start)
         if d_pt is None:
             continue
         is_after_tq = d_pt > tq_date
         st_key = "AFTER_AS_OF_DATE" if is_after_tq else states_at_tq.get(ev.event_id, "UNKNOWN")
-        grouped.setdefault(st_key, []).append((ev, d_pt, ev.event_id in selected_rank_map))
+        if ev.event_id in selected_rank_map and not is_after_tq:
+            selected_points.append((ev, d_pt, st_key, selected_rank_map[ev.event_id]))
+        else:
+            grouped.setdefault(st_key, []).append((ev, d_pt))
 
     for st_key, items in grouped.items():
         st_info = (
             get_status_style(st_key)
             if st_key != "AFTER_AS_OF_DATE"
-            else {"plot_color": "#C6C6C6", "symbol": "◌", "opacity": "0.35"}
+            else {"plot_color": "#C6C6C6", "symbol": "◌", "opacity": "0.40"}
         )
-        xs = [to_x(d_pt) for _, d_pt, _ in items]
-        ys = [ev.event_type for ev, _, _ in items]
-        texts = [
-            f"[E{selected_rank_map[ev.event_id]}]" if is_sel else ""
-            for ev, _, is_sel in items
-        ]
-        marker_sizes = [13 if is_sel else 8 for _, _, is_sel in items]
-        line_colors = [ACCENT_BLUE if is_sel else "#FFFFFF" for _, _, is_sel in items]
-        line_widths = [2.6 if is_sel else 0.8 for _, _, is_sel in items]
+        xs = [to_x(d_pt) for _, d_pt in items]
+        ys = [ev.event_type for ev, _ in items]
         hover_texts = [
             (
-                f"<b>{f'[E{selected_rank_map[ev.event_id]}] ' if is_sel else ''}{html.escape(ev.concept)}</b>"
+                f"<b>{html.escape(ev.concept)}</b>"
                 f"<br>ID: {ev.event_id} | Type: {ev.event_type}"
                 f"<br>Status at as_of_date: {st_key}"
                 f"<br>Observed/Start: {ev.observed_time or ev.valid_start or 'unknown'}"
@@ -584,35 +598,72 @@ def build_timeline_figure(
                 f"<br>Precision: {ev.date_precision}"
                 f"<br>Detail: {html.escape(ev.text[:90])}"
             )
-            for ev, _, is_sel in items
+            for ev, _ in items
         ]
         legend_name = (
-            f"{st_info['symbol']} {st_key}"
+            st_key
             if st_key != "AFTER_AS_OF_DATE"
-            else "◌ AFTER as_of_date (Excluded)"
+            else "AFTER as_of_date (Excluded)"
         )
         fig.add_trace(
             go.Scatter(
                 x=xs,
                 y=ys,
-                mode="markers+text",
+                mode="markers",
                 name=legend_name,
-                text=texts,
+                marker=dict(
+                    size=9,
+                    color=st_info["plot_color"],
+                    opacity=float(st_info["opacity"]),
+                    line=dict(color="#FFFFFF", width=1),
+                    symbol="diamond" if st_key == "PERSISTENT" else ("circle-open" if st_key in ("ENDED", "NOT_LISTED_LATEST") else ("x" if st_key == "SUPERSEDED" else "circle")),
+                ),
+                hovertext=hover_texts,
+                hoverinfo="text",
+            )
+        )
+
+    # 3. Draw selected top-k [E1..Ek] events on the top layer with bold accent outline and labels
+    if selected_points:
+        selected_points.sort(key=lambda item: item[3])
+        sel_xs = [to_x(d_pt) for _, d_pt, _, _ in selected_points]
+        sel_ys = [ev.event_type for ev, _, _, _ in selected_points]
+        sel_labels = [f"[E{rank}]" for _, _, _, rank in selected_points]
+        sel_colors = [get_status_style(st_k)["plot_color"] for _, _, st_k, _ in selected_points]
+        sel_hovers = [
+            (
+                f"<b>[E{rank}] {html.escape(ev.concept)}</b>"
+                f"<br>ID: {ev.event_id} | Type: {ev.event_type}"
+                f"<br>Status at as_of_date: {st_k}"
+                f"<br>Observed/Start: {ev.observed_time or ev.valid_start or 'unknown'}"
+                f"{f' -> End: {ev.valid_end}' if ev.valid_end else ''}"
+                f"<br>Precision: {ev.date_precision}"
+                f"<br>Detail: {html.escape(ev.text[:90])}"
+            )
+            for ev, _, st_k, rank in selected_points
+        ]
+        fig.add_trace(
+            go.Scatter(
+                x=sel_xs,
+                y=sel_ys,
+                mode="markers+text",
+                name="Selected Top-k [E#]",
+                text=sel_labels,
                 textposition="top center",
                 textfont=dict(
                     family="IBM Plex Mono, Consolas, monospace",
-                    size=10,
+                    size=11,
                     color=ACCENT_BLUE,
                 ),
                 marker=dict(
-                    size=marker_sizes,
-                    color=st_info["plot_color"],
-                    opacity=float(st_info["opacity"]),
-                    line=dict(color=line_colors, width=line_widths),
-                    symbol="diamond" if st_key == "PERSISTENT" else ("circle-open" if st_key in ("ENDED", "NOT_LISTED_LATEST") else "circle"),
+                    size=13,
+                    color=sel_colors,
+                    opacity=1.0,
+                    line=dict(color=ACCENT_BLUE, width=2.8),
+                    symbol="circle",
                 ),
-                hovertemplate="%{customdata}<extra></extra>",
-                customdata=hover_texts,
+                hovertext=sel_hovers,
+                hoverinfo="text",
             )
         )
 
@@ -626,8 +677,9 @@ def build_timeline_figure(
     )
     fig.add_annotation(
         x=x_tq,
-        y=1.06,
+        y=1.0,
         yref="paper",
+        yanchor="bottom",
         text=f"as_of_date: {f'Day +{(tq_date - day_zero).days}' if use_relative_days else as_of_date}",
         showarrow=False,
         font=dict(family="IBM Plex Mono, Consolas, monospace", size=11, color="#161616"),
@@ -652,30 +704,40 @@ def build_timeline_figure(
         else ("Shifted Calendar Date (Track R)" if track == "R" else "Clinical Timeline Date")
     )
     fig.update_layout(
-        height=320,
-        margin=dict(l=10, r=10, t=34, b=28),
+        template="plotly_white",
+        height=340,
+        margin=dict(l=140, r=24, t=56, b=42),
         plot_bgcolor="#FFFFFF",
         paper_bgcolor="#FFFFFF",
+        font=dict(family="IBM Plex Sans, sans-serif", color="#161616", size=12),
         xaxis=dict(
-            title=x_title,
+            title=dict(text=x_title, font=dict(size=12, color="#161616")),
             showgrid=True,
-            gridcolor="#EDF1F5",
+            gridcolor="#E5E9F0",
+            showline=True,
+            linecolor="#8D8D8D",
+            tickfont=dict(color="#161616", size=11),
             zeroline=False,
         ),
         yaxis=dict(
             title="",
+            type="category",
             categoryorder="array",
             categoryarray=list(reversed(present_types)),
             showgrid=True,
-            gridcolor="#F4F6F8",
+            gridcolor="#E5E9F0",
+            showline=True,
+            linecolor="#8D8D8D",
+            tickfont=dict(family="IBM Plex Mono, Consolas, monospace", color="#161616", size=11),
         ),
         legend=dict(
             orientation="h",
             yanchor="bottom",
-            y=1.12,
+            y=1.10,
             xanchor="left",
             x=0.0,
-            font=dict(family="IBM Plex Mono, Consolas, monospace", size=11),
+            font=dict(family="IBM Plex Mono, Consolas, monospace", size=11, color="#161616"),
+            bgcolor="rgba(255,255,255,0.9)",
         ),
     )
     return fig
@@ -1031,15 +1093,19 @@ def main() -> None:
     configs = load_static_configs()
 
     # Top bar: Title + View Mode Switch
-    top_col1, top_col2 = st.columns([4, 1])
+    top_col1, top_col2 = st.columns([3.8, 1.2], vertical_alignment="center")
     with top_col1:
-        st.markdown("### Chronology-Aware Clinical Record & Evidence Viewer")
+        st.markdown(
+            '<div class="app-title">Chronology-Aware Clinical Record &amp; Evidence Viewer</div>',
+            unsafe_allow_html=True,
+        )
     with top_col2:
         view_mode = st.radio(
-            "Display Density Mode",
+            "View Mode",
             options=["Patient", "Clinician"],
             horizontal=True,
             index=1,
+            label_visibility="collapsed",
         )
 
     inject_design_system_css(view_mode)
@@ -1055,7 +1121,7 @@ def main() -> None:
 
     # Primary Control Bar (Progressive Disclosure: Patient, Date, System, Question up front)
     with st.container(border=True):
-        ctrl1, ctrl2, ctrl3, ctrl4 = st.columns([1.3, 1.4, 1.3, 2.0])
+        ctrl1, ctrl2, ctrl3, ctrl4 = st.columns([1.2, 1.1, 1.1, 2.2], vertical_alignment="bottom")
         with ctrl1:
             track_choice = st.selectbox(
                 "Data Track",
@@ -1088,9 +1154,10 @@ def main() -> None:
                 for q in patient_questions
             ]
             selected_preset = st.selectbox(
-                "Preset Benchmark Questions (loads question & as_of_date only)",
+                "Preset Benchmark Question",
                 options=preset_options,
                 index=1 if len(preset_options) > 1 else 0,
+                help="Loads only question text and as_of_date (never gold labels).",
             )
 
         active_preset_q: Optional[Question] = None
@@ -1101,8 +1168,9 @@ def main() -> None:
 
         with ctrl3:
             as_of_date_str = st.text_input(
-                "Query Date (as_of_date, YYYY-MM-DD)",
+                "Query Date (as_of_date)",
                 value=default_as_of,
+                help="ISO format YYYY-MM-DD",
             ).strip()
 
         q_col1, q_col2 = st.columns([3.5, 1.5])
@@ -1224,7 +1292,7 @@ def main() -> None:
             use_relative_days=use_rel_days,
             window_start=window_start_val,
         )
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, use_container_width=True, theme=None)
 
     # Clinician Mode Stretch Summary
     if view_mode == "Clinician":
