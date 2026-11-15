@@ -282,7 +282,7 @@ def load_jsonl(model_cls: type[BaseModel], path: str | Path) -> list[Any]:
     in_path = Path(path)
     results = []
     with in_path.open("r", encoding="utf-8") as f:
-        for line_num, line in enumerate(f, start=1):
+        for line in f:
             stripped = line.strip()
             if not stripped:
                 continue

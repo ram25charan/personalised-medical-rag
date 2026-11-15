@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Optional
-
 import numpy as np
 
 from src.retrieval.bm25 import build_event_search_text

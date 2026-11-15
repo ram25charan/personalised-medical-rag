@@ -170,7 +170,7 @@ def build_events(raw: dict[str, pd.DataFrame]) -> list[Event]:
         medrecon_groups[(stay_id, concept)].append((int(idx), row, concept_class))
 
     for (stay_id, concept), entries in medrecon_groups.items():
-        first_idx, first_row, first_class = entries[0]
+        _, first_row, first_class = entries[0]
         subject_id = int(first_row["subject_id"])
         pid = f"R{subject_id}"
         source_rows = [e[0] for e in entries]
@@ -480,7 +480,7 @@ def build_coverage_report(events: list[Event]) -> dict[str, Any]:
     patients_with_within_visit_vital_series = 0
     stays_with_medrecon_pyxis_overlap = 0
 
-    for pid, p_events in by_patient.items():
+    for p_events in by_patient.values():
         visits = [ev for ev in p_events if ev.event_type == "visit"]
         med_by_stay: dict[str, set[str]] = defaultdict(set)
         pyxis_by_stay: dict[str, set[str]] = defaultdict(set)

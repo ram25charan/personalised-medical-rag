@@ -7,7 +7,6 @@ Computes Recall@5, Recall@10, nDCG@10, MRR, Hit Rate@5, and Stale-Evidence Rate
 from __future__ import annotations
 
 import math
-from typing import Any
 
 
 def recall_at_k(ranked_ids: list[str], gold_ids: list[str], k: int) -> float:

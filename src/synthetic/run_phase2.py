@@ -40,7 +40,6 @@ def run_phase2(
     s_patients = sorted({e.patient_id for e in s_events})
     dev_patients = sorted({q.patient_id for q in questions if q.track == "S" and q.split == "dev"})
     test_s_patients = sorted({q.patient_id for q in questions if q.track == "S" and q.split == "test"})
-    test_r_patients = sorted({q.patient_id for q in questions if q.track == "R" and q.split == "test"})
 
     q_by_id = {q.question_id: q for q in questions}
     cat_counts_s_dev = Counter(

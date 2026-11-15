@@ -17,7 +17,6 @@ import json
 import subprocess
 from collections import defaultdict
 from datetime import date
-from pathlib import Path
 from typing import Any, Optional
 
 from src.evaluation.answer_metrics import evaluate_single_answer

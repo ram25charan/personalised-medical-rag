@@ -277,7 +277,6 @@ def run_retrieval_experiments(
     budget_systems = ["B1", "RS4", "RS5", "B3", "B2"]
     for split_name in ["S_test", "R_test"]:
         split_qs = splits[split_name]
-        ans_qs = [q for q in split_qs if len(gold_by_qid[q.question_id].gold_events) > 0]
         budget_table: dict[str, dict[str, dict[str, float]]] = defaultdict(dict)
 
         for k_val in budget_ks:

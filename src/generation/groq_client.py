@@ -43,14 +43,14 @@ def load_api_keys(env_path: str | Path = ".env") -> dict[str, list[tuple[str, st
         return str(val).strip()
 
     groq_keys: list[tuple[str, str]] = []
-    for idx, kname in enumerate(["GROQ_API_KEY_1", "GROQ_API_KEY_2", "GROQ_API_KEY"], start=1):
+    for kname in ["GROQ_API_KEY_1", "GROQ_API_KEY_2", "GROQ_API_KEY"]:
         val = _get(kname)
         if val and not val.startswith("your_") and val not in [k for _, k in groq_keys]:
             label = f"groq-{len(groq_keys) + 1}"
             groq_keys.append((label, val))
 
     gemini_keys: list[tuple[str, str]] = []
-    for idx, kname in enumerate(["GEMINI_API_KEY_1", "GEMINI_API_KEY_2", "GEMINI_API_KEY"], start=1):
+    for kname in ["GEMINI_API_KEY_1", "GEMINI_API_KEY_2", "GEMINI_API_KEY"]:
         val = _get(kname)
         if val and not val.startswith("your_") and val not in [k for _, k in gemini_keys]:
             label = f"gemini-{len(gemini_keys) + 1}"

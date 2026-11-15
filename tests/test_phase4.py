@@ -22,10 +22,8 @@ from src.evaluation.answer_metrics import (
     answer_correctness,
     citation_precision_recall_f1,
     conflict_flag_accuracy,
-    contradiction_rate,
     evaluate_single_answer,
     grounded_faithfulness,
-    temporal_consistency,
     uncertainty_noted_accuracy,
 )
 from src.generation.cache import load_cached_response, save_cached_response

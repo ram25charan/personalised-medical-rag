@@ -4,7 +4,6 @@ event construction, provenance, intra-stay duplicate collapsing, and timelines (
 
 from __future__ import annotations
 
-import json
 from pathlib import Path
 
 import pytest

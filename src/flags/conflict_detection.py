@@ -105,8 +105,6 @@ def detect_conflicts(
                 src2 = e2.attributes.get("clinical_source") or e2.source_table
                 rep1 = e1.attributes.get("reported_status")
                 rep2 = e2.attributes.get("reported_status")
-                action1 = e1.attributes.get("action")
-                action2 = e2.attributes.get("action")
 
                 # Sequential intervals where one order ends on or before the date the next order starts do not overlap
                 is_sequential = (

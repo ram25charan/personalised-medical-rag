@@ -18,7 +18,7 @@ from __future__ import annotations
 import html
 import re
 import sys
-from datetime import date, datetime
+from datetime import date
 from pathlib import Path
 from typing import Any, Optional
 

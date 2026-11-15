@@ -7,7 +7,6 @@ on hand-computed examples (Sections 10.6 & 11.5).
 from __future__ import annotations
 
 import math
-from pathlib import Path
 
 import pytest
 
@@ -22,13 +21,12 @@ from src.evaluation.retrieval_metrics import (
 from src.flags.conflict_detection import detect_conflicts
 from src.flags.uncertainty import uncertainty_flags
 from src.fusion.fusion import compute_fused_scores, validate_weights
-from src.fusion.selection import order_chronologically, select
-from src.pipeline import run_pipeline
-from src.retrieval.rrf import min_max_normalise, rq_scores
+from src.fusion.selection import select
+from src.retrieval.rrf import rq_scores
 from src.schemas import Event
 from src.temporal.history_relevance import load_relation_table, rh_scores
 from src.temporal.state import compute_state, filter_candidate_pool
-from src.temporal.temporal_scoring import classify_intent_by_rules, load_rt_rules, rt_scores
+from src.temporal.temporal_scoring import rt_scores
 
 
 def _make_event(
