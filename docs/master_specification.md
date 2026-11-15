@@ -1133,6 +1133,7 @@ New optional fields may be added without breaking consumers. Renaming or removin
 | 2026-11-15 | 1.0.4 | Updated TD1 before Phase 4: added support for 4 API keys (`GROQ_API_KEY_1`, `GROQ_API_KEY_2`, `GEMINI_API_KEY_1`, `GEMINI_API_KEY_2`) with intra-provider key rotation on rate limits/errors for experiments, Gemini Flash as the second generator model (STRETCH) and live demo provider option, while strictly keeping each experimental table pinned to a single model ID. |
 | 2026-11-15 | 1.0.5 | Completed Phase 4: resolved DF1 and DF5 (`openai/gpt-oss-120b` with `reasoning_effort = "low"` for Groq; `gemini-flash-lite-latest` for Gemini Flash); froze prompt template `v1.0`; evaluated all 6 generation systems (`B1`, `B2`, `B1+`, `B2-`, `B4`, `ORACLE`) on `S_test` (100 questions) and `R_test` (30 questions) across both generators with 1,000-resample paired bootstrap CIs, $2 \times 2$ factorial decomposition (`E3`), per-category breakdowns (`E4`), 20-response stratified manual review, and Section 8.9 failure taxonomy. |
 | 2026-11-15 | 1.0.6 | Completed Phase 5: built 25-passage demo clinical corpus (`data/corpus/demo_corpus.jsonl`, 100–200 words per passage, zero advice/dosing terms, 100% pipeline concept alignment) with automated validator (`src/retrieval/validate_corpus.py`), thresholded BM25 + MiniLM + RRF corpus retrieval (`top_k = 2`, `src/retrieval/corpus_retrieval.py`), and single-page Streamlit Clinical Record Viewer (`app/main.py`, `.streamlit/config.toml`) featuring verbatim status badges, longitudinal swimlane timeline (with relative-day axis for Track R), immediate zero-LLM `B1 vs B2` selection diff, single pinned model per provider, and Gemini blocked on Track R. |
+| 2026-11-15 | 1.0.7 | Completed Phase 6 code, figures, and reproducibility package: wrote comprehensive unified `README.md`, added `experiments/generate_figures.py` (`matplotlib>=3.9.0` in `requirements.txt`), and generated 5 300-DPI publication figures (`results/figures/fig1_budget_curve_E1.png` through `fig5_factorial_E3.png`). IEEE paper drafting deferred per user request. |
 
 ---
 
@@ -1173,13 +1174,18 @@ New optional fields may be added without breaking consumers. Renaming or removin
   - Single-page Streamlit Clinical Record Viewer (`app/main.py`, `.streamlit/config.toml`, `docs/demo_and_corpus_phase5.md`) with Patient/Clinician density modes, longitudinal swimlane timeline (with relative-day axis for Track R), verbatim status badges, immediate zero-LLM `B1 vs B2` selection diff with on-demand generation, structured clinician history summary (STRETCH), single pinned model per provider, and Gemini blocked on Track R.
   - Phase 5 unit test suite (`tests/test_phase5.py`, 31/31 total tests passing).
 
+- **Phase 6 (Figures, Comprehensive README & Reproducibility Package — Technical Deliverables Complete):**
+  - Unified, detailed project documentation in `README.md` covering architecture, datasets, retrieval and multi-generator evaluation results, Streamlit application, reproduction commands, and all 31 unit/integration tests.
+  - Publication figure generator (`experiments/generate_figures.py`) producing 5 300-DPI figures (`fig1_budget_curve_E1.png`, `fig2_weight_sensitivity.png`, `fig3_generation_comparison.png`, `fig4_category_breakdown_E4.png`, `fig5_factorial_E3.png`) in `results/figures/`.
+  - Codebase cleanup across all 5 phases (`18a96fe`) and updated `requirements.txt` (`matplotlib>=3.9.0`).
+
 ### 15.2 Current Implementation State
 
-Phases 1, 2, 3, 4, and 5 are **complete** and verified (`v0.5-phase5`). Ready to start Phase 6 (Publication figures, IEEE research paper draft, final README, and reproducibility package).
+All software, data, benchmark, evaluation, UI, figure, and reproducibility deliverables (Phases 1–5 + Phase 6 technical package) are **complete** and verified (`31 / 31` unit tests passing).
 
 ### 15.3 Outstanding Work
 
-Phase 6 (Section 11).
+- IEEE research paper draft (`docs/paper_ieee.md`) — deferred per user instruction.
 
 ### 15.4 Known Issues and Blockers
 
@@ -1191,7 +1197,7 @@ Phase 6 (Section 11).
 
 ### 15.5 Next Recommended Action
 
-Start **Phase 6** (Generate publication figures in `results/figures/`, write the complete IEEE research paper in `docs/paper_ieee.md`, and finalize `README.md` and the reproducibility package).
+Merge `phase-6` into `main` (if desired) and use the verified tables (`docs/retrieval_evaluation_phase3.md`, `docs/generation_evaluation_phase4.md`) and figures (`results/figures/`) for the final paper or presentation.
 
 ---
 
