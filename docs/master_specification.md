@@ -1132,6 +1132,7 @@ New optional fields may be added without breaking consumers. Renaming or removin
 | 2026-11-15 | 1.0.3 | Completed Phase 3: froze per-intent weights in `configs/weights.json` (tuned on Track S dev only) and `insufficient_evidence_tau = 0.15`; completed retrieval-level evaluation across Track S and Track R with 1,000-resample paired bootstrap confidence intervals. |
 | 2026-11-15 | 1.0.4 | Updated TD1 before Phase 4: added support for 4 API keys (`GROQ_API_KEY_1`, `GROQ_API_KEY_2`, `GEMINI_API_KEY_1`, `GEMINI_API_KEY_2`) with intra-provider key rotation on rate limits/errors for experiments, Gemini Flash as the second generator model (STRETCH) and live demo provider option, while strictly keeping each experimental table pinned to a single model ID. |
 | 2026-11-15 | 1.0.5 | Completed Phase 4: resolved DF1 and DF5 (`openai/gpt-oss-120b` with `reasoning_effort = "low"` for Groq; `gemini-flash-lite-latest` for Gemini Flash); froze prompt template `v1.0`; evaluated all 6 generation systems (`B1`, `B2`, `B1+`, `B2-`, `B4`, `ORACLE`) on `S_test` (100 questions) and `R_test` (30 questions) across both generators with 1,000-resample paired bootstrap CIs, $2 \times 2$ factorial decomposition (`E3`), per-category breakdowns (`E4`), 20-response stratified manual review, and Section 8.9 failure taxonomy. |
+| 2026-11-15 | 1.0.6 | Completed Phase 5: built 25-passage demo clinical corpus (`data/corpus/demo_corpus.jsonl`, 100–200 words per passage, zero advice/dosing terms, 100% pipeline concept alignment) with automated validator (`src/retrieval/validate_corpus.py`), thresholded BM25 + MiniLM + RRF corpus retrieval (`top_k = 2`, `src/retrieval/corpus_retrieval.py`), and single-page Streamlit Clinical Record Viewer (`app/main.py`, `.streamlit/config.toml`) featuring verbatim status badges, longitudinal swimlane timeline (with relative-day axis for Track R), immediate zero-LLM `B1 vs B2` selection diff, single pinned model per provider, and Gemini blocked on Track R. |
 
 ---
 
@@ -1166,14 +1167,19 @@ New optional fields may be added without breaking consumers. Renaming or removin
   - Deterministic answer-level evaluation metrics (`src/evaluation/answer_metrics.py`), resumable priority-ordered benchmark runner (`src/evaluation/runner.py`, `experiments/run_generation.py`), and comprehensive comparison report generator (`experiments/compare.py`, `docs/generation_evaluation_phase4.md`).
   - Full 6-system evaluation (`B1`, `B2`, `B1+`, `B2-`, `B4`, `ORACLE`) on `S_test` (100 questions) and `R_test` (30 questions) across both **Groq (`openai/gpt-oss-120b`)** (`results/metrics/generation_metrics.json`) and **Gemini Flash (`gemini-flash-lite-latest`)** (`results/metrics/generation_metrics_gemini.json`), including paired bootstrap hypothesis tests (`H1/H2`, `H3`), $2 \times 2$ Selection $\times$ Annotation factorial (`E3`), per-category breakdowns (`E4`), 20-response stratified manual review (`results/metrics/manual_review_20.json`), and Section 8.9 failure taxonomy.
   - Phase 4 unit test suite (`tests/test_phase4.py`, 27/27 total tests passing).
+- **Phase 5 (Demo Clinical Corpus and Single-Page Streamlit Record Viewer):**
+  - 25-passage demo clinical corpus (`data/corpus/demo_corpus.jsonl`: 9 MedlinePlus condition overviews, 6 MedlinePlus lab test explainers, 10 paraphrased FDA DailyMed drug-class notes; 100–200 words each; zero dosing/advice words) and automated corpus validator (`src/retrieval/validate_corpus.py`).
+  - Thresholded BM25 + MiniLM + RRF corpus retrieval (`src/retrieval/corpus_retrieval.py`, `top_k = 2`) with off-topic/U5 suppression and strict separation guard (`assert_no_corpus_citation_in_claims`).
+  - Single-page Streamlit Clinical Record Viewer (`app/main.py`, `.streamlit/config.toml`, `docs/demo_and_corpus_phase5.md`) with Patient/Clinician density modes, longitudinal swimlane timeline (with relative-day axis for Track R), verbatim status badges, immediate zero-LLM `B1 vs B2` selection diff with on-demand generation, structured clinician history summary (STRETCH), single pinned model per provider, and Gemini blocked on Track R.
+  - Phase 5 unit test suite (`tests/test_phase5.py`, 31/31 total tests passing).
 
 ### 15.2 Current Implementation State
 
-Phases 1, 2, 3, and 4 are **complete** and verified (`v0.4-phase4`). Ready to start Phase 5 (Demo clinical corpus and single-page Streamlit application).
+Phases 1, 2, 3, 4, and 5 are **complete** and verified (`v0.5-phase5`). Ready to start Phase 6 (Publication figures, IEEE research paper draft, final README, and reproducibility package).
 
 ### 15.3 Outstanding Work
 
-Phases 5 and 6 (Section 11).
+Phase 6 (Section 11).
 
 ### 15.4 Known Issues and Blockers
 
@@ -1185,7 +1191,7 @@ Phases 5 and 6 (Section 11).
 
 ### 15.5 Next Recommended Action
 
-Start **Phase 5** (Demo clinical corpus `data/corpus/demo_corpus.jsonl`, corpus retrieval `src/retrieval/corpus_retrieval.py`, and single-page Streamlit application `app/main.py`).
+Start **Phase 6** (Generate publication figures in `results/figures/`, write the complete IEEE research paper in `docs/paper_ieee.md`, and finalize `README.md` and the reproducibility package).
 
 ---
 
