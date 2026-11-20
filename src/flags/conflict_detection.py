@@ -58,7 +58,6 @@ def detect_conflicts(
         and (relevant_concepts is None or e.concept.lower().strip() in relevant_concepts)
     }
 
-    # Group all available patient events sharing a selected concept
     by_concept: dict[str, list[Event]] = defaultdict(list)
     for ev in available:
         c_low = ev.concept.lower().strip()
@@ -73,7 +72,6 @@ def detect_conflicts(
         if len(evs) < 2:
             continue
 
-        # Track R check: mismatch between medrecon and pyxis is an informational provenance note
         has_medrecon = [e for e in evs if e.source_table == "medrecon"]
         has_pyxis = [e for e in evs if e.source_table == "pyxis"]
         if has_medrecon and has_pyxis:
@@ -89,12 +87,10 @@ def detect_conflicts(
                 )
             )
 
-        # Pairwise conflict check on interval-basis records
         n = len(evs)
         for i in range(n):
             for j in range(i + 1, n):
                 e1, e2 = evs[i], evs[j]
-                # Skip Track R medrecon vs pyxis pairs
                 if {e1.source_table, e2.source_table} == {"medrecon", "pyxis"}:
                     continue
                 if e1.status_basis == "snapshot" or e2.status_basis == "snapshot":
@@ -106,7 +102,6 @@ def detect_conflicts(
                 rep1 = e1.attributes.get("reported_status")
                 rep2 = e2.attributes.get("reported_status")
 
-                # Sequential intervals where one order ends on or before the date the next order starts do not overlap
                 is_sequential = (
                     e1.valid_end is not None
                     and e2.valid_start is not None
@@ -118,14 +113,12 @@ def detect_conflicts(
                 )
                 overlap = (not is_sequential) and _intervals_overlap(e1, e2, as_of_date)
 
-                # C1: Status conflict (overlapping validity, one active/open and another ended/discontinued across sources)
                 is_active_1 = (e1.valid_end is None or e1.valid_end > as_of_date) or rep1 == "active"
                 is_ended_1 = (e1.valid_end is not None and e1.valid_end <= as_of_date) or rep1 == "ended"
                 is_active_2 = (e2.valid_end is None or e2.valid_end > as_of_date) or rep2 == "active"
                 is_ended_2 = (e2.valid_end is not None and e2.valid_end <= as_of_date) or rep2 == "ended"
 
                 if overlap and ((is_active_1 and is_ended_2) or (is_active_2 and is_ended_1)):
-                    # Check that they are concurrent conflicting reports (e.g. different clinical_source or overlapping open end)
                     if src1 != src2 or (e1.valid_end is None or e2.valid_end is None):
                         key = ("C1", pair_ids[0], pair_ids[1])
                         if key not in seen_pairs:
@@ -139,12 +132,10 @@ def detect_conflicts(
                             )
                             continue
 
-                # C2: Dose conflict (same medication, overlapping active validity, different doses)
                 if e1.event_type == "medication_order" and e2.event_type == "medication_order":
                     dose1 = e1.attributes.get("dose")
                     dose2 = e2.attributes.get("dose")
                     if overlap and dose1 and dose2 and str(dose1).strip().lower() != str(dose2).strip().lower():
-                        # Both open or concurrent overlapping active intervals
                         if (e1.valid_end is None and e2.valid_end is None) or (src1 and src2 and src1 != src2):
                             key = ("C2", pair_ids[0], pair_ids[1])
                             if key not in seen_pairs:
@@ -158,7 +149,6 @@ def detect_conflicts(
                                 )
                                 continue
 
-                # C3: Date conflict (same concept and type reported across different sources with dates > 30 days apart)
                 if e1.event_type == e2.event_type and src1 and src2 and src1 != src2:
                     d1 = _parse_iso_day(e1.observed_time)
                     d2 = _parse_iso_day(e2.observed_time)

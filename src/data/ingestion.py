@@ -102,7 +102,6 @@ def assess_data_quality(
     triage = raw["triage"]
     vitalsign = raw["vitalsign"]
 
-    # File hashes
     file_hashes = {}
     for name in EXPECTED_TABLE_ROWS:
         try:
@@ -110,16 +109,13 @@ def assess_data_quality(
         except FileNotFoundError:
             file_hashes[name] = None
 
-    # Missing value counts per table
     missing_values: dict[str, dict[str, int]] = {}
     for name, df in raw.items():
         na_counts = df.isna().sum().to_dict()
         missing_values[name] = {k: int(v) for k, v in na_counts.items() if v > 0}
 
-    # Exact duplicate row counts
     duplicate_rows = {name: int(df.duplicated().sum()) for name, df in raw.items()}
 
-    # Relational integrity check (all stay_ids in child tables exist in edstays)
     valid_stays = set(edstays["stay_id"].unique())
     valid_subjects = set(edstays["subject_id"].unique())
     orphan_stays: dict[str, int] = {}
@@ -130,14 +126,12 @@ def assess_data_quality(
         if "subject_id" in df.columns:
             orphan_subjects[name] = int((~df["subject_id"].isin(valid_subjects)).sum())
 
-    # Timestamp checks on edstays
     intime_dt = pd.to_datetime(edstays["intime"], errors="coerce")
     outtime_dt = pd.to_datetime(edstays["outtime"], errors="coerce")
     invalid_intime = int(intime_dt.isna().sum())
     invalid_outtime = int(outtime_dt.isna().sum())
     inverted_stay_times = int((outtime_dt < intime_dt).sum())
 
-    # Longitudinal structure (Section 6.2)
     stays_per_patient = edstays.groupby("subject_id")["stay_id"].nunique()
     patients_2plus_stays = int((stays_per_patient >= 2).sum())
     patients_3plus_stays = int((stays_per_patient >= 3).sum())
@@ -156,17 +150,14 @@ def assess_data_quality(
     medrecon_stays_per_patient = medrecon.groupby("subject_id")["stay_id"].nunique()
     patients_2plus_medrecon_visits = int((medrecon_stays_per_patient >= 2).sum())
 
-    # Multi-visit stays missing a medication list
     multi_visit_stays = edstays[edstays["subject_id"].isin(multi_visit_ids)]
     multi_visit_stays_without_medrecon = int(
         (~multi_visit_stays["stay_id"].isin(set(medrecon["stay_id"].unique()))).sum()
     )
 
-    # Patients with both ICD-9 and ICD-10 diagnosis codes
     icd_versions_per_patient = diagnosis.groupby("subject_id")["icd_version"].nunique()
     patients_both_icd9_and_icd10 = int((icd_versions_per_patient > 1).sum())
 
-    # Physiological outlier flags (vitalsign & triage) - flagged, never deleted
     def count_vital_outliers(df: pd.DataFrame) -> dict[str, int]:
         flags: dict[str, int] = {}
         if "temperature" in df.columns:

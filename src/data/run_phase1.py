@@ -36,7 +36,6 @@ def run_phase1(
     timelines = build_patient_timelines(events)
     coverage_report = build_coverage_report(events)
 
-    # Save processed JSON/JSONL artifacts
     save_jsonl(events, out_dir / "events.jsonl")
 
     with (out_dir / "quality_report.json").open("w", encoding="utf-8") as f:
@@ -48,7 +47,6 @@ def run_phase1(
     with (out_dir / "coverage_report.json").open("w", encoding="utf-8") as f:
         json.dump(coverage_report, f, indent=2)
 
-    # Also write human-readable markdown summary in docs/data_audit_phase1.md
     ls = quality_report["longitudinal_summary"]
     le = coverage_report["longitudinal_evidence_counts"]
     md_lines = [

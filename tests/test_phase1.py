@@ -81,14 +81,12 @@ def test_medication_normalisation_brand_and_brackets(raw_data):
     gsn_to_concept, gsn_to_class = build_gsn_canonical_map(
         raw_data["medrecon"], raw_data["pyxis"]
     )
-    # GSN 386 has both 'enalapril maleate' and 'Vasotec' -> resolves to lowercase generic 'enalapril maleate'
     concept_386, class_386 = normalise_medication(
         "Vasotec", 386, None, gsn_to_concept, gsn_to_class
     )
     assert concept_386 == "enalapril maleate"
     assert class_386 == "ACE Inhibitors"
 
-    # GSN 18 has 'digoxin' and 'digoxin [Digitek]' -> resolves to 'digoxin'
     concept_18, _ = normalise_medication(
         "digoxin [Digitek]", 18, None, gsn_to_concept, gsn_to_class
     )
@@ -105,7 +103,6 @@ def test_event_construction_and_provenance(raw_data, track_r_events):
     """Verify event schema compliance, provenance tracking, and intra-stay duplicate collapsing."""
     assert len(track_r_events) == 5471
 
-    # Every event must be a valid Event instance with Track R provenance
     event_ids = set()
     medrecon_rows_covered = set()
 
@@ -128,10 +125,8 @@ def test_event_construction_and_provenance(raw_data, track_r_events):
         else:
             assert ev.status_basis == "interval"
 
-    # All 2,764 raw medrecon rows must be accounted for in the collapsed provenance source_rows
     assert len(medrecon_rows_covered) == 2764
 
-    # Check that duplicate normalised drugs within the same stay were collapsed
     stay_med_pairs = set()
     for ev in track_r_events:
         if ev.event_type == "reported_home_medication":
@@ -148,7 +143,6 @@ def test_timelines_and_coverage_report(track_r_events):
     for pid, tl in timelines.items():
         assert tl["patient_id"] == pid
         assert tl["visit_count"] >= 1
-        # Check relative_day is non-decreasing
         rel_days = [
             e["relative_day"] for e in tl["events"] if e["relative_day"] is not None
         ]
@@ -266,7 +260,6 @@ def test_all_contract_schemas_validate():
     )
     assert rr.k == 10
 
-    # Extra unknown fields must be rejected by strict contracts
     with pytest.raises(ValidationError):
         Question(
             question_id="Q_1",

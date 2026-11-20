@@ -191,7 +191,6 @@ def test_deterministic_answer_metrics_status_and_contradiction() -> None:
         expected_flags=[],
     )
 
-    # Correct answer (B2 style)
     good_ans = AnswerJSON(
         answer_text="Amlodipine was discontinued on 2022-09-09.",
         status_claims=[StatusClaim(concept="amlodipine", status="ENDED")],
@@ -209,7 +208,6 @@ def test_deterministic_answer_metrics_status_and_contradiction() -> None:
     assert m_good["citation_f1"] == 1.0
     assert m_good["grounded_faithfulness"] == 1.0
 
-    # Contradictory answer claiming ENDED drug is ACTIVE (B1 failure mode)
     bad_ans = AnswerJSON(
         answer_text="The patient is currently taking amlodipine 5 mg daily.",
         status_claims=[StatusClaim(concept="amlodipine", status="ACTIVE")],
@@ -228,7 +226,6 @@ def test_deterministic_answer_metrics_status_and_contradiction() -> None:
 
 
 def test_deterministic_answer_metrics_set_ordered_and_abstain() -> None:
-    # 1. Ordered values
     gold_ord = Gold(
         question_id="Q_ORD",
         intent="change_over_time",
@@ -250,7 +247,6 @@ def test_deterministic_answer_metrics_set_ordered_and_abstain() -> None:
     p, r, f1 = citation_precision_recall_f1(ans_ord.cited_event_ids, gold_ord.gold_events)
     assert (p, r, f1) == (1.0, 1.0, 1.0)
 
-    # 2. Set F1 on conflict question
     gold_conf = Gold(
         question_id="Q_CONF",
         intent="current_state",
@@ -278,7 +274,6 @@ def test_deterministic_answer_metrics_set_ordered_and_abstain() -> None:
     assert conflict_flag_accuracy(ans_conf, gold_conf) == 1.0
     assert uncertainty_noted_accuracy(ans_conf, gold_conf) == 1.0
 
-    # 3. Abstention on insufficient evidence
     gold_abs = Gold(
         question_id="Q_ABS",
         intent="current_state",

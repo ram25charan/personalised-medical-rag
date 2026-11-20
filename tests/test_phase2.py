@@ -67,7 +67,6 @@ def test_gold_and_distractor_event_integrity():
 
     for g in golds:
         q = q_by_id[g.question_id]
-        # Gold and distractor sets for a question must be disjoint
         assert len(set(g.gold_events) & set(g.distractor_events)) == 0
 
         if g.category == "insufficient_evidence":
@@ -83,7 +82,6 @@ def test_gold_and_distractor_event_integrity():
                 f"Cross-patient leak in gold: {ev.patient_id} != {q.patient_id}"
             )
             if ev.observed_time is not None:
-                # Must be observed on or before as_of_date
                 assert ev.observed_time <= q.as_of_date, (
                     f"Future event in gold/distractors: {ev.observed_time} > {q.as_of_date}"
                 )

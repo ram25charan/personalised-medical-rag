@@ -37,7 +37,6 @@ def extract_question_anchors(
     found: list[str] = []
     concepts_dict = relation_table.get("concepts", {})
 
-    # 1. Check lexicon concepts and synonyms
     for canonical, info in concepts_dict.items():
         synonyms = [canonical] + [s.lower() for s in info.get("synonyms", [])]
         for syn in synonyms:
@@ -46,7 +45,6 @@ def extract_question_anchors(
                     found.append(canonical)
                 break
 
-    # 2. Also check exact concepts present in the patient's candidate pool (for Track R specific drugs/diagnoses)
     if candidate_events:
         for ev in candidate_events:
             c_low = ev.concept.lower().strip()
@@ -76,7 +74,6 @@ def build_anchor_set(
     lexicon_anchors = extract_question_anchors(question_text, relation_table, candidate_events)
     anchors = list(lexicon_anchors)
 
-    # Top-5 events by Rq
     sorted_evs = sorted(
         candidate_events,
         key=lambda e: (rq_scores.get(e.event_id, 0.0), e.observed_time or ""),
@@ -88,7 +85,6 @@ def build_anchor_set(
         if c not in _GENERIC_CONCEPTS and c not in anchors:
             anchors.append(c)
 
-    # Encounters of events that match the primary lexicon anchors (or top-2 Rq events if no lexicon anchor matched)
     primary_set = set(lexicon_anchors) if lexicon_anchors else {
         e.concept.lower().strip()
         for e in top_evs[:2]
@@ -113,7 +109,6 @@ def rh_scores(
     anchor_list = [a.lower().strip() for a in anchors if a.strip()]
     anchor_set = set(anchor_list)
 
-    # Precompute related concepts and classes for all anchors
     related_to_anchors: set[str] = set()
     anchor_classes: set[str] = set()
 
@@ -125,7 +120,6 @@ def rh_scores(
             for rel_c in info.get("related_concepts", []):
                 related_to_anchors.add(rel_c.lower().strip())
 
-    # Also check reverse relation links and patient event classes for anchors
     for c_name, info in concepts_dict.items():
         rels = {r.lower().strip() for r in info.get("related_concepts", [])}
         if rels & anchor_set:
@@ -135,7 +129,6 @@ def rh_scores(
         c_low = ev.concept.lower().strip()
         if c_low in anchor_set and ev.concept_class and c_low not in _GENERIC_CONCEPTS:
             c_cls = ev.concept_class.lower().strip()
-            # Avoid treating generic ICD version tags ("icd-9", "icd-10") as a shared clinical class
             if not c_cls.startswith("icd-"):
                 anchor_classes.add(c_cls)
 

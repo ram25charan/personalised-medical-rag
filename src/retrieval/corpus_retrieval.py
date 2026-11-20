@@ -95,7 +95,6 @@ def retrieve_corpus_passages(
     rel_table = load_relation_table(relation_table_path)
     q_anchors = set(extract_question_anchors(question_text, rel_table))
 
-    # Extract clinical concepts from selected events, scoped to question anchors when anchors exist
     event_concepts: list[str] = []
     if selected_events:
         allowed_from_anchors: set[str] = set(q_anchors)
@@ -108,19 +107,16 @@ def retrieve_corpus_passages(
             c = ev.concept.strip().lower()
             if c in GENERIC_NON_TOPIC_CONCEPTS:
                 continue
-            # If the question names specific clinical concepts, only expand with related selected event concepts
             if allowed_from_anchors and c not in allowed_from_anchors:
                 continue
             if c not in event_concepts:
                 event_concepts.append(c)
 
-    # Check if the question is completely off-topic (no question anchors and no medical query terms matching corpus)
     q_tokens = set(tokenize_medical_text(question_text))
     combined_query = question_text.strip()
     if event_concepts and (q_anchors or any(w in q_tokens for w in {"medication", "medications", "taking", "prescribed", "active", "current", "history", "condition", "conditions", "problem", "problems", "lab", "labs", "test", "results", "allergy", "allergies", "treatment", "therapy", "dose", "changed", "trend"})):
         combined_query = f"{question_text.strip()} {' '.join(event_concepts[:4])}"
 
-    # 1. BM25 scoring over corpus chunks
     query_tokens = tokenize_medical_text(combined_query)
     bm25_raw = (
         np.array(idx_data["bm25"].get_scores(query_tokens), dtype=float)
@@ -133,17 +129,13 @@ def retrieve_corpus_passages(
         else np.zeros(len(chunks), dtype=float)
     )
 
-    # 2. Dense MiniLM cosine similarity
     q_emb = encode_texts_cached([combined_query, question_text.strip()])
     dense_sims = np.dot(idx_data["embeddings"], q_emb[0])
     q_only_dense = np.dot(idx_data["embeddings"], q_emb[1])
 
-    # Guard against off-topic questions: if the question itself has no clinical anchor,
-    # no medical query keyword, and low direct question similarity to every chunk, return []
     if not q_anchors and float(np.max(q_only_dense)) < 0.30 and float(np.max(q_only_bm25)) < 2.5:
         return []
 
-    # 3. Reciprocal Rank Fusion (BM25 + Dense) + concept match gating
     bm25_order = np.argsort(-bm25_raw, kind="mergesort")
     dense_order = np.argsort(-dense_sims, kind="mergesort")
     bm25_ranks = {int(idx): r + 1 for r, idx in enumerate(bm25_order)}
@@ -158,7 +150,6 @@ def retrieve_corpus_passages(
         ch_concepts = {c.strip().lower() for c in ch.concepts}
         matched = sorted(ch_concepts & active_concepts)
 
-        # Also check if a chunk concept appears verbatim in question_text
         q_lower = question_text.lower()
         for c in ch_concepts:
             if c in q_lower and c not in matched:
@@ -169,7 +160,6 @@ def retrieve_corpus_passages(
         d_sim = float(dense_sims[i])
         b_val = float(bm25_raw[i])
 
-        # Relevance gate: must either match an active concept OR have strong direct lexical + dense relevance
         has_concept_match = len(matched) > 0
         has_strong_text_match = (float(q_only_dense[i]) >= 0.36 and float(q_only_bm25[i]) >= 2.0)
         if not (has_concept_match or has_strong_text_match):

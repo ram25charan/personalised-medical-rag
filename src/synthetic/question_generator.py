@@ -44,7 +44,6 @@ def _make_track_s_question_and_gold(
 
     if category == "temporal_ordering":
         if variant % 2 == 0:
-            # First occurrence of chronic condition among 8 later follow-up notes of the same condition
             c_info = sc["condition_htn"]
             q_text = f"When was {c_info['concept']} first diagnosed for this patient?"
             intent = "first_occurrence"
@@ -56,7 +55,6 @@ def _make_track_s_question_and_gold(
             exp_conf = False
             exp_flags: list[str] = []
         else:
-            # Condition-level historical sequence of hypertension medications (tests Rh + Rt)
             m_info = sc["med_lifecycle"]
             q_text = (
                 f"In what chronological order were medications prescribed to treat the patient's "
@@ -76,7 +74,6 @@ def _make_track_s_question_and_gold(
     elif category == "current_vs_historical":
         m_info = sc["med_lifecycle"]
         if variant % 2 == 0:
-            # Ask about the medication with 6 prior refills + 1 dose change stop vs current replacement
             q_text = (
                 f"Is the patient currently taking {m_info['old_med']} as of {as_of}, "
                 f"or has it been discontinued?"
@@ -84,17 +81,12 @@ def _make_track_s_question_and_gold(
             intent = "current_state"
             anchors = [m_info["old_med"], m_info["new_med"]]
             gold_ids = [m_info["dose_change_id"]]
-            # All 7 earlier start/refill records of old_med are stale distractors!
             distractors = [m_info["start_id"]] + m_info["refill_ids"]
             exp_ans = ExpectedAnswer(type="status", value="ENDED")
             exp_beh = "answer"
             exp_conf = False
             exp_flags = []
         else:
-            # Condition-level current medication query: asks about essential (primary) hypertension
-            # without naming the active drug in the question text! B1 (Rq only) matches the 9 condition
-            # notes ("essential (primary) hypertension"), whereas B3/B2 use Rh to link hypertension -> new_med
-            # and B2 uses Rt to rank the active new_med above the 8 ended old_med orders!
             q_text = (
                 f"Which medication is currently active for treating the patient's "
                 f"essential (primary) hypertension as of {as_of}?"
@@ -110,7 +102,6 @@ def _make_track_s_question_and_gold(
 
     elif category == "longitudinal_change":
         if variant % 2 == 0:
-            # 8-point lab series: must select both the earliest (#1) and latest (#8) over 6 intermediate labs
             l_info = sc["lab_trend"]
             q_text = (
                 f"How has the patient's {l_info['concept']} changed from the earliest "
@@ -128,7 +119,6 @@ def _make_track_s_question_and_gold(
             exp_conf = False
             exp_flags = []
         else:
-            # Dose change over time across 8 orders of old_med (earliest start vs latest dose escalation)
             m_info = sc["med_lifecycle"]
             q_text = f"How did the patient's {m_info['old_med']} dose change from initial start to final order?"
             intent = "change_over_time"
@@ -156,7 +146,6 @@ def _make_track_s_question_and_gold(
             exp_conf = False
             exp_flags = []
         else:
-            # Condition-level query for Type 2 diabetes mellitus active regimen (tests Rh + Rt over 6 old refills)
             m_info = sc["med_lifecycle"]
             q_text = (
                 f"What is the current active medication and dose prescribed for the patient's "
@@ -304,13 +293,13 @@ def generate_track_r_questions(
         golds.append(
             Gold(
                 question_id=qid,
-                intent=intent,  # type: ignore[arg-type]
-                category=category,  # type: ignore[arg-type]
+                intent=intent,
+                category=category,
                 anchor_concepts=anchors,
                 gold_events=gold_ids,
                 distractor_events=dist_ids,
-                expected_answer=ExpectedAnswer(type=ans_type, value=ans_val),  # type: ignore[arg-type]
-                expected_behavior=behavior,  # type: ignore[arg-type]
+                expected_answer=ExpectedAnswer(type=ans_type, value=ans_val),
+                expected_behavior=behavior,
                 expected_conflict=False,
                 expected_flags=flags or [],
             )
@@ -318,7 +307,6 @@ def generate_track_r_questions(
 
     sorted_pids = sorted(by_patient.keys())
 
-    # 1. Category 2 (current_vs_historical): 6 questions
     cat2_count = 0
     for pid in sorted_pids:
         if cat2_count >= 6:
@@ -384,7 +372,6 @@ def generate_track_r_questions(
                 )
             cat2_count += 1
 
-    # 2. Category 3 (longitudinal_change): 6 questions
     cat3_count = 0
     for pid in sorted_pids:
         if cat3_count >= 6:
@@ -423,7 +410,6 @@ def generate_track_r_questions(
             )
             cat3_count += 1
 
-    # 3. Category 1 (temporal_ordering): 6 questions
     cat1_count = 0
     for pid in sorted_pids:
         if cat1_count >= 6:
@@ -453,7 +439,6 @@ def generate_track_r_questions(
             )
             cat1_count += 1
 
-    # 4. Category 4 (irrelevant_history): 5 questions
     cat4_count = 0
     for pid in sorted_pids:
         if cat4_count >= 5:
@@ -489,7 +474,6 @@ def generate_track_r_questions(
             )
             cat4_count += 1
 
-    # 5. Category 5 (missing_or_ambiguous_dates): 3 questions
     cat5_count = 0
     for pid in sorted_pids:
         if cat5_count >= 3:
@@ -519,7 +503,6 @@ def generate_track_r_questions(
             )
             cat5_count += 1
 
-    # 6. Category 7 (insufficient_evidence): 4 questions
     cat7_count = 0
     unrecorded_pool = ["methotrexate", "tacrolimus", "lithium carbonate", "hba1c"]
     for pid in sorted_pids:

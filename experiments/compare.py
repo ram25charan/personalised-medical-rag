@@ -148,7 +148,6 @@ def generate_markdown_report(
             )
         lines.append("")
 
-        # Paired Bootstrap Tests
         paired = sp_data.get("paired_hypothesis_tests", {})
         if paired:
             lines.append(f"### Paired Bootstrap Hypothesis Tests (`{split_key}`, 1,000 resamples)")
@@ -166,7 +165,6 @@ def generate_markdown_report(
                 )
             lines.append("")
 
-        # E3 2x2 Factorial
         fact = sp_data.get("factorial_2x2_E3", {})
         if fact:
             lines.append(
@@ -186,7 +184,6 @@ def generate_markdown_report(
                 )
             lines.append("")
 
-        # E4 Category breakdown for B1 vs B2
         if "B1" in sys_map and "B2" in sys_map:
             lines.append(f"### Exploratory Analysis E4: Per-Category Breakdown (`B1` vs `B2` on `{split_key}`)")
             lines.append("")
@@ -207,7 +204,6 @@ def generate_markdown_report(
                 )
             lines.append("")
 
-    # Optional secondary generator comparison (e.g. Gemini Flash or Groq GPT-OSS-120B)
     sec_path = Path(secondary_metrics_path)
     if sec_path.exists():
         with sec_path.open("r", encoding="utf-8") as f:
@@ -280,7 +276,6 @@ def generate_markdown_report(
                     )
                 lines.append("")
 
-    # Manual review summary
     rev_path = Path(manual_review_path)
     if rev_path.exists():
         with rev_path.open("r", encoding="utf-8") as f:
@@ -303,7 +298,6 @@ def generate_markdown_report(
             )
         lines.append("")
 
-    # Root-cause failure taxonomy (Section 8.9)
     _append_failure_analysis(
         lines,
         "results/outputs/generation_runs.jsonl",

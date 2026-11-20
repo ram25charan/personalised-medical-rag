@@ -43,19 +43,15 @@ def uncertainty_flags(
     u4_ids: list[str] = []
 
     for ev in selected_evs:
-        # U1: Medication with no recorded end date
         if ev.event_type in ("medication_order", "reported_home_medication") and ev.valid_end is None:
             u1_ids.append(ev.event_id)
 
-        # U2: Date precision coarser than a day (month or year)
         if ev.date_precision in ("month", "year"):
             u2_ids.append(ev.event_id)
 
-        # U3: Date missing
         if ev.observed_time is None or ev.valid_start is None or ev.date_precision == "unknown":
             u3_ids.append(ev.event_id)
 
-        # U4: Snapshot or reconciliation source
         if ev.status_basis == "snapshot" or ev.source_table == "medrecon":
             u4_ids.append(ev.event_id)
 
@@ -93,8 +89,6 @@ def uncertainty_flags(
             )
         )
 
-    # U5: Insufficient evidence check
-    # Check whether any candidate event matches the question's anchor concept(s) and reaches Rq >= tau
     insufficient_evidence = False
     anchor_set = {a.lower().strip() for a in question_anchors if a.strip()}
     if not candidate_events:
@@ -113,10 +107,7 @@ def uncertainty_flags(
             if max_anchor_rq < tau:
                 insufficient_evidence = True
     else:
-        # If no anchor concept matched in the lexicon or candidate concepts, check if the question asks
-        # about a specific clinical term that is completely absent from the patient's events
         if question_text:
-            # Check raw BM25 / lexical overlap on content words
             stop_words = {
                 "what", "when", "where", "which", "who", "how", "is", "are", "was", "were",
                 "the", "patient", "currently", "taking", "as", "of", "in", "this", "their",

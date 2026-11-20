@@ -17,6 +17,7 @@ htmlcov/
 # Raw data and local LLM disk cache (never committed per Section 10.8)
 data/raw/
 results/cache/
+docs/
 
 # IDE and OS files
 .vscode/

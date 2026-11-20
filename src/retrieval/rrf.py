@@ -40,7 +40,6 @@ def reciprocal_rank_fusion(
     fused: dict[str, float] = {eid: 0.0 for eid in all_ids}
 
     for s_dict in score_dicts:
-        # Sort descending by score, tie-break deterministically by event_id
         ranked = sorted(all_ids, key=lambda eid: (-s_dict.get(eid, 0.0), eid))
         for rank_idx, eid in enumerate(ranked, start=1):
             fused[eid] += 1.0 / float(rrf_k + rank_idx)
@@ -76,7 +75,6 @@ def rq_scores(
         raw_dense = dense_scores(pool, text, model_name=model_name)
         return min_max_normalise(raw_dense)
 
-    # Default: hybrid BM25 + Dense via RRF
     raw_bm25 = bm25_scores(pool, text)
     raw_dense = dense_scores(pool, text, model_name=model_name)
     rrf = reciprocal_rank_fusion([raw_bm25, raw_dense], rrf_k=rrf_k)

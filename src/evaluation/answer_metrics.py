@@ -42,7 +42,6 @@ _MONTH_NAMES = {
 
 def _norm(text: Any) -> str:
     s = str(text or "").strip().lower()
-    # Normalise Unicode narrow no-break spaces (\u202f), non-breaking spaces (\u00a0), and multi-spaces
     return re.sub(r"\s+", " ", s)
 
 
@@ -65,14 +64,11 @@ def _build_concept_states_map(
 
     concept_states: dict[str, set[str]] = {}
     for c, items in by_concept.items():
-        # If this concept has a C1 conflict in gold, both ACTIVE and ENDED are valid states
         if gold.expected_conflict and c in {_norm(a) for a in gold.anchor_concepts}:
             concept_states[c] = {st for _, st in items}
         else:
-            # Find latest observed_time for this concept
             max_obs = max(obs for obs, _ in items)
             latest_states = {st for obs, st in items if obs == max_obs}
-            # Include PERSISTENT if any record for this concept is persistent
             if any(st == "PERSISTENT" for _, st in items):
                 latest_states.add("PERSISTENT")
             concept_states[c] = latest_states
@@ -94,7 +90,6 @@ def _status_matches(claimed_status: str, target_status: str) -> bool:
     ]
     for grp in equiv_groups:
         if ts in grp and cs in grp:
-            # Note: do not conflate ACTIVE with ENDED or NOT_LISTED_LATEST
             if ts in {"ENDED", "NOT_LISTED_LATEST"} and cs == "ACTIVE":
                 return False
             if ts == "ACTIVE" and cs in {"ENDED", "NOT_LISTED_LATEST", "HISTORICAL"}:
@@ -109,20 +104,16 @@ def answer_correctness(parsed: AnswerJSON, gold: Gold) -> float:
     exp_val = gold.expected_answer.value
     ans_lower = _norm(parsed.answer_text)
 
-    # 1. Insufficient evidence (`none`)
     if exp_type == "none" or gold.expected_behavior == "abstain":
         return 1.0 if parsed.abstain else 0.0
 
-    # If the question is answerable but the model abstained, correctness is 0.0
     if parsed.abstain:
         return 0.0
 
-    # 2. Single-valued `status`
     if exp_type == "status":
         target_st = str(exp_val).strip().upper()
         primary_anchor = _norm(gold.anchor_concepts[0]) if gold.anchor_concepts else ""
 
-        # Check structured status_claims first
         matching_claims = [
             c
             for c in parsed.status_claims
@@ -131,7 +122,6 @@ def answer_correctness(parsed: AnswerJSON, gold: Gold) -> float:
             or _norm(c.concept) in primary_anchor
         ]
         if matching_claims:
-            # If any claim on the primary anchor directly contradicts target_st, return 0.0
             for c in matching_claims:
                 if target_st in {"ENDED", "NOT_LISTED_LATEST"} and c.status.upper() == "ACTIVE":
                     return 0.0
@@ -143,7 +133,6 @@ def answer_correctness(parsed: AnswerJSON, gold: Gold) -> float:
             if any(_status_matches(c.status, target_st) for c in matching_claims):
                 return 1.0
 
-        # Fallback check on answer_text when status_claims omitted the anchor
         if target_st == "ENDED":
             if any(
                 w in ans_lower
@@ -178,7 +167,6 @@ def answer_correctness(parsed: AnswerJSON, gold: Gold) -> float:
                 return 1.0
         return 0.0
 
-    # 3. Single-valued `value` (date, dose, or "unknown")
     if exp_type == "value":
         target_str = _norm(exp_val)
         if target_str == "unknown":
@@ -196,14 +184,12 @@ def answer_correctness(parsed: AnswerJSON, gold: Gold) -> float:
             ]
             return 1.0 if (any(w in ans_lower for w in unknown_cues) or parsed.uncertainty_noted) else 0.0
 
-        # Exact substring or date prefix match (e.g. "2180-05-06 19:17:00" -> "2180-05-06")
         if target_str in ans_lower:
             return 1.0
         if len(target_str) >= 10 and re.match(r"^\d{4}-\d{2}-\d{2}", target_str):
             date_prefix = target_str[:10]
             if date_prefix in ans_lower:
                 return 1.0
-        # Month-precision date match (e.g. "2022-06" -> "june 2022" or "jun 2022")
         m_ym = re.match(r"^(\d{4})-(\d{2})$", target_str)
         if m_ym:
             yr, mo = m_ym.group(1), m_ym.group(2)
@@ -212,14 +198,12 @@ def answer_correctness(parsed: AnswerJSON, gold: Gold) -> float:
                 return 1.0
         return 0.0
 
-    # 4. Set-valued `set` (Set F1)
     if exp_type == "set":
         raw_items = exp_val if isinstance(exp_val, list) else [exp_val]
         exp_set = {_norm(x) for x in raw_items if _norm(x)}
         if not exp_set:
             return 1.0
 
-        # Subcase 4a: expected set is {"active", "ended"} (C1 conflict question)
         if exp_set == {"active", "ended"}:
             claimed_statuses = {c.status.strip().upper() for c in parsed.status_claims}
             has_active = "ACTIVE" in claimed_statuses or "active" in ans_lower
@@ -239,23 +223,18 @@ def answer_correctness(parsed: AnswerJSON, gold: Gold) -> float:
             rec = tp / len(exp_set)
             return round(2 * prec * rec / (prec + rec), 4)
 
-        # Subcase 4b: current_vs_historical condition-level query where anchor_concepts lists
-        # [condition, active_med, discontinued_med] and exp_set == {active_med}
         candidate_meds = [_norm(c) for c in gold.anchor_concepts[1:]] if len(gold.anchor_concepts) > 1 else []
         if candidate_meds and exp_set.issubset(set(candidate_meds)):
             pred_active: set[str] = set()
-            # Check status_claims first
             for c in parsed.status_claims:
                 c_name = _norm(c.concept)
                 for med in candidate_meds:
                     if med in c_name or c_name in med:
                         if c.status.strip().upper() in {"ACTIVE", "LISTED", "PERSISTENT"}:
                             pred_active.add(med)
-            # If status_claims didn't populate pred_active, inspect answer_text
             if not pred_active:
                 for med in candidate_meds:
                     if med in ans_lower:
-                        # Check that it isn't only mentioned as discontinued/stopped
                         med_discontinued_pattern = rf"{re.escape(med)}[^.;]*?(?:discontinued|stopped|ended|historical|prior)"
                         if not re.search(med_discontinued_pattern, ans_lower):
                             pred_active.add(med)
@@ -268,16 +247,14 @@ def answer_correctness(parsed: AnswerJSON, gold: Gold) -> float:
             rec = tp / len(exp_set)
             return round(2 * prec * rec / (prec + rec), 4)
 
-        # Subcase 4c: general set of values/doses/medications (e.g. ["20 mg", "40 mg"] or med list)
         matched = {item for item in exp_set if item in ans_lower}
         tp = len(matched)
         if tp == 0:
             return 0.0
-        prec = 1.0  # all matched items are in exp_set
+        prec = 1.0
         rec = tp / len(exp_set)
         return round(2 * prec * rec / (prec + rec), 4)
 
-    # 5. Ordered values `ordered_values`
     if exp_type == "ordered_values":
         raw_list = exp_val if isinstance(exp_val, list) else [exp_val]
         exp_list = [_norm(x) for x in raw_list if _norm(x)]
@@ -288,17 +265,14 @@ def answer_correctness(parsed: AnswerJSON, gold: Gold) -> float:
         for item in exp_list:
             idx = ans_lower.find(item)
             if idx == -1:
-                # Try numeric string without trailing .0 if float
                 if item.endswith(".0") and item[:-2] in ans_lower:
                     idx = ans_lower.find(item[:-2])
                 else:
                     return 0.0
             positions.append(idx)
 
-        # Verify chronological order in text (or all values present when explicitly describing transition)
         if all(positions[i] <= positions[i + 1] for i in range(len(positions) - 1)):
             return 1.0
-        # Also allow if both values are present and status_claims orders HISTORICAL before ACTIVE
         return 0.5
 
     return 0.0
@@ -318,7 +292,6 @@ def temporal_consistency(
         return 0.0
 
     if not parsed.status_claims:
-        # Fall back to whether the answer's primary status/value claim is temporally consistent
         return 1.0 if answer_correctness(parsed, gold) >= 0.99 else 0.0
 
     consistent_count = 0
@@ -332,7 +305,6 @@ def temporal_consistency(
                 matched_states |= st_set
 
         if not matched_states:
-            # If the concept is the primary anchor and gold specifies a status, compare against gold
             if gold.expected_answer.type == "status":
                 evaluated_count += 1
                 if _status_matches(c_status, str(gold.expected_answer.value)):
@@ -358,7 +330,6 @@ def contradiction_rate(
     concept as currently `ACTIVE` (or vice versa), else 0.0 (Section 8.6).
     """
     if gold.expected_behavior == "abstain":
-        # Claiming a non-existent medication is active on an abstain question is a contradiction
         if not parsed.abstain and any(
             c.status.strip().upper() in {"ACTIVE", "LISTED", "PERSISTENT"}
             for c in parsed.status_claims
@@ -366,7 +337,6 @@ def contradiction_rate(
             return 1.0
         return 0.0
 
-    # Check explicit status_claims against known concept states
     for claim in parsed.status_claims:
         c_norm = _norm(claim.concept)
         c_status = claim.status.strip().upper()
@@ -378,7 +348,6 @@ def contradiction_rate(
         if not matched_states:
             continue
 
-        # If there is a known C1 conflict (both ACTIVE and ENDED present), neither claim alone is a contradiction
         if "ACTIVE" in matched_states and "ENDED" in matched_states:
             continue
 
@@ -391,7 +360,6 @@ def contradiction_rate(
         ):
             return 1.0
 
-    # Also check current_vs_historical questions when status_claims is empty or incomplete
     if gold.category == "current_vs_historical" and answer_correctness(parsed, gold) < 0.99:
         return 1.0
 
@@ -407,7 +375,6 @@ def citation_precision_recall_f1(
     gold_set = {str(x).strip() for x in gold_events if str(x).strip()}
 
     if not gold_set:
-        # For insufficient_evidence questions where gold_events is empty:
         if not cited_set:
             return 1.0, 1.0, 1.0
         return 0.0, 0.0, 0.0
@@ -457,7 +424,6 @@ def grounded_faithfulness(
     selected_set = set(selected_event_ids)
     cited_set = {str(x).strip() for x in parsed.cited_event_ids if str(x).strip()}
 
-    # Any hallucinated event ID outside the prompt context violates faithfulness
     if not cited_set.issubset(selected_set):
         return 0.0
 

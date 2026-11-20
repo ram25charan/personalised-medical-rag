@@ -75,7 +75,6 @@ def build_events(raw: dict[str, pd.DataFrame]) -> list[Event]:
 
     gsn_to_concept, gsn_to_class = build_gsn_canonical_map(medrecon, pyxis)
 
-    # Map stay_id -> stay metadata (subject_id, intime, outtime, disposition)
     stay_lookup: dict[int, dict[str, Any]] = {}
     for idx, row in edstays.iterrows():
         stay_id = int(row["stay_id"])
@@ -91,10 +90,8 @@ def build_events(raw: dict[str, pd.DataFrame]) -> list[Event]:
             "row_idx": int(idx),
         }
 
-    # Collect intermediate records per patient so we can sort chronologically and assign stable IDs
     patient_records: dict[str, list[dict[str, Any]]] = defaultdict(list)
 
-    # 1. edstays -> visit
     for stay_id, info in stay_lookup.items():
         pid = f"R{info['subject_id']}"
         disp = info["disposition"] or "UNKNOWN"
@@ -127,7 +124,6 @@ def build_events(raw: dict[str, pd.DataFrame]) -> list[Event]:
             }
         )
 
-    # 2. triage -> triage_observation
     for idx, row in triage.iterrows():
         stay_id = int(row["stay_id"])
         subject_id = int(row["subject_id"])
@@ -157,7 +153,6 @@ def build_events(raw: dict[str, pd.DataFrame]) -> list[Event]:
             }
         )
 
-    # 3. medrecon -> reported_home_medication (collapse duplicate normalised drug per stay)
     medrecon_groups: dict[tuple[int, str], list[tuple[int, pd.Series, Optional[str]]]] = defaultdict(list)
     for idx, row in medrecon.iterrows():
         stay_id = int(row["stay_id"])
@@ -222,7 +217,6 @@ def build_events(raw: dict[str, pd.DataFrame]) -> list[Event]:
             }
         )
 
-    # 4. pyxis -> ed_administered_medication
     for idx, row in pyxis.iterrows():
         stay_id = int(row["stay_id"])
         subject_id = int(row["subject_id"])
@@ -259,7 +253,6 @@ def build_events(raw: dict[str, pd.DataFrame]) -> list[Event]:
             }
         )
 
-    # 5. diagnosis -> diagnosis_at_visit
     for idx, row in diagnosis.iterrows():
         stay_id = int(row["stay_id"])
         subject_id = int(row["subject_id"])
@@ -298,7 +291,6 @@ def build_events(raw: dict[str, pd.DataFrame]) -> list[Event]:
             }
         )
 
-    # 6. vitalsign -> vital_sign
     for idx, row in vitalsign.iterrows():
         stay_id = int(row["stay_id"])
         subject_id = int(row["subject_id"])
@@ -324,7 +316,6 @@ def build_events(raw: dict[str, pd.DataFrame]) -> list[Event]:
             }
         )
 
-    # Order events chronologically within each patient and assign stable event IDs
     type_priority = {
         "visit": 0,
         "triage_observation": 1,
@@ -472,7 +463,6 @@ def build_coverage_report(events: list[Event]) -> dict[str, Any]:
     for ev in events:
         event_type_counts[ev.event_type] += 1
 
-    # Analyze medication changes across visits (for longitudinal_change & current_vs_historical)
     patients_with_med_changes = 0
     consecutive_visit_pairs = 0
     pairs_with_added_or_dropped_meds = 0
@@ -498,7 +488,6 @@ def build_coverage_report(events: list[Event]) -> dict[str, Any]:
             elif ev.event_type == "vital_sign":
                 vitals_by_stay[sid] += 1
 
-        # Ordered stays with medrecon
         med_stays = [
             v.encounter_id for v in visits if v.encounter_id in med_by_stay
         ]
@@ -515,7 +504,6 @@ def build_coverage_report(events: list[Event]) -> dict[str, Any]:
             if patient_changed:
                 patients_with_med_changes += 1
 
-        # Recurring diagnoses across visits
         diag_counts: dict[str, int] = defaultdict(int)
         for sid, concepts in diag_by_stay.items():
             for c in concepts:
@@ -523,11 +511,9 @@ def build_coverage_report(events: list[Event]) -> dict[str, Any]:
         if any(cnt >= 2 for cnt in diag_counts.values()):
             patients_with_recurring_diagnoses += 1
 
-        # Within-visit vital series (>= 3 measurements)
         if any(cnt >= 3 for cnt in vitals_by_stay.values()):
             patients_with_within_visit_vital_series += 1
 
-        # Stays where both medrecon and pyxis exist
         for sid in set(med_by_stay.keys()) | set(pyxis_by_stay.keys()):
             if med_by_stay.get(sid) and pyxis_by_stay.get(sid):
                 stays_with_medrecon_pyxis_overlap += 1

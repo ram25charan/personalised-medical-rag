@@ -92,7 +92,6 @@ def tune_weights_on_dev(
         q for q in all_questions if q.track == "S" and q.split == "dev"
     ]
 
-    # Precompute Rq, Rh, Rt for every dev question once
     dev_features: list[dict[str, Any]] = []
     for q in dev_questions:
         g = gold_by_qid[q.question_id]
@@ -146,7 +145,6 @@ def tune_weights_on_dev(
     sensitivity_report: dict[str, Any] = {"B2_by_intent": {}, "B3_by_intent": {}}
 
     for intent_name in all_intents:
-        # Exclude insufficient_evidence (where gold_events is empty) when tuning ranking weights
         intent_items = [
             item
             for item in dev_features
@@ -155,7 +153,6 @@ def tune_weights_on_dev(
         if not intent_items:
             intent_items = [item for item in dev_features if len(item["gold"].gold_events) > 0]
 
-        # 1. Tune B2 (66 combinations)
         b2_results = []
         for w in b2_grid:
             ndcgs = []
@@ -176,7 +173,6 @@ def tune_weights_on_dev(
                 }
             )
 
-        # Sort by (mean_ndcg_at_10 desc, mean_recall_at_10 desc, balanced non-zero alpha/beta/gamma preference)
         b2_results.sort(
             key=lambda r: (
                 r["mean_ndcg_at_10"],
@@ -195,7 +191,6 @@ def tune_weights_on_dev(
             "all_grid": b2_results,
         }
 
-        # 2. Tune B3 (11 combinations, gamma = 0)
         b3_results = []
         for w in b3_grid:
             ndcgs = []
@@ -232,7 +227,6 @@ def tune_weights_on_dev(
             "all_grid": b3_results,
         }
 
-    # Tune / verify tau for U5 insufficient evidence on dev questions
     best_tau = 0.35
     best_u5_acc = -1.0
     for cand_tau in [0.15, 0.25, 0.35, 0.45, 0.55]:

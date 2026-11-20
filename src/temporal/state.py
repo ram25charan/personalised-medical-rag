@@ -19,7 +19,6 @@ def is_available_by_as_of(event: Event, as_of_date: str) -> bool:
     """
     if event.observed_time is None:
         return True
-    # ISO-8601 prefix/string comparison handles YYYY, YYYY-MM, and YYYY-MM-DD against YYYY-MM-DD
     return event.observed_time <= as_of_date
 
 
@@ -68,12 +67,10 @@ def compute_state(
     """
     available = filter_candidate_pool(patient_events, as_of_date, patient_id=event.patient_id)
 
-    # 1. Snapshot basis (Track R reported_home_medication)
     if event.status_basis == "snapshot":
         latest_enc = _get_latest_snapshot_encounter(available)
         if latest_enc is None:
             return "UNKNOWN"
-        # Check if this concept is listed on the latest snapshot encounter
         concepts_on_latest = {
             e.concept
             for e in available
@@ -82,15 +79,12 @@ def compute_state(
         if event.encounter_id == latest_enc or event.concept in concepts_on_latest:
             if event.encounter_id == latest_enc:
                 return "LISTED"
-            # Earlier visit's listing of a drug that is also on the latest visit
             return "SUPERSEDED"
         return "NOT_LISTED_LATEST"
 
-    # 2. Interval basis: check UNKNOWN date or coarse precision first (Section 7.3)
     if event.valid_start is None or event.date_precision != "day":
         return "UNKNOWN"
 
-    # 3. Persistent types (allergy, chronic condition, recurring diagnosis across visits)
     if event.event_type in ("allergy", "condition"):
         if event.valid_end is None or event.valid_end > as_of_date:
             return "PERSISTENT"
@@ -105,7 +99,6 @@ def compute_state(
         if len(same_diag_visits) >= 2:
             return "PERSISTENT"
 
-    # 4. Check SUPERSEDED for longitudinal series (lab_result, vital_sign, medication_order)
     if event.event_type in ("lab_result", "vital_sign"):
         later_same = [
             e
@@ -121,8 +114,6 @@ def compute_state(
             return "SUPERSEDED"
 
     if event.event_type == "medication_order":
-        # If this medication order has ended and a later order of the same medication exists,
-        # or if this order was explicitly closed by a dose change
         if event.valid_end is not None and event.valid_end <= as_of_date:
             later_orders = [
                 e
@@ -137,7 +128,6 @@ def compute_state(
                 return "SUPERSEDED"
             return "ENDED"
 
-    # 5. Standard interval ENDED vs ACTIVE
     if event.valid_end is not None and event.valid_end <= as_of_date:
         return "ENDED"
 

@@ -97,7 +97,6 @@ def rt_scores(
     }
     anchor_set = {a.lower().strip() for a in (anchors or []) if a.strip()}
 
-    # Group events by concept in chronological order for series-based intents
     by_concept: dict[str, list[Event]] = defaultdict(list)
     for ev in patient_events:
         by_concept[ev.concept.lower().strip()].append(ev)
@@ -116,7 +115,6 @@ def rt_scores(
             elif st == "SUPERSEDED":
                 scores[ev.event_id] = 0.2
             else:
-                # ENDED or NOT_LISTED_LATEST
                 scores[ev.event_id] = 0.1
 
     elif intent == "historical":
@@ -130,7 +128,6 @@ def rt_scores(
                 scores[ev.event_id] = 0.1
 
     elif intent == "change_over_time":
-        # Identify boundary (earliest & latest) vs intermediate events for each anchor concept series
         boundary_ids: set[str] = set()
         intermediate_ids: set[str] = set()
         target_concepts = anchor_set if anchor_set else set(by_concept.keys())

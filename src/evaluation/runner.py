@@ -80,14 +80,12 @@ def summarize_generation_split(
             vals = [float(r["metrics"][m_name]) for r in recs]
             sys_metrics[m_name] = bootstrap_mean_ci(vals, n_resamples=n_resamples)
 
-        # Also compute answer_correctness specifically on answerable questions vs abstain questions
         if ans_recs:
             sys_metrics["answer_correctness_answerable_only"] = bootstrap_mean_ci(
                 [float(r["metrics"]["answer_correctness"]) for r in ans_recs],
                 n_resamples=n_resamples,
             )
 
-        # Breakdown by intent (E4)
         by_intent: dict[str, dict[str, Any]] = {}
         intent_groups: dict[str, list[dict[str, Any]]] = defaultdict(list)
         for r in recs:
@@ -109,7 +107,6 @@ def summarize_generation_split(
                 ),
             }
 
-        # Breakdown by category (E4)
         by_category: dict[str, dict[str, Any]] = {}
         cat_groups: dict[str, list[dict[str, Any]]] = defaultdict(list)
         for r in recs:
@@ -148,7 +145,6 @@ def summarize_generation_split(
             "by_category": by_category,
         }
 
-    # Paired bootstrap comparisons (H1/H2, H3, E3 2x2 factorial, and ORACLE upper bound)
     comparisons_spec = [
         ("H1_H2_full_B2_vs_B1", "B2", "B1"),
         ("H3_flags_B2_vs_B4", "B2", "B4"),
@@ -175,7 +171,6 @@ def summarize_generation_split(
                 vals_a, vals_b, n_resamples=n_resamples
             )
 
-    # E3 2x2 Factorial Matrix summary ({B1, B1+, B2-, B2})
     factorial_e3: dict[str, Any] = {}
     if all(s in system_summaries for s in ["B1", "B1+", "B2-", "B2"]):
         for m_name in [
@@ -238,7 +233,6 @@ def run_generation_evaluation_on_questions(
     )
     run_date_str = date.today().isoformat()
 
-    # Precompute Rq hybrid and temporal states per question once so all 6 systems share them
     precomputed_rq: dict[str, dict[str, float]] = {}
     precomputed_pools: dict[str, list[Event]] = {}
     precomputed_states: dict[str, dict[str, Any]] = {}
@@ -325,7 +319,6 @@ def run_generation_evaluation_on_questions(
             )
             combined_metrics = {**ret_m, **ans_m}
 
-            # Determine active weights for logging
             mode = sys_cfg["systems"].get(sys_id, {}).get("mode", "fusion_b2")
             if mode == "fusion_b2":
                 w_used = weights_cfg.get("B2", {}).get(

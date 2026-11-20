@@ -72,7 +72,6 @@ def paired_bootstrap(
     lower = float(np.percentile(boot_diffs, 100.0 * alpha))
     upper = float(np.percentile(boot_diffs, 100.0 * (1.0 - alpha)))
 
-    # Two-sided empirical p-value around 0
     prop_le_zero = float(np.mean(boot_diffs <= 0.0))
     prop_ge_zero = float(np.mean(boot_diffs >= 0.0))
     p_val = min(1.0, 2.0 * min(prop_le_zero, prop_ge_zero))

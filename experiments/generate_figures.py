@@ -132,7 +132,6 @@ def plot_generation_comparison(
     colors = ["#8D8D8D", "#6FDC8C", "#78A9FF", "#4589FF", "#0F62FE"]
 
     for col_idx, (title, sys_map) in enumerate(panels):
-        # Row 0: Answer Correctness with 95% CI error bars
         ax_top = axes[0, col_idx]
         means = [sys_map[s]["metrics"]["answer_correctness"]["mean"] for s in sys_order]
         err_lo = [m - sys_map[s]["metrics"]["answer_correctness"]["ci_lower"] for s, m in zip(sys_order, means)]
@@ -144,7 +143,6 @@ def plot_generation_comparison(
         for b, m, hi in zip(bars, means, err_hi):
             ax_top.text(b.get_x() + b.get_width() / 2, m + hi + 0.014, f"{m:.2f}", ha="center", va="bottom", fontsize=7.8)
 
-        # Row 1: Contradiction Rate (lower is better)
         ax_bot = axes[1, col_idx]
         c_rates = [sys_map[s]["metrics"]["contradiction_rate"]["mean"] for s in sys_order]
         bars_c = ax_bot.bar(x, c_rates, color=colors, edgecolor="#161616", linewidth=0.6)
@@ -222,7 +220,6 @@ def plot_factorial_e3(groq_metrics: dict[str, Any], out_dir: Path) -> Path:
     fig, axes = plt.subplots(1, 3, figsize=(10.2, 3.3))
     for ax, (m_key, title, ylim) in zip(axes, metrics_to_plot):
         fv = fact[m_key]
-        # Selection = B1: A0 -> A2; Selection = B2: A0 -> A2
         ax.plot([0, 1], [fv["B1_selB1_annA0"], fv["B1plus_selB1_annA2"]], "--o", color="#525252", label="Selection = B1", linewidth=1.9)
         ax.plot([0, 1], [fv["B2minus_selB2_annA0"], fv["B2_selB2_annA2"]], "-s", color="#0F62FE", label="Selection = B2", linewidth=2.2)
         ax.set_xticks([0, 1])

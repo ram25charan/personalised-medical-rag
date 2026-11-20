@@ -71,15 +71,12 @@ def clean_medication_string(raw_name: str) -> str:
         return "unknown_medication"
 
     s = str(raw_name).strip().lstrip("*").strip()
-    # Remove bracketed brand notes like [Digitek]
     s = re.sub(r"\[.*?\]", " ", s)
-    # Remove parenthetical notes like (vitamin D3) if there is text before them
     s_no_paren = re.sub(r"\(.*?\)", " ", s).strip()
     if s_no_paren:
         s = s_no_paren
 
     s = s.lower()
-    # Remove trailing strength / unit tokens like "10 mg", "500mg", "10"
     s = re.sub(r"\b\d+(\.\d+)?\s*(mg|mcg|g|ml|units|meq|%)?\b\s*$", "", s).strip()
     s = re.sub(r"\s+", " ", s).strip(" -/,")
     return s if s else str(raw_name).strip().lower()
@@ -133,7 +130,6 @@ def build_gsn_canonical_map(
         lower_entries = [name for name, is_low in entries if is_low]
         pool = lower_entries if lower_entries else [name for name, _ in entries]
         counts = Counter(pool)
-        # Sort by (-frequency, length, alphabetical) for complete determinism
         best_name = sorted(counts.keys(), key=lambda n: (-counts[n], len(n), n))[0]
         gsn_to_concept[gsn_int] = best_name
 

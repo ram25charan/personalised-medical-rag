@@ -50,9 +50,6 @@ from src.temporal.history_relevance import load_relation_table
 from src.temporal.state import compute_state, filter_candidate_pool
 from src.temporal.temporal_scoring import load_rt_rules
 
-# ---------------------------------------------------------------------------
-# Design System: Verbatim Status Styling (Colour + Accessible Pattern Prefix)
-# ---------------------------------------------------------------------------
 STATUS_STYLE_MAP: dict[str, dict[str, str]] = {
     "ACTIVE": {
         "bg": "#DEFBE6",
@@ -165,52 +162,63 @@ def render_provenance_badge_html(track: str, source_dataset: str) -> str:
 
 
 def inject_design_system_css(view_mode: str) -> None:
-    body_size = "1.04rem" if view_mode == "Patient" else "0.94rem"
+    body_size = "1.04rem" if view_mode == "Patient" else "0.95rem"
     st.markdown(
         f"""
         <style>
+        .stApp {{
+            background-color: #F8FAFC;
+        }}
         .block-container {{
-            padding-top: 3.25rem;
-            padding-bottom: 2.5rem;
-            max-width: 1280px;
+            padding-top: 2.2rem;
+            padding-bottom: 3rem;
+            max-width: 1120px;
         }}
         .app-title {{
-            font-size: 1.45rem;
+            font-size: 1.7rem;
             font-weight: 700;
-            color: #161616;
-            margin: 0;
-            padding-top: 4px;
-            line-height: 1.3;
+            color: #0F172A;
+            margin: 0 0 4px 0;
+            line-height: 1.25;
+            letter-spacing: -0.01em;
+        }}
+        .app-subtitle {{
+            font-size: 0.94rem;
+            color: #475569;
+            margin: 0 0 12px 0;
         }}
         .prototype-banner {{
-            background-color: #F4F6F8;
-            border-left: 4px solid #161616;
-            border-top: 1px solid #E0E6ED;
-            border-right: 1px solid #E0E6ED;
-            border-bottom: 1px solid #E0E6ED;
+            background-color: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-left: 4px solid #0284C7;
+            border-radius: 8px;
             padding: 8px 14px;
-            font-size: 0.84rem;
-            color: #161616;
+            font-size: 0.83rem;
+            color: #334155;
             margin-bottom: 16px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
         }}
         .mono-id {{
             font-family: "IBM Plex Mono", "Consolas", "SFMono-Regular", monospace;
-            font-size: 0.86em;
-            background: #F4F6F8;
-            border: 1px solid #D0D7DE;
-            padding: 1px 6px;
-            color: #161616;
+            font-size: 0.84em;
+            background: #F1F5F9;
+            border: 1px solid #CBD5E1;
+            border-radius: 6px;
+            padding: 2px 7px;
+            color: #1E293B;
         }}
         .cite-tag {{
             font-family: "IBM Plex Mono", "Consolas", monospace;
             font-size: 0.84em;
             font-weight: 600;
-            background: #EDF5FF;
-            color: #0043CE;
-            border: 1px solid #0F62FE;
+            background: #EFF6FF;
+            color: #1D4ED8;
+            border: 1px solid #93C5FD;
+            border-radius: 6px;
             padding: 1px 6px;
             margin-right: 4px;
         }}
@@ -218,17 +226,19 @@ def inject_design_system_css(view_mode: str) -> None:
             font-family: "IBM Plex Mono", "Consolas", monospace;
             font-size: 0.84em;
             font-weight: 600;
-            background: #F4F6F8;
-            color: #393939;
-            border: 1px solid #8D8D8D;
+            background: #F1F5F9;
+            color: #334155;
+            border: 1px solid #CBD5E1;
+            border-radius: 6px;
             padding: 1px 6px;
             margin-right: 4px;
         }}
         .status-badge {{
             font-family: "IBM Plex Mono", "Consolas", monospace;
-            font-size: 0.78rem;
+            font-size: 0.77rem;
             font-weight: 600;
-            padding: 2px 8px;
+            padding: 2px 9px;
+            border-radius: 999px;
             display: inline-block;
             margin-right: 6px;
             letter-spacing: 0.01em;
@@ -237,10 +247,11 @@ def inject_design_system_css(view_mode: str) -> None:
             font-family: "IBM Plex Mono", "Consolas", monospace;
             font-size: 0.76rem;
             font-weight: 600;
-            background: #FFF1F1;
-            color: #A2191F;
-            border: 1px solid #DA1E28;
-            padding: 2px 7px;
+            background: #FEF2F2;
+            color: #B91C1C;
+            border: 1px solid #FCA5A5;
+            border-radius: 6px;
+            padding: 2px 8px;
             display: inline-block;
             margin-right: 6px;
         }}
@@ -248,10 +259,11 @@ def inject_design_system_css(view_mode: str) -> None:
             font-family: "IBM Plex Mono", "Consolas", monospace;
             font-size: 0.76rem;
             font-weight: 600;
-            background: #FDF6DD;
-            color: #684E00;
-            border: 1px solid #D2A106;
-            padding: 2px 7px;
+            background: #FFFBEB;
+            color: #92400E;
+            border: 1px solid #FCD34D;
+            border-radius: 6px;
+            padding: 2px 8px;
             display: inline-block;
             margin-right: 6px;
         }}
@@ -259,50 +271,58 @@ def inject_design_system_css(view_mode: str) -> None:
             font-family: "IBM Plex Mono", "Consolas", monospace;
             font-size: 0.75rem;
             font-weight: 600;
-            background: #EDF5FF;
-            color: #0043CE;
-            border: 1px solid #0F62FE;
-            padding: 1px 6px;
+            background: #EFF6FF;
+            color: #1D4ED8;
+            border: 1px solid #93C5FD;
+            border-radius: 6px;
+            padding: 1px 7px;
         }}
         .diff-badge-b1 {{
             font-family: "IBM Plex Mono", "Consolas", monospace;
             font-size: 0.75rem;
             font-weight: 600;
-            background: #F4F6F8;
-            color: #525252;
-            border: 1px solid #8D8D8D;
-            padding: 1px 6px;
+            background: #F1F5F9;
+            color: #475569;
+            border: 1px solid #CBD5E1;
+            border-radius: 6px;
+            padding: 1px 7px;
         }}
         .prov-badge {{
             font-family: "IBM Plex Mono", "Consolas", monospace;
-            font-size: 0.76rem;
+            font-size: 0.75rem;
             font-weight: 600;
-            padding: 3px 8px;
+            border-radius: 6px;
+            padding: 3px 9px;
             display: inline-block;
         }}
         .prov-real {{
-            background: #FFF8E1;
-            color: #5C4300;
-            border: 1px solid #D2A106;
+            background: #FFFBEB;
+            color: #92400E;
+            border: 1px solid #FCD34D;
         }}
         .prov-synth {{
-            background: #EDF5FF;
-            color: #0043CE;
-            border: 1px solid #0F62FE;
+            background: #EFF6FF;
+            color: #1D4ED8;
+            border: 1px solid #93C5FD;
         }}
         .answer-prose {{
             font-size: {body_size};
-            line-height: 1.62;
-            color: #161616;
+            line-height: 1.65;
+            color: #0F172A;
             padding: 6px 0;
         }}
         .record-header {{
-            font-size: 0.82rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            color: #525252;
+            color: #475569;
             font-weight: 600;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
+        }}
+        .section-caption {{
+            font-size: 0.85rem;
+            color: #64748B;
+            margin-bottom: 8px;
         }}
         </style>
         """,
@@ -310,9 +330,6 @@ def inject_design_system_css(view_mode: str) -> None:
     )
 
 
-# ---------------------------------------------------------------------------
-# Cached Data Loaders
-# ---------------------------------------------------------------------------
 @st.cache_data(show_spinner=False)
 def load_all_events_and_questions() -> dict[str, Any]:
     real_events: list[Event] = load_jsonl(Event, ROOT_DIR / "data/processed/events.jsonl")
@@ -358,9 +375,6 @@ def load_static_configs() -> dict[str, Any]:
     }
 
 
-# ---------------------------------------------------------------------------
-# Single-Key Pinned Generator Call (No Multi-Key Rotation, Cache-First)
-# ---------------------------------------------------------------------------
 def generate_single_pinned_answer(
     pipe_out: PipelineOutput,
     question_text: str,
@@ -412,7 +426,6 @@ def generate_single_pinned_answer(
             "message": f"No API key configured in .env for provider '{provider}'. Cached responses remain available.",
         }
 
-    # Use only the first/primary key for the pinned provider (no multi-key rotation)
     primary_label, primary_key = prov_keys[0]
     try:
         if provider.lower() == "groq":
@@ -465,9 +478,6 @@ def generate_single_pinned_answer(
         }
 
 
-# ---------------------------------------------------------------------------
-# Timeline Centrepiece (Swimlanes + Interval Bars + Point Events + Selected Outline)
-# ---------------------------------------------------------------------------
 def _parse_iso_day(d_str: Optional[str]) -> Optional[date]:
     if not d_str:
         return None
@@ -514,13 +524,11 @@ def build_timeline_figure(
 
     fig = go.Figure()
 
-    # Present lanes in clinical order
     present_types = [t for t in EVENT_LANE_ORDER if any(e.event_type == t for e in patient_events)]
     for e in patient_events:
         if e.event_type not in present_types:
             present_types.append(e.event_type)
 
-    # 1. Combine unselected interval bars into a single trace and selected interval bars into a single trace
     unsel_bar_x: list[Any] = []
     unsel_bar_y: list[Any] = []
     sel_bar_x: list[Any] = []
@@ -566,7 +574,6 @@ def build_timeline_figure(
             )
         )
 
-    # 2. Group point markers by verbatim status (unselected first, then selected on top)
     grouped: dict[str, list[tuple[Event, date]]] = {}
     selected_points: list[tuple[Event, date, str, int]] = []
     for ev in patient_events:
@@ -623,7 +630,6 @@ def build_timeline_figure(
             )
         )
 
-    # 3. Draw selected top-k [E1..Ek] events on the top layer with bold accent outline and labels
     if selected_points:
         selected_points.sort(key=lambda item: item[3])
         sel_xs = [to_x(d_pt) for _, d_pt, _, _ in selected_points]
@@ -667,7 +673,6 @@ def build_timeline_figure(
             )
         )
 
-    # Vertical line at as_of_date
     x_tq = to_x(tq_date)
     fig.add_vline(
         x=x_tq,
@@ -743,9 +748,6 @@ def build_timeline_figure(
     return fig
 
 
-# ---------------------------------------------------------------------------
-# Structured Clinical History Summary (Clinician View Stretch Item, Section 9.2)
-# ---------------------------------------------------------------------------
 def render_structured_clinical_summary(
     pool_events: list[Event],
     states_map: dict[str, str],
@@ -797,9 +799,6 @@ def render_structured_clinical_summary(
             st.markdown(", ".join(f"`{m}`" for m in ended_meds[:8]) if ended_meds else "*None recorded*")
 
 
-# ---------------------------------------------------------------------------
-# Conflict & Uncertainty Presentation (Section 9.6)
-# ---------------------------------------------------------------------------
 def render_conflicts_and_uncertainties(
     pipe_out: PipelineOutput,
     events_by_id: dict[str, Event],
@@ -854,22 +853,17 @@ def render_conflicts_and_uncertainties(
                 )
 
 
-# ---------------------------------------------------------------------------
-# Answer Presentation
-# ---------------------------------------------------------------------------
 def format_answer_text_with_citations(
     answer_text: str,
     cited_event_ids: list[str],
     rank_map: dict[str, int],
 ) -> str:
     escaped = html.escape(answer_text)
-    # Highlight [E#] tags
     escaped = re.sub(
         r"\[(E\d+)\]",
         r'<span class="cite-tag">[\1]</span>',
         escaped,
     )
-    # Also replace raw event_ids if mentioned in prose with their [E#] tag + mono-id
     for eid in cited_event_ids:
         if eid in rank_map and eid in escaped:
             tag = f'<span class="cite-tag">[E{rank_map[eid]}]</span><span class="mono-id">{eid}</span>'
@@ -928,7 +922,6 @@ def render_answer_panel(
             unsafe_allow_html=True,
         )
 
-        # Status claims & cited event IDs bar
         b_col1, b_col2 = st.columns([3, 2])
         with b_col1:
             if ans.status_claims:
@@ -948,9 +941,6 @@ def render_answer_panel(
                 st.markdown(f"<small><strong>Supporting Events:</strong></small> {cites_html}", unsafe_allow_html=True)
 
 
-# ---------------------------------------------------------------------------
-# Evidence List Presentation (Patient Mode vs Clinician Mode Density)
-# ---------------------------------------------------------------------------
 def render_evidence_records(
     pipe_out: PipelineOutput,
     events_by_id: dict[str, Event],
@@ -998,7 +988,6 @@ def render_evidence_records(
                     unsafe_allow_html=True,
                 )
     else:
-        # Clinician Mode: Compact high-density table with Rq, Rh, Rt, Fused Score, and verbatim statuses
         rows = []
         for rank_idx, eid in enumerate(pipe_out.selected_event_ids, start=1):
             ev = events_by_id.get(eid)
@@ -1033,9 +1022,6 @@ def render_evidence_records(
         st.dataframe(df, use_container_width=True, hide_index=True)
 
 
-# ---------------------------------------------------------------------------
-# General Medical Information Box ([C1], [C2]) (Section 9.5 & Part 1)
-# ---------------------------------------------------------------------------
 def render_general_information_box(
     question_text: str,
     selected_events: list[Event],
@@ -1048,7 +1034,6 @@ def render_general_information_box(
         top_k=2,
     )
     if not passages:
-        # Part 1 Rule 5: "If nothing clears the threshold, show no background box."
         return
 
     with st.container(border=True):
@@ -1079,66 +1064,48 @@ def render_general_information_box(
                 )
 
 
-# ---------------------------------------------------------------------------
-# Main Single-Page Application
-# ---------------------------------------------------------------------------
+def _find_matching_preset(
+    patient_questions: list[Question],
+    question_text: str,
+    as_of_date_str: str,
+) -> Optional[Question]:
+    q_norm = question_text.strip().lower()
+    for q in patient_questions:
+        if q.text.strip().lower() == q_norm and q.as_of_date == as_of_date_str:
+            return q
+    for q in patient_questions:
+        if q.text.strip().lower() == q_norm:
+            return q
+    return None
+
+
 def main() -> None:
     st.set_page_config(
-        page_title="Chronology-Aware Clinical Record Viewer",
+        page_title="Personal Medical Record Assistant",
         layout="wide",
-        initial_sidebar_state="collapsed",
+        initial_sidebar_state="expanded",
     )
 
     data_bundle = load_all_events_and_questions()
     configs = load_static_configs()
 
-    # Top bar: Title + View Mode Switch
-    top_col1, top_col2 = st.columns([3.8, 1.2], vertical_alignment="center")
-    with top_col1:
-        st.markdown(
-            '<div class="app-title">Chronology-Aware Clinical Record &amp; Evidence Viewer</div>',
-            unsafe_allow_html=True,
+    with st.sidebar:
+        st.markdown("### Patient Record")
+        track_choice = st.radio(
+            "Record Source",
+            options=["Synthetic Patients (Longitudinal)", "Real ED Patients (MIMIC-IV-ED)"],
+            index=0,
+            help="Synthetic records span multi-year longitudinal timelines; Real records are de-identified MIMIC-IV-ED visits.",
         )
-    with top_col2:
-        view_mode = st.radio(
-            "View Mode",
-            options=["Patient", "Clinician"],
-            horizontal=True,
-            index=1,
-            label_visibility="collapsed",
-        )
-
-    inject_design_system_css(view_mode)
-
-    # Permanent Prototype Disclaimer Notice (Section 9.5)
-    st.markdown(
-        '<div class="prototype-banner">'
-        '<span><strong>NOTICE:</strong> Research prototype. Not medical advice. Synthetic and de-identified demo data.</span>'
-        '<span class="mono-id">Schema v1.0 &middot; Prompt v1.0</span>'
-        "</div>",
-        unsafe_allow_html=True,
-    )
-
-    # Primary Control Bar (Progressive Disclosure: Patient, Date, System, Question up front)
-    with st.container(border=True):
-        ctrl1, ctrl2, ctrl3, ctrl4 = st.columns([1.2, 1.1, 1.1, 2.2], vertical_alignment="bottom")
-        with ctrl1:
-            track_choice = st.selectbox(
-                "Data Track",
-                options=["S (Synthetic Longitudinal)", "R (MIMIC-IV-ED Demo)"],
-                index=0,
-            )
-            active_track = "S" if track_choice.startswith("S") else "R"
+        active_track = "S" if track_choice.startswith("Synthetic") else "R"
 
         pids = data_bundle["synth_pids"] if active_track == "S" else data_bundle["real_pids"]
-        with ctrl2:
-            default_pid_idx = pids.index("S_020") if ("S_020" in pids and active_track == "S") else 0
-            selected_pid = st.selectbox("Patient ID", options=pids, index=default_pid_idx)
+        default_pid_idx = pids.index("S_020") if ("S_020" in pids and active_track == "S") else 0
+        selected_pid = st.selectbox("Select Patient", options=pids, index=default_pid_idx)
 
         patient_events: list[Event] = data_bundle["by_patient"].get(selected_pid, [])
         patient_questions: list[Question] = data_bundle["q_by_patient"].get(selected_pid, [])
 
-        # Determine latest date in patient's record
         obs_dates = sorted(
             {
                 (e.observed_time or e.valid_start)[:10]
@@ -1146,103 +1113,131 @@ def main() -> None:
                 if (e.observed_time or e.valid_start) and len(e.observed_time or e.valid_start or "") >= 10
             }
         )
-        default_as_of = patient_questions[0].as_of_date if patient_questions else (obs_dates[-1] if obs_dates else "2025-09-01")
+        default_as_of = (
+            patient_questions[0].as_of_date
+            if patient_questions
+            else (obs_dates[-1] if obs_dates else "2025-09-01")
+        )
+        default_q_text = (
+            patient_questions[0].text
+            if patient_questions
+            else "What medications is the patient currently taking?"
+        )
 
-        with ctrl4:
-            preset_options = ["Custom clinical question..."] + [
-                f"[{q.question_id}] {q.text} (as_of: {q.as_of_date})"
-                for q in patient_questions
-            ]
-            selected_preset = st.selectbox(
-                "Preset Benchmark Question",
-                options=preset_options,
-                index=1 if len(preset_options) > 1 else 0,
-                help="Loads only question text and as_of_date (never gold labels).",
-            )
+        if st.session_state.get("_last_selected_pid") != selected_pid:
+            st.session_state["_last_selected_pid"] = selected_pid
+            st.session_state["ui_as_of_date"] = default_as_of
+            st.session_state["ui_question_text"] = default_q_text
+            st.session_state["_auto_run_b2"] = True
 
-        active_preset_q: Optional[Question] = None
-        if selected_preset != "Custom clinical question...":
-            q_idx = preset_options.index(selected_preset) - 1
-            active_preset_q = patient_questions[q_idx]
-            default_as_of = active_preset_q.as_of_date
+        if obs_dates:
+            st.caption(f"{len(patient_events)} records · {obs_dates[0]} to {obs_dates[-1]}")
+        else:
+            st.caption(f"{len(patient_events)} records")
 
-        with ctrl3:
+        st.divider()
+        st.markdown("### Display")
+        reading_mode = st.radio(
+            "Reading Mode",
+            options=["Simple (Patient)", "Clinician"],
+            index=1,
+            horizontal=True,
+        )
+        view_mode = "Patient" if reading_mode.startswith("Simple") else "Clinician"
+
+        st.divider()
+        with st.expander("Advanced & Research Settings", expanded=False):
             as_of_date_str = st.text_input(
-                "Query Date (as_of_date)",
-                value=default_as_of,
-                help="ISO format YYYY-MM-DD",
+                "Record As-Of Date (YYYY-MM-DD)",
+                key="ui_as_of_date",
+                help="Only records on or before this date are visible to the assistant.",
             ).strip()
 
-        q_col1, q_col2 = st.columns([3.5, 1.5])
-        with q_col1:
-            question_text = st.text_input(
-                "Clinical Question",
-                value=active_preset_q.text if active_preset_q else "What medications is the patient currently taking?",
-            ).strip()
-        with q_col2:
-            system_mode = st.selectbox(
-                "Pipeline Configuration",
-                options=[
-                    "Compare B1 vs B2 (Selection Diff + On-Demand LLM)",
-                    "B2 (Chronology-Aware Fusion + A2)",
-                    "B1 (Conventional RAG Baseline)",
-                ],
-                index=0,
+            if active_track == "R":
+                st.selectbox(
+                    "LLM Provider (Track R Policy)",
+                    options=[f"groq ({DEFAULT_GROQ_MODEL}) — Pinned"],
+                    index=0,
+                    disabled=True,
+                    help="Gemini is disabled on real MIMIC-IV-ED data.",
+                )
+                active_provider = "groq"
+                active_model_id = DEFAULT_GROQ_MODEL
+            else:
+                provider_choice = st.selectbox(
+                    "Model Provider",
+                    options=[
+                        f"groq ({DEFAULT_GROQ_MODEL})",
+                        f"gemini ({DEFAULT_GEMINI_MODEL})",
+                    ],
+                    index=0,
+                )
+                active_provider = "groq" if provider_choice.startswith("groq") else "gemini"
+                active_model_id = DEFAULT_GROQ_MODEL if active_provider == "groq" else DEFAULT_GEMINI_MODEL
+
+            k_budget = st.slider("Records to Retrieve (top-k)", min_value=5, max_value=20, value=10, step=1)
+            default_win = (
+                patient_questions[0].window_start
+                if (patient_questions and patient_questions[0].window_start)
+                else ""
+            )
+            window_start_in = st.text_input("Optional Start Date Filter", value=default_win).strip()
+            window_start_val = window_start_in if window_start_in else None
+            use_rel_days = st.checkbox(
+                "Timeline: Days Since First Visit",
+                value=(active_track == "R"),
+                help="Recommended for Real ED records whose calendar dates are shifted.",
             )
 
-        # Progressive Disclosure: Advanced Controls Expander
-        with st.expander("Advanced Configuration (Provider, Top-k Budget, Window Filter, Timeline Axis)"):
-            adv1, adv2, adv3, adv4 = st.columns(4)
-            with adv1:
-                if active_track == "R":
-                    provider_choice = st.selectbox(
-                        "LLM Provider (Track R Policy)",
-                        options=["groq (openai/gpt-oss-120b) — Pinned"],
-                        index=0,
-                        help="Gemini free tier is disabled on Track R because free-tier prompts may be used by Google to improve products.",
-                    )
-                    active_provider = "groq"
-                    active_model_id = DEFAULT_GROQ_MODEL
-                else:
-                    provider_choice = st.selectbox(
-                        "Pinned Generator Model",
-                        options=[
-                            f"groq ({DEFAULT_GROQ_MODEL})",
-                            f"gemini ({DEFAULT_GEMINI_MODEL})",
-                        ],
-                        index=0,
-                    )
-                    active_provider = "groq" if provider_choice.startswith("groq") else "gemini"
-                    active_model_id = DEFAULT_GROQ_MODEL if active_provider == "groq" else DEFAULT_GEMINI_MODEL
-            with adv2:
-                k_budget = st.slider("Context Budget (top-k events)", min_value=5, max_value=20, value=10, step=1)
-            with adv3:
-                default_win = active_preset_q.window_start if (active_preset_q and active_preset_q.window_start) else ""
-                window_start_in = st.text_input("Optional window_start (YYYY-MM-DD)", value=default_win).strip()
-                window_start_val = window_start_in if window_start_in else None
-            with adv4:
-                use_rel_days = st.checkbox(
-                    "Use 'Days Since First Visit' Timeline Axis",
-                    value=(active_track == "R"),
-                    help="Recommended for Track R (MIMIC-IV-ED) because real dates are shifted.",
-                )
+    inject_design_system_css(view_mode)
 
-    # Provenance header bar
-    sample_src_ds = patient_events[0].source_dataset if patient_events else "custom_generator"
+    st.markdown('<div class="app-title">Personal Medical Record Assistant</div>', unsafe_allow_html=True)
     st.markdown(
-        f'{render_provenance_badge_html(active_track, sample_src_ds)} '
-        f'<span class="mono-id">Patient: {html.escape(selected_pid)}</span> '
-        f'<span class="mono-id">Total Events: {len(patient_events)}</span> '
-        f'<span class="mono-id">as_of_date: {html.escape(as_of_date_str)}</span>',
+        '<div class="app-subtitle">Ask questions about a patient\'s medical history with timeline-aware evidence.</div>',
         unsafe_allow_html=True,
     )
 
-    # Empty question guard
+    sample_src_ds = patient_events[0].source_dataset if patient_events else "custom_generator"
+    st.markdown(
+        '<div class="prototype-banner">'
+        '<span><strong>Prototype Notice:</strong> For research and demonstration only — not medical advice.</span>'
+        f'<span>{render_provenance_badge_html(active_track, sample_src_ds)} '
+        f'<span class="mono-id">Patient {html.escape(selected_pid)}</span> '
+        f'<span class="mono-id">As of {html.escape(as_of_date_str or default_as_of)}</span></span>'
+        "</div>",
+        unsafe_allow_html=True,
+    )
+
+    with st.form(key="ask_question_form", border=False):
+        q_col, btn_col = st.columns([5.2, 1.0], vertical_alignment="bottom")
+        with q_col:
+            question_text = st.text_input(
+                "Ask a question about this patient's record",
+                key="ui_question_text",
+                placeholder="Type any clinical question (e.g., Is the patient currently taking metformin?)",
+            ).strip()
+        with btn_col:
+            ask_submitted = st.form_submit_button("Ask", type="primary", use_container_width=True)
+
+    if patient_questions:
+        chips = patient_questions[:4]
+        st.markdown('<div class="section-caption">Try an example question:</div>', unsafe_allow_html=True)
+        chip_cols = st.columns(len(chips))
+        for idx, pq in enumerate(chips):
+            label = pq.text if len(pq.text) <= 58 else pq.text[:55] + "..."
+            with chip_cols[idx]:
+                if st.button(label, key=f"chip_{selected_pid}_{pq.question_id}", use_container_width=True):
+                    st.session_state["ui_question_text"] = pq.text
+                    st.session_state["ui_as_of_date"] = pq.as_of_date
+                    st.session_state["_auto_run_b2"] = True
+                    st.rerun()
+
     if not question_text:
-        st.info("Enter a clinical question above or select a preset question to inspect retrieval and temporal state fusion.")
+        st.info("Type a question above or click an example question to view the answer and supporting records.")
         return
 
-    # Execute Retrieval & Temporal Fusion Stages (Deterministic, <0.1s, Zero LLM Calls)
+    active_preset_q = _find_matching_preset(patient_questions, question_text, as_of_date_str)
+
     pipe_b2 = run_retrieval_stage(
         patient_id=selected_pid,
         question_text=question_text,
@@ -1270,41 +1265,80 @@ def main() -> None:
         rt_rules=configs["rt_rules"],
     )
 
-    primary_pipe = pipe_b1 if system_mode.startswith("B1") else pipe_b2
     events_by_id = {e.event_id: e for e in patient_events}
     pool_at_tq = filter_candidate_pool(patient_events, as_of_date_str, patient_id=selected_pid)
     states_at_tq = {e.event_id: compute_state(e, as_of_date_str, pool_at_tq) for e in pool_at_tq}
-    rank_map_primary = {eid: idx + 1 for idx, eid in enumerate(primary_pipe.selected_event_ids)}
+    rank_map_b2 = {eid: idx + 1 for idx, eid in enumerate(pipe_b2.selected_event_ids)}
+    rank_map_b1 = {eid: idx + 1 for idx, eid in enumerate(pipe_b1.selected_event_ids)}
 
-    # 1. Timeline Centrepiece
-    with st.container(border=True):
-        tl_label = "B1 Top-k Highlighted" if system_mode.startswith("B1") else "B2 Top-k Highlighted"
-        st.markdown(
-            f'<div class="record-header">Longitudinal Patient Timeline ({tl_label} in Accent Blue &middot; Verbatim Statuses at as_of_date)</div>',
-            unsafe_allow_html=True,
-        )
-        fig = build_timeline_figure(
-            patient_events=patient_events,
-            as_of_date=as_of_date_str,
-            selected_rank_map=rank_map_primary,
-            states_at_tq=states_at_tq,
-            track=active_track,
-            use_relative_days=use_rel_days,
-            window_start=window_start_val,
-        )
-        st.plotly_chart(fig, use_container_width=True, theme=None)
-
-    # Clinician Mode Stretch Summary
-    if view_mode == "Clinician":
-        render_structured_clinical_summary(pool_at_tq, states_at_tq)
-
-    # Conflict & Uncertainty Alerts (from B2's temporal/conflict analysis)
-    render_conflicts_and_uncertainties(pipe_b2, events_by_id, {eid: i + 1 for i, eid in enumerate(pipe_b2.selected_event_ids)})
-
-    # 2. Mode-Specific Results: Side-by-Side B1 vs B2 vs Single System
     state_key_prefix = f"{selected_pid}_{as_of_date_str}_{question_text}_{active_provider}_{active_model_id}_{k_budget}"
 
-    if system_mode.startswith("Compare"):
+    auto_run = st.session_state.pop("_auto_run_b2", False)
+    if ask_submitted or (auto_run and f"ans_B2_{state_key_prefix}" not in st.session_state):
+        with st.spinner("Analyzing patient timeline and generating answer..."):
+            ans_b2, meta_b2 = generate_single_pinned_answer(
+                pipe_b2, question_text, window_start_val, active_provider, active_model_id, active_track
+            )
+            st.session_state[f"ans_B2_{state_key_prefix}"] = (ans_b2, meta_b2)
+
+    b2_stored = st.session_state.get(
+        f"ans_B2_{state_key_prefix}",
+        (None, {"message": "Click 'Ask' above to generate the answer for this question."}),
+    )
+
+    tab_answer, tab_timeline, tab_research = st.tabs(
+        ["Answer & Evidence", "Timeline & Health Summary", "Research Comparison (B1 vs B2)"]
+    )
+
+    with tab_answer:
+        if pipe_b2.flags.conflicts or pipe_b2.flags.uncertainty:
+            render_conflicts_and_uncertainties(pipe_b2, events_by_id, rank_map_b2)
+
+        render_answer_panel(
+            b2_stored[0],
+            b2_stored[1],
+            pipe_b2,
+            rank_map_b2,
+            "Answer (Chronology-Aware)",
+        )
+
+        with st.expander(f"Supporting Patient Records ({len(pipe_b2.selected_event_ids)} retrieved)", expanded=True):
+            render_evidence_records(pipe_b2, events_by_id, view_mode)
+
+        selected_ev_objs = [
+            events_by_id[eid] for eid in pipe_b2.selected_event_ids if eid in events_by_id
+        ]
+        render_general_information_box(
+            question_text=question_text,
+            selected_events=selected_ev_objs,
+            insufficient_evidence=pipe_b2.flags.insufficient_evidence,
+        )
+
+    with tab_timeline:
+        with st.container(border=True):
+            st.markdown(
+                '<div class="record-header">Longitudinal Patient Timeline (Top Retrieved Records Highlighted in Blue)</div>',
+                unsafe_allow_html=True,
+            )
+            fig = build_timeline_figure(
+                patient_events=patient_events,
+                as_of_date=as_of_date_str,
+                selected_rank_map=rank_map_b2,
+                states_at_tq=states_at_tq,
+                track=active_track,
+                use_relative_days=use_rel_days,
+                window_start=window_start_val,
+            )
+            st.plotly_chart(fig, use_container_width=True, theme=None)
+
+        render_structured_clinical_summary(pool_at_tq, states_at_tq)
+
+    with tab_research:
+        st.caption(
+            "Compare Standard RAG (B1: query relevance only, unannotated context) against "
+            "Chronology-Aware Fusion (B2: query + history relevance + temporal scoring + state annotations)."
+        )
+
         set_b1 = set(pipe_b1.selected_event_ids)
         set_b2 = set(pipe_b2.selected_event_ids)
         only_b2 = [eid for eid in pipe_b2.selected_event_ids if eid not in set_b1]
@@ -1321,16 +1355,12 @@ def main() -> None:
         }
 
         with st.container(border=True):
-            st.markdown(
-                '<div class="record-header">Immediate Selection Comparison: B1 (Hybrid Rq Only, A0) vs B2 (Chronology-Aware Fusion, A2)</div>',
-                unsafe_allow_html=True,
-            )
             m1, m2, m3, m4, m5 = st.columns(5)
             m1.metric("Detected Intent", pipe_b2.intent)
-            m2.metric("Shared Top-k Events", f"{len(shared_eids)} / {k_budget}")
-            m3.metric("Picked ONLY by B2", len(only_b2))
-            m4.metric("Picked ONLY by B1", len(only_b1))
-            m5.metric("B2 Flags (Conflicts / Unc.)", f"{len(pipe_b2.flags.conflicts)}C / {len(pipe_b2.flags.uncertainty)}U")
+            m2.metric("Shared Top-k", f"{len(shared_eids)} / {k_budget}")
+            m3.metric("Only in B2", len(only_b2))
+            m4.metric("Only in B1", len(only_b1))
+            m5.metric("B2 Flags", f"{len(pipe_b2.flags.conflicts)}C / {len(pipe_b2.flags.uncertainty)}U")
 
             btn_c1, btn_c2, btn_c3 = st.columns(3)
             with btn_c1:
@@ -1341,117 +1371,59 @@ def main() -> None:
                 gen_both_clicked = st.button("Generate Both (B1 & B2)", use_container_width=True)
 
             if gen_b2_clicked or gen_both_clicked:
-                with st.status("Running B2 pipeline stages...", expanded=False) as status_box:
-                    st.write("1. Candidate pool filtered at `as_of_date` (`E_<=tq`).")
-                    st.write(f"2. Intent `{pipe_b2.intent}` classified; fused `Rq + Rh + Rt` scores computed.")
-                    st.write(f"3. Attached A2 annotations ({len(pipe_b2.flags.conflicts)} conflict, {len(pipe_b2.flags.uncertainty)} uncertainty flags).")
-                    st.write(f"4. Querying pinned model `{active_model_id}` (checking disk cache first)...")
+                with st.spinner("Running B2 generation..."):
                     ans_b2, meta_b2 = generate_single_pinned_answer(
                         pipe_b2, question_text, window_start_val, active_provider, active_model_id, active_track
                     )
                     st.session_state[f"ans_B2_{state_key_prefix}"] = (ans_b2, meta_b2)
-                    status_box.update(label="B2 execution complete", state="complete")
+                    b2_stored = (ans_b2, meta_b2)
 
             if gen_b1_clicked or gen_both_clicked:
-                with st.status("Running B1 baseline pipeline stages...", expanded=False) as status_box:
-                    st.write("1. Candidate pool filtered at `as_of_date` (`E_<=tq`).")
-                    st.write("2. Ranked by hybrid `Rq` only with raw unannotated context (`A0`).")
-                    st.write(f"3. Querying pinned model `{active_model_id}` (checking disk cache first)...")
+                with st.spinner("Running B1 baseline generation..."):
                     ans_b1, meta_b1 = generate_single_pinned_answer(
                         pipe_b1, question_text, window_start_val, active_provider, active_model_id, active_track
                     )
                     st.session_state[f"ans_B1_{state_key_prefix}"] = (ans_b1, meta_b1)
-                    status_box.update(label="B1 execution complete", state="complete")
 
         col_left, col_right = st.columns(2)
         with col_left:
-            b2_stored = st.session_state.get(f"ans_B2_{state_key_prefix}", (None, {"message": "Click 'Generate B2 Answer' above to run LLM generation (selection shown below)."}))
             render_answer_panel(
                 b2_stored[0],
                 b2_stored[1],
                 pipe_b2,
-                {eid: i + 1 for i, eid in enumerate(pipe_b2.selected_event_ids)},
-                "B2 (Proposed: Chronology-Aware + A2)",
+                rank_map_b2,
+                "B2 (Chronology-Aware + A2)",
             )
             st.markdown('<div class="record-header">B2 Selected Evidence ([E1]–[Ek])</div>', unsafe_allow_html=True)
             render_evidence_records(pipe_b2, events_by_id, view_mode, diff_tags_by_eid=diff_tags_b2)
 
         with col_right:
-            b1_stored = st.session_state.get(f"ans_B1_{state_key_prefix}", (None, {"message": "Click 'Generate B1 Answer' above to run LLM generation (selection shown below)."}))
+            b1_stored = st.session_state.get(
+                f"ans_B1_{state_key_prefix}",
+                (None, {"message": "Click 'Generate B1 Answer' above to compare the baseline response."}),
+            )
             render_answer_panel(
                 b1_stored[0],
                 b1_stored[1],
                 pipe_b1,
-                {eid: i + 1 for i, eid in enumerate(pipe_b1.selected_event_ids)},
-                "B1 (Baseline: Hybrid Rq Only + A0)",
+                rank_map_b1,
+                "B1 (Standard RAG Baseline + A0)",
             )
             st.markdown('<div class="record-header">B1 Selected Evidence ([E1]–[Ek])</div>', unsafe_allow_html=True)
             render_evidence_records(pipe_b1, events_by_id, view_mode, diff_tags_by_eid=diff_tags_b1)
 
-        any_generated = (
-            st.session_state.get(f"ans_B2_{state_key_prefix}", (None, {}))[0] is not None
-            or st.session_state.get(f"ans_B1_{state_key_prefix}", (None, {}))[0] is not None
-        )
-
-    else:
-        sys_code = "B1" if system_mode.startswith("B1") else "B2"
-        sys_title = (
-            "B1 (Conventional RAG Baseline, A0)"
-            if sys_code == "B1"
-            else "B2 (Chronology-Aware Fusion + A2)"
-        )
-        run_clicked = st.button(f"Generate {sys_code} Answer", type="primary")
-        if run_clicked:
-            with st.status(f"Executing {sys_code} pipeline stages...", expanded=False) as status_box:
-                st.write("1. Candidate pool filtered at `as_of_date` (`E_<=tq`).")
-                st.write(f"2. Intent `{primary_pipe.intent}` classified and top-{k_budget} events selected.")
-                st.write(f"3. Querying pinned model `{active_model_id}` (checking disk cache first)...")
-                ans_single, meta_single = generate_single_pinned_answer(
-                    primary_pipe, question_text, window_start_val, active_provider, active_model_id, active_track
-                )
-                st.session_state[f"ans_{sys_code}_{state_key_prefix}"] = (ans_single, meta_single)
-                status_box.update(label=f"{sys_code} execution complete", state="complete")
-
-        stored_single = st.session_state.get(
-            f"ans_{sys_code}_{state_key_prefix}",
-            (None, {"message": f"Click 'Generate {sys_code} Answer' above to generate the grounded response."}),
-        )
-        render_answer_panel(
-            stored_single[0],
-            stored_single[1],
-            primary_pipe,
-            rank_map_primary,
-            sys_title,
-        )
-        st.markdown(f'<div class="record-header">{sys_code} Selected Evidence Records ([E1]–[E{len(primary_pipe.selected_event_ids)}])</div>', unsafe_allow_html=True)
-        render_evidence_records(primary_pipe, events_by_id, view_mode)
-        any_generated = stored_single[0] is not None
-
-    # Optional Post-Generation Benchmark Verification Expander (Hidden by default, shown only after generation)
-    if active_preset_q is not None and any_generated:
-        with st.expander("Show Expected Benchmark Answer (Demo Verification Only — Never Used by Pipeline)", expanded=False):
-            gold_lookup = load_optional_gold_lookup()
-            g_item = gold_lookup.get(active_preset_q.question_id)
-            if g_item:
-                st.markdown(
-                    f"- **Benchmark Question ID:** `{active_preset_q.question_id}` (`{g_item.get('category')}` | `{g_item.get('intent')}`)\n"
-                    f"- **Expected Behavior:** `{g_item.get('expected_behavior')}`\n"
-                    f"- **Expected Answer Value:** `{g_item.get('expected_answer', {}).get('value')}`\n"
-                    f"- **Gold Supporting Events:** `{', '.join(g_item.get('gold_events', []))}`\n"
-                    f"- **Distractor (Stale/Superseded) Events:** `{', '.join(g_item.get('distractor_events', [])) or 'None'}`"
-                )
-
-    # 3. Separate General Medical Background Box ([C1], [C2])
-    selected_ev_objs = [
-        events_by_id[eid]
-        for eid in pipe_b2.selected_event_ids
-        if eid in events_by_id
-    ]
-    render_general_information_box(
-        question_text=question_text,
-        selected_events=selected_ev_objs,
-        insufficient_evidence=pipe_b2.flags.insufficient_evidence,
-    )
+        if active_preset_q is not None:
+            with st.expander("Expected Benchmark Answer (Demo Verification Only — Never Used by Pipeline)", expanded=False):
+                gold_lookup = load_optional_gold_lookup()
+                g_item = gold_lookup.get(active_preset_q.question_id)
+                if g_item:
+                    st.markdown(
+                        f"- **Benchmark Question ID:** `{active_preset_q.question_id}` (`{g_item.get('category')}` | `{g_item.get('intent')}`)\n"
+                        f"- **Expected Behavior:** `{g_item.get('expected_behavior')}`\n"
+                        f"- **Expected Answer Value:** `{g_item.get('expected_answer', {}).get('value')}`\n"
+                        f"- **Gold Supporting Events:** `{', '.join(g_item.get('gold_events', []))}`\n"
+                        f"- **Distractor (Stale/Superseded) Events:** `{', '.join(g_item.get('distractor_events', [])) or 'None'}`"
+                    )
 
 
 if __name__ == "__main__":

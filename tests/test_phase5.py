@@ -65,14 +65,12 @@ def test_corpus_retrieval_10_demo_questions_and_off_topic_threshold() -> None:
         all_concepts = {c for r in results for c in r["chunk"].concepts}
         assert expected_concept in all_concepts, f"Expected '{expected_concept}' in retrieved concepts {all_concepts}"
 
-    # 10th question: off-topic query must return empty list so no background box is rendered
     off_topic = retrieve_corpus_passages(
         "What is the weather forecast in Tokyo and how do you bake sourdough bread?",
         top_k=2,
     )
     assert off_topic == []
 
-    # Insufficient evidence (U5) must also suppress the background box
     u5_res = retrieve_corpus_passages(
         "Is the patient taking metformin?",
         insufficient_evidence=True,
@@ -113,7 +111,6 @@ def test_app_end_to_end_real_and_synthetic_patients_and_track_r_gemini_block() -
     bundle = load_all_events_and_questions()
     configs = load_static_configs()
 
-    # 1. Synthetic patient (Track S) end-to-end retrieval + timeline + cached generation
     s_qs = [q for qlist in bundle["q_by_patient"].values() for q in qlist if q.track == "S" and q.split == "test"]
     assert s_qs
     sq = s_qs[0]
@@ -144,7 +141,6 @@ def test_app_end_to_end_real_and_synthetic_patients_and_track_r_gemini_block() -
     )
     assert len(fig_s.data) >= 1
 
-    # Verify cached generation works on Track S
     ans_s, meta_s = generate_single_pinned_answer(
         pipe_s_b2,
         sq.text,
@@ -156,7 +152,6 @@ def test_app_end_to_end_real_and_synthetic_patients_and_track_r_gemini_block() -
     assert ans_s is not None
     assert meta_s.get("cached") is True
 
-    # 2. Real patient (Track R) end-to-end retrieval + relative-day timeline + Gemini block
     r_qs = [q for qlist in bundle["q_by_patient"].values() for q in qlist if q.track == "R"]
     assert r_qs
     rq = r_qs[0]
@@ -187,7 +182,6 @@ def test_app_end_to_end_real_and_synthetic_patients_and_track_r_gemini_block() -
     )
     assert len(fig_r.data) >= 1
 
-    # Verify Gemini is blocked on Track R
     ans_r_blocked, meta_r_blocked = generate_single_pinned_answer(
         pipe_r_b2,
         rq.text,
@@ -199,7 +193,6 @@ def test_app_end_to_end_real_and_synthetic_patients_and_track_r_gemini_block() -
     assert ans_r_blocked is None
     assert meta_r_blocked.get("error_type") == "blocked_provider"
 
-    # 3. Verbatim status badge check
     for st_name in ("ACTIVE", "ENDED", "SUPERSEDED", "PERSISTENT", "UNKNOWN", "LISTED", "NOT_LISTED_LATEST"):
         assert st_name in STATUS_STYLE_MAP
         badge_html = render_status_badge_html(st_name)

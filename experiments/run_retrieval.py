@@ -65,8 +65,6 @@ def _summarize_split_results(
     """Compute per-system bootstrap means + CIs, hypothesis paired tests, and intent/category breakdowns."""
     system_summaries: dict[str, Any] = {}
     for sys_id, recs in records_by_system.items():
-        # retrieval accuracy metrics (Recall, nDCG, MRR, HitRate) are evaluated over answerable questions
-        # (where gold_events is non-empty), while stale_evidence_rate is evaluated over all questions.
         ans_recs = [r for r in recs if len(r["gold_events"]) > 0]
         target_pool = ans_recs if ans_recs else recs
 
@@ -76,7 +74,6 @@ def _summarize_split_results(
             vals = [float(r["metrics"][m_name]) for r in pool_to_use]
             sys_metrics[m_name] = bootstrap_mean_ci(vals, n_resamples=n_resamples)
 
-        # Breakdown by intent
         by_intent: dict[str, dict[str, float]] = {}
         intent_groups: dict[str, list[dict[str, Any]]] = defaultdict(list)
         for r in target_pool:
@@ -89,7 +86,6 @@ def _summarize_split_results(
                 "mrr": round(sum(x["metrics"]["mrr"] for x in grp) / len(grp), 4),
             }
 
-        # Breakdown by category
         by_cat: dict[str, dict[str, float]] = {}
         cat_groups: dict[str, list[dict[str, Any]]] = defaultdict(list)
         for r in recs:
@@ -112,7 +108,6 @@ def _summarize_split_results(
             "by_category": by_cat,
         }
 
-    # Paired bootstrap hypothesis comparisons (H1, H2, and strong baselines)
     comparisons_spec = [
         ("H1_history_alone_B3_vs_B1", "B3", "B1"),
         ("H1_combined_B2_vs_B1", "B2", "B1"),
@@ -169,7 +164,6 @@ def run_retrieval_experiments(
 
     gold_by_qid = {g.question_id: g for g in golds}
 
-    # Precompute Rq scores (hybrid, bm25, dense) once per question to keep runtime fast (~10s total)
     precomputed_rq: dict[str, dict[str, dict[str, float]]] = {}
     for q in questions:
         pool = filter_candidate_pool(
@@ -199,7 +193,6 @@ def run_retrieval_experiments(
         "intent_ablation_oracle_vs_rules": {},
     }
 
-    # 1. Main evaluation across all splits at default k=10
     for split_name, split_qs in splits.items():
         records_by_system: dict[str, list[dict[str, Any]]] = defaultdict(list)
         for sys_id in RETRIEVAL_SYSTEMS:
@@ -273,7 +266,6 @@ def run_retrieval_experiments(
 
         full_metrics_report["splits"][split_name] = _summarize_split_results(records_by_system)
 
-    # 2. Context-Budget Study (E1): k in {5, 10, 20} on S_test and R_test for B1, B3, B2, RS4, RS5
     budget_systems = ["B1", "RS4", "RS5", "B3", "B2"]
     for split_name in ["S_test", "R_test"]:
         split_qs = splits[split_name]
@@ -321,7 +313,6 @@ def run_retrieval_experiments(
                 }
         full_metrics_report["budget_study_E1"][split_name] = dict(budget_table)
 
-    # 3. Rule-Intent vs Oracle-Intent Ablation on S_test and R_test for B2
     for split_name in ["S_test", "R_test"]:
         split_qs = splits[split_name]
         intent_matches = 0
@@ -380,7 +371,6 @@ def run_retrieval_experiments(
             ),
         }
 
-    # Save outputs
     save_jsonl(all_result_records, "results/outputs/retrieval_runs.jsonl")
     Path("results/metrics").mkdir(parents=True, exist_ok=True)
     with Path("results/metrics/retrieval_metrics.json").open("w", encoding="utf-8") as f:
@@ -437,7 +427,6 @@ def _write_phase3_markdown_report(report: dict[str, Any], weights_cfg: dict[str,
                 f"| {m['stale_evidence_rate']['mean']:.4f} |"
             )
 
-        # Paired bootstrap table
         pt = report["splits"][split_key]["paired_bootstrap_tests"]
         md.extend(
             [
@@ -457,7 +446,6 @@ def _write_phase3_markdown_report(report: dict[str, Any], weights_cfg: dict[str,
                 f"| `{ds['diff_mean']:+.4f}` [{ds['ci_lower']:+.4f}, {ds['ci_upper']:+.4f}] |"
             )
 
-    # Budget study E1
     md.extend(
         [
             "",
@@ -478,7 +466,6 @@ def _write_phase3_markdown_report(report: dict[str, Any], weights_cfg: dict[str,
                 f"| {k20['recall_at_k']:.4f} | {k5['ndcg_at_k']:.4f} | {k10['ndcg_at_k']:.4f} | {k20['ndcg_at_k']:.4f} |"
             )
 
-    # Oracle vs Rule intent
     md.extend(
         [
             "",

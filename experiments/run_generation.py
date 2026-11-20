@@ -47,7 +47,6 @@ def build_manual_review_sample(
         by_cat[rec["category"]].append(qid)
 
     selected_qids: list[str] = []
-    # Round-robin across categories until we reach sample_size (20)
     cats = sorted(by_cat.keys())
     idx = 0
     while len(selected_qids) < sample_size:

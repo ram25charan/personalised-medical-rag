@@ -210,11 +210,6 @@ def generate_synthetic_patients(
         as_of_dt = base_date + timedelta(days=rng.randint(1200, 1360))
         as_of_str = _fmt_date(as_of_dt)
 
-        # ------------------------------------------------------------------
-        # Scenario 1: Persistent Allergy + Chronic Condition with 8 follow-up notes
-        # (So querying "When was hypertension first diagnosed?" must rank the earliest
-        #  diagnosis above 8 later follow-up condition notes!)
-        # ------------------------------------------------------------------
         allergy_concept, allergy_class, allergy_reaction = _ALLERGY_PATTERNS[
             p_idx % len(_ALLERGY_PATTERNS)
         ]
@@ -268,7 +263,6 @@ def generate_synthetic_patients(
                     attributes={"onset": _fmt_date(cond_dt_1), "status": "chronic"},
                 )
 
-        # Also record Type 2 diabetes mellitus diagnosis (for cross-concept Rh testing)
         dm_diag_dt = base_date + timedelta(days=rng.randint(60, 85))
         collector.add(
             tag="cond_dm_first",
@@ -283,16 +277,9 @@ def generate_synthetic_patients(
             attributes={"onset": _fmt_date(dm_diag_dt), "status": "chronic"},
         )
 
-        # ------------------------------------------------------------------
-        # Scenario 2: Medication Lifecycle with 7 historical refills before discontinuation
-        # Note: The medication text states the drug name and dose without repeating the word
-        # "hypertension", so condition-level queries rely on Rh (relation table) to retrieve
-        # the drug and Rt to prefer the current active replacement over the 7 ended refills!
-        # ------------------------------------------------------------------
         med_t1 = cond_dt_1 + timedelta(days=5)
         refill_tags: list[str] = []
         prev_dt = med_t1
-        # Initial start order
         next_dt = prev_dt + timedelta(days=60)
         collector.add(
             tag="med_lifecycle_start",
@@ -308,7 +295,6 @@ def generate_synthetic_patients(
         )
         prev_dt = next_dt
 
-        # 6 intermediate refills at initial dose (all ended/superseded)
         for r_i in range(1, 7):
             r_end = prev_dt + timedelta(days=60)
             r_tag = f"med_lifecycle_refill_{r_i}"
@@ -327,7 +313,6 @@ def generate_synthetic_patients(
             )
             prev_dt = r_end
 
-        # Dose escalation order (later discontinued)
         med_t2 = prev_dt
         med_t3_stop = med_t2 + timedelta(days=90)
         collector.add(
@@ -343,7 +328,6 @@ def generate_synthetic_patients(
             attributes={"dose": old_dose_2, "action": "dose_change", "stopped": True},
         )
 
-        # Replacement active medication (note: text names new_med and dose without saying "antihypertensive")
         med_t4_new = med_t3_stop + timedelta(days=10)
         collector.add(
             tag="med_lifecycle_new_active",
@@ -358,7 +342,6 @@ def generate_synthetic_patients(
             attributes={"dose": new_dose, "action": "start"},
         )
 
-        # Active diabetes medication (with 6 prior ended refills so active order competes with old refills)
         dm_med, dm_class, dm_dose1, dm_dose2 = _DIABETES_DRUGS[p_idx % len(_DIABETES_DRUGS)]
         dm_curr_dt = dm_diag_dt + timedelta(days=5)
         dm_old_refill_tags: list[str] = []
@@ -393,10 +376,6 @@ def generate_synthetic_patients(
             attributes={"dose": dm_dose2, "action": "start"},
         )
 
-        # ------------------------------------------------------------------
-        # Scenario 3: Lab Trend (8 longitudinal measurements over ~3 years)
-        # So finding both the earliest (#1) and latest (#8) in top-5 requires Rt boundary scoring!
-        # ------------------------------------------------------------------
         lab_concept, lab_class, lab_unit, base_vals = _LAB_TREND_PATTERNS[
             p_idx % len(_LAB_TREND_PATTERNS)
         ]
@@ -420,9 +399,6 @@ def generate_synthetic_patients(
                 attributes={"value": l_val, "unit": lab_unit, "series_index": l_i},
             )
 
-        # ------------------------------------------------------------------
-        # Scenario 4: Missing or Ambiguous Dates (U2 month-only / U3 unknown date)
-        # ------------------------------------------------------------------
         statin_concept, statin_class, statin_dose, _ = _STATIN_PATTERNS[
             p_idx % len(_STATIN_PATTERNS)
         ]
@@ -454,9 +430,6 @@ def generate_synthetic_patients(
             attributes={"onset": None, "status": "historical_unverified"},
         )
 
-        # ------------------------------------------------------------------
-        # Scenario 5: Conflicting Records (C1 status conflict or C2 dose conflict)
-        # ------------------------------------------------------------------
         conf_med, conf_class, conf_dose_a, conf_dose_b = _CONFLICT_PATTERNS[
             p_idx % len(_CONFLICT_PATTERNS)
         ]
@@ -515,7 +488,6 @@ def generate_synthetic_patients(
                 attributes={"dose": conf_dose_b, "reported_status": "active", "clinical_source": "specialist_clinic"},
             )
 
-        # Future Event (observed AFTER as_of_date) to test AD5 availability filter
         future_dt = as_of_dt + timedelta(days=rng.randint(15, 60))
         collector.add(
             tag="future_event_1",
@@ -530,9 +502,6 @@ def generate_synthetic_patients(
             attributes={"value": 5.9, "unit": lab_unit, "is_future_relative_to_default_as_of": True},
         )
 
-        # ------------------------------------------------------------------
-        # Scenario 6: Irrelevant History / Distractor Events
-        # ------------------------------------------------------------------
         distractor_tags: list[str] = []
         current_count = len(collector.raw_events)
         needed = max(25, target_event_count - current_count)

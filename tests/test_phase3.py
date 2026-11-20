@@ -49,16 +49,16 @@ def _make_event(
         event_id=event_id,
         patient_id=patient_id,
         track="S" if patient_id.startswith("S") else "R",
-        event_type=event_type,  # type: ignore[arg-type]
+        event_type=event_type,
         concept=concept,
         concept_class=concept_class,
         text=text,
         observed_time=observed_time,
         valid_start=valid_start,
         valid_end=valid_end,
-        date_precision=date_precision,  # type: ignore[arg-type]
+        date_precision=date_precision,
         time_is_shifted=patient_id.startswith("R"),
-        status_basis=status_basis,  # type: ignore[arg-type]
+        status_basis=status_basis,
         source_type="synthetic" if patient_id.startswith("S") else "real",
         source_dataset="test",
         source_table=source_table,
@@ -111,7 +111,6 @@ def test_temporal_state_all_states_and_edge_cases():
     assert compute_state(e_unknown_prec, as_of, pool) == "UNKNOWN"
     assert compute_state(e_missing_start, as_of, pool) == "UNKNOWN"
 
-    # Snapshot basis (Track R medrecon): LISTED vs NOT_LISTED_LATEST
     r_old = _make_event(
         "R1_1",
         patient_id="R1",
@@ -214,37 +213,32 @@ def test_rt_scoring_all_five_intents():
     e_ended = _make_event("E6", concept="lisinopril", valid_start="2022-01-01", valid_end="2023-01-01")
     pool = [e1, e2, e3, e_active, e_persist, e_ended]
 
-    # 1. current_state
     rt_curr = rt_scores(pool, "current_state", as_of, anchors=["metformin"])
-    assert rt_curr["E4"] == 1.0  # ACTIVE
-    assert rt_curr["E5"] == 1.0  # PERSISTENT
-    assert rt_curr["E1"] == 0.2  # SUPERSEDED
-    assert rt_curr["E6"] == 0.1  # ENDED
+    assert rt_curr["E4"] == 1.0
+    assert rt_curr["E5"] == 1.0
+    assert rt_curr["E1"] == 0.2
+    assert rt_curr["E6"] == 0.1
 
-    # 2. change_over_time (E1 is earliest, E2 intermediate, E3 latest of hba1c series)
     rt_cot = rt_scores(pool, "change_over_time", as_of, anchors=["hba1c"])
     assert rt_cot["E1"] == 1.0
     assert rt_cot["E2"] == 0.7
     assert rt_cot["E3"] == 1.0
     assert rt_cot["E4"] == 0.1
 
-    # 3. first_occurrence (E1 is earliest of hba1c, E2 & E3 are later)
     rt_fo = rt_scores(pool, "first_occurrence", as_of, anchors=["hba1c"])
     assert rt_fo["E1"] == 1.0
     assert rt_fo["E2"] == 0.3
     assert rt_fo["E3"] == 0.3
     assert rt_fo["E4"] == 0.1
 
-    # 4. persistent_fact
     rt_pf = rt_scores(pool, "persistent_fact", as_of)
     assert rt_pf["E5"] == 1.0
     assert rt_pf["E4"] == 0.5
     assert rt_pf["E6"] == 0.2
 
-    # 5. historical
     rt_hist = rt_scores(pool, "historical", as_of, window_start="2024-01-01")
     assert rt_hist["E2"] == 1.0
-    assert rt_hist["E6"] == 0.1  # ended in 2023 before window_start 2024-01-01
+    assert rt_hist["E6"] == 0.1
 
 
 def test_fusion_normalisation_and_weights():
@@ -258,8 +252,6 @@ def test_fusion_normalisation_and_weights():
     rh = {"E1": 1.0, "E2": 0.0}
     rt = {"E1": 1.0, "E2": 0.1}
     fused = compute_fused_scores(rq, rh, rt, {"alpha": 0.4, "beta": 0.2, "gamma": 0.4})
-    # E1: rq_norm = 0.0 -> 0.4*0 + 0.2*1.0 + 0.4*1.0 = 0.6
-    # E2: rq_norm = 1.0 -> 0.4*1.0 + 0.2*0 + 0.4*0.1 = 0.44
     assert math.isclose(fused["E1"], 0.6, abs_tol=1e-6)
     assert math.isclose(fused["E2"], 0.44, abs_tol=1e-6)
     assert select(rq, rh, rt, {"alpha": 0.4, "beta": 0.2, "gamma": 0.4}, k=1) == ["E1"]
@@ -268,7 +260,6 @@ def test_fusion_normalisation_and_weights():
 def test_conflict_rules_c1_c2_c3_and_track_r_provenance():
     """Verify C1 status conflict, C2 dose conflict, C3 date conflict, and Track R provenance note."""
     as_of = "2025-06-01"
-    # C1: active vs ended on overlapping validity
     c1_a = _make_event(
         "C1_A",
         concept="apixaban",
@@ -286,7 +277,6 @@ def test_conflict_rules_c1_c2_c3_and_track_r_provenance():
     conf_c1, _ = detect_conflicts(["C1_A"], [c1_a, c1_b], as_of)
     assert any(c.rule == "C1" for c in conf_c1)
 
-    # C2: different doses on overlapping active intervals
     c2_a = _make_event(
         "C2_A",
         concept="furosemide",
@@ -304,7 +294,6 @@ def test_conflict_rules_c1_c2_c3_and_track_r_provenance():
     conf_c2, _ = detect_conflicts(["C2_A"], [c2_a, c2_b], as_of)
     assert any(c.rule == "C2" for c in conf_c2)
 
-    # C3: dates differing by > 30 days across sources
     c3_a = _make_event(
         "C3_A",
         event_type="condition",
@@ -326,7 +315,6 @@ def test_conflict_rules_c1_c2_c3_and_track_r_provenance():
     conf_c3, _ = detect_conflicts(["C3_A"], [c3_a, c3_b], as_of)
     assert any(c.rule == "C3" for c in conf_c3)
 
-    # Track R medrecon vs pyxis -> informational provenance note, NOT conflict
     r_med = _make_event(
         "R_M",
         patient_id="R1",
@@ -380,7 +368,6 @@ def test_uncertainty_flags_u1_to_u5():
     assert flag_codes == {"U1", "U2", "U3", "U4"}
     assert insuff is False
 
-    # U5: Querying an unrecorded concept ("tacrolimus") not in pool
     _, insuff_u5 = uncertainty_flags(
         ["U1_E"], pool, rq, question_anchors=["tacrolimus"], tau=0.35
     )
@@ -393,20 +380,15 @@ def test_retrieval_metrics_hand_computed():
     gold = ["E_gold1", "E_gold2"]
     distractors = ["E_dist1", "E_dist2"]
 
-    # Recall@2: 1 of 2 gold found -> 0.5; Recall@5: 2 of 2 found -> 1.0
     assert math.isclose(recall_at_k(ranked, gold, 2), 0.5)
     assert math.isclose(recall_at_k(ranked, gold, 5), 1.0)
     assert math.isclose(hit_rate_at_k(ranked, gold, 2), 1.0)
-    # First gold is at rank 2 -> MRR = 1/2 = 0.5
     assert math.isclose(mrr_score(ranked, gold), 0.5)
-    # nDCG@5: hits at rank 2 (1/log2(3)) and rank 4 (1/log2(5)); ideal hits at rank 1 (1.0) and rank 2 (1/log2(3))
     expected_dcg = (1.0 / math.log2(3.0)) + (1.0 / math.log2(5.0))
     expected_idcg = 1.0 + (1.0 / math.log2(3.0))
     assert math.isclose(ndcg_at_k(ranked, gold, 5), expected_dcg / expected_idcg, abs_tol=1e-6)
-    # Stale-evidence rate: 2 distractors out of 5 selected -> 0.4
     assert math.isclose(stale_evidence_rate(ranked, distractors, k=5), 0.4)
 
-    # Paired bootstrap check
     boot = paired_bootstrap([1.0, 1.0, 0.8, 0.9], [0.5, 0.5, 0.4, 0.5], n_resamples=500, seed=42)
     assert boot["diff_mean"] > 0.35
     assert boot["ci_lower"] > 0.3

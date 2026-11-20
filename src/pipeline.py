@@ -133,11 +133,9 @@ def run_retrieval_stage(
     annotation_level = sys_spec.get("annotation", "A2")
     tau = float(sys_cfg_all.get("insufficient_evidence_tau", 0.35))
 
-    # 1. Candidate pool filtered to patient_id and observed_time <= as_of_date
     pool = filter_candidate_pool(patient_events, as_of_date, patient_id=patient_id)
     ev_by_id = {e.event_id: e for e in pool}
 
-    # 2. Intent determination (rules vs oracle)
     if intent_override is not None:
         intent: IntentType = intent_override
         intent_source: Literal["rules", "oracle"] = "oracle"
@@ -145,12 +143,10 @@ def run_retrieval_stage(
         intent = classify_intent_by_rules(question_text, rt_cfg)
         intent_source = "rules"
 
-    # 3. Compute temporal states at as_of_date
     states_by_id: dict[str, TemporalStateType] = {
         ev.event_id: compute_state(ev, as_of_date, pool) for ev in pool
     }
 
-    # 4. Question relevance Rq
     if mode == "bm25_only":
         rq = (
             precomputed_rq_bm25
@@ -170,15 +166,12 @@ def run_retrieval_stage(
             else rq_scores(pool, question_text, as_of_date, mode="hybrid", patient_id=patient_id)
         )
 
-    # 5. Anchor extraction & History relevance Rh
     question_only_anchors = extract_question_anchors(question_text, rel_tbl, pool)
     anchors, anchor_encounters = build_anchor_set(
         question_text, pool, rq, rel_tbl, top_rq_n=5
     )
     rh = rh_scores(pool, anchors, rel_tbl, anchor_encounters=anchor_encounters)
 
-    # 6. Temporal relevance Rt
-    # Use question_only_anchors if non-empty for series/occurrence intents so top-Rq noise doesn't dilute series boundaries
     rt_anchor_input = question_only_anchors if question_only_anchors else anchors
     rt = rt_scores(
         pool,
@@ -190,7 +183,6 @@ def run_retrieval_stage(
         precomputed_states=states_by_id,
     )
 
-    # 7. Selection according to system mode
     if mode in ("bm25_only", "dense_only", "hybrid_rq_only"):
         weights = {"alpha": 1.0, "beta": 0.0, "gamma": 0.0}
         selected_ranked_ids, fused_scores = rank_by_fused_score(
@@ -229,10 +221,6 @@ def run_retrieval_stage(
     else:
         raise ValueError(f"Unknown retrieval mode: {mode}")
 
-    # 8. Conflict & Uncertainty Flag Detection
-    # Restrict C1-C3 and U1-U4 flag attachment to concepts directly queried by the question
-    # (expanding condition anchors to related medications when the question asks about medications/treatment)
-    # so unrelated spillover events in top-k do not trigger false conflict/uncertainty warnings.
     q_anchor_set = {a.lower().strip() for a in question_only_anchors if a.strip()}
     if q_anchor_set:
         relevant_concepts = set(q_anchor_set)
@@ -273,7 +261,6 @@ def run_retrieval_stage(
         provenance_notes=prov_notes,
     )
 
-    # 9. Candidate score records (sorted by descending score for inspection)
     selected_set = set(selected_ranked_ids)
     candidates_list: list[CandidateScore] = []
     for eid in sorted(
@@ -292,7 +279,6 @@ def run_retrieval_stage(
             )
         )
 
-    # 10. Chronological ordering for context assembly (Section 7 global rule)
     chrono_ids = order_chronologically(selected_ranked_ids, ev_by_id)
     context_text = assemble_context_text(
         chrono_ids,
@@ -302,8 +288,6 @@ def run_retrieval_stage(
         annotation_level=annotation_level,
     )
 
-    # Note: `selected_event_ids` stores the ranked top-k event IDs (so rank-sensitive retrieval metrics
-    # nDCG@k and MRR can evaluate `selected_event_ids` directly), while `context_text` orders them chronologically.
     return PipelineOutput(
         patient_id=patient_id,
         as_of_date=as_of_date,

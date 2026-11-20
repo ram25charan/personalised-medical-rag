@@ -60,7 +60,6 @@ def select_recency_only(
         key=lambda eid: (-rq.get(eid, 0.0), eid),
     )[:pool_size]
 
-    # Sort the top-50 pool by observed_time descending (unknown dates last), tie-breaking by Rq descending
     recency_ranked = sorted(
         top_rq_ids,
         key=lambda eid: (
@@ -70,7 +69,6 @@ def select_recency_only(
         ),
         reverse=True,
     )
-    # Assign synthetic display score decreasing by rank in recency order
     scores: dict[str, float] = {eid: 0.0 for eid in ev_by_id}
     n = max(1, len(recency_ranked))
     for idx, eid in enumerate(recency_ranked):

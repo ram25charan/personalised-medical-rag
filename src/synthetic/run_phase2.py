@@ -36,7 +36,6 @@ def run_phase2(
     save_jsonl(questions, bench_out / "questions.jsonl")
     save_jsonl(golds, bench_out / "gold.jsonl")
 
-    # Compute summary statistics
     s_patients = sorted({e.patient_id for e in s_events})
     dev_patients = sorted({q.patient_id for q in questions if q.track == "S" and q.split == "dev"})
     test_s_patients = sorted({q.patient_id for q in questions if q.track == "S" and q.split == "test"})
@@ -74,7 +73,6 @@ def run_phase2(
     with (bench_out / "benchmark_summary.json").open("w", encoding="utf-8") as f:
         json.dump(summary, f, indent=2)
 
-    # Write generator & benchmark documentation in docs/synthetic_and_benchmark_phase2.md
     md = [
         "# Phase 2 Synthetic Patient Generator & Benchmark Specification",
         "",

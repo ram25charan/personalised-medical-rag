@@ -82,12 +82,10 @@ def parse_and_validate_answer_json(
             id_to_line[ev_id] = m.group(3).lower()
 
     cleaned = raw_text.strip()
-    # Strip markdown code fences if present
     fence_match = re.search(r"```(?:json)?\s*(\{.*?\})\s*```", cleaned, flags=re.DOTALL)
     if fence_match:
         cleaned = fence_match.group(1).strip()
     else:
-        # Extract outermost JSON object braces
         start_idx = cleaned.find("{")
         end_idx = cleaned.rfind("}")
         if start_idx != -1 and end_idx != -1 and end_idx > start_idx:
@@ -130,15 +128,12 @@ def parse_and_validate_answer_json(
                 if clean_cid and clean_cid not in cited_ids:
                     cited_ids.append(clean_cid)
 
-    # If answer_text explicitly references [E#] or (see E#) and cited_ids has an off-by-one event ID
-    # whose concept is not mentioned in status_claims/answer_text, align with the explicit E# reference
     if e_map and ans_text and not bool(data.get("abstain", False)):
         explicit_e_refs = [
             f"E{num}" for num in re.findall(r"\bE(\d{1,2})\b", ans_text) if f"E{num}" in e_map
         ]
         if explicit_e_refs:
             mapped_from_text = [e_map[ek] for ek in explicit_e_refs]
-            # Check if any current cited_id has zero overlap with claimed concepts while mapped_from_text matches
             claimed_concepts = [c.concept for c in claims]
             if claimed_concepts and cited_ids:
                 valid_existing = [
@@ -286,7 +281,6 @@ class MultiKeyLLMClient:
                 meta["cached"] = True
                 return parsed, cached["raw_output"], prompt_hash, meta
 
-        # Enforce polite pacing for live API calls
         elapsed = time.time() - self._last_call_ts
         if elapsed < self.min_request_interval_sec:
             time.sleep(self.min_request_interval_sec - elapsed)
@@ -332,7 +326,6 @@ class MultiKeyLLMClient:
                         call_meta["key_label"] = key_label
                         call_meta["model_id"] = active_model
                         call_meta["cached"] = False
-                        # Advance round-robin cursor so both keys share quota evenly
                         self._key_cursor[prov] = (self._key_cursor.get(prov, 0) + 1) % max(
                             1, len(ordered_keys)
                         )
@@ -350,7 +343,6 @@ class MultiKeyLLMClient:
 
                     except Exception as exc:
                         last_err = exc
-                        # Rotate immediately to the next key on rate limit or error
                         self._key_cursor[prov] = (self._key_cursor.get(prov, 0) + 1) % max(
                             1, len(ordered_keys)
                         )
@@ -364,7 +356,6 @@ class MultiKeyLLMClient:
                         else:
                             time.sleep(0.5)
 
-            # Exponential backoff if all keys were temporarily throttled on this attempt
             time.sleep(min(15.0, 2.0 * attempt))
 
         raise RuntimeError(
